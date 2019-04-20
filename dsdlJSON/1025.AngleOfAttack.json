@@ -21,5 +21,8 @@
       "description": "Radians^2"
     }
   ],
-  "statics": ["uint8 SENSOR_ID_LEFT = 254", "uint8 SENSOR_ID_RIGHT = 255"]
+  "statics": [
+    "uint8 SENSOR_ID_LEFT = 254",
+    "uint8 SENSOR_ID_RIGHT = 255"
+  ]
 }

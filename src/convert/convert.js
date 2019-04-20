@@ -7,10 +7,12 @@ const convertOne = require('./convertOne');
 
 const source = join(__dirname, '../../dsdl');
 const destination = join(__dirname, '../../dsdlJSON');
+const combined = join(__dirname, '../kinds.json');
 
 function convert() {
   let data = {};
   processFolder(source, data);
+  fs.writeFileSync(combined, JSON.stringify(data, undefined, 2));
 }
 
 function processFolder(source, data) {
@@ -27,7 +29,8 @@ function processFolder(source, data) {
           definition
         };
         let result = convertOne(definition);
-        data[file].result = result;
+        let parts = file.split('.');
+        data[parts[0]] = result;
 
         let targetName = fullname
           .replace(source, destination)

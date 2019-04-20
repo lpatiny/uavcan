@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`uavtest gps 1`] = `
+Object {
+  "gimbalId": 12,
+  "heightCm": 0,
+  "heightReference": 0,
+  "latitudeDeg1E7": 0,
+  "longitudeDeg1E7": 235864064,
+}
+`;
