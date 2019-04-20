@@ -37,7 +37,6 @@ function processFolder(source, data) {
           JSON.stringify(result, undefined, 2),
           'utf8'
         );
-        console.log(targetName);
       }
     }
   }

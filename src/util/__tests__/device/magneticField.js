@@ -1,5 +1,7 @@
 'use strict';
 
+test.skip('skip', () => {});
+
 const magneticField = {
   description: `Magnetic field readings, in Gauss, in body frame.
     SI units are avoided because of float16 range limitations.`,

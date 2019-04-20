@@ -1,5 +1,7 @@
 'use strict';
 
+test.skip('skip', () => {});
+
 const float = {
   description: 'Float examples',
   variables: [

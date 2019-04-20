@@ -1,5 +1,7 @@
 'use strict';
 
+/* global BigInt */
+
 const n1 = BigInt(1);
 const n8 = BigInt(8);
 const n255 = BigInt(255);
@@ -103,6 +105,7 @@ function parseFloat(bigInt, variable, from) {
     case 64:
       return buffer.readDoubleBE();
     default:
+      return undefined;
   }
 }
 

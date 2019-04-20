@@ -1,40 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-Object {
-  "description": "Magnetic field readings, in Gauss, in body frame.
-SI units are avoided because of float16 range limitations.",
-  "variables": Array [
-    Object {
-      "bits": 8,
-      "description": "",
-      "kind": "int",
-      "name": "sensorId",
-      "unsigned": true,
-    },
-    Object {
-      "bits": 16,
-      "description": "",
-      "kind": "floatArray",
-      "length": 3,
-      "name": "magneticFieldGa",
-    },
-    Object {
-      "bits": 16,
-      "description": "",
-      "kind": "floatArray",
-      "length": 9,
-      "name": "magneticFieldCovariance",
-      "range": true,
-    },
-  ],
-}
-`;
-
 exports[`convert simple 1`] = `
 Object {
   "description": "Magnetic field readings, in Gauss, in body frame.
 SI units are avoided because of float16 range limitations.",
+  "statics": Array [],
   "variables": Array [
     Object {
       "bits": 8,
