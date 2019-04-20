@@ -1,0 +1,28 @@
+{
+  "description": "Magnetic field readings, in Gauss, in body frame.\nSI units are avoided because of float16 range limitations.",
+  "variables": [
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "sensorId",
+      "description": ""
+    },
+    {
+      "length": 3,
+      "kind": "floatArray",
+      "bits": 16,
+      "name": "magneticFieldGa",
+      "description": ""
+    },
+    {
+      "length": 9,
+      "range": true,
+      "kind": "floatArray",
+      "bits": 16,
+      "name": "magneticFieldCovariance",
+      "description": ""
+    }
+  ],
+  "statics": []
+}

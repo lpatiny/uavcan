@@ -1,0 +1,15 @@
+{
+  "description": "Full node info request.\nNote that all fields of the response section are byte-aligned.\nCurrent node status\nVersion information shall not be changed while the node is running.\nHuman readable non-empty ASCII node name.\nNode name shall not be changed while the node is running.\nEmpty string is not a valid node name.\nAllowed characters are: a-z (lowercase ASCII letters) 0-9 (decimal digits) . (dot) - (dash) _ (underscore).\nNode name is a reversed internet domain name (like Java packages), e.g. \"com.manufacturer.project.product\".",
+  "variables": [
+    {
+      "length": 80,
+      "range": true,
+      "kind": "intArray",
+      "unsigned": true,
+      "bits": 8,
+      "name": "name",
+      "description": ""
+    }
+  ],
+  "statics": []
+}

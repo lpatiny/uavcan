@@ -1,0 +1,48 @@
+{
+  "description": "Raw IMU data with timestamps.\nTHIS DEFINITION MAY BE CHANGED IN A NON-BACKWARD-COMPATIBLE WAY IN THE FUTURE.\nData acquisition timestamp in the bus shared time base.\nIntegration interval, seconds.\nSet to a non-positive value if the integrated samples are not available\n(in this case, only the latest point samples will be valid).\nAngular velocity samples in radian/second.\nThe samples are represented in the body frame, the axes are ordered as follows:\n  1. angular velocity around X (roll rate)\n  2. angular velocity around Y (pitch rate)\n  3. angular velocity around Z (yaw rate)\nLinear acceleration samples in meter/(second^2).\nThe samples are represented in the body frame, the axes are ordered as follows:\n  1. linear acceleration along X (forward positive)\n  2. linear acceleration along Y (right positive)\n  3. linear acceleration along Z (down positive)\nCovariance matrix. The diagonal entries are ordered as follows:\n  1. roll rate                (radian^2)/(second^2)\n  2. pitch rate               (radian^2)/(second^2)\n  3. yaw rate                 (radian^2)/(second^2)\n  4. forward acceleration     (meter^2)/(second^4)\n  5. rightward acceleration   (meter^2)/(second^4)\n  6. downward acceleration    (meter^2)/(second^4)",
+  "variables": [
+    {
+      "kind": "float",
+      "bits": 32,
+      "name": "integrationInterval",
+      "description": ""
+    },
+    {
+      "length": 3,
+      "kind": "floatArray",
+      "bits": 16,
+      "name": "rateGyroLatest",
+      "description": "Latest sample, radian/second"
+    },
+    {
+      "length": 3,
+      "kind": "floatArray",
+      "bits": 32,
+      "name": "rateGyroIntegral",
+      "description": "Integrated samples, radian/second"
+    },
+    {
+      "length": 3,
+      "kind": "floatArray",
+      "bits": 16,
+      "name": "accelerometerLatest",
+      "description": "Latest sample, meter/(second^2)"
+    },
+    {
+      "length": 3,
+      "kind": "floatArray",
+      "bits": 32,
+      "name": "accelerometerIntegral",
+      "description": "Integrated samples, meter/(second^2)"
+    },
+    {
+      "length": 36,
+      "range": true,
+      "kind": "floatArray",
+      "bits": 16,
+      "name": "covariance",
+      "description": ""
+    }
+  ],
+  "statics": []
+}

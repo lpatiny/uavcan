@@ -1,0 +1,47 @@
+{
+  "name": "uavcan",
+  "version": "0.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "eslint": "eslint src",
+    "eslint-fix": "npm run eslint -- --fix",
+    "test": "npm run test-only && npm run eslint",
+    "test-coverage": "jest --coverage",
+    "test-travis": "npm run test-coverage && npm run eslint",
+    "test-only": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheminfo/uavcan.git"
+  },
+  "keywords": [],
+  "author": "Luc Patiny",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cheminfo/uavcan/issues"
+  },
+  "homepage": "https://github.com/cheminfo/uavcan#readme",
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "devDependencies": {
+    "codecov": "^3.3.0",
+    "eslint": "^5.16.0",
+    "eslint-config-cheminfo": "^1.20.1",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jest": "^22.4.1",
+    "jest": "^24.7.1",
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "@petamoriken/float16": "^1.0.8",
+    "bigint-buffer": "^1.1.2",
+    "camelcase": "^5.3.1",
+    "iobuffer": "^4.0.1"
+  }
+}

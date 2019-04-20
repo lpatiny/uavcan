@@ -1,0 +1,37 @@
+{
+  "description": "Nested type.\nGeneric hardware version information.\nThese values should remain unchanged for the device's lifetime.\nHardware version code.\nUnique ID is a 128 bit long sequence that is globally unique for each node.\nAll zeros is not a valid UID.\nIf filled with zeros, assume that the value is undefined.\nCertificate of authenticity (COA) of the hardware, 255 bytes max.",
+  "variables": [
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "major",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "minor",
+      "description": ""
+    },
+    {
+      "length": 16,
+      "kind": "intArray",
+      "unsigned": true,
+      "bits": 8,
+      "name": "uniqueId",
+      "description": ""
+    },
+    {
+      "length": 255,
+      "range": true,
+      "kind": "intArray",
+      "unsigned": true,
+      "bits": 8,
+      "name": "certificateOfAuthenticity",
+      "description": ""
+    }
+  ],
+  "statics": []
+}

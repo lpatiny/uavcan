@@ -1,0 +1,40 @@
+{
+  "description": "Generic actuator feedback, if available.\nUnknown fields should be set to NAN.\nWhether the units are linear or angular depends on the actuator type (refer to the Command data type).",
+  "variables": [
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "actuatorId",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "position",
+      "description": "meter or radian"
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "force",
+      "description": "Newton or Newton metre"
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "speed",
+      "description": "meter per second or radian per second"
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 7,
+      "name": "powerRatingPct",
+      "description": "0 - unloaded, 100 - full load"
+    }
+  ],
+  "statics": [
+    "uint7 POWER_RATING_PCT_UNKNOWN = 127"
+  ]
+}

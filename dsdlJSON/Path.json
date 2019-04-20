@@ -1,0 +1,17 @@
+{
+  "description": "Nested type.\nFile system path in UTF8.\nThe only valid separator is forward slash.",
+  "variables": [
+    {
+      "length": 200,
+      "range": true,
+      "kind": "intArray",
+      "unsigned": true,
+      "bits": 8,
+      "name": "path",
+      "description": ""
+    }
+  ],
+  "statics": [
+    "uint8 SEPARATOR = '/'"
+  ]
+}

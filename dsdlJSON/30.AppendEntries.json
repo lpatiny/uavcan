@@ -1,0 +1,44 @@
+{
+  "description": "THIS DEFINITION IS SUBJECT TO CHANGE.\nThis type is a part of the Raft consensus algorithm.\nPlease refer to the specification for details.\nGiven min election timeout and cluster size, the maximum recommended request interval can be derived as follows:\n  max recommended request interval = (min election timeout) / 2 requests / (cluster size - 1)\nThe equation assumes that the Leader requests one Follower at a time, so that there's at most one pending call\nat any moment. Such behavior is optimal as it creates uniform bus load, but it is actually implementation-specific.\nObviously, request interval can be lower than that if needed, but higher values are not recommended as they may\ncause Followers to initiate premature elections in case of intensive frame losses or delays.\nReal timeout is randomized in the range (MIN, MAX], according to the Raft paper.\nRefer to the Raft paper for explanation.\nWorst-case replication time per Follower can be computed as:\n  worst replication time = (127 log entries) * (2 trips of next_index) * (request interval per Follower)\nRefer to the Raft paper for explanation.",
+  "variables": [
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 32,
+      "name": "term",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 32,
+      "name": "prevLogTerm",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "prevLogIndex",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "leaderCommit",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 32,
+      "name": "term",
+      "description": ""
+    }
+  ],
+  "statics": [
+    "uint16 DEFAULT_MIN_ELECTION_TIMEOUT_MS = 2000",
+    "uint16 DEFAULT_MAX_ELECTION_TIMEOUT_MS = 4000"
+  ]
+}

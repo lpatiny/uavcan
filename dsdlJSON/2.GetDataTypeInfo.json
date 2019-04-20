@@ -1,0 +1,57 @@
+{
+  "description": "Get the implementation details of a given data type.\nRequest is interpreted as follows:\n - If the field 'name' is empty, the fields 'kind' and 'id' will be used to identify the data type.\n - If the field 'name' is non-empty, it will be used to identify the data type; the\n   fields 'kind' and 'id' will be ignored.",
+  "variables": [
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 16,
+      "name": "id",
+      "description": "Ignored if 'name' is non-empty"
+    },
+    {
+      "length": 80,
+      "range": true,
+      "kind": "intArray",
+      "unsigned": true,
+      "bits": 8,
+      "name": "name",
+      "description": "Full data type name, e.g. \"uavcan.protocol.GetDataTypeInfo\""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 64,
+      "name": "signature",
+      "description": "Data type signature; valid only if the data type is known (see FLAG_KNOWN)"
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 16,
+      "name": "id",
+      "description": "Valid only if the data type is known (see FLAG_KNOWN)"
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "flags",
+      "description": ""
+    },
+    {
+      "length": 80,
+      "range": true,
+      "kind": "intArray",
+      "unsigned": true,
+      "bits": 8,
+      "name": "name",
+      "description": "Full data type name"
+    }
+  ],
+  "statics": [
+    "uint8 FLAG_KNOWN      = 1   # This data type is defined",
+    "uint8 FLAG_SUBSCRIBED = 2   # Subscribed to messages of this type",
+    "uint8 FLAG_PUBLISHING = 4   # Publishing messages of this type",
+    "uint8 FLAG_SERVING    = 8   # Providing service of this type"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "description": "GNSS low priority auxiliary info.\nUnknown DOP parameters should be set to NAN.",
+  "variables": [
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "gdop",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "pdop",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "hdop",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "vdop",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "tdop",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "ndop",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "edop",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 7,
+      "name": "satsVisible",
+      "description": "All visible sats of all available GNSS (e.g. GPS, GLONASS, etc)"
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 6,
+      "name": "satsUsed",
+      "description": "All used sats of all available GNSS"
+    }
+  ],
+  "statics": []
+}

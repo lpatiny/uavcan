@@ -1,0 +1,48 @@
+{
+  "description": "Generic narrow-beam range sensor data.",
+  "variables": [
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "sensorId",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "fieldOfView",
+      "description": "Radians"
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 5,
+      "name": "sensorType",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 3,
+      "name": "readingType",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "range",
+      "description": "Meters"
+    }
+  ],
+  "statics": [
+    "uint5 SENSOR_TYPE_UNDEFINED = 0",
+    "uint5 SENSOR_TYPE_SONAR     = 1",
+    "uint5 SENSOR_TYPE_LIDAR     = 2",
+    "uint5 SENSOR_TYPE_RADAR     = 3",
+    "uint3 READING_TYPE_UNDEFINED   = 0   # Range is unknown",
+    "uint3 READING_TYPE_VALID_RANGE = 1   # Range field contains valid distance",
+    "uint3 READING_TYPE_TOO_CLOSE   = 2   # Range field contains min range for the sensor",
+    "uint3 READING_TYPE_TOO_FAR     = 3   # Range field contains max range for the sensor"
+  ]
+}

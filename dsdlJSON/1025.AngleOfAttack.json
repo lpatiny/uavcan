@@ -1,0 +1,25 @@
+{
+  "description": "Angle of attack.",
+  "variables": [
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "sensorId",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "aoa",
+      "description": "Radians"
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "aoaVariance",
+      "description": "Radians^2"
+    }
+  ],
+  "statics": ["uint8 SENSOR_ID_LEFT = 254", "uint8 SENSOR_ID_RIGHT = 255"]
+}

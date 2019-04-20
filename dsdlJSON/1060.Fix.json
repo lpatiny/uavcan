@@ -1,0 +1,109 @@
+{
+  "description": "GNSS navigation solution with uncertainty.\nThis message is deprecated. Use the newer 1063.Fix2.uavcan message.\nTime solution.\nTime standard (GPS, UTC, TAI, etc) is defined in the field below.\nTime standard used in the GNSS timestamp field.\nIf known, the number of leap seconds allows to perform conversions between some time standards.\nPosition and velocity solution\nFix status\nPrecision",
+  "variables": [
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 3,
+      "name": "gnssTimeStandard",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "numLeapSeconds",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "bits": 37,
+      "name": "longitudeDeg1E8",
+      "description": "Longitude degrees multiplied by 1e8 (approx. 1 mm per LSB)"
+    },
+    {
+      "kind": "int",
+      "bits": 37,
+      "name": "latitudeDeg1E8",
+      "description": "Latitude degrees multiplied by 1e8 (approx. 1 mm per LSB on equator)"
+    },
+    {
+      "kind": "int",
+      "bits": 27,
+      "name": "heightEllipsoidMm",
+      "description": "Height above ellipsoid in millimeters"
+    },
+    {
+      "kind": "int",
+      "bits": 27,
+      "name": "heightMslMm",
+      "description": "Height above mean sea level in millimeters"
+    },
+    {
+      "length": 3,
+      "kind": "floatArray",
+      "bits": 16,
+      "name": "nedVelocity",
+      "description": "NED frame (north-east-down) in meters per second"
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 6,
+      "name": "satsUsed",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 2,
+      "name": "status2DFix",
+      "description": "= 2"
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 2,
+      "name": "status3DFix",
+      "description": "= 3"
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 2,
+      "name": "status",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "pdop",
+      "description": ""
+    },
+    {
+      "length": 9,
+      "range": true,
+      "kind": "floatArray",
+      "bits": 16,
+      "name": "positionCovariance",
+      "description": "m^2"
+    },
+    {
+      "length": 9,
+      "range": true,
+      "kind": "floatArray",
+      "bits": 16,
+      "name": "velocityCovariance",
+      "description": "(m/s)^2"
+    }
+  ],
+  "statics": [
+    "uint3 GNSS_TIME_STANDARD_NONE = 0  # Time is unknown",
+    "uint3 GNSS_TIME_STANDARD_TAI  = 1",
+    "uint3 GNSS_TIME_STANDARD_UTC  = 2",
+    "uint3 GNSS_TIME_STANDARD_GPS  = 3",
+    "uint8 NUM_LEAP_SECONDS_UNKNOWN = 0",
+    "uint2 STATUS_NO_FIX    = 0",
+    "uint2 STATUS_TIME_ONLY = 1"
+  ]
+}

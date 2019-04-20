@@ -1,0 +1,31 @@
+{
+  "description": "Nested type.\nSingle actuator command.\nWhether the units are linear or angular depends on the actuator type.\nValue of the above type",
+  "variables": [
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "actuatorId",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "commandType",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "commandValue",
+      "description": ""
+    }
+  ],
+  "statics": [
+    "uint8 COMMAND_TYPE_UNITLESS     = 0     # [-1, 1]",
+    "uint8 COMMAND_TYPE_POSITION     = 1     # meter or radian",
+    "uint8 COMMAND_TYPE_FORCE        = 2     # Newton or Newton metre",
+    "uint8 COMMAND_TYPE_SPEED        = 3     # meter per second or radian per second"
+  ]
+}

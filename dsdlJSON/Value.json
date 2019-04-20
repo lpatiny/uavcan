@@ -1,0 +1,34 @@
+{
+  "description": "Single parameter value.\nThis is a union, which means that this structure can contain either one of the fields below.\nThe structure is prefixed with tag - a selector value that indicates which particular field is encoded.",
+  "variables": [
+    {
+      "kind": "int",
+      "bits": 64,
+      "name": "integerValue",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 32,
+      "name": "realValue",
+      "description": "32-bit type is used to simplify implementation on low-end systems"
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "booleanValue",
+      "description": "8-bit value is used for alignment reasons"
+    },
+    {
+      "length": 128,
+      "range": true,
+      "kind": "intArray",
+      "unsigned": true,
+      "bits": 8,
+      "name": "stringValue",
+      "description": "Length prefix is exactly one byte long, which ensures proper alignment of payload"
+    }
+  ],
+  "statics": []
+}

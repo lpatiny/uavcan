@@ -1,0 +1,38 @@
+{
+  "description": "Generic fuel tank status message.\nAll fields are required unless stated otherwise. Unpopulated optional fields should be set to NaN.\nReserved for future use.\nThe estimated amount of fuel.\nThe reported values can be either measured directly using appropriate sensors,\nor they can be estimated by fusing the data provided by various sensors.\nFor example, a Kalman filter can be used to fuse the data from fuel level sensors and flow sensors.\nAll fields are required.\nEstimate of the current fuel consumption rate.\nThe flow can be negative if the fuel is being transferred between the tanks or during refueling.\nThis field is required.\nUnit: (centimeter^3)/minute\nFuel temperature.\nThis field is optional, set to NaN if not provided.\nUnit: kelvin\nThe ID of the current fuel tank.",
+  "variables": [
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 7,
+      "name": "availableFuelVolumePercent",
+      "description": "Unit: percent, from 0% to 100%"
+    },
+    {
+      "kind": "float",
+      "bits": 32,
+      "name": "availableFuelVolumeCm3",
+      "description": "Unit: centimeter^3"
+    },
+    {
+      "kind": "float",
+      "bits": 32,
+      "name": "fuelConsumptionRateCm3Pm",
+      "description": ""
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "fuelTemperature",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 8,
+      "name": "fuelTankId",
+      "description": ""
+    }
+  ],
+  "statics": []
+}

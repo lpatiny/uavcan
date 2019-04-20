@@ -1,0 +1,18 @@
+{
+  "description": "TAS.",
+  "variables": [
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "trueAirspeed",
+      "description": "m/s"
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "trueAirspeedVariance",
+      "description": "(m/s)^2"
+    }
+  ],
+  "statics": []
+}

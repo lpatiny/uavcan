@@ -1,0 +1,14 @@
+{
+  "description": "Simple RPM setpoint.\nThe ESC should automatically clamp the setpoint according to the minimum and maximum supported RPM;\nfor example, given a ESC that operates in the range 100 to 10000 RPM, a setpoint of 1 RPM will be clamped to 100 RPM.\nNegative values indicate reverse rotation.",
+  "variables": [
+    {
+      "length": 20,
+      "range": true,
+      "kind": "intArray",
+      "bits": 18,
+      "name": "rpm",
+      "description": ""
+    }
+  ],
+  "statics": []
+}

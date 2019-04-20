@@ -1,0 +1,18 @@
+{
+  "description": "Static pressure.",
+  "variables": [
+    {
+      "kind": "float",
+      "bits": 32,
+      "name": "staticPressure",
+      "description": "Pascal"
+    },
+    {
+      "kind": "float",
+      "bits": 16,
+      "name": "staticPressureVariance",
+      "description": "Pascal^2"
+    }
+  ],
+  "statics": []
+}

@@ -1,0 +1,15 @@
+{
+  "description": "This message will be broadcasted when the node receives user input in the process of enumeration.\nThis field is unused; keep it empty\nName of the enumerated parameter.\nThis field must always be populated by the enumeratee.\nIf multiple parameters were enumerated at once (e.g. ESC index and the direction of rotation),\nthe field should contain the name of the most important parameter.",
+  "variables": [
+    {
+      "length": 92,
+      "range": true,
+      "kind": "intArray",
+      "unsigned": true,
+      "bits": 8,
+      "name": "parameterName",
+      "description": ""
+    }
+  ],
+  "statics": []
+}

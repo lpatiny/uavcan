@@ -1,0 +1,27 @@
+{
+  "description": "Nested type.\nRGB color in the standard 5-6-5 16-bit palette.\nMonocolor lights should interpret this as brightness setpoint: from zero (0, 0, 0) to full brightness (31, 63, 31).",
+  "variables": [
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 5,
+      "name": "red",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 6,
+      "name": "green",
+      "description": ""
+    },
+    {
+      "kind": "int",
+      "unsigned": true,
+      "bits": 5,
+      "name": "blue",
+      "description": ""
+    }
+  ],
+  "statics": []
+}
