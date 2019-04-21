@@ -7,10 +7,15 @@ describe('uavtest', () => {
     let kindGeo = kinds[1041];
     let data = [12, 14, 15];
 
-    let service = false;
-    let request = false;
+    let result = bufferToJSON(data, kindGeo);
+    expect(result).toMatchSnapshot();
+  });
 
-    let result = bufferToJSON(data, kindGeo, service, request);
+  it('responseParameter', () => {
+    let kindGetSet = kinds[11];
+    let data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    let result = bufferToJSON(data, kindGetSet, true, false);
     expect(result).toMatchSnapshot();
   });
 });

@@ -30,24 +30,53 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
   if (isService && isRequest) transfer = kind.request;
   if (isService && !isRequest) transfer = kind.response;
 
-  let unionPrefixed = 0;
-  let extractedKind = 0;
+  let unionDidPreceed = 0;
+  let extractedUnionType = -1;
+  let unionTagCount = 0;
+  let voidCount = 0;
+  let unionTagValueName = '';
 
   for (let variable of transfer.variables) {
-    if (kinds[variable.kind] && kinds[variable.kind].type === 'message') {
+    if (variable.kind === 'void') {
+      variable.name = `${variable.kind}${voidCount}`;
+      voidCount++;
+    } else if (
+      kinds[variable.kind] &&
+      kinds[variable.kind].type === 'message'
+    ) {
       variable = kinds[variable.kind].message.variables[0];
     } else if (kinds[variable.kind] && kinds[variable.kind].type === 'union') {
-      unionPrefixed = true;
-    } else if (extractedKind) {
-      unionPrefixed = false;
-      // extract kind from union data received
-      variable = kinds[variable.kind].message.variables[extractedKind];
+      unionDidPreceed = 1;
+      variable.bits = Math.ceil(
+        Math.log(kinds[variable.kind].message.variables.length) / Math.log(2)
+      );
+      unionTagValueName = variable.name;
+      variable.name = `${variable.kind}${unionTagCount}`;
+      variable.kind = 'unionTag'; // rename kind to explicit name. must succeed bit length calculation
+
+      unionTagCount++;
     }
 
     from = processVariable(bigInt, variable, from, result);
 
-    if (unionPrefixed) {
-      extractedKind = result[variable.name];
+    if (unionDidPreceed) {
+      unionDidPreceed = false;
+      extractedUnionType = result[variable.name];
+
+      let name = variable.name.substr(0, variable.name.length - 1);
+      let unionType = kinds[name].message.variables[extractedUnionType];
+
+      if (unionType.bits) {
+        variable.bits = unionType.bits;
+      } else {
+        variable.bits = 0; // 0 on Empty type
+      }
+      variable.kind = unionType.kind;
+      variable.name = unionTagValueName;
+
+      from = processVariable(bigInt, variable, from, result);
+
+      extractedUnionType = -1;
     }
   }
   return result;
@@ -57,7 +86,9 @@ function processVariable(bigInt, variable, from, result) {
   let value;
 
   switch (variable.kind) {
-    case 'void':
+    case 'Empty': // same as void but occupies 0 bits
+    case 'void': // void is just padding and can contain anything. it is not actively read.
+    case 'unionTag': // union tags are always unsigned integers. the value represents the index of the type to be used
     case 'int':
       value = parseInt(bigInt, variable, from);
       from -= BigInt(variable.bits);
@@ -83,7 +114,7 @@ function processVariable(bigInt, variable, from, result) {
       }
       break;
     default:
-      throw new Error(`Unknow variable kind: ${variable.kind}`);
+      throw new Error(`Unknown variable kind: ${variable.kind}`);
   }
 
   result[variable.name] = value;

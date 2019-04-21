@@ -10,3 +10,30 @@ Object {
   "longitudeDeg1E7": 251658240,
 }
 `;
+
+exports[`uavtest responseParameter 1`] = `
+Object {
+  "NumericValue2": 0,
+  "NumericValue3": 0,
+  "Value0": 0,
+  "Value1": 0,
+  "defaultValue": 0,
+  "maxValue": 0,
+  "minValue": 0,
+  "name": Array [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+  ],
+  "value": 0,
+  "void0": 0,
+  "void1": 0,
+  "void2": 0,
+  "void3": 0,
+}
+`;
