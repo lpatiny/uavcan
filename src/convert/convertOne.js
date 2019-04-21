@@ -50,11 +50,19 @@ function convertOne(content) {
       // a constant
       // todo need to deals with the definitions of constants
       transferType.statics.push(line);
-    } else if (fields[0].match(/^(float|int|uint)[0-9]+$/)) {
+    } else if (fields[0].match(/^(float|int|uint|void)[0-9]+$/)) {
       currentVariable = getVar(fields);
       transferType.variables.push(currentVariable);
     } else if (fields[0].match(/^(float|int|uint)[0-9]+\[.*$/)) {
       currentVariable = getVarArray(fields);
+      transferType.variables.push(currentVariable);
+    } else if (fields[0].match(/^[A-Z].[A-z]+$/)) {
+      // handle linked union fields and types
+      currentVariable = getLinkedVar(fields);
+      transferType.variables.push(currentVariable);
+    } else if (fields[0].match(/^[A-Z].[A-z]+\[.*$/)) {
+      // handle linked array union fields and types
+      currentVariable = getLinkedVarArray(fields);
       transferType.variables.push(currentVariable);
     }
   }
@@ -87,12 +95,26 @@ function convertOne(content) {
 
 module.exports = convertOne;
 
+function getLinkedVar(fields) {
+  let variable = {};
+  variable.kind = 0;
+  variable.bits = 0;
+  variable.name = 0;
+
+  return variable;
+}
+function getLinkedVarArray(fields) {
+  let variable = {};
+
+  return variable;
+}
+
 function getVar(fields) {
   let variable = {};
   variable.kind = fields[0].replace(/[0-9u]/g, '').toLowerCase();
   if (fields[0].includes('u')) variable.unsigned = true;
   variable.bits = Number(fields[0].replace(/[a-z]/g, ''));
-  variable.name = camelCase(fields[1]);
+  if (fields[1]) variable.name = camelCase(fields[1]);
   variable.description = fields
     .slice(2)
     .filter((value) => value !== '#')
