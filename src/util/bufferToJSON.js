@@ -6,7 +6,7 @@ const n1 = BigInt(1);
 const n8 = BigInt(8);
 const n255 = BigInt(255);
 
-const decodeFloat16 = require('./decodeFloat16');
+const { byteToFloat16 } = require('float16');
 
 /**
  *
@@ -99,7 +99,7 @@ function parseFloat(bigInt, variable, from) {
   let buffer = Buffer.from(bytes);
   switch (variable.bits) {
     case 16:
-      return decodeFloat16((bytes[0] << 8) | bytes[1]);
+      return byteToFloat16((bytes[0] << 8) | bytes[1]);
     case 32:
       return buffer.readFloatBE();
     case 64:
