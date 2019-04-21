@@ -5,14 +5,21 @@ const camelCase = require('camelcase');
 function convertOne(content) {
   let result = {
     description: '',
-    variables: [],
-    statics: []
+    request: {
+      variables: [],
+      statics: []
+    },
+    response: {
+      variables: [],
+      statics: []
+    }
   };
+
   let currentVariable;
-
   let lines = content.split(/[\r\n]/);
-
   let inComment = false;
+  let requestResponse = result.request;
+
   for (let line of lines) {
     let fields = line.split(/[ \t]+/);
     if (line.startsWith('#')) {
@@ -26,16 +33,18 @@ function convertOne(content) {
         if (result.description) result.description += '\n';
         result.description += line.replace(/# /, '');
       }
+    } else if (line.startsWith('---')) {
+      requestResponse = result.response;
     } else if (fields[1] && fields[1].match(/^[A-Z_]+$/)) {
       // a constant
       // todo need to deals with the definitions of constants
-      result.statics.push(line);
+      requestResponse.statics.push(line);
     } else if (fields[0].match(/^(float|int|uint)[0-9]+$/)) {
       currentVariable = getVar(fields);
-      result.variables.push(currentVariable);
+      requestResponse.variables.push(currentVariable);
     } else if (fields[0].match(/^(float|int|uint)[0-9]+\[.*$/)) {
       currentVariable = getVarArray(fields);
-      result.variables.push(currentVariable);
+      requestResponse.variables.push(currentVariable);
     }
   }
   return result;

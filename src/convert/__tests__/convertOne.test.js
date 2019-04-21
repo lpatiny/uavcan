@@ -20,4 +20,19 @@ describe('convert', () => {
 
     expect(result).toMatchSnapshot();
   });
+
+  it('requestresponse', () => {
+    const source = join(
+      __dirname,
+      '../../../dsdl/protocol/param/11.GetSet.uavcan'
+    );
+
+    let content = fs.readFileSync(source, 'utf8');
+
+    let result = convertOne(content, 'GetSet');
+
+    // console.log(JSON.stringify(result, undefined, 2));
+
+    expect(result).toMatchSnapshot();
+  });
 });
