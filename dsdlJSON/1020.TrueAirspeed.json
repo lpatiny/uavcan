@@ -17,13 +17,5 @@
       }
     ],
     "statics": []
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

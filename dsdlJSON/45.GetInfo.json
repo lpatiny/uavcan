@@ -1,10 +1,6 @@
 {
   "description": "Request info about a remote file system entry (file, directory, etc).\nFile size in bytes.\nShould be set to zero for directories.",
   "type": "service",
-  "request": {
-    "variables": [],
-    "statics": []
-  },
   "response": {
     "variables": [
       {

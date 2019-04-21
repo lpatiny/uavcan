@@ -43,13 +43,5 @@
       "uint8 OPTIONAL_FIELD_FLAG_VCS_COMMIT = 1",
       "uint8 OPTIONAL_FIELD_FLAG_IMAGE_CRC  = 2"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

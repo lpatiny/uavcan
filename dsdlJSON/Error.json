@@ -22,13 +22,5 @@
       "int16 OUT_OF_SPACE      = 28",
       "int16 NOT_IMPLEMENTED   = 38"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

@@ -36,13 +36,5 @@
       "uint8 ERROR_FLAG_OVERCURRENT  = 4",
       "uint8 ERROR_FLAG_UNDERCURRENT = 8"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

@@ -108,13 +108,5 @@
       "uint2 STATUS_NO_FIX    = 0",
       "uint2 STATUS_TIME_ONLY = 1"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

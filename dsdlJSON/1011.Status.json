@@ -39,13 +39,5 @@
     "statics": [
       "uint7 POWER_RATING_PCT_UNKNOWN = 127"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

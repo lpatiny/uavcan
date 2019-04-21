@@ -13,7 +13,7 @@ const { byteToFloat16 } = require('float16');
  * @param {*} data
  * @param {*} kind
  */
-function bufferToJSON(data, kind, isService, isRequest) {
+function bufferToJSON(data, kind, isService = false, isRequest = false) {
   let buffer;
   if (Array.isArray(data)) {
     buffer = Buffer.from(data);

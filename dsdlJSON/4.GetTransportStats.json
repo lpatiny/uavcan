@@ -1,10 +1,6 @@
 {
   "description": "Get transport statistics.\nUAVCAN transport layer statistics.\nCAN bus statistics, for each interface independently.",
   "type": "service",
-  "request": {
-    "variables": [],
-    "statics": []
-  },
   "response": {
     "variables": [
       {

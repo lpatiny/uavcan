@@ -16,13 +16,5 @@
     "statics": [
       "uint8 SEPARATOR = '/'"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

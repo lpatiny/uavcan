@@ -23,13 +23,5 @@
     "statics": [
       "uint16 BROADCASTING_PERIOD_MS = 1000"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

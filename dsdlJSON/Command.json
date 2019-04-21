@@ -30,13 +30,5 @@
       "uint8 COMMAND_TYPE_FORCE        = 2     # Newton or Newton metre",
       "uint8 COMMAND_TYPE_SPEED        = 3     # meter per second or radian per second"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

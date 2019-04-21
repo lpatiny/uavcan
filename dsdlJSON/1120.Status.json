@@ -143,13 +143,5 @@
       "uint3 SPARK_PLUG_SECOND_ACTIVE  = 2",
       "uint3 SPARK_PLUG_BOTH_ACTIVE    = 3"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

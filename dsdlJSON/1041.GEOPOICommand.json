@@ -40,13 +40,5 @@
       "uint2 HEIGHT_REFERENCE_ELLIPSOID = 0",
       "uint2 HEIGHT_REFERENCE_MEAN_SEA_LEVEL = 1"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

@@ -15,13 +15,5 @@
       "uint8 STATUS_DISARMED           = 0",
       "uint8 STATUS_FULLY_ARMED        = 255"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

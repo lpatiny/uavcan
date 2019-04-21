@@ -23,13 +23,5 @@
       "uint8 LIGHT_ID_LANDING        = 254",
       "uint8 LIGHT_ID_FORMATION      = 255"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

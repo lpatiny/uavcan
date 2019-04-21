@@ -63,21 +63,21 @@ function convertOne(content) {
   if (
     result.request &&
     result.request.variables.length === 0 &&
-    result.request.statics === 0
+    result.request.statics.length === 0
   ) {
     delete result.request;
   }
   if (
     result.response &&
     result.response.variables.length === 0 &&
-    result.response.statics === 0
+    result.response.statics.length === 0
   ) {
     delete result.response;
   }
   if (
     result.message &&
     result.message.variables.length === 0 &&
-    result.message.statics === 0
+    result.message.statics.length === 0
   ) {
     delete result.message;
   }

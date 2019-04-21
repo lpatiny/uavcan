@@ -122,13 +122,5 @@
       "uint6 SUB_MODE_RTK_FLOAT     = 0",
       "uint6 SUB_MODE_RTK_FIXED     = 1"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

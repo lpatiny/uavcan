@@ -14,13 +14,5 @@
     "statics": [
       "uint8 MAVLINK                   = 0     # MAVLink"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

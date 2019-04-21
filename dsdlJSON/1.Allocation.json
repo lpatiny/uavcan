@@ -29,13 +29,5 @@
       "uint8 MAX_LENGTH_OF_UNIQUE_ID_IN_REQUEST = 6",
       "uint7 ANY_NODE_ID = 0"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

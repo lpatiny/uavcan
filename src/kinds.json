@@ -30,14 +30,6 @@
         "uint8 MAX_LENGTH_OF_UNIQUE_ID_IN_REQUEST = 6",
         "uint7 ANY_NODE_ID = 0"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "2": {
@@ -115,14 +107,6 @@
         "uint16 MIN_BROADCASTING_PERIOD_MS = 40              # Milliseconds",
         "uint16 RECOMMENDED_BROADCASTER_TIMEOUT_MS = 2200    # Milliseconds"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "5": {
@@ -141,10 +125,6 @@
       "statics": [
         "uint40 MAGIC_NUMBER = 0xACCE551B1E"
       ]
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "6": {
@@ -469,10 +449,6 @@
   "45": {
     "description": "Request info about a remote file system entry (file, directory, etc).\nFile size in bytes.\nShould be set to zero for directories.",
     "type": "service",
-    "request": {
-      "variables": [],
-      "statics": []
-    },
     "response": {
       "variables": [
         {
@@ -500,23 +476,11 @@
         }
       ],
       "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "47": {
     "description": "Delete remote file system entry.\nIf the remote entry is a directory, all nested entries will be removed too.",
-    "type": "service",
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
-    }
+    "type": "service"
   },
   "48": {
     "description": "Read file from a remote node.\n\nThere are two possible outcomes of a successful service call:\n 1. Data array size equals its capacity. This means that the end of the file is not reached yet.\n 2. Data array size is less than its capacity, possibly zero. This means that the end of file is reached.\n\nThus, if the client needs to fetch the entire file, it should repeatedly call this service while increasing the\noffset, until incomplete data is returned.\nIf the object pointed by 'path' cannot be read (e.g. it is a directory or it does not exist), appropriate error code\nwill be returned, and data array will be empty.",
@@ -570,10 +534,6 @@
           "description": ""
         }
       ],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -671,14 +631,6 @@
         "uint3 MODE_SOFTWARE_UPDATE  = 3         # New software/firmware is being loaded.",
         "uint3 MODE_OFFLINE          = 7         # The node is no longer available."
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "380": {
@@ -696,14 +648,6 @@
           "description": ""
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -732,14 +676,6 @@
       "statics": [
         "uint16 BROADCASTING_PERIOD_MS = 1000"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1000": {
@@ -794,14 +730,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1001": {
@@ -825,14 +753,6 @@
           "description": ""
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -864,14 +784,6 @@
           "description": ""
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -924,31 +836,11 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1010": {
     "description": "Actuator commands.\nThe system supports up to 256 actuators; up to 15 of them can be commanded with one message.",
-    "type": "message",
-    "message": {
-      "variables": [],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
-    }
+    "type": "message"
   },
   "1011": {
     "description": "Generic actuator feedback, if available.\nUnknown fields should be set to NAN.\nWhether the units are linear or angular depends on the actuator type (refer to the Command data type).",
@@ -991,14 +883,6 @@
       "statics": [
         "uint7 POWER_RATING_PCT_UNKNOWN = 127"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1020": {
@@ -1020,14 +904,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1021": {
@@ -1048,14 +924,6 @@
           "description": "(m/s)^2"
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -1088,14 +956,6 @@
         "uint8 SENSOR_ID_LEFT = 254",
         "uint8 SENSOR_ID_RIGHT = 255"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1026": {
@@ -1116,14 +976,6 @@
           "description": "Radians^2"
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -1190,14 +1042,6 @@
         "uint8 FLAG_HEATER_OVERCURRENT    = 4",
         "uint8 FLAG_HEATER_OPENCIRCUIT    = 8"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1028": {
@@ -1218,14 +1062,6 @@
           "description": "Pascal^2"
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -1248,14 +1084,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1030": {
@@ -1273,14 +1101,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1031": {
@@ -1297,14 +1117,6 @@
           "description": ""
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -1360,14 +1172,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1040": {
@@ -1390,14 +1194,6 @@
           "description": ""
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -1443,14 +1239,6 @@
         "uint2 HEIGHT_REFERENCE_ELLIPSOID = 0",
         "uint2 HEIGHT_REFERENCE_MEAN_SEA_LEVEL = 1"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1044": {
@@ -1481,14 +1269,6 @@
           "description": "+inf for non-existent axes"
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -1541,14 +1321,6 @@
         "uint3 READING_TYPE_TOO_CLOSE   = 2   # Range field contains min range for the sensor",
         "uint3 READING_TYPE_TOO_FAR     = 3   # Range field contains max range for the sensor"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1060": {
@@ -1661,14 +1433,6 @@
         "uint2 STATUS_NO_FIX    = 0",
         "uint2 STATUS_TIME_ONLY = 1"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1061": {
@@ -1734,14 +1498,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1062": {
@@ -1783,14 +1539,6 @@
       "statics": [
         "uint8 PROTOCOL_ID_UNKNOWN = 0"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1063": {
@@ -1917,14 +1665,6 @@
         "uint6 SUB_MODE_RTK_FLOAT     = 0",
         "uint6 SUB_MODE_RTK_FIXED     = 1"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1070": {
@@ -1947,14 +1687,6 @@
           "description": ""
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -1991,14 +1723,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1080": {
@@ -2020,31 +1744,11 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1081": {
     "description": "Lights control command.",
-    "type": "message",
-    "message": {
-      "variables": [],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
-    }
+    "type": "message"
   },
   "1090": {
     "description": "Primary power supply status.\nTypical publishing rate should be around 1~2 Hz.\nHow many hours left to full discharge at average load over the last 10 seconds.\nTrue if the publishing node senses that an external power source can be used, e.g. to charge batteries.\nRemaining energy estimate in percent.",
@@ -2078,14 +1782,6 @@
           "description": "[Percent] Error standard deviation. Use best guess if unknown."
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -2127,14 +1823,6 @@
         "uint8 ERROR_FLAG_OVERCURRENT  = 4",
         "uint8 ERROR_FLAG_UNDERCURRENT = 8"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1092": {
@@ -2248,14 +1936,6 @@
         "uint11 STATUS_FLAG_RESERVED_B   = 1024  # Keep zero",
         "uint7 STATE_OF_HEALTH_UNKNOWN = 127     # Use this constant if SOH cannot be estimated"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1100": {
@@ -2275,14 +1955,6 @@
         "uint8 STATUS_DISARMED           = 0",
         "uint8 STATUS_FULLY_ARMED        = 255"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1110": {
@@ -2315,14 +1987,6 @@
         "uint8 ERROR_FLAG_OVERHEATING = 1",
         "uint8 ERROR_FLAG_OVERCOOLING = 2"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1120": {
@@ -2470,14 +2134,6 @@
         "uint3 SPARK_PLUG_SECOND_ACTIVE  = 2",
         "uint3 SPARK_PLUG_BOTH_ACTIVE    = 3"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1129": {
@@ -2518,14 +2174,6 @@
           "description": ""
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -2622,14 +2270,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "2010": {
@@ -2655,14 +2295,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "16370": {
@@ -2686,14 +2318,6 @@
           "description": ""
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -2722,14 +2346,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "CoarseOrientation.uavcan": {
@@ -2751,14 +2367,6 @@
       "statics": [
         "float32 ANGLE_MULTIPLIER = 4.7746482927568605"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "Timestamp.uavcan": {
@@ -2772,14 +2380,6 @@
       "statics": [
         "uint56 UNKNOWN = 0"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1010.ArrayCommand.uavcan": {
@@ -2823,14 +2423,6 @@
         "uint8 COMMAND_TYPE_FORCE        = 2     # Newton or Newton metre",
         "uint8 COMMAND_TYPE_SPEED        = 3     # meter per second or radian per second"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1000.Solution.uavcan": {
@@ -2897,14 +2489,6 @@
         "uint8 COMMAND_MODE_ORIENTATION_BODY_FRAME  = 2",
         "uint8 COMMAND_MODE_GEO_POI                 = 3"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1110.Temperature.uavcan": {
@@ -2963,14 +2547,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1070.Command.uavcan": {
@@ -3025,14 +2601,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1080.BeepCommand.uavcan": {
@@ -3072,14 +2640,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "SingleLightCommand.uavcan": {
@@ -3110,14 +2670,6 @@
         "uint8 LIGHT_ID_LANDING        = 254",
         "uint8 LIGHT_ID_FORMATION      = 255"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1090.PrimaryPowerSupplyStatus.uavcan": {
@@ -3193,14 +2745,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "DataTypeKind.uavcan": {
@@ -3223,14 +2767,6 @@
         "uint8 SERVICE = 0",
         "uint8 MESSAGE = 1"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "HardwareVersion.uavcan": {
@@ -3273,14 +2809,6 @@
           "description": ""
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -3332,14 +2860,6 @@
         "uint8 OPTIONAL_FIELD_FLAG_VCS_COMMIT = 1",
         "uint8 OPTIONAL_FIELD_FLAG_IMAGE_CRC  = 2"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "16370.KeyValue.uavcan": {
@@ -3370,14 +2890,6 @@
         "uint3 WARNING  = 2",
         "uint3 ERROR    = 3"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "1.Allocation.uavcan": {
@@ -3423,14 +2935,6 @@
           "description": "Node ID of this allocation."
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -3481,14 +2985,6 @@
         "uint8 FLAG_READABLE  = 8",
         "uint8 FLAG_WRITEABLE = 16"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "Error.uavcan": {
@@ -3518,14 +3014,6 @@
         "int16 OUT_OF_SPACE      = 28",
         "int16 NOT_IMPLEMENTED   = 38"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "Path.uavcan": {
@@ -3549,14 +3037,6 @@
       "statics": [
         "uint8 SEPARATOR = '/'"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "10.ExecuteOpcode.uavcan": {
@@ -3570,19 +3050,7 @@
   },
   "Empty": {
     "description": "Ex nihilo nihil fit.",
-    "type": "message",
-    "message": {
-      "variables": [],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
-    }
+    "type": "message"
   },
   "NumericValue.uavcan": {
     "definition": "#\n# Numeric-only value.\n#\n# This is a union, which means that this structure can contain either one of the fields below.\n# The structure is prefixed with tag - a selector value that indicates which particular field is encoded.\n#\n\n@union                          # Tag is 2 bits long.\n\nEmpty empty                     # Empty field, used to represent an undefined value.\n\nint64   integer_value\nfloat32 real_value\n"
@@ -3605,14 +3073,6 @@
           "description": ""
         }
       ],
-      "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
       "statics": []
     }
   },
@@ -3654,14 +3114,6 @@
         }
       ],
       "statics": []
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   },
   "2010.Broadcast.uavcan": {
@@ -3689,14 +3141,6 @@
       "statics": [
         "uint8 MAVLINK                   = 0     # MAVLink"
       ]
-    },
-    "request": {
-      "variables": [],
-      "statics": []
-    },
-    "response": {
-      "variables": [],
-      "statics": []
     }
   }
 }

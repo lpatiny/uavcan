@@ -61,13 +61,5 @@
       "uint8 FLAG_HEATER_OVERCURRENT    = 4",
       "uint8 FLAG_HEATER_OPENCIRCUIT    = 8"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

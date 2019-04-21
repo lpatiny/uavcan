@@ -17,13 +17,5 @@
       "uint8 COMMAND_MODE_ORIENTATION_BODY_FRAME  = 2",
       "uint8 COMMAND_MODE_GEO_POI                 = 3"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

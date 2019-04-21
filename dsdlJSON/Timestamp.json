@@ -6,13 +6,5 @@
     "statics": [
       "uint56 UNKNOWN = 0"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

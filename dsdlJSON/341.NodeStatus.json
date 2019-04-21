@@ -53,13 +53,5 @@
       "uint3 MODE_SOFTWARE_UPDATE  = 3         # New software/firmware is being loaded.",
       "uint3 MODE_OFFLINE          = 7         # The node is no longer available."
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

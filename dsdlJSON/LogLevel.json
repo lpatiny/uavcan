@@ -17,13 +17,5 @@
       "uint3 WARNING  = 2",
       "uint3 ERROR    = 3"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

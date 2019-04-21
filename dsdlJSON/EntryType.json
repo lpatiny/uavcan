@@ -18,13 +18,5 @@
       "uint8 FLAG_READABLE  = 8",
       "uint8 FLAG_WRITEABLE = 16"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

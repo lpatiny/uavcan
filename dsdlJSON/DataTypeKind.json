@@ -15,13 +15,5 @@
       "uint8 SERVICE = 0",
       "uint8 MESSAGE = 1"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

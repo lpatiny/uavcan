@@ -17,13 +17,5 @@
       "uint8 MIN_MESSAGES = 3",
       "uint16 MAX_INTERVAL_MS = 500"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

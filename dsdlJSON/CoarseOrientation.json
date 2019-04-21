@@ -14,13 +14,5 @@
     "statics": [
       "float32 ANGLE_MULTIPLIER = 4.7746482927568605"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

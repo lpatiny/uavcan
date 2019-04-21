@@ -28,13 +28,5 @@
       "uint8 ERROR_FLAG_OVERHEATING = 1",
       "uint8 ERROR_FLAG_OVERCOOLING = 2"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

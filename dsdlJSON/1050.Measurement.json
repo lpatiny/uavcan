@@ -47,13 +47,5 @@
       "uint3 READING_TYPE_TOO_CLOSE   = 2   # Range field contains min range for the sensor",
       "uint3 READING_TYPE_TOO_FAR     = 3   # Range field contains max range for the sensor"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }

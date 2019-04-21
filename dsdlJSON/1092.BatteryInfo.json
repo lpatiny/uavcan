@@ -109,13 +109,5 @@
       "uint11 STATUS_FLAG_RESERVED_B   = 1024  # Keep zero",
       "uint7 STATE_OF_HEALTH_UNKNOWN = 127     # Use this constant if SOH cannot be estimated"
     ]
-  },
-  "request": {
-    "variables": [],
-    "statics": []
-  },
-  "response": {
-    "variables": [],
-    "statics": []
   }
 }
