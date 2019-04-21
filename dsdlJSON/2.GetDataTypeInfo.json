@@ -11,6 +11,11 @@
         "description": "Ignored if 'name' is non-empty"
       },
       {
+        "kind": "DataTypeKind",
+        "name": "kind",
+        "description": "Ignored if 'name' is non-empty"
+      },
+      {
         "length": 80,
         "range": true,
         "kind": "intArray",
@@ -37,6 +42,11 @@
         "bits": 16,
         "name": "id",
         "description": "Valid only if the data type is known (see FLAG_KNOWN)"
+      },
+      {
+        "kind": "DataTypeKind",
+        "name": "kind",
+        "description": "Ditto"
       },
       {
         "kind": "int",

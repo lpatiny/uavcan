@@ -30,6 +30,11 @@ Empty name (and/or empty value) in response indicates that there is no such para
         "unsigned": true,
       },
       Object {
+        "description": "",
+        "kind": "Value",
+        "name": "value",
+      },
+      Object {
         "bits": 8,
         "description": "",
         "kind": "intArray",
@@ -43,6 +48,46 @@ Empty name (and/or empty value) in response indicates that there is no such para
   "response": Object {
     "statics": Array [],
     "variables": Array [
+      Object {
+        "bits": 5,
+        "description": "",
+        "kind": "void",
+      },
+      Object {
+        "description": "",
+        "kind": "Value",
+        "name": "value",
+      },
+      Object {
+        "bits": 5,
+        "description": "",
+        "kind": "void",
+      },
+      Object {
+        "description": "Optional",
+        "kind": "Value",
+        "name": "defaultValue",
+      },
+      Object {
+        "bits": 6,
+        "description": "",
+        "kind": "void",
+      },
+      Object {
+        "description": "Optional, not applicable for bool/string",
+        "kind": "NumericValue",
+        "name": "maxValue",
+      },
+      Object {
+        "bits": 6,
+        "description": "",
+        "kind": "void",
+      },
+      Object {
+        "description": "Optional, not applicable for bool/string",
+        "kind": "NumericValue",
+        "name": "minValue",
+      },
       Object {
         "bits": 8,
         "description": "",

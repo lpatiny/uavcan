@@ -1,4 +1,16 @@
 {
   "description": "Lights control command.",
-  "type": "message"
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "length": 20,
+        "range": true,
+        "kind": "SingleLightCommand[<=20]Array",
+        "name": "commands",
+        "description": ""
+      }
+    ],
+    "statics": []
+  }
 }

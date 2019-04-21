@@ -29,6 +29,11 @@
         "description": "meter per second or radian per second"
       },
       {
+        "kind": "void",
+        "bits": 1,
+        "description": ""
+      },
+      {
         "kind": "int",
         "unsigned": true,
         "bits": 7,

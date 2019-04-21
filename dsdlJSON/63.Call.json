@@ -4,6 +4,11 @@
   "request": {
     "variables": [
       {
+        "kind": "Protocol",
+        "name": "protocol",
+        "description": ""
+      },
+      {
         "kind": "int",
         "unsigned": true,
         "bits": 8,

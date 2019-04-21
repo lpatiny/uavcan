@@ -11,6 +11,11 @@
         "description": ""
       },
       {
+        "kind": "Mode",
+        "name": "mode",
+        "description": ""
+      },
+      {
         "length": 4,
         "kind": "floatArray",
         "bits": 16,

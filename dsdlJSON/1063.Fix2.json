@@ -11,6 +11,12 @@
         "description": ""
       },
       {
+        "kind": "void",
+        "bits": 13,
+        "name": "#",
+        "description": "Reserved space"
+      },
+      {
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -102,6 +108,13 @@
         "kind": "float",
         "bits": 16,
         "name": "pdop",
+        "description": ""
+      },
+      {
+        "length": 1,
+        "range": true,
+        "kind": "ECEFPositionVelocity[<=1]Array",
+        "name": "ecefPositionVelocity",
         "description": ""
       }
     ],

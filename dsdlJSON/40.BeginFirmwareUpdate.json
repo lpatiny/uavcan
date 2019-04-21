@@ -9,6 +9,11 @@
         "bits": 8,
         "name": "sourceNodeId",
         "description": "If this field is zero, the caller's Node ID will be used instead."
+      },
+      {
+        "kind": "Path",
+        "name": "imageFileRemotePath",
+        "description": ""
       }
     ],
     "statics": []

@@ -11,6 +11,11 @@
         "description": ""
       },
       {
+        "kind": "Mode",
+        "name": "mode",
+        "description": ""
+      },
+      {
         "kind": "int",
         "bits": 32,
         "name": "longitudeDeg1E7",

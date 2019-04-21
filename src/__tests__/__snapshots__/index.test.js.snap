@@ -2,10 +2,11 @@
 
 exports[`uavtest gps 1`] = `
 Object {
+  "commandMode": 14,
   "gimbalId": 12,
   "heightCm": 0,
   "heightReference": 0,
   "latitudeDeg1E7": 0,
-  "longitudeDeg1E7": 235864064,
+  "longitudeDeg1E7": 251658240,
 }
 `;

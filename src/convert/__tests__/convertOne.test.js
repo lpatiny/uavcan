@@ -31,7 +31,7 @@ describe('convert', () => {
 
     let result = convertOne(content, 'GetSet');
 
-    console.log(JSON.stringify(result, undefined, 2));
+    // console.log(JSON.stringify(result, undefined, 2));
 
     expect(result).toMatchSnapshot();
   });

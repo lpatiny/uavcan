@@ -4,6 +4,11 @@
   "message": {
     "variables": [
       {
+        "kind": "Empty",
+        "name": "empty",
+        "description": "Empty field, used to represent an undefined value."
+      },
+      {
         "kind": "int",
         "bits": 64,
         "name": "integerValue",

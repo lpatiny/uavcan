@@ -45,6 +45,11 @@
           "description": "Ignored if 'name' is non-empty"
         },
         {
+          "kind": "DataTypeKind",
+          "name": "kind",
+          "description": "Ignored if 'name' is non-empty"
+        },
+        {
           "length": 80,
           "range": true,
           "kind": "intArray",
@@ -71,6 +76,11 @@
           "bits": 16,
           "name": "id",
           "description": "Valid only if the data type is known (see FLAG_KNOWN)"
+        },
+        {
+          "kind": "DataTypeKind",
+          "name": "kind",
+          "description": "Ditto"
         },
         {
           "kind": "int",
@@ -240,6 +250,11 @@
           "description": ""
         },
         {
+          "kind": "Value",
+          "name": "value",
+          "description": ""
+        },
+        {
           "length": 92,
           "range": true,
           "kind": "intArray",
@@ -253,6 +268,46 @@
     },
     "response": {
       "variables": [
+        {
+          "kind": "void",
+          "bits": 5,
+          "description": ""
+        },
+        {
+          "kind": "Value",
+          "name": "value",
+          "description": ""
+        },
+        {
+          "kind": "void",
+          "bits": 5,
+          "description": ""
+        },
+        {
+          "kind": "Value",
+          "name": "defaultValue",
+          "description": "Optional"
+        },
+        {
+          "kind": "void",
+          "bits": 6,
+          "description": ""
+        },
+        {
+          "kind": "NumericValue",
+          "name": "maxValue",
+          "description": "Optional, not applicable for bool/string"
+        },
+        {
+          "kind": "void",
+          "bits": 6,
+          "description": ""
+        },
+        {
+          "kind": "NumericValue",
+          "name": "minValue",
+          "description": "Optional, not applicable for bool/string"
+        },
         {
           "length": 92,
           "range": true,
@@ -344,6 +399,13 @@
           "bits": 8,
           "name": "leaderCommit",
           "description": ""
+        },
+        {
+          "length": 1,
+          "range": true,
+          "kind": "Entry[<=1]Array",
+          "name": "entries",
+          "description": ""
         }
       ],
       "statics": [
@@ -417,6 +479,11 @@
           "bits": 8,
           "name": "sourceNodeId",
           "description": "If this field is zero, the caller's Node ID will be used instead."
+        },
+        {
+          "kind": "Path",
+          "name": "imageFileRemotePath",
+          "description": ""
         }
       ],
       "statics": []
@@ -449,6 +516,16 @@
   "45": {
     "description": "Request info about a remote file system entry (file, directory, etc).\nFile size in bytes.\nShould be set to zero for directories.",
     "type": "service",
+    "request": {
+      "variables": [
+        {
+          "kind": "Path",
+          "name": "path",
+          "description": ""
+        }
+      ],
+      "statics": []
+    },
     "response": {
       "variables": [
         {
@@ -456,6 +533,16 @@
           "unsigned": true,
           "bits": 40,
           "name": "size",
+          "description": ""
+        },
+        {
+          "kind": "Error",
+          "name": "error",
+          "description": ""
+        },
+        {
+          "kind": "EntryType",
+          "name": "entryType",
           "description": ""
         }
       ],
@@ -473,6 +560,31 @@
           "bits": 32,
           "name": "entryIndex",
           "description": ""
+        },
+        {
+          "kind": "Path",
+          "name": "directoryPath",
+          "description": ""
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "kind": "Error",
+          "name": "error",
+          "description": ""
+        },
+        {
+          "kind": "EntryType",
+          "name": "entryType",
+          "description": ""
+        },
+        {
+          "kind": "Path",
+          "name": "entryFullPath",
+          "description": "Ignored/Empty if such entry does not exist."
         }
       ],
       "statics": []
@@ -480,7 +592,27 @@
   },
   "47": {
     "description": "Delete remote file system entry.\nIf the remote entry is a directory, all nested entries will be removed too.",
-    "type": "service"
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "kind": "Path",
+          "name": "path",
+          "description": ""
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "kind": "Error",
+          "name": "error",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
   },
   "48": {
     "description": "Read file from a remote node.\n\nThere are two possible outcomes of a successful service call:\n 1. Data array size equals its capacity. This means that the end of the file is not reached yet.\n 2. Data array size is less than its capacity, possibly zero. This means that the end of file is reached.\n\nThus, if the client needs to fetch the entire file, it should repeatedly call this service while increasing the\noffset, until incomplete data is returned.\nIf the object pointed by 'path' cannot be read (e.g. it is a directory or it does not exist), appropriate error code\nwill be returned, and data array will be empty.",
@@ -493,12 +625,22 @@
           "bits": 40,
           "name": "offset",
           "description": ""
+        },
+        {
+          "kind": "Path",
+          "name": "path",
+          "description": ""
         }
       ],
       "statics": []
     },
     "response": {
       "variables": [
+        {
+          "kind": "Error",
+          "name": "error",
+          "description": ""
+        },
         {
           "length": 256,
           "range": true,
@@ -525,12 +667,27 @@
           "description": ""
         },
         {
+          "kind": "Path",
+          "name": "path",
+          "description": ""
+        },
+        {
           "length": 192,
           "range": true,
           "kind": "intArray",
           "unsigned": true,
           "bits": 8,
           "name": "data",
+          "description": ""
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "kind": "Error",
+          "name": "error",
           "description": ""
         }
       ],
@@ -542,6 +699,11 @@
     "type": "service",
     "request": {
       "variables": [
+        {
+          "kind": "Protocol",
+          "name": "protocol",
+          "description": ""
+        },
         {
           "kind": "int",
           "unsigned": true,
@@ -639,6 +801,11 @@
     "message": {
       "variables": [
         {
+          "kind": "void",
+          "bits": 6,
+          "description": ""
+        },
+        {
           "length": 92,
           "range": true,
           "kind": "intArray",
@@ -691,6 +858,11 @@
           "description": ""
         },
         {
+          "kind": "void",
+          "bits": 4,
+          "description": ""
+        },
+        {
           "length": 9,
           "range": true,
           "kind": "floatArray",
@@ -703,6 +875,11 @@
           "kind": "floatArray",
           "bits": 16,
           "name": "angularVelocity",
+          "description": ""
+        },
+        {
+          "kind": "void",
+          "bits": 4,
           "description": ""
         },
         {
@@ -840,7 +1017,19 @@
   },
   "1010": {
     "description": "Actuator commands.\nThe system supports up to 256 actuators; up to 15 of them can be commanded with one message.",
-    "type": "message"
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "length": 15,
+          "range": true,
+          "kind": "Command[<=15]Array",
+          "name": "commands",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
   },
   "1011": {
     "description": "Generic actuator feedback, if available.\nUnknown fields should be set to NAN.\nWhether the units are linear or angular depends on the actuator type (refer to the Command data type).",
@@ -871,6 +1060,11 @@
           "bits": 16,
           "name": "speed",
           "description": "meter per second or radian per second"
+        },
+        {
+          "kind": "void",
+          "bits": 1,
+          "description": ""
         },
         {
           "kind": "int",
@@ -1187,6 +1381,11 @@
           "description": ""
         },
         {
+          "kind": "Mode",
+          "name": "mode",
+          "description": ""
+        },
+        {
           "length": 4,
           "kind": "floatArray",
           "bits": 16,
@@ -1207,6 +1406,11 @@
           "unsigned": true,
           "bits": 8,
           "name": "gimbalId",
+          "description": ""
+        },
+        {
+          "kind": "Mode",
+          "name": "mode",
           "description": ""
         },
         {
@@ -1251,6 +1455,11 @@
           "unsigned": true,
           "bits": 8,
           "name": "gimbalId",
+          "description": ""
+        },
+        {
+          "kind": "Mode",
+          "name": "mode",
           "description": ""
         },
         {
@@ -1336,6 +1545,12 @@
           "description": ""
         },
         {
+          "kind": "void",
+          "bits": 5,
+          "name": "#",
+          "description": "Reserved space"
+        },
+        {
           "kind": "int",
           "unsigned": true,
           "bits": 8,
@@ -1405,6 +1620,11 @@
           "kind": "float",
           "bits": 16,
           "name": "pdop",
+          "description": ""
+        },
+        {
+          "kind": "void",
+          "bits": 4,
           "description": ""
         },
         {
@@ -1554,6 +1774,12 @@
           "description": ""
         },
         {
+          "kind": "void",
+          "bits": 13,
+          "name": "#",
+          "description": "Reserved space"
+        },
+        {
           "kind": "int",
           "unsigned": true,
           "bits": 8,
@@ -1645,6 +1871,13 @@
           "kind": "float",
           "bits": 16,
           "name": "pdop",
+          "description": ""
+        },
+        {
+          "length": 1,
+          "range": true,
+          "kind": "ECEFPositionVelocity[<=1]Array",
+          "name": "ecefPositionVelocity",
           "description": ""
         }
       ],
@@ -1748,7 +1981,19 @@
   },
   "1081": {
     "description": "Lights control command.",
-    "type": "message"
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "length": 20,
+          "range": true,
+          "kind": "SingleLightCommand[<=20]Array",
+          "name": "commands",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
   },
   "1090": {
     "description": "Primary power supply status.\nTypical publishing rate should be around 1~2 Hz.\nHow many hours left to full discharge at average load over the last 10 seconds.\nTrue if the publishing node senses that an external power source can be used, e.g. to charge batteries.\nRemaining energy estimate in percent.",
@@ -2009,6 +2254,11 @@
           "description": ""
         },
         {
+          "kind": "void",
+          "bits": 16,
+          "description": ""
+        },
+        {
           "kind": "int",
           "unsigned": true,
           "bits": 7,
@@ -2102,6 +2352,13 @@
           "bits": 3,
           "name": "sparkPlugUsage",
           "description": ""
+        },
+        {
+          "length": 16,
+          "range": true,
+          "kind": "CylinderStatus[<=16]Array",
+          "name": "cylinderStatus",
+          "description": ""
         }
       ],
       "statics": [
@@ -2141,6 +2398,11 @@
     "type": "message",
     "message": {
       "variables": [
+        {
+          "kind": "void",
+          "bits": 9,
+          "description": ""
+        },
         {
           "kind": "int",
           "unsigned": true,
@@ -2278,6 +2540,11 @@
     "message": {
       "variables": [
         {
+          "kind": "Protocol",
+          "name": "protocol",
+          "description": ""
+        },
+        {
           "kind": "int",
           "unsigned": true,
           "bits": 8,
@@ -2326,6 +2593,11 @@
     "type": "message",
     "message": {
       "variables": [
+        {
+          "kind": "LogLevel",
+          "name": "level",
+          "description": ""
+        },
         {
           "length": 31,
           "range": true,
@@ -2536,6 +2808,12 @@
           "bits": 36,
           "name": "positionXyzMm",
           "description": "XYZ-axis coordinates in mm"
+        },
+        {
+          "kind": "void",
+          "bits": 6,
+          "name": "#",
+          "description": "Aligns the following array at byte boundary"
         },
         {
           "length": 36,
@@ -2928,6 +3206,11 @@
           "description": "Unique ID of this allocation."
         },
         {
+          "kind": "void",
+          "bits": 1,
+          "description": ""
+        },
+        {
           "kind": "int",
           "unsigned": true,
           "bits": 7,
@@ -3061,6 +3344,11 @@
     "message": {
       "variables": [
         {
+          "kind": "Empty",
+          "name": "empty",
+          "description": "Empty field, used to represent an undefined value."
+        },
+        {
           "kind": "int",
           "bits": 64,
           "name": "integerValue",
@@ -3084,6 +3372,11 @@
     "type": "union",
     "message": {
       "variables": [
+        {
+          "kind": "Empty",
+          "name": "empty",
+          "description": "Empty field, used to represent an undefined value."
+        },
         {
           "kind": "int",
           "bits": 64,

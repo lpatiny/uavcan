@@ -23,6 +23,13 @@
         "bits": 48,
         "name": "transferErrors",
         "description": "Number of errors detected in the UAVCAN transport layer."
+      },
+      {
+        "length": 3,
+        "range": true,
+        "kind": "CANIfaceStats[<=3]Array",
+        "name": "canIfaceStats",
+        "description": ""
       }
     ],
     "statics": []

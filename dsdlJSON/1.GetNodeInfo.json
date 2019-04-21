@@ -4,6 +4,21 @@
   "response": {
     "variables": [
       {
+        "kind": "NodeStatus",
+        "name": "status",
+        "description": ""
+      },
+      {
+        "kind": "SoftwareVersion",
+        "name": "softwareVersion",
+        "description": ""
+      },
+      {
+        "kind": "HardwareVersion",
+        "name": "hardwareVersion",
+        "description": ""
+      },
+      {
         "length": 80,
         "range": true,
         "kind": "intArray",

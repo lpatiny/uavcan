@@ -30,6 +30,13 @@
         "bits": 8,
         "name": "leaderCommit",
         "description": ""
+      },
+      {
+        "length": 1,
+        "range": true,
+        "kind": "Entry[<=1]Array",
+        "name": "entries",
+        "description": ""
       }
     ],
     "statics": [

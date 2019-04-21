@@ -19,6 +19,11 @@
         "description": "Unique ID of this allocation."
       },
       {
+        "kind": "void",
+        "bits": 1,
+        "description": ""
+      },
+      {
         "kind": "int",
         "unsigned": true,
         "bits": 7,

@@ -8,6 +8,8 @@ const n255 = BigInt(255);
 
 const { byteToFloat16 } = require('float16');
 
+const kinds = require('../kinds.json');
+
 /**
  *
  * @param {*} data
@@ -28,15 +30,34 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
   if (isService && isRequest) transfer = kind.request;
   if (isService && !isRequest) transfer = kind.response;
 
+  let unionPrefixed = 0;
+  let extractedKind = 0;
+
   for (let variable of transfer.variables) {
+    if (kinds[variable.kind] && kinds[variable.kind].type === 'message') {
+      variable = kinds[variable.kind].message.variables[0];
+    } else if (kinds[variable.kind] && kinds[variable.kind].type === 'union') {
+      unionPrefixed = true;
+    } else if (extractedKind) {
+      unionPrefixed = false;
+      // extract kind from union data received
+      variable = kinds[variable.kind].message.variables[extractedKind];
+    }
+
     from = processVariable(bigInt, variable, from, result);
+
+    if (unionPrefixed) {
+      extractedKind = result[variable.name];
+    }
   }
   return result;
 }
 
 function processVariable(bigInt, variable, from, result) {
   let value;
+
   switch (variable.kind) {
+    case 'void':
     case 'int':
       value = parseInt(bigInt, variable, from);
       from -= BigInt(variable.bits);

@@ -9,12 +9,22 @@
         "bits": 40,
         "name": "offset",
         "description": ""
+      },
+      {
+        "kind": "Path",
+        "name": "path",
+        "description": ""
       }
     ],
     "statics": []
   },
   "response": {
     "variables": [
+      {
+        "kind": "Error",
+        "name": "error",
+        "description": ""
+      },
       {
         "length": 256,
         "range": true,

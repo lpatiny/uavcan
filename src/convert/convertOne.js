@@ -97,14 +97,24 @@ module.exports = convertOne;
 
 function getLinkedVar(fields) {
   let variable = {};
-  variable.kind = 0;
-  variable.bits = 0;
-  variable.name = 0;
-
+  variable.kind = fields[0];
+  if (fields[1]) variable.name = camelCase(fields[1]);
+  variable.description = fields
+    .slice(2)
+    .filter((value) => value !== '#')
+    .join(' ');
   return variable;
 }
+
 function getLinkedVarArray(fields) {
-  let variable = {};
+  let variable = parseArraySize(fields[0]);
+
+  variable.kind = `${fields[0]}Array`;
+  if (fields[1]) variable.name = camelCase(fields[1]);
+  variable.description = fields
+    .slice(2)
+    .filter((value) => value !== '#')
+    .join(' ');
 
   return variable;
 }

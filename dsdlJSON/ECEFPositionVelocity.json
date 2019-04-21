@@ -18,6 +18,12 @@
         "description": "XYZ-axis coordinates in mm"
       },
       {
+        "kind": "void",
+        "bits": 6,
+        "name": "#",
+        "description": "Aligns the following array at byte boundary"
+      },
+      {
         "length": 36,
         "range": true,
         "kind": "floatArray",

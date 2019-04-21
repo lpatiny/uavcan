@@ -11,12 +11,27 @@
         "description": ""
       },
       {
+        "kind": "Path",
+        "name": "path",
+        "description": ""
+      },
+      {
         "length": 192,
         "range": true,
         "kind": "intArray",
         "unsigned": true,
         "bits": 8,
         "name": "data",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "response": {
+    "variables": [
+      {
+        "kind": "Error",
+        "name": "error",
         "description": ""
       }
     ],

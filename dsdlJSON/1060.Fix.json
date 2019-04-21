@@ -11,6 +11,12 @@
         "description": ""
       },
       {
+        "kind": "void",
+        "bits": 5,
+        "name": "#",
+        "description": "Reserved space"
+      },
+      {
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -80,6 +86,11 @@
         "kind": "float",
         "bits": 16,
         "name": "pdop",
+        "description": ""
+      },
+      {
+        "kind": "void",
+        "bits": 4,
         "description": ""
       },
       {

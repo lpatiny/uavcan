@@ -1,6 +1,16 @@
 {
   "description": "Request info about a remote file system entry (file, directory, etc).\nFile size in bytes.\nShould be set to zero for directories.",
   "type": "service",
+  "request": {
+    "variables": [
+      {
+        "kind": "Path",
+        "name": "path",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
   "response": {
     "variables": [
       {
@@ -8,6 +18,16 @@
         "unsigned": true,
         "bits": 40,
         "name": "size",
+        "description": ""
+      },
+      {
+        "kind": "Error",
+        "name": "error",
+        "description": ""
+      },
+      {
+        "kind": "EntryType",
+        "name": "entryType",
         "description": ""
       }
     ],

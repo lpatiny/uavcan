@@ -11,6 +11,11 @@
         "description": ""
       },
       {
+        "kind": "void",
+        "bits": 4,
+        "description": ""
+      },
+      {
         "length": 9,
         "range": true,
         "kind": "floatArray",
@@ -23,6 +28,11 @@
         "kind": "floatArray",
         "bits": 16,
         "name": "angularVelocity",
+        "description": ""
+      },
+      {
+        "kind": "void",
+        "bits": 4,
         "description": ""
       },
       {

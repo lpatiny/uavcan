@@ -9,6 +9,31 @@
         "bits": 32,
         "name": "entryIndex",
         "description": ""
+      },
+      {
+        "kind": "Path",
+        "name": "directoryPath",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "response": {
+    "variables": [
+      {
+        "kind": "Error",
+        "name": "error",
+        "description": ""
+      },
+      {
+        "kind": "EntryType",
+        "name": "entryType",
+        "description": ""
+      },
+      {
+        "kind": "Path",
+        "name": "entryFullPath",
+        "description": "Ignored/Empty if such entry does not exist."
       }
     ],
     "statics": []

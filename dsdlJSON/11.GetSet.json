@@ -11,6 +11,11 @@
         "description": ""
       },
       {
+        "kind": "Value",
+        "name": "value",
+        "description": ""
+      },
+      {
         "length": 92,
         "range": true,
         "kind": "intArray",
@@ -24,6 +29,46 @@
   },
   "response": {
     "variables": [
+      {
+        "kind": "void",
+        "bits": 5,
+        "description": ""
+      },
+      {
+        "kind": "Value",
+        "name": "value",
+        "description": ""
+      },
+      {
+        "kind": "void",
+        "bits": 5,
+        "description": ""
+      },
+      {
+        "kind": "Value",
+        "name": "defaultValue",
+        "description": "Optional"
+      },
+      {
+        "kind": "void",
+        "bits": 6,
+        "description": ""
+      },
+      {
+        "kind": "NumericValue",
+        "name": "maxValue",
+        "description": "Optional, not applicable for bool/string"
+      },
+      {
+        "kind": "void",
+        "bits": 6,
+        "description": ""
+      },
+      {
+        "kind": "NumericValue",
+        "name": "minValue",
+        "description": "Optional, not applicable for bool/string"
+      },
       {
         "length": 92,
         "range": true,

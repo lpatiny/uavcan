@@ -18,6 +18,11 @@
         "description": ""
       },
       {
+        "kind": "void",
+        "bits": 16,
+        "description": ""
+      },
+      {
         "kind": "int",
         "unsigned": true,
         "bits": 7,
@@ -110,6 +115,13 @@
         "unsigned": true,
         "bits": 3,
         "name": "sparkPlugUsage",
+        "description": ""
+      },
+      {
+        "length": 16,
+        "range": true,
+        "kind": "CylinderStatus[<=16]Array",
+        "name": "cylinderStatus",
         "description": ""
       }
     ],
