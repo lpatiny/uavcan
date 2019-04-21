@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`uavtest NodeStatus 1`] = `
+Object {
+  "health": 0,
+  "mode": 0,
+  "subMode": 0,
+  "uptimeSec": 202247936,
+  "vendorSpecificStatusCode": 0,
+}
+`;
+
 exports[`uavtest gps 1`] = `
 Object {
   "commandMode": 14,
@@ -8,6 +18,17 @@ Object {
   "heightReference": 0,
   "latitudeDeg1E7": 0,
   "longitudeDeg1E7": 251658240,
+}
+`;
+
+exports[`uavtest requestParameter 1`] = `
+Object {
+  "Value0": 0,
+  "index": 0,
+  "name": Array [
+    192,
+  ],
+  "value": 0,
 }
 `;
 

@@ -40,6 +40,7 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
     if (variable.kind === 'void') {
       variable.name = `${variable.kind}${voidCount}`;
       voidCount++;
+      variable.bits = 0;
     } else if (
       kinds[variable.kind] &&
       kinds[variable.kind].type === 'message'
@@ -53,19 +54,20 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
       unionTagValueName = variable.name;
       variable.name = `${variable.kind}${unionTagCount}`;
       variable.kind = 'unionTag'; // rename kind to explicit name. must succeed bit length calculation
-
+      variable.unsigned = true;
       unionTagCount++;
+
+      console.log('uniontag variable sent to parser', variable);
     }
 
     from = processVariable(bigInt, variable, from, result);
 
     if (unionDidPreceed) {
-      unionDidPreceed = false;
+      unionDidPreceed = 0;
       extractedUnionType = result[variable.name];
 
       let name = variable.name.substr(0, variable.name.length - 1);
-      let unionType = kinds[name].message.variables[extractedUnionType];
-
+      let unionType = kinds[name].message.variables[1];
       if (unionType.bits) {
         variable.bits = unionType.bits;
       } else {
@@ -73,6 +75,9 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
       }
       variable.kind = unionType.kind;
       variable.name = unionTagValueName;
+
+      console.log('extracted uniontag value', extractedUnionType);
+      console.log(result, unionType);
 
       from = processVariable(bigInt, variable, from, result);
 
