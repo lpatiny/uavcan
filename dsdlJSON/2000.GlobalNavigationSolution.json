@@ -1,92 +1,103 @@
 {
   "description": "Inertial data and orientation in body frame with fused location.\nFields marked as optional should be set to NaN if the corresponding value is unknown.\nGlobal network synchronized timestamp, if known.\nSet to zero if the timestamp is not known.\nGeo location [angular degree].\nHeight estimates [meter].\nAtmospheric pressure adjusted to sea level [hectopascal].\nRotation quaternion between the NED frame and the body frame.\nZero rotation corresponds to the following orientation:\n  X facing north\n  Y facing east\n  Z facing down\nColumn order:\n  longitude                                   [meter^2]\n  latitude                                    [meter^2]\n  height (MSL or ellipsoid, whichever worse)  [meter^2]\n  roll angle                                  [radian^2]\n  pitch angle                                 [radian^2]\n  yaw angle                                   [radian^2]\nLinear velocity in the body frame, X-Y-Z [meter/second].\nAngular velocity in the body frame, roll-pitch-yaw [radian/second].\nLow resolution estimate of the linear acceleration in the body frame [(meter/second)^2].\nThis estimate should be properly downsampled in order to avoid aliasing effects.\nColumn order:\n  X velocity      [(meter/second)^2]\n  Y velocity      [(meter/second)^2]\n  Z velocity      [(meter/second)^2]\n  roll velocity   [(radian/second)^2]\n  pitch velocity  [(radian/second)^2]\n  yaw velocity    [(radian/second)^2]",
-  "variables": [
-    {
-      "kind": "float",
-      "bits": 64,
-      "name": "longitude",
-      "description": "required"
-    },
-    {
-      "kind": "float",
-      "bits": 64,
-      "name": "latitude",
-      "description": "required"
-    },
-    {
-      "kind": "float",
-      "bits": 32,
-      "name": "heightEllipsoid",
-      "description": "Above ellipsoid (required)"
-    },
-    {
-      "kind": "float",
-      "bits": 32,
-      "name": "heightMsl",
-      "description": "Above the mean sea level (required)"
-    },
-    {
-      "kind": "float",
-      "bits": 32,
-      "name": "heightAgl",
-      "description": "Above ground level (provided by radar altimeter or LIDAR) (optional)"
-    },
-    {
-      "kind": "float",
-      "bits": 32,
-      "name": "heightBaro",
-      "description": "Barometric height (optional)"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "qnhHpa",
-      "description": "optional"
-    },
-    {
-      "length": 4,
-      "kind": "floatArray",
-      "bits": 32,
-      "name": "orientationXyzw",
-      "description": ""
-    },
-    {
-      "length": 36,
-      "range": true,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "poseCovariance",
-      "description": ""
-    },
-    {
-      "length": 3,
-      "kind": "floatArray",
-      "bits": 32,
-      "name": "linearVelocityBody",
-      "description": ""
-    },
-    {
-      "length": 3,
-      "kind": "floatArray",
-      "bits": 32,
-      "name": "angularVelocityBody",
-      "description": ""
-    },
-    {
-      "length": 3,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "linearAccelerationBody",
-      "description": ""
-    },
-    {
-      "length": 36,
-      "range": true,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "velocityCovariance",
-      "description": ""
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "float",
+        "bits": 64,
+        "name": "longitude",
+        "description": "required"
+      },
+      {
+        "kind": "float",
+        "bits": 64,
+        "name": "latitude",
+        "description": "required"
+      },
+      {
+        "kind": "float",
+        "bits": 32,
+        "name": "heightEllipsoid",
+        "description": "Above ellipsoid (required)"
+      },
+      {
+        "kind": "float",
+        "bits": 32,
+        "name": "heightMsl",
+        "description": "Above the mean sea level (required)"
+      },
+      {
+        "kind": "float",
+        "bits": 32,
+        "name": "heightAgl",
+        "description": "Above ground level (provided by radar altimeter or LIDAR) (optional)"
+      },
+      {
+        "kind": "float",
+        "bits": 32,
+        "name": "heightBaro",
+        "description": "Barometric height (optional)"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "qnhHpa",
+        "description": "optional"
+      },
+      {
+        "length": 4,
+        "kind": "floatArray",
+        "bits": 32,
+        "name": "orientationXyzw",
+        "description": ""
+      },
+      {
+        "length": 36,
+        "range": true,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "poseCovariance",
+        "description": ""
+      },
+      {
+        "length": 3,
+        "kind": "floatArray",
+        "bits": 32,
+        "name": "linearVelocityBody",
+        "description": ""
+      },
+      {
+        "length": 3,
+        "kind": "floatArray",
+        "bits": 32,
+        "name": "angularVelocityBody",
+        "description": ""
+      },
+      {
+        "length": 3,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "linearAccelerationBody",
+        "description": ""
+      },
+      {
+        "length": 36,
+        "range": true,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "velocityCovariance",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

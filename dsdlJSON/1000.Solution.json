@@ -1,51 +1,62 @@
 {
   "description": "Inertial data and orientation in body frame.\nNormalized quaternion\nrad/sec\nm/s^2",
-  "variables": [
-    {
-      "length": 4,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "orientationXyzw",
-      "description": ""
-    },
-    {
-      "length": 9,
-      "range": true,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "orientationCovariance",
-      "description": ""
-    },
-    {
-      "length": 3,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "angularVelocity",
-      "description": ""
-    },
-    {
-      "length": 9,
-      "range": true,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "angularVelocityCovariance",
-      "description": ""
-    },
-    {
-      "length": 3,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "linearAcceleration",
-      "description": ""
-    },
-    {
-      "length": 9,
-      "range": true,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "linearAccelerationCovariance",
-      "description": ""
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "length": 4,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "orientationXyzw",
+        "description": ""
+      },
+      {
+        "length": 9,
+        "range": true,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "orientationCovariance",
+        "description": ""
+      },
+      {
+        "length": 3,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "angularVelocity",
+        "description": ""
+      },
+      {
+        "length": 9,
+        "range": true,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "angularVelocityCovariance",
+        "description": ""
+      },
+      {
+        "length": 3,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "linearAcceleration",
+        "description": ""
+      },
+      {
+        "length": 9,
+        "range": true,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "linearAccelerationCovariance",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

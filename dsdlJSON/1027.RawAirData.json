@@ -1,62 +1,73 @@
 {
   "description": "Raw Air Data.\nNote: unused vars should be assigned NaN\nHeater State\n\nPressure Data\nTemperature Data",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "flags",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 32,
-      "name": "staticPressure",
-      "description": "Pascal"
-    },
-    {
-      "kind": "float",
-      "bits": 32,
-      "name": "differentialPressure",
-      "description": "Pascal"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "staticPressureSensorTemperature",
-      "description": "Kelvin"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "differentialPressureSensorTemperature",
-      "description": "Kelvin"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "staticAirTemperature",
-      "description": "Kelvin"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "pitotTemperature",
-      "description": "Kelvin"
-    },
-    {
-      "length": 16,
-      "range": true,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "covariance",
-      "description": "order of diagonal elements : "
-    }
-  ],
-  "statics": [
-    "uint8 FLAG_HEATER_AVAILABLE      = 1",
-    "uint8 FLAG_HEATER_WORKING        = 2",
-    "uint8 FLAG_HEATER_OVERCURRENT    = 4",
-    "uint8 FLAG_HEATER_OPENCIRCUIT    = 8"
-  ]
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "flags",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 32,
+        "name": "staticPressure",
+        "description": "Pascal"
+      },
+      {
+        "kind": "float",
+        "bits": 32,
+        "name": "differentialPressure",
+        "description": "Pascal"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "staticPressureSensorTemperature",
+        "description": "Kelvin"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "differentialPressureSensorTemperature",
+        "description": "Kelvin"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "staticAirTemperature",
+        "description": "Kelvin"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "pitotTemperature",
+        "description": "Kelvin"
+      },
+      {
+        "length": 16,
+        "range": true,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "covariance",
+        "description": "order of diagonal elements : "
+      }
+    ],
+    "statics": [
+      "uint8 FLAG_HEATER_AVAILABLE      = 1",
+      "uint8 FLAG_HEATER_WORKING        = 2",
+      "uint8 FLAG_HEATER_OVERCURRENT    = 4",
+      "uint8 FLAG_HEATER_OPENCIRCUIT    = 8"
+    ]
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

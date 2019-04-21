@@ -1,37 +1,48 @@
 {
   "description": "Generic electrical circuit info.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 16,
-      "name": "circuitId",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "voltage",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "current",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "errorFlags",
-      "description": ""
-    }
-  ],
-  "statics": [
-    "uint8 ERROR_FLAG_OVERVOLTAGE  = 1",
-    "uint8 ERROR_FLAG_UNDERVOLTAGE = 2",
-    "uint8 ERROR_FLAG_OVERCURRENT  = 4",
-    "uint8 ERROR_FLAG_UNDERCURRENT = 8"
-  ]
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 16,
+        "name": "circuitId",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "voltage",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "current",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "errorFlags",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint8 ERROR_FLAG_OVERVOLTAGE  = 1",
+      "uint8 ERROR_FLAG_UNDERVOLTAGE = 2",
+      "uint8 ERROR_FLAG_OVERCURRENT  = 4",
+      "uint8 ERROR_FLAG_UNDERCURRENT = 8"
+    ]
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

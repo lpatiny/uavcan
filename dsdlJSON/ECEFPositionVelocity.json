@@ -1,28 +1,39 @@
 {
   "description": "Nested type.\nGNSS ECEF high resolution position and velocity.\nECEF is an acronym for Earth-Centered-Earth-Fixed, which is a cartesian\ncoordinate system which rotates with the earth. The origin (0,0,0) is\nlocated at the center of the earth. The x-axis is a vector pointing from\nthe origin with positive direction towards 0 degrees latitude and\nlongitude (equator, at the prime meridian). The z-axis is a vector\npointing from the origin towards the north-pole. The y-axis completes a\nright-handed coordinate system.",
-  "variables": [
-    {
-      "length": 3,
-      "kind": "floatArray",
-      "bits": 32,
-      "name": "velocityXyz",
-      "description": "XYZ velocity in m/s"
-    },
-    {
-      "length": 3,
-      "kind": "intArray",
-      "bits": 36,
-      "name": "positionXyzMm",
-      "description": "XYZ-axis coordinates in mm"
-    },
-    {
-      "length": 36,
-      "range": true,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "covariance",
-      "description": "Position and velocity covariance in the ECEF frame. Units are m^2 for position,"
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "length": 3,
+        "kind": "floatArray",
+        "bits": 32,
+        "name": "velocityXyz",
+        "description": "XYZ velocity in m/s"
+      },
+      {
+        "length": 3,
+        "kind": "intArray",
+        "bits": 36,
+        "name": "positionXyzMm",
+        "description": "XYZ-axis coordinates in mm"
+      },
+      {
+        "length": 36,
+        "range": true,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "covariance",
+        "description": "Position and velocity covariance in the ECEF frame. Units are m^2 for position,"
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

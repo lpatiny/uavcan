@@ -1,110 +1,121 @@
 {
   "description": "Single battery info.\nTypical publishing rate should be around 0.2~1 Hz.\nPlease refer to the Smart Battery data specification for some elaboration.\nPrimary parameters.\nSome fields can be set to NAN if their values are unknown.\nFull charge capacity is expected to slowly reduce as the battery is aging. Normally its estimate is updated after\nevery charging cycle.\nStatus flags.\nNotes:\n - CHARGING must be always set as long as the battery is connected to a charger, even if the charging is complete.\n - CHARGED must be cleared immediately when the charger is disconnected.\nState of Health (SOH) estimate, in percent.\nhttp://en.wikipedia.org/wiki/State_of_health\nRelative State of Charge (SOC) estimate, in percent.\nhttp://en.wikipedia.org/wiki/State_of_charge\nBattery identification.\nModel instance ID must be unique within the same battery model name.\nModel name is a human-readable string that normally should include the vendor name, model name, and chemistry\ntype of this battery. This field should be assumed case-insensitive. Example: \"Zubax Smart Battery v1.1 LiPo\".",
-  "variables": [
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "temperature",
-      "description": "[Kelvin]"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "voltage",
-      "description": "[Volt]"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "current",
-      "description": "[Ampere]"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "averagePower10Sec",
-      "description": "[Watt] Average power consumption over the last 10 seconds"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "remainingCapacityWh",
-      "description": "[Watt hours] Will be increasing during charging"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "fullChargeCapacityWh",
-      "description": "[Watt hours] Predicted battery capacity when it is fully charged. Falls with aging"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "hoursToFullCharge",
-      "description": "[Hours] Charging is expected to complete in this time; zero if not charging"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 11,
-      "name": "statusFlags",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 7,
-      "name": "stateOfHealthPct",
-      "description": "Health of the battery, in percent, optional"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 7,
-      "name": "stateOfChargePct",
-      "description": "Percent of the full charge [0, 100]. This field is required"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 7,
-      "name": "stateOfChargePctStdev",
-      "description": "SOC error standard deviation; use best guess if unknown"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "batteryId",
-      "description": "Identifies the battery within this vehicle, e.g. 0 - primary battery"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 32,
-      "name": "modelInstanceId",
-      "description": "Set to zero if not applicable"
-    },
-    {
-      "kind": "intArray",
-      "unsigned": true,
-      "bits": 8,
-      "name": "modelName",
-      "description": "Battery model name"
-    }
-  ],
-  "statics": [
-    "uint11 STATUS_FLAG_IN_USE       = 1     # The battery is currently used as a power supply",
-    "uint11 STATUS_FLAG_CHARGING     = 2     # Charger is active",
-    "uint11 STATUS_FLAG_CHARGED      = 4     # Charging complete, but the charger is still active",
-    "uint11 STATUS_FLAG_TEMP_HOT     = 8     # Battery temperature is above normal",
-    "uint11 STATUS_FLAG_TEMP_COLD    = 16    # Battery temperature is below normal",
-    "uint11 STATUS_FLAG_OVERLOAD     = 32    # Safe operating area violation",
-    "uint11 STATUS_FLAG_BAD_BATTERY  = 64    # This battery should not be used anymore (e.g. low SOH)",
-    "uint11 STATUS_FLAG_NEED_SERVICE = 128   # This battery requires maintenance (e.g. balancing, full recharge)",
-    "uint11 STATUS_FLAG_BMS_ERROR    = 256   # Battery management system/controller error, smart battery interface error",
-    "uint11 STATUS_FLAG_RESERVED_A   = 512   # Keep zero",
-    "uint11 STATUS_FLAG_RESERVED_B   = 1024  # Keep zero",
-    "uint7 STATE_OF_HEALTH_UNKNOWN = 127     # Use this constant if SOH cannot be estimated"
-  ]
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "temperature",
+        "description": "[Kelvin]"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "voltage",
+        "description": "[Volt]"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "current",
+        "description": "[Ampere]"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "averagePower10Sec",
+        "description": "[Watt] Average power consumption over the last 10 seconds"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "remainingCapacityWh",
+        "description": "[Watt hours] Will be increasing during charging"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "fullChargeCapacityWh",
+        "description": "[Watt hours] Predicted battery capacity when it is fully charged. Falls with aging"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "hoursToFullCharge",
+        "description": "[Hours] Charging is expected to complete in this time; zero if not charging"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 11,
+        "name": "statusFlags",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "stateOfHealthPct",
+        "description": "Health of the battery, in percent, optional"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "stateOfChargePct",
+        "description": "Percent of the full charge [0, 100]. This field is required"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "stateOfChargePctStdev",
+        "description": "SOC error standard deviation; use best guess if unknown"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "batteryId",
+        "description": "Identifies the battery within this vehicle, e.g. 0 - primary battery"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 32,
+        "name": "modelInstanceId",
+        "description": "Set to zero if not applicable"
+      },
+      {
+        "kind": "intArray",
+        "unsigned": true,
+        "bits": 8,
+        "name": "modelName",
+        "description": "Battery model name"
+      }
+    ],
+    "statics": [
+      "uint11 STATUS_FLAG_IN_USE       = 1     # The battery is currently used as a power supply",
+      "uint11 STATUS_FLAG_CHARGING     = 2     # Charger is active",
+      "uint11 STATUS_FLAG_CHARGED      = 4     # Charging complete, but the charger is still active",
+      "uint11 STATUS_FLAG_TEMP_HOT     = 8     # Battery temperature is above normal",
+      "uint11 STATUS_FLAG_TEMP_COLD    = 16    # Battery temperature is below normal",
+      "uint11 STATUS_FLAG_OVERLOAD     = 32    # Safe operating area violation",
+      "uint11 STATUS_FLAG_BAD_BATTERY  = 64    # This battery should not be used anymore (e.g. low SOH)",
+      "uint11 STATUS_FLAG_NEED_SERVICE = 128   # This battery requires maintenance (e.g. balancing, full recharge)",
+      "uint11 STATUS_FLAG_BMS_ERROR    = 256   # Battery management system/controller error, smart battery interface error",
+      "uint11 STATUS_FLAG_RESERVED_A   = 512   # Keep zero",
+      "uint11 STATUS_FLAG_RESERVED_B   = 1024  # Keep zero",
+      "uint7 STATE_OF_HEALTH_UNKNOWN = 127     # Use this constant if SOH cannot be estimated"
+    ]
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

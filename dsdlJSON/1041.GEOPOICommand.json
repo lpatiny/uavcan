@@ -1,41 +1,52 @@
 {
   "description": "Generic camera gimbal control.\nThis message can only be used in the following modes:\n - COMMAND_MODE_GEO_POI\nTarget operation mode - how to handle this message.\nSee the list of acceptable modes above.\nCoordinates of the POI (point of interest).",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "gimbalId",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "bits": 32,
-      "name": "longitudeDeg1E7",
-      "description": "1 LSB = 1e-7 deg"
-    },
-    {
-      "kind": "int",
-      "bits": 32,
-      "name": "latitudeDeg1E7",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "bits": 22,
-      "name": "heightCm",
-      "description": "1 LSB = 10 mm"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 2,
-      "name": "heightReference",
-      "description": ""
-    }
-  ],
-  "statics": [
-    "uint2 HEIGHT_REFERENCE_ELLIPSOID = 0",
-    "uint2 HEIGHT_REFERENCE_MEAN_SEA_LEVEL = 1"
-  ]
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "gimbalId",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "bits": 32,
+        "name": "longitudeDeg1E7",
+        "description": "1 LSB = 1e-7 deg"
+      },
+      {
+        "kind": "int",
+        "bits": 32,
+        "name": "latitudeDeg1E7",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "bits": 22,
+        "name": "heightCm",
+        "description": "1 LSB = 10 mm"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 2,
+        "name": "heightReference",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint2 HEIGHT_REFERENCE_ELLIPSOID = 0",
+      "uint2 HEIGHT_REFERENCE_MEAN_SEA_LEVEL = 1"
+    ]
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

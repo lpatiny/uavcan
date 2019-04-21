@@ -1,20 +1,31 @@
 {
   "description": "Generic cargo holder/hardpoint command.\nEither a binary command (0 - release, 1+ - hold) or bitmask",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "hardpointId",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 16,
-      "name": "command",
-      "description": ""
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "hardpointId",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 16,
+        "name": "command",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

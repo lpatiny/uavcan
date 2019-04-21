@@ -1,51 +1,62 @@
 {
   "description": "Generic ESC status.\nUnknown fields should be set to NAN.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 32,
-      "name": "errorCount",
-      "description": "Resets when the motor restarts"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "voltage",
-      "description": "Volt"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "current",
-      "description": "Ampere. Can be negative in case of a regenerative braking."
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "temperature",
-      "description": "Kelvin"
-    },
-    {
-      "kind": "int",
-      "bits": 18,
-      "name": "rpm",
-      "description": "Negative value indicates reverse rotation"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 7,
-      "name": "powerRatingPct",
-      "description": "Instant demand factor in percent (percent of maximum power); range 0% to 127%."
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 5,
-      "name": "escIndex",
-      "description": ""
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 32,
+        "name": "errorCount",
+        "description": "Resets when the motor restarts"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "voltage",
+        "description": "Volt"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "current",
+        "description": "Ampere. Can be negative in case of a regenerative braking."
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "temperature",
+        "description": "Kelvin"
+      },
+      {
+        "kind": "int",
+        "bits": 18,
+        "name": "rpm",
+        "description": "Negative value indicates reverse rotation"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "powerRatingPct",
+        "description": "Instant demand factor in percent (percent of maximum power); range 0% to 127%."
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 5,
+        "name": "escIndex",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

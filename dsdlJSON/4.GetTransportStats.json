@@ -1,27 +1,34 @@
 {
   "description": "Get transport statistics.\nUAVCAN transport layer statistics.\nCAN bus statistics, for each interface independently.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 48,
-      "name": "transfersTx",
-      "description": "Number of transmitted transfers."
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 48,
-      "name": "transfersRx",
-      "description": "Number of received transfers."
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 48,
-      "name": "transferErrors",
-      "description": "Number of errors detected in the UAVCAN transport layer."
-    }
-  ],
-  "statics": []
+  "type": "service",
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 48,
+        "name": "transfersTx",
+        "description": "Number of transmitted transfers."
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 48,
+        "name": "transfersRx",
+        "description": "Number of received transfers."
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 48,
+        "name": "transferErrors",
+        "description": "Number of errors detected in the UAVCAN transport layer."
+      }
+    ],
+    "statics": []
+  }
 }

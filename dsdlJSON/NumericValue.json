@@ -1,18 +1,29 @@
 {
   "description": "Numeric-only value.\nThis is a union, which means that this structure can contain either one of the fields below.\nThe structure is prefixed with tag - a selector value that indicates which particular field is encoded.",
-  "variables": [
-    {
-      "kind": "int",
-      "bits": 64,
-      "name": "integerValue",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 32,
-      "name": "realValue",
-      "description": ""
-    }
-  ],
-  "statics": []
+  "type": "union",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "bits": 64,
+        "name": "integerValue",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 32,
+        "name": "realValue",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

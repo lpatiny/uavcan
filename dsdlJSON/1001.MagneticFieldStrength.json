@@ -1,21 +1,32 @@
 {
   "description": "Magnetic field readings, in Gauss, in body frame.\nSI units are avoided because of float16 range limitations.\nThis message is deprecated. Use the newer 1002.MagneticFieldStrength2.uavcan message.",
-  "variables": [
-    {
-      "length": 3,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "magneticFieldGa",
-      "description": ""
-    },
-    {
-      "length": 9,
-      "range": true,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "magneticFieldCovariance",
-      "description": ""
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "length": 3,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "magneticFieldGa",
+        "description": ""
+      },
+      {
+        "length": 9,
+        "range": true,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "magneticFieldCovariance",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

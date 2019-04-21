@@ -1,32 +1,43 @@
 {
   "description": "Generic cargo holder/hardpoint status.\nMeaning is the same as for the command field in the Command message",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "hardpointId",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "payloadWeight",
-      "description": "Newton"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "payloadWeightVariance",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 16,
-      "name": "status",
-      "description": ""
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "hardpointId",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "payloadWeight",
+        "description": "Newton"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "payloadWeightVariance",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 16,
+        "name": "status",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

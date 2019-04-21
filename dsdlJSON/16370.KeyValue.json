@@ -1,21 +1,32 @@
 {
   "description": "Generic named parameter (key/value pair).\nIntegers are exactly representable in the range (-2^24, 2^24) which is (-16'777'216, 16'777'216).\nTail array optimization is enabled, so if key length does not exceed 3 characters, the whole\nmessage can fit into one CAN frame. The message always fits into one CAN FD frame.",
-  "variables": [
-    {
-      "kind": "float",
-      "bits": 32,
-      "name": "value",
-      "description": ""
-    },
-    {
-      "length": 58,
-      "range": true,
-      "kind": "intArray",
-      "unsigned": true,
-      "bits": 8,
-      "name": "key",
-      "description": ""
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "float",
+        "bits": 32,
+        "name": "value",
+        "description": ""
+      },
+      {
+        "length": 58,
+        "range": true,
+        "kind": "intArray",
+        "unsigned": true,
+        "bits": 8,
+        "name": "key",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

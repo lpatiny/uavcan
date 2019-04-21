@@ -1,20 +1,31 @@
 {
   "description": "Generic camera gimbal control.\nThis message can only be used in the following modes:\n - COMMAND_MODE_ANGULAR_VELOCITY\n - COMMAND_MODE_ORIENTATION_FIXED_FRAME\n - COMMAND_MODE_ORIENTATION_BODY_FRAME\nTarget operation mode - how to handle this message.\nSee the list of acceptable modes above.\nIn the angular velocity mode, this field contains a rate quaternion.\nIn the orientation mode, this field contains orientation either in fixed frame or in body frame.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "gimbalId",
-      "description": ""
-    },
-    {
-      "length": 4,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "quaternionXyzw",
-      "description": ""
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "gimbalId",
+        "description": ""
+      },
+      {
+        "length": 4,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "quaternionXyzw",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

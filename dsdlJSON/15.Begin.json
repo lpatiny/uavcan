@@ -1,37 +1,46 @@
 {
   "description": "This service instructs the node to begin the process of automated enumeration.\nThe node will automatically leave enumeration mode upon expiration of this timeout.\nName of the parameter to enumerate, e.g. ESC index.\nIf the name is left empty, the node will infer the parameter name automatically (autodetect).\nIt is highly recommended to always use autodetection in order to avoid dependency on hard-coded parameter names,\nand also allow the enumeratee to possibly enumerate multiple different parameters at once.\nThe rule of thumb is to always leave this parameter empty unless you really know what you're doing.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 16,
-      "name": "timeoutSec",
-      "description": "[Seconds]"
-    },
-    {
-      "length": 92,
-      "range": true,
-      "kind": "intArray",
-      "unsigned": true,
-      "bits": 8,
-      "name": "parameterName",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "error",
-      "description": ""
-    }
-  ],
-  "statics": [
-    "uint16 TIMEOUT_CANCEL   = 0     # Stop enumeration immediately",
-    "uint16 TIMEOUT_INFINITE = 65535 # Do not stop until explicitly requested",
-    "uint8 ERROR_OK                  = 0     # Success",
-    "uint8 ERROR_INVALID_MODE        = 1     # The node cannot perform enumeration in its current operating mode",
-    "uint8 ERROR_INVALID_PARAMETER   = 2     # The node cannot enumerate on the requested parameter, or it doesn't exist",
-    "uint8 ERROR_UNSUPPORTED         = 3     # The node cannot perform enumeration in its current configuration",
-    "uint8 ERROR_UNKNOWN             = 255   # Generic error"
-  ]
+  "type": "service",
+  "request": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 16,
+        "name": "timeoutSec",
+        "description": "[Seconds]"
+      },
+      {
+        "length": 92,
+        "range": true,
+        "kind": "intArray",
+        "unsigned": true,
+        "bits": 8,
+        "name": "parameterName",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint16 TIMEOUT_CANCEL   = 0     # Stop enumeration immediately",
+      "uint16 TIMEOUT_INFINITE = 65535 # Do not stop until explicitly requested"
+    ]
+  },
+  "response": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "error",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint8 ERROR_OK                  = 0     # Success",
+      "uint8 ERROR_INVALID_MODE        = 1     # The node cannot perform enumeration in its current operating mode",
+      "uint8 ERROR_INVALID_PARAMETER   = 2     # The node cannot enumerate on the requested parameter, or it doesn't exist",
+      "uint8 ERROR_UNSUPPORTED         = 3     # The node cannot perform enumeration in its current configuration",
+      "uint8 ERROR_UNKNOWN             = 255   # Generic error"
+    ]
+  }
 }

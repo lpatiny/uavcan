@@ -1,34 +1,42 @@
 {
   "description": "THIS DEFINITION IS SUBJECT TO CHANGE.\nThis type is a part of the Raft consensus algorithm.\nPlease refer to the specification for details.\nRefer to the Raft paper for explanation.\nRefer to the Raft paper for explanation.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 32,
-      "name": "term",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 32,
-      "name": "lastLogTerm",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "lastLogIndex",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 32,
-      "name": "term",
-      "description": ""
-    }
-  ],
-  "statics": []
+  "type": "service",
+  "request": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 32,
+        "name": "term",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 32,
+        "name": "lastLogTerm",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "lastLogIndex",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "response": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 32,
+        "name": "term",
+        "description": ""
+      }
+    ],
+    "statics": []
+  }
 }

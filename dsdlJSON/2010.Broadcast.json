@@ -1,22 +1,33 @@
 {
   "description": "This message struct carries arbitrary data in the format of the specified high-level protocol.\nThe data will be delivered to all nodes that are interested in tunneled protocols.\nFiner addressing schemes may be implemented using the means provided by the encapsulated protocol.\nThe channelID allows for additional routing between the source and target nodes.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "channelId",
-      "description": ""
-    },
-    {
-      "length": 60,
-      "range": true,
-      "kind": "intArray",
-      "unsigned": true,
-      "bits": 8,
-      "name": "buffer",
-      "description": "TAO rules apply"
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "channelId",
+        "description": ""
+      },
+      {
+        "length": 60,
+        "range": true,
+        "kind": "intArray",
+        "unsigned": true,
+        "bits": 8,
+        "name": "buffer",
+        "description": "TAO rules apply"
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

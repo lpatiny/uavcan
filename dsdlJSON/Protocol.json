@@ -1,15 +1,26 @@
 {
   "description": "This enumeration specifies the encapsulated protocol.\nNew protocols are likely to be added in the future.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "protocol",
-      "description": ""
-    }
-  ],
-  "statics": [
-    "uint8 MAVLINK                   = 0     # MAVLink"
-  ]
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "protocol",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint8 MAVLINK                   = 0     # MAVLink"
+    ]
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

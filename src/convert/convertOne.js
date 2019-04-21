@@ -5,6 +5,11 @@ const camelCase = require('camelcase');
 function convertOne(content) {
   let result = {
     description: '',
+    type: 'message',
+    message: {
+      variables: [],
+      statics: []
+    },
     request: {
       variables: [],
       statics: []
@@ -18,7 +23,7 @@ function convertOne(content) {
   let currentVariable;
   let lines = content.split(/[\r\n]/);
   let inComment = false;
-  let requestResponse = result.request;
+  let transferType = result.message;
 
   for (let line of lines) {
     let fields = line.split(/[ \t]+/);
@@ -34,19 +39,49 @@ function convertOne(content) {
         result.description += line.replace(/# /, '');
       }
     } else if (line.startsWith('---')) {
-      requestResponse = result.response;
+      result.request = transferType;
+      delete result.message;
+      transferType = result.response;
+      result.type = 'service';
+    } else if (line.startsWith('@union')) {
+      // handle unions
+      result.type = 'union';
     } else if (fields[1] && fields[1].match(/^[A-Z_]+$/)) {
       // a constant
       // todo need to deals with the definitions of constants
-      requestResponse.statics.push(line);
+      transferType.statics.push(line);
     } else if (fields[0].match(/^(float|int|uint)[0-9]+$/)) {
       currentVariable = getVar(fields);
-      requestResponse.variables.push(currentVariable);
+      transferType.variables.push(currentVariable);
     } else if (fields[0].match(/^(float|int|uint)[0-9]+\[.*$/)) {
       currentVariable = getVarArray(fields);
-      requestResponse.variables.push(currentVariable);
+      transferType.variables.push(currentVariable);
     }
   }
+
+  // clean up object
+  if (
+    result.request &&
+    result.request.variables.length === 0 &&
+    result.request.statics === 0
+  ) {
+    delete result.request;
+  }
+  if (
+    result.response &&
+    result.response.variables.length === 0 &&
+    result.response.statics === 0
+  ) {
+    delete result.response;
+  }
+  if (
+    result.message &&
+    result.message.variables.length === 0 &&
+    result.message.statics === 0
+  ) {
+    delete result.message;
+  }
+
   return result;
 }
 

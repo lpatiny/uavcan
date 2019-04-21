@@ -1,7 +1,18 @@
 {
   "description": "Global timestamp in microseconds, 7 bytes.\nUse this data type for timestamp fields in messages, like follows:\n  uavcan.Timestamp timestamp",
-  "variables": [],
-  "statics": [
-    "uint56 UNKNOWN = 0"
-  ]
+  "type": "message",
+  "message": {
+    "variables": [],
+    "statics": [
+      "uint56 UNKNOWN = 0"
+    ]
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

@@ -1,32 +1,43 @@
 {
   "description": "Primary power supply status.\nTypical publishing rate should be around 1~2 Hz.\nHow many hours left to full discharge at average load over the last 10 seconds.\nTrue if the publishing node senses that an external power source can be used, e.g. to charge batteries.\nRemaining energy estimate in percent.",
-  "variables": [
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "hoursToEmptyAt10SecAvgPower",
-      "description": "[Hours]"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "hoursToEmptyAt10SecAvgPowerVariance",
-      "description": "[Hours^2]"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 7,
-      "name": "remainingEnergyPct",
-      "description": "[Percent] Required"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 7,
-      "name": "remainingEnergyPctStdev",
-      "description": "[Percent] Error standard deviation. Use best guess if unknown."
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "hoursToEmptyAt10SecAvgPower",
+        "description": "[Hours]"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "hoursToEmptyAt10SecAvgPowerVariance",
+        "description": "[Hours^2]"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "remainingEnergyPct",
+        "description": "[Percent] Required"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "remainingEnergyPctStdev",
+        "description": "[Percent] Error standard deviation. Use best guess if unknown."
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

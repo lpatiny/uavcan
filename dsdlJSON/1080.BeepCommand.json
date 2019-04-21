@@ -1,18 +1,29 @@
 {
   "description": "Nodes that are capable of producing sounds should obey.",
-  "variables": [
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "frequency",
-      "description": "Hz"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "duration",
-      "description": "Sec"
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "frequency",
+        "description": "Hz"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "duration",
+        "description": "Sec"
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

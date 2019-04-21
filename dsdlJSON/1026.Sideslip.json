@@ -1,18 +1,29 @@
 {
   "description": "Body sideslip in radians.",
-  "variables": [
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "sideslipAngle",
-      "description": "Radians"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "sideslipAngleVariance",
-      "description": "Radians^2"
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "sideslipAngle",
+        "description": "Radians"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "sideslipAngleVariance",
+        "description": "Radians^2"
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

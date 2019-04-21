@@ -1,18 +1,29 @@
 {
   "description": "IAS.",
-  "variables": [
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "indicatedAirspeed",
-      "description": "m/s"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "indicatedAirspeedVariance",
-      "description": "(m/s)^2"
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "indicatedAirspeed",
+        "description": "m/s"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "indicatedAirspeedVariance",
+        "description": "(m/s)^2"
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

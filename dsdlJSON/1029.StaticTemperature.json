@@ -1,18 +1,29 @@
 {
   "description": "Static temperature.",
-  "variables": [
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "staticTemperature",
-      "description": "Kelvin"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "staticTemperatureVariance",
-      "description": "Kelvin^2"
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "staticTemperature",
+        "description": "Kelvin"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "staticTemperatureVariance",
+        "description": "Kelvin^2"
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

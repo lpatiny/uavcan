@@ -1,123 +1,134 @@
 {
   "description": "GNSS ECEF and LLA navigation solution with uncertainty.\nGlobal network-synchronized time, if available, otherwise zero.\nTime solution.\nThe method and number of leap seconds which were in use for deriving the timestamp are\ndefined in the fields below.\nMethod used for deriving the GNSS timestamp field.\nThis data type relies on the following definitions:\n  Leap seconds  - Accumulated one-second adjustments applied to UTC since 1972.\n                  For reference, on May 2017, the number of leap seconds was equal 27.\n                  The number of leap seconds is taken from the field num_leap_seconds.\n                  Refer to https://en.wikipedia.org/wiki/Leap_second for a general overview.\n  TAI timestamp - The number of microseconds between the current TAI time and\n                  the TAI time at UTC 1970-01-01T00:00:00.\n  UTC timestamp - The number of microseconds between the current UTC time and\n                  UTC 1970-01-01T00:00:00.\n                  UTC can be expressed via TAI as follows (in seconds):\n                      UTC = TAI - num_leap_seconds - 10\n                  And via GPS (in seconds):\n                      UTC = GPS - num_leap_seconds + 9\n  GPS timestamp - The number of microseconds between the current GPS time and\n                  the GPS time at UTC 1970-01-01T00:00:00.\n                  GPS time can be expressed via TAI as follows (in seconds):\n                      GPS = TAI - 19\nAccumulated one-second adjustments applied to UTC since 1972.\nThe number must agree with the currently correct number of UTC leap seconds. If this cannot\nbe garanteed, the field must be set to NUM_LEAP_SECONDS_UNKNOWN.\nPosition and velocity solution\nFix status\nGNSS Mode\nGNSS Sub mode\nPrecision\nPosition and velocity solution in ECEF, if available",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 3,
-      "name": "gnssTimeStandard",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "numLeapSeconds",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "bits": 37,
-      "name": "longitudeDeg1E8",
-      "description": "Longitude degrees multiplied by 1e8 (approx. 1 mm per LSB)"
-    },
-    {
-      "kind": "int",
-      "bits": 37,
-      "name": "latitudeDeg1E8",
-      "description": "Latitude degrees multiplied by 1e8 (approx. 1 mm per LSB on equator)"
-    },
-    {
-      "kind": "int",
-      "bits": 27,
-      "name": "heightEllipsoidMm",
-      "description": "Height above ellipsoid in millimeters"
-    },
-    {
-      "kind": "int",
-      "bits": 27,
-      "name": "heightMslMm",
-      "description": "Height above mean sea level in millimeters"
-    },
-    {
-      "length": 3,
-      "kind": "floatArray",
-      "bits": 32,
-      "name": "nedVelocity",
-      "description": "NED frame (north-east-down) in meters per second"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 6,
-      "name": "satsUsed",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 2,
-      "name": "status2DFix",
-      "description": "= 2"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 2,
-      "name": "status3DFix",
-      "description": "= 3"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 2,
-      "name": "status",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 4,
-      "name": "mode",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 6,
-      "name": "subMode",
-      "description": ""
-    },
-    {
-      "length": 36,
-      "range": true,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "covariance",
-      "description": "Position and velocity covariance. Units are"
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "pdop",
-      "description": ""
-    }
-  ],
-  "statics": [
-    "uint3 GNSS_TIME_STANDARD_NONE = 0  # Time is unknown",
-    "uint3 GNSS_TIME_STANDARD_TAI  = 1",
-    "uint3 GNSS_TIME_STANDARD_UTC  = 2",
-    "uint3 GNSS_TIME_STANDARD_GPS  = 3",
-    "uint8 NUM_LEAP_SECONDS_UNKNOWN = 0",
-    "uint2 STATUS_NO_FIX    = 0",
-    "uint2 STATUS_TIME_ONLY = 1",
-    "uint4 MODE_SINGLE      = 0",
-    "uint4 MODE_DGPS        = 1",
-    "uint4 MODE_RTK         = 2",
-    "uint4 MODE_PPP         = 3",
-    "uint6 SUB_MODE_DGPS_OTHER    = 0",
-    "uint6 SUB_MODE_DGPS_SBAS     = 1",
-    "uint6 SUB_MODE_RTK_FLOAT     = 0",
-    "uint6 SUB_MODE_RTK_FIXED     = 1"
-  ]
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 3,
+        "name": "gnssTimeStandard",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "numLeapSeconds",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "bits": 37,
+        "name": "longitudeDeg1E8",
+        "description": "Longitude degrees multiplied by 1e8 (approx. 1 mm per LSB)"
+      },
+      {
+        "kind": "int",
+        "bits": 37,
+        "name": "latitudeDeg1E8",
+        "description": "Latitude degrees multiplied by 1e8 (approx. 1 mm per LSB on equator)"
+      },
+      {
+        "kind": "int",
+        "bits": 27,
+        "name": "heightEllipsoidMm",
+        "description": "Height above ellipsoid in millimeters"
+      },
+      {
+        "kind": "int",
+        "bits": 27,
+        "name": "heightMslMm",
+        "description": "Height above mean sea level in millimeters"
+      },
+      {
+        "length": 3,
+        "kind": "floatArray",
+        "bits": 32,
+        "name": "nedVelocity",
+        "description": "NED frame (north-east-down) in meters per second"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 6,
+        "name": "satsUsed",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 2,
+        "name": "status2DFix",
+        "description": "= 2"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 2,
+        "name": "status3DFix",
+        "description": "= 3"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 2,
+        "name": "status",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 4,
+        "name": "mode",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 6,
+        "name": "subMode",
+        "description": ""
+      },
+      {
+        "length": 36,
+        "range": true,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "covariance",
+        "description": "Position and velocity covariance. Units are"
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "pdop",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint3 GNSS_TIME_STANDARD_NONE = 0  # Time is unknown",
+      "uint3 GNSS_TIME_STANDARD_TAI  = 1",
+      "uint3 GNSS_TIME_STANDARD_UTC  = 2",
+      "uint3 GNSS_TIME_STANDARD_GPS  = 3",
+      "uint8 NUM_LEAP_SECONDS_UNKNOWN = 0",
+      "uint2 STATUS_NO_FIX    = 0",
+      "uint2 STATUS_TIME_ONLY = 1",
+      "uint4 MODE_SINGLE      = 0",
+      "uint4 MODE_DGPS        = 1",
+      "uint4 MODE_RTK         = 2",
+      "uint4 MODE_PPP         = 3",
+      "uint6 SUB_MODE_DGPS_OTHER    = 0",
+      "uint6 SUB_MODE_DGPS_SBAS     = 1",
+      "uint6 SUB_MODE_RTK_FLOAT     = 0",
+      "uint6 SUB_MODE_RTK_FIXED     = 1"
+    ]
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

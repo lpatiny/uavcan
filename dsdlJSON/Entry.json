@@ -1,28 +1,39 @@
 {
   "description": "THIS DEFINITION IS SUBJECT TO CHANGE.\nOne dynamic node ID allocation entry.\nThis type is a part of the Raft consensus algorithm.\nPlease refer to the specification for details.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 32,
-      "name": "term",
-      "description": "Refer to the Raft paper for explanation."
-    },
-    {
-      "length": 16,
-      "kind": "intArray",
-      "unsigned": true,
-      "bits": 8,
-      "name": "uniqueId",
-      "description": "Unique ID of this allocation."
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 7,
-      "name": "nodeId",
-      "description": "Node ID of this allocation."
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 32,
+        "name": "term",
+        "description": "Refer to the Raft paper for explanation."
+      },
+      {
+        "length": 16,
+        "kind": "intArray",
+        "unsigned": true,
+        "bits": 8,
+        "name": "uniqueId",
+        "description": "Unique ID of this allocation."
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "nodeId",
+        "description": "Node ID of this allocation."
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

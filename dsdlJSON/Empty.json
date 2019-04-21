@@ -1,5 +1,16 @@
 {
   "description": "Ex nihilo nihil fit.",
-  "variables": [],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

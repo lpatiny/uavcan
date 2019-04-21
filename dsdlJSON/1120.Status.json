@@ -1,144 +1,155 @@
 {
   "description": "Generic status message of a piston engine control system.\nAll integer fields are required unless stated otherwise.\nAll floating point fields are optional unless stated otherwise; unknown/unapplicable fields should be set to NaN.\nAbstract engine state. The flags defined below can provide further elaboration.\nThis is a required field.\nThe engine is not running. This is the default state.\nNext states: STARTING, FAULT\nThe engine is starting. This is a transient state.\nNext states: STOPPED, RUNNING, FAULT\nThe engine is running normally.\nSome error flags may be set to indicate non-fatal issues, e.g. overheating.\nNext states: STOPPED, FAULT\nThe engine can no longer function.\nThe error flags may contain additional information about the nature of the fault.\nNext states: STOPPED.\nGeneral status flags.\nNote that not all flags are required. Those that aren't are prepended with a validity flag, which is, obviously,\nalways required; when the validity flag is set, it is assumed that the relevant flags are set correctly.\nIf the validity flag is cleared, then the state of the relevant flags should be ignored.\nAll unused bits must be cleared.\nGeneral error. This flag is required, and it can be used to indicate an error condition\nthat does not fit any of the other flags.\nNote that the vendor may also report additional status information via the vendor specific status code\nfield of the NodeStatus message.\nError of the crankshaft sensor. This flag is optional.\nTemperature levels. These flags are optional; either none of them or all of them are supported.\nFuel pressure. These flags are optional; either none of them or all of them are supported.\nDetonation warning. This flag is optional.\nThis warning is cleared immediately after broadcasting is done if detonation is no longer happening.\nMisfire warning. This flag is optional.\nThis warning is cleared immediately after broadcasting is done if misfire is no longer happening.\nOil pressure. These flags are optional; either none of them or all of them are supported.\nDebris warning. This flag is optional.\nReserved space\nEngine load estimate.\nUnit: percent.\nRange: [0, 127].\nEngine speed.\nUnit: revolutions per minute.\nSpark dwell time.\nUnit: millisecond.\nAtmospheric (barometric) pressure.\nUnit: kilopascal.\nEngine intake manifold pressure.\nUnit: kilopascal.\nEngine intake manifold temperature.\nUnit: kelvin.\nEngine coolant temperature.\nUnit: kelvin.\nOil pressure.\nUnit: kilopascal.\nOil temperature.\nUnit: kelvin.\nFuel pressure.\nUnit: kilopascal.\nInstant fuel consumption estimate.\nThe estimated value should be low-pass filtered in order to prevent aliasing effects.\nUnit: (centimeter^3)/minute.\nEstimate of the consumed fuel since the start of the engine.\nThis variable MUST be reset when the engine is stopped.\nUnit: centimeter^3.\nThrottle position.\nUnit: percent.\nThe index of the publishing ECU.\nSpark plug activity report.\nCan be used during pre-flight tests of the spark subsystem.\nPer-cylinder status information.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 2,
-      "name": "state",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 30,
-      "name": "flags",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 7,
-      "name": "engineLoadPercent",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 17,
-      "name": "engineSpeedRpm",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "sparkDwellTimeMs",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "atmosphericPressureKpa",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "intakeManifoldPressureKpa",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "intakeManifoldTemperature",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "coolantTemperature",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "oilPressure",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "oilTemperature",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "fuelPressure",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 32,
-      "name": "fuelConsumptionRateCm3Pm",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 32,
-      "name": "estimatedConsumedFuelVolumeCm3",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 7,
-      "name": "throttlePositionPercent",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 6,
-      "name": "ecuIndex",
-      "description": ""
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 3,
-      "name": "sparkPlugUsage",
-      "description": ""
-    }
-  ],
-  "statics": [
-    "uint2 STATE_STOPPED = 0",
-    "uint2 STATE_STARTING = 1",
-    "uint2 STATE_RUNNING = 2",
-    "uint2 STATE_FAULT = 3",
-    "uint30 FLAG_GENERAL_ERROR                       = 1",
-    "uint30 FLAG_CRANKSHAFT_SENSOR_ERROR_SUPPORTED   = 2",
-    "uint30 FLAG_CRANKSHAFT_SENSOR_ERROR             = 4",
-    "uint30 FLAG_TEMPERATURE_SUPPORTED               = 8",
-    "uint30 FLAG_TEMPERATURE_BELOW_NOMINAL           = 16      # Under-temperature warning",
-    "uint30 FLAG_TEMPERATURE_ABOVE_NOMINAL           = 32      # Over-temperature warning",
-    "uint30 FLAG_TEMPERATURE_OVERHEATING             = 64      # Critical overheating",
-    "uint30 FLAG_TEMPERATURE_EGT_ABOVE_NOMINAL       = 128     # Exhaust gas over-temperature warning",
-    "uint30 FLAG_FUEL_PRESSURE_SUPPORTED             = 256",
-    "uint30 FLAG_FUEL_PRESSURE_BELOW_NOMINAL         = 512     # Under-pressure warning",
-    "uint30 FLAG_FUEL_PRESSURE_ABOVE_NOMINAL         = 1024    # Over-pressure warning",
-    "uint30 FLAG_DETONATION_SUPPORTED                = 2048",
-    "uint30 FLAG_DETONATION_OBSERVED                 = 4096    # Detonation condition observed warning",
-    "uint30 FLAG_MISFIRE_SUPPORTED                   = 8192",
-    "uint30 FLAG_MISFIRE_OBSERVED                    = 16384   # Misfire condition observed warning",
-    "uint30 FLAG_OIL_PRESSURE_SUPPORTED              = 32768",
-    "uint30 FLAG_OIL_PRESSURE_BELOW_NOMINAL          = 65536   # Under-pressure warning",
-    "uint30 FLAG_OIL_PRESSURE_ABOVE_NOMINAL          = 131072  # Over-pressure warning",
-    "uint30 FLAG_DEBRIS_SUPPORTED                    = 262144",
-    "uint30 FLAG_DEBRIS_DETECTED                     = 524288  # Detection of debris warning",
-    "uint3 SPARK_PLUG_SINGLE         = 0",
-    "uint3 SPARK_PLUG_FIRST_ACTIVE   = 1",
-    "uint3 SPARK_PLUG_SECOND_ACTIVE  = 2",
-    "uint3 SPARK_PLUG_BOTH_ACTIVE    = 3"
-  ]
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 2,
+        "name": "state",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 30,
+        "name": "flags",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "engineLoadPercent",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 17,
+        "name": "engineSpeedRpm",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "sparkDwellTimeMs",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "atmosphericPressureKpa",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "intakeManifoldPressureKpa",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "intakeManifoldTemperature",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "coolantTemperature",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "oilPressure",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "oilTemperature",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "fuelPressure",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 32,
+        "name": "fuelConsumptionRateCm3Pm",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 32,
+        "name": "estimatedConsumedFuelVolumeCm3",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "throttlePositionPercent",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 6,
+        "name": "ecuIndex",
+        "description": ""
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 3,
+        "name": "sparkPlugUsage",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint2 STATE_STOPPED = 0",
+      "uint2 STATE_STARTING = 1",
+      "uint2 STATE_RUNNING = 2",
+      "uint2 STATE_FAULT = 3",
+      "uint30 FLAG_GENERAL_ERROR                       = 1",
+      "uint30 FLAG_CRANKSHAFT_SENSOR_ERROR_SUPPORTED   = 2",
+      "uint30 FLAG_CRANKSHAFT_SENSOR_ERROR             = 4",
+      "uint30 FLAG_TEMPERATURE_SUPPORTED               = 8",
+      "uint30 FLAG_TEMPERATURE_BELOW_NOMINAL           = 16      # Under-temperature warning",
+      "uint30 FLAG_TEMPERATURE_ABOVE_NOMINAL           = 32      # Over-temperature warning",
+      "uint30 FLAG_TEMPERATURE_OVERHEATING             = 64      # Critical overheating",
+      "uint30 FLAG_TEMPERATURE_EGT_ABOVE_NOMINAL       = 128     # Exhaust gas over-temperature warning",
+      "uint30 FLAG_FUEL_PRESSURE_SUPPORTED             = 256",
+      "uint30 FLAG_FUEL_PRESSURE_BELOW_NOMINAL         = 512     # Under-pressure warning",
+      "uint30 FLAG_FUEL_PRESSURE_ABOVE_NOMINAL         = 1024    # Over-pressure warning",
+      "uint30 FLAG_DETONATION_SUPPORTED                = 2048",
+      "uint30 FLAG_DETONATION_OBSERVED                 = 4096    # Detonation condition observed warning",
+      "uint30 FLAG_MISFIRE_SUPPORTED                   = 8192",
+      "uint30 FLAG_MISFIRE_OBSERVED                    = 16384   # Misfire condition observed warning",
+      "uint30 FLAG_OIL_PRESSURE_SUPPORTED              = 32768",
+      "uint30 FLAG_OIL_PRESSURE_BELOW_NOMINAL          = 65536   # Under-pressure warning",
+      "uint30 FLAG_OIL_PRESSURE_ABOVE_NOMINAL          = 131072  # Over-pressure warning",
+      "uint30 FLAG_DEBRIS_SUPPORTED                    = 262144",
+      "uint30 FLAG_DEBRIS_DETECTED                     = 524288  # Detection of debris warning",
+      "uint3 SPARK_PLUG_SINGLE         = 0",
+      "uint3 SPARK_PLUG_FIRST_ACTIVE   = 1",
+      "uint3 SPARK_PLUG_SECOND_ACTIVE  = 2",
+      "uint3 SPARK_PLUG_BOTH_ACTIVE    = 3"
+    ]
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

@@ -1,29 +1,40 @@
 {
   "description": "Generic device temperature",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 16,
-      "name": "deviceId",
-      "description": ""
-    },
-    {
-      "kind": "float",
-      "bits": 16,
-      "name": "temperature",
-      "description": "in kelvin"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "errorFlags",
-      "description": ""
-    }
-  ],
-  "statics": [
-    "uint8 ERROR_FLAG_OVERHEATING = 1",
-    "uint8 ERROR_FLAG_OVERCOOLING = 2"
-  ]
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 16,
+        "name": "deviceId",
+        "description": ""
+      },
+      {
+        "kind": "float",
+        "bits": 16,
+        "name": "temperature",
+        "description": "in kelvin"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "errorFlags",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint8 ERROR_FLAG_OVERHEATING = 1",
+      "uint8 ERROR_FLAG_OVERCOOLING = 2"
+    ]
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

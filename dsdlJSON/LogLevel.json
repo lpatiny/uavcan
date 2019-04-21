@@ -1,18 +1,29 @@
 {
   "description": "Log message severity",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 3,
-      "name": "value",
-      "description": ""
-    }
-  ],
-  "statics": [
-    "uint3 DEBUG    = 0",
-    "uint3 INFO     = 1",
-    "uint3 WARNING  = 2",
-    "uint3 ERROR    = 3"
-  ]
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 3,
+        "name": "value",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint3 DEBUG    = 0",
+      "uint3 INFO     = 1",
+      "uint3 WARNING  = 2",
+      "uint3 ERROR    = 3"
+    ]
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

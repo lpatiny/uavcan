@@ -1,5 +1,12 @@
 {
   "description": "Delete remote file system entry.\nIf the remote entry is a directory, all nested entries will be removed too.",
-  "variables": [],
-  "statics": []
+  "type": "service",
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

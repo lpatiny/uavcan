@@ -1,5 +1,16 @@
 {
   "description": "Lights control command.",
-  "variables": [],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

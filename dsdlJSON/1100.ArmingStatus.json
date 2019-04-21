@@ -1,16 +1,27 @@
 {
   "description": "This message represents the system arming status.\nSome nodes may refuse to operate unless the system is fully armed.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "status",
-      "description": ""
-    }
-  ],
-  "statics": [
-    "uint8 STATUS_DISARMED           = 0",
-    "uint8 STATUS_FULLY_ARMED        = 255"
-  ]
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "status",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint8 STATUS_DISARMED           = 0",
+      "uint8 STATUS_FULLY_ARMED        = 255"
+    ]
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

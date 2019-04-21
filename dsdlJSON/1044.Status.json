@@ -1,28 +1,39 @@
 {
   "description": "Generic gimbal status.\nCamera axis orientation in body frame (not in fixed frame).\nPlease refer to the UAVCAN coordinate frame conventions.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "gimbalId",
-      "description": ""
-    },
-    {
-      "length": 4,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "cameraOrientationInBodyFrameXyzw",
-      "description": ""
-    },
-    {
-      "length": 9,
-      "range": true,
-      "kind": "floatArray",
-      "bits": 16,
-      "name": "cameraOrientationInBodyFrameCovariance",
-      "description": "+inf for non-existent axes"
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "gimbalId",
+        "description": ""
+      },
+      {
+        "length": 4,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "cameraOrientationInBodyFrameXyzw",
+        "description": ""
+      },
+      {
+        "length": 9,
+        "range": true,
+        "kind": "floatArray",
+        "bits": 16,
+        "name": "cameraOrientationInBodyFrameCovariance",
+        "description": "+inf for non-existent axes"
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

@@ -1,24 +1,35 @@
 {
   "description": "Generic log message.\nAll items are byte aligned.",
-  "variables": [
-    {
-      "length": 31,
-      "range": true,
-      "kind": "intArray",
-      "unsigned": true,
-      "bits": 8,
-      "name": "source",
-      "description": ""
-    },
-    {
-      "length": 90,
-      "range": true,
-      "kind": "intArray",
-      "unsigned": true,
-      "bits": 8,
-      "name": "text",
-      "description": ""
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "length": 31,
+        "range": true,
+        "kind": "intArray",
+        "unsigned": true,
+        "bits": 8,
+        "name": "source",
+        "description": ""
+      },
+      {
+        "length": 90,
+        "range": true,
+        "kind": "intArray",
+        "unsigned": true,
+        "bits": 8,
+        "name": "text",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

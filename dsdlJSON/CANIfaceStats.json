@@ -1,27 +1,38 @@
 {
   "description": "Single CAN iface statistics.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 48,
-      "name": "framesTx",
-      "description": "Number of transmitted CAN frames."
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 48,
-      "name": "framesRx",
-      "description": "Number of received CAN frames."
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 48,
-      "name": "errors",
-      "description": "Number of errors in the CAN layer."
-    }
-  ],
-  "statics": []
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 48,
+        "name": "framesTx",
+        "description": "Number of transmitted CAN frames."
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 48,
+        "name": "framesRx",
+        "description": "Number of received CAN frames."
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 48,
+        "name": "errors",
+        "description": "Number of errors in the CAN layer."
+      }
+    ],
+    "statics": []
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }

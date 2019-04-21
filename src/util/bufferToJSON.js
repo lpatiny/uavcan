@@ -13,7 +13,7 @@ const { byteToFloat16 } = require('float16');
  * @param {*} data
  * @param {*} kind
  */
-function bufferToJSON(data, kind) {
+function bufferToJSON(data, kind, isService, isRequest) {
   let buffer;
   if (Array.isArray(data)) {
     buffer = Buffer.from(data);
@@ -23,7 +23,12 @@ function bufferToJSON(data, kind) {
   let bigInt = BigInt(`0x${buffer.toString('hex')}`);
   let result = {};
   let from = BigInt(buffer.length * 8);
-  for (let variable of kind.variables) {
+
+  let transfer = kind.message;
+  if (isService && isRequest) transfer = kind.request;
+  if (isService && !isRequest) transfer = kind.response;
+
+  for (let variable of transfer.variables) {
     from = processVariable(bigInt, variable, from, result);
   }
   return result;

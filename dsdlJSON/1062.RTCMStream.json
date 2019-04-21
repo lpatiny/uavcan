@@ -1,38 +1,49 @@
 {
   "description": "GNSS RTCM SC-104 protocol raw stream container.\nRTCM messages that are longer than max data size can be split over multiple consecutive messages.",
-  "variables": [
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "protocolIdRtcm2",
-      "description": "= 2"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "protocolIdRtcm3",
-      "description": "= 3"
-    },
-    {
-      "kind": "int",
-      "unsigned": true,
-      "bits": 8,
-      "name": "protocolId",
-      "description": ""
-    },
-    {
-      "length": 128,
-      "range": true,
-      "kind": "intArray",
-      "unsigned": true,
-      "bits": 8,
-      "name": "data",
-      "description": ""
-    }
-  ],
-  "statics": [
-    "uint8 PROTOCOL_ID_UNKNOWN = 0"
-  ]
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "protocolIdRtcm2",
+        "description": "= 2"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "protocolIdRtcm3",
+        "description": "= 3"
+      },
+      {
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "protocolId",
+        "description": ""
+      },
+      {
+        "length": 128,
+        "range": true,
+        "kind": "intArray",
+        "unsigned": true,
+        "bits": 8,
+        "name": "data",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint8 PROTOCOL_ID_UNKNOWN = 0"
+    ]
+  },
+  "request": {
+    "variables": [],
+    "statics": []
+  },
+  "response": {
+    "variables": [],
+    "statics": []
+  }
 }
