@@ -23,6 +23,7 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
     throw new Error('bufferToJSON, data should be a uint8 array');
   }
   let bigInt = BigInt(`0x${buffer.toString('hex')}`);
+
   let result = {};
   let from = BigInt(buffer.length * 8);
 
@@ -54,10 +55,7 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
       unionTagValueName = variable.name;
       variable.name = `${variable.kind}${unionTagCount}`;
       variable.kind = 'unionTag'; // rename kind to explicit name. must succeed bit length calculation
-      variable.unsigned = true;
       unionTagCount++;
-
-      console.log('uniontag variable sent to parser', variable);
     }
 
     from = processVariable(bigInt, variable, from, result);
@@ -75,9 +73,6 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
       }
       variable.kind = unionType.kind;
       variable.name = unionTagValueName;
-
-      console.log('extracted uniontag value', extractedUnionType);
-      console.log(result, unionType);
 
       from = processVariable(bigInt, variable, from, result);
 
@@ -128,19 +123,32 @@ function processVariable(bigInt, variable, from, result) {
 
 function parseInt(bigInt, variable, from) {
   let nbBits = BigInt(variable.bits);
-  let value;
+  let value = BigInt(0);
+  let byteValue = BigInt(0);
+  let i;
+
+  console.log('parseInt');
   if (variable.unsigned) {
-    let mask = (n1 << nbBits) - n1;
-    value = (bigInt >> (from - nbBits)) & mask;
+    console.log('unsigned');
+    for (i = n8; i <= nbBits; i = i + n8) {
+      byteValue = (bigInt >> (from - i)) & n255;
+      value = value | (byteValue << (i - n8));
+    }
   } else {
+    // TODO: verify test data is correct
+    /*
     let mask = (n1 << (nbBits - n1)) - n1;
     let sign = (bigInt >> (from - n1)) & n1;
+
     value = (bigInt >> (from - nbBits)) & mask;
+
+
     if (sign) {
       value = -mask - n1 + value;
     }
+    */
   }
-  if (variable.bits < BigInt(53)) {
+  if (variable.bits < 53) {
     return Number(value); // can only store 53 bits in javascript for an integer
   } else {
     return value;

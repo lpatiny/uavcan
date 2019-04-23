@@ -14,7 +14,7 @@ describe('uavtest', () => {
     */
 
     let kindNodeStatus = kinds[341];
-    let data = [167, 41, 0, 0, 0, 0, 0];
+    let data = [141, 46, 0, 0, 0, 0, 0, 219];
 
     let result = bufferToJSON(data, kindNodeStatus);
     expect(result).toStrictEqual({
@@ -37,7 +37,7 @@ describe('uavtest', () => {
   it('requestParameter', () => {
     let kindGetSet = kinds[11];
 
-    let data = [0, 0, 0xc0];
+    let data = [0, 0];
     let result = bufferToJSON(data, kindGetSet, true, true);
     expect(result).toMatchSnapshot();
   });
