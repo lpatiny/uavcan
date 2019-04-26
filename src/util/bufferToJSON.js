@@ -32,7 +32,8 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
   let result = {};
   let from = BigInt(buffer.length * 8);
 
-  let transfer = kind.message;
+  let transfer;
+  if (!isService) transfer = kind.message;
   if (isService && isRequest) transfer = kind.request;
   if (isService && !isRequest) transfer = kind.response;
 
