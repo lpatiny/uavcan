@@ -21,14 +21,54 @@ Object {
 }
 `;
 
+exports[`uavtest requestParam 1`] = `
+Object {
+  "Value0": 0,
+  "index": 0,
+  "name": Array [
+    0,
+  ],
+  "value": 0n,
+}
+`;
+
 exports[`uavtest requestParameter 1`] = `
 Object {
   "Value0": 0,
   "index": 0,
   "name": Array [
-    192,
+    0,
   ],
-  "value": 0,
+  "value": 0n,
+}
+`;
+
+exports[`uavtest responseParam 1`] = `
+Object {
+  "NumericValue2": 0,
+  "NumericValue3": 0,
+  "Value0": 0,
+  "Value1": 0,
+  "defaultValue": 16384n,
+  "maxValue": 67043584n,
+  "minValue": 262144n,
+  "name": Array [
+    0,
+    0,
+    1,
+    145,
+    201,
+    165,
+    217,
+    149,
+    201,
+    204,
+  ],
+  "value": 20488n,
+  "void0": 0,
+  "void1": 0,
+  "void2": 0,
+  "void3": 0,
 }
 `;
 

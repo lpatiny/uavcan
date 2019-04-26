@@ -3,8 +3,11 @@
 /* global BigInt */
 
 const n1 = BigInt(1);
+const n2 = BigInt(2);
+const n0 = BigInt(0);
 const n8 = BigInt(8);
 const n255 = BigInt(255);
+const n128 = BigInt(128);
 
 const { byteToFloat16 } = require('float16');
 
@@ -56,13 +59,19 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
       variable.name = `${variable.kind}${unionTagCount}`;
       variable.kind = 'unionTag'; // rename kind to explicit name. must succeed bit length calculation
       unionTagCount++;
-    }
 
+      console.log(`uniontag type=${variable.name}`);
+      console.log(`uniontag bits=${variable.bits}`);
+    }
+    console.log(from);
     from = processVariable(bigInt, variable, from, result);
+    console.log(from);
 
     if (unionDidPreceed) {
       unionDidPreceed = 0;
       extractedUnionType = result[variable.name];
+      console.log(`type stored in uniontag:${extractedUnionType}`);
+      console.log(`result[${variable.name}] =${result[variable.name]}`);
 
       let name = variable.name.substr(0, variable.name.length - 1);
       let unionType = kinds[name].message.variables[1];
@@ -90,6 +99,15 @@ function processVariable(bigInt, variable, from, result) {
     case 'void': // void is just padding and can contain anything. it is not actively read.
     case 'unionTag': // union tags are always unsigned integers. the value represents the index of the type to be used
     case 'int':
+      if (variable.kind === 'unionTag') {
+        console.log('START uniontag processvariable');
+        console.log(variable);
+        let nbBits = BigInt(variable.bits);
+        let wordValue = (bigInt >> (from - nbBits)) & BigInt(n2 ** nbBits - n1);
+        console.log(wordValue.toString(2));
+        console.log('END uniontag processvariable');
+      }
+
       value = parseInt(bigInt, variable, from);
       from -= BigInt(variable.bits);
       break;
@@ -121,33 +139,39 @@ function processVariable(bigInt, variable, from, result) {
   return from;
 }
 
+function getIntSign(int, len) {
+  let sign = BigInt(int) >> (BigInt(len) - n1);
+  return sign;
+}
+
+function getTwosComplement(val, len) {
+  if (len) {
+    let mask = n2 ** (len - n1);
+    return -(val & mask) + (val & ~mask);
+  } else {
+    return 0;
+  }
+}
+
 function parseInt(bigInt, variable, from) {
   let nbBits = BigInt(variable.bits);
+  let byteValue = n0;
   let value = BigInt(0);
-  let byteValue = BigInt(0);
+
   let i;
-
-  console.log('parseInt');
-  if (variable.unsigned) {
-    console.log('unsigned');
-    for (i = n8; i <= nbBits; i = i + n8) {
-      byteValue = (bigInt >> (from - i)) & n255;
-      value = value | (byteValue << (i - n8));
-    }
-  } else {
-    // TODO: verify test data is correct
-    /*
-    let mask = (n1 << (nbBits - n1)) - n1;
-    let sign = (bigInt >> (from - n1)) & n1;
-
-    value = (bigInt >> (from - nbBits)) & mask;
-
-
-    if (sign) {
-      value = -mask - n1 + value;
-    }
-    */
+  for (i = n8; i <= nbBits; i = i + n8) {
+    byteValue = (bigInt >> (from - i)) & n255;
+    value = value | (byteValue << (i - n8));
   }
+
+  if (!variable.unsigned && nbBits > 7) {
+    value = getTwosComplement(value, nbBits);
+  } else if (nbBits < 8) {
+    // handle integers smaller than 8bits
+    let wordValue = (bigInt >> (from - nbBits)) & BigInt(n2 ** nbBits - n1);
+    value = getTwosComplement(wordValue, nbBits);
+  }
+
   if (variable.bits < 53) {
     return Number(value); // can only store 53 bits in javascript for an integer
   } else {

@@ -26,15 +26,7 @@ describe('uavtest', () => {
     });
   });
 
-  it('gps', () => {
-    let kindGeo = kinds[1041];
-    let data = [12, 14, 15];
-
-    let result = bufferToJSON(data, kindGeo);
-    expect(result).toMatchSnapshot();
-  });
-
-  it('requestParameter', () => {
+  it('requestParam', () => {
     let kindGetSet = kinds[11];
 
     let data = [0, 0];
@@ -42,7 +34,7 @@ describe('uavtest', () => {
     expect(result).toMatchSnapshot();
   });
 
-  it('responseParameter', () => {
+  it('responseParam', () => {
     /* real GetSet log:
 
 getset request completed ------------------------------
@@ -197,6 +189,17 @@ decodedp { transfer_payload: [ 101, 114, 115 ],
       115 // frame 7
     ];
     let result = bufferToJSON(data, kindGetSet, true, false);
+    console.log(result);
+    console.log(String.fromCharCode(97 + result.name[3]));
+
+    expect(result).toMatchSnapshot();
+  });
+
+  it('gps', () => {
+    let kindGeo = kinds[1041];
+    let data = [12, 14, 15];
+
+    let result = bufferToJSON(data, kindGeo);
     expect(result).toMatchSnapshot();
   });
 });
