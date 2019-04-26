@@ -15,13 +15,15 @@ const kinds = require('../kinds.json');
 
 /**
  *
- * @param {*} data
+ * @param {*} data Buffer
  * @param {*} kind
  */
 function bufferToJSON(data, kind, isService = false, isRequest = false) {
   let buffer;
   if (Array.isArray(data)) {
     buffer = Buffer.from(data);
+  } else if (Buffer.isBuffer(data)) {
+    buffer = data;
   } else {
     throw new Error('bufferToJSON, data should be a uint8 array');
   }
@@ -61,6 +63,17 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
     }
     from = processVariable(bigInt, variable, from, result);
 
+
+    // very implicit, FIXME
+    if (result.name) {
+      result.nameStr = nameToString(result.name);
+    }
+
+    if (result.key) {
+      result.keyStr = nameToString(result.key);
+    }
+
+
     if (unionDidPreceed) {
       unionDidPreceed = 0;
       extractedUnionType = result[variable.name];
@@ -81,6 +94,10 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
     }
   }
   return result;
+}
+
+function nameToString(name) {
+  return String.fromCharCode.apply(String, name);
 }
 
 function processVariable(bigInt, variable, from, result) {
@@ -107,6 +124,7 @@ function processVariable(bigInt, variable, from, result) {
         from -= BigInt(variable.bits);
         if (from <= 0) break;
       }
+
       break;
     case 'floatArray':
       value = [];
@@ -152,11 +170,14 @@ function parseInt(bigInt, variable, from) {
     value = getTwosComplement(wordValue, nbBits);
   }
 
+  return Number(value);
+  /* FUTURE, when json.stringify knows how to handle bigint
   if (variable.bits < 53) {
     return Number(value); // can only store 53 bits in javascript for an integer
   } else {
     return value;
   }
+  */
 }
 
 // can only parse float16 and float32 and float64

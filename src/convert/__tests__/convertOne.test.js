@@ -9,7 +9,7 @@ describe('convert', () => {
   it('simple', () => {
     const source = join(
       __dirname,
-      '../../../dsdl/equipment/ahrs/1002.MagneticFieldStrength2.uavcan'
+      '../../../public_regulated_data_types/uavcan/equipment/ahrs/1002.MagneticFieldStrength2.uavcan'
     );
 
     let content = fs.readFileSync(source, 'utf8');
@@ -24,7 +24,7 @@ describe('convert', () => {
   it('requestresponse', () => {
     const source = join(
       __dirname,
-      '../../../dsdl/protocol/param/11.GetSet.uavcan'
+      '../../../public_regulated_data_types/uavcan/protocol/param/11.GetSet.uavcan'
     );
 
     let content = fs.readFileSync(source, 'utf8');

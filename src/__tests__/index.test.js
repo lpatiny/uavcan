@@ -57,8 +57,9 @@ describe('uavtest', () => {
     expect(result).toStrictEqual({
       index: 1,
       Value0: 1,
-      value: BigInt(123),
-      name: [100, 114, 105, 118, 101, 114, 115]
+      value: (123),
+      name: [100, 114, 105, 118, 101, 114, 115],
+      nameStr: 'drivers'
     });
   });
 
@@ -82,21 +83,22 @@ describe('uavtest', () => {
     ];
 
     let result = bufferToJSON(data, kindGetSet, true, false);
-    console.log(result);
 
     expect(result).toStrictEqual({ void0: 0,
       Value0: (1),
-      value: BigInt(1023),
+      value: (1023),
       void1: 0,
       Value1: (1),
-      defaultValue: BigInt(0),
+      defaultValue: (0),
       void2: 0,
       NumericValue2: (1),
-      maxValue: BigInt(1023),
+      maxValue: (1023),
       void3: 0,
       NumericValue3: (1),
-      minValue: BigInt(0),
-      name: [100, 114, 105, 118, 101, 114, 115] });
+      minValue: (0),
+      name: [100, 114, 105, 118, 101, 114, 115],
+      nameStr: 'drivers'
+    });
   });
 
   it('gps', () => {
