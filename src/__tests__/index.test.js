@@ -43,14 +43,13 @@ describe('uavtest', () => {
       0,
       0,
       0, // last byte of int64
-      1, // beginning of string
-      0,
-      2,
-      0,
-      3,
-      0,
-      4,
-      0
+      0x64, // =d beginning of string
+      0x72, // =r
+      0x69, // =i
+      0x76, // =v
+      0x65, // =e
+      0x72, // =r
+      0x73, // =s
     ];
 
     let result = bufferToJSON(data, kindGetSet, true, true);
@@ -59,14 +58,45 @@ describe('uavtest', () => {
       index: 1,
       Value0: 1,
       value: BigInt(123),
-      name: [1, 0, 2, 0, 3, 0, 4, 0]
+      name: [100, 114, 105, 118, 101, 114, 115]
     });
   });
 
   it('responseParam', () => {
-    // TODO
-    let result = 0;
-    expect(result).toMatchSnapshot();
+    let kindGetSet = kinds[11];
+
+    let data = [
+      0x01, 0xFF, 0x03, 0x00, 0x00,
+      0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00,
+      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+      0xFF, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00,
+      0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
+      0x00, 0x00, 0x00,
+      0x64, // =d beginning of string
+      0x72, // =r
+      0x69, // =i
+      0x76, // =v
+      0x65, // =e
+      0x72, // =r
+      0x73, // =s
+    ];
+
+    let result = bufferToJSON(data, kindGetSet, true, false);
+    console.log(result);
+
+    expect(result).toStrictEqual({ void0: 0,
+      Value0: BigInt(1),
+      value: BigInt(1023),
+      void1: 0,
+      Value1: BigInt(1),
+      defaultValue: BigInt(0),
+      void2: 0,
+      NumericValue2: BigInt(1),
+      maxValue: BigInt(1023),
+      void3: 0,
+      NumericValue3: BigInt(1),
+      minValue: BigInt(0),
+      name: [0, 0, 1, 145, 201, 165, 217, 149, 201, 204] });
   });
 
   it('gps', () => {
