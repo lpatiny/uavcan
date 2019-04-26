@@ -29,169 +29,43 @@ describe('uavtest', () => {
   it('requestParam', () => {
     let kindGetSet = kinds[11];
 
-    let data = [0, 0];
+    // this is my hypothesis of how a uniontag value is encoded based on the examples in
+    // https://uavcan.org/Specification/3._Data_structure_description_language/
+
+    let data = [
+      0b00000001, // 8bits of index
+      0b00000001, // next 5bits of index, then 3bits of uniontag value
+      123, // since uniontag = 1, this value is an int64
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0, // last byte of int64
+      1, // beginning of string
+      0,
+      2,
+      0,
+      3,
+      0,
+      4,
+      0
+    ];
+
     let result = bufferToJSON(data, kindGetSet, true, true);
-    expect(result).toMatchSnapshot();
+
+    expect(result).toStrictEqual({
+      index: 1,
+      Value0: 1,
+      value: BigInt(123),
+      name: [1, 0, 2, 0, 3, 0, 4, 0]
+    });
   });
 
   it('responseParam', () => {
-    /* real GetSet log:
-
-getset request completed ------------------------------
-sent to ws: {"id":504098815,"dlc":8,"timestamp":1555866393634,"data":[0,0,198],"is_ext_id":true,"is_remote":false}
-
-1. raw: [ 6, 148, 1, 10, 0, 0, 0, 134 ]
-decodedid { src_id: 111,
-  dst_id: 127,
-  service_flag: 1,
-  message_type_id: -1,
-  priority: 30,
-  request_flag: 0,
-  service_type_id: 11 }
-decodedp { transfer_payload: [ 6, 148, 1, 10, 0, 0, 0 ],
-  start_of_transfer: 1,
-  end_of_transfer: 0,
-  toggle: 0,
-  transfer_id: 6 }
-
-2. raw: [ 0, 0, 0, 0, 1, 0, 0, 38 ]
-decodedid { src_id: 111,
-  dst_id: 127,
-  service_flag: 1,
-  message_type_id: -1,
-  priority: 30,
-  request_flag: 0,
-  service_type_id: 11 }
-decodedp { transfer_payload: [ 0, 0, 0, 0, 1, 0, 0 ],
-  start_of_transfer: 0,
-  end_of_transfer: 0,
-  toggle: 1,
-  transfer_id: 6 }
-
-3. raw: [ 0, 0, 0, 0, 0, 0, 1, 6 ]
-decodedid { src_id: 111,
-  dst_id: 127,
-  service_flag: 1,
-  message_type_id: -1,
-  priority: 30,
-  request_flag: 0,
-  service_type_id: 11 }
-decodedp { transfer_payload: [ 0, 0, 0, 0, 0, 0, 1 ],
-  start_of_transfer: 0,
-  end_of_transfer: 0,
-  toggle: 0,
-  transfer_id: 6 }
-
-4. raw: [ 255, 3, 0, 0, 0, 0, 0, 38 ]
-decodedid { src_id: 111,
-  dst_id: 127,
-  service_flag: 1,
-  message_type_id: -1,
-  priority: 30,
-  request_flag: 0,
-  service_type_id: 11 }
-decodedp { transfer_payload: [ 255, 3, 0, 0, 0, 0, 0 ],
-  start_of_transfer: 0,
-  end_of_transfer: 0,
-  toggle: 1,
-  transfer_id: 6 }
-
-5. raw: [ 0, 1, 0, 0, 0, 0, 0, 6 ]
-decodedid { src_id: 111,
-  dst_id: 127,
-  service_flag: 1,
-  message_type_id: -1,
-  priority: 30,
-  request_flag: 0,
-  service_type_id: 11 }
-decodedp { transfer_payload: [ 0, 1, 0, 0, 0, 0, 0 ],
-  start_of_transfer: 0,
-  end_of_transfer: 0,
-  toggle: 0,
-  transfer_id: 6 }
-
-6. raw: [ 0, 0, 0, 100, 114, 105, 118, 38 ]
-decodedid { src_id: 111,
-  dst_id: 127,
-  service_flag: 1,
-  message_type_id: -1,
-  priority: 30,
-  request_flag: 0,
-  service_type_id: 11 }
-decodedp { transfer_payload: [ 0, 0, 0, 100, 114, 105, 118 ],
-  start_of_transfer: 0,
-  end_of_transfer: 0,
-  toggle: 1,
-  transfer_id: 6 }
-
-7. raw: [ 101, 114, 115, 70 ]
-decodedid { src_id: 111,
-  dst_id: 127,
-  service_flag: 1,
-  message_type_id: -1,
-  priority: 30,
-  request_flag: 0,
-  service_type_id: 11 }
-decodedp { transfer_payload: [ 101, 114, 115 ],
-  start_of_transfer: 0,
-  end_of_transfer: 1,
-  toggle: 0,
-  transfer_id: 6 }
-
-
-*/
-
-    let kindGetSet = kinds[11];
-
-    let data = [
-      1,
-      10,
-      0,
-      0,
-      0, // frame 1 (5 bytes due to crc and tail)
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      0, // frame 2
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      1, // frame 3
-      255,
-      3,
-      0,
-      0,
-      0,
-      0,
-      0, // frame 4
-      0,
-      1,
-      0,
-      0,
-      0,
-      0,
-      0, // frame 5
-      0,
-      0,
-      0,
-      100,
-      114,
-      105,
-      118, // frame 6
-      101,
-      114,
-      115 // frame 7
-    ];
-    let result = bufferToJSON(data, kindGetSet, true, false);
-    console.log(result);
-    console.log(String.fromCharCode(97 + result.name[3]));
-
+    // TODO
+    let result = 0;
     expect(result).toMatchSnapshot();
   });
 

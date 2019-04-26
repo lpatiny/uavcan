@@ -59,19 +59,12 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
       variable.name = `${variable.kind}${unionTagCount}`;
       variable.kind = 'unionTag'; // rename kind to explicit name. must succeed bit length calculation
       unionTagCount++;
-
-      console.log(`uniontag type=${variable.name}`);
-      console.log(`uniontag bits=${variable.bits}`);
     }
-    console.log(from);
     from = processVariable(bigInt, variable, from, result);
-    console.log(from);
 
     if (unionDidPreceed) {
       unionDidPreceed = 0;
       extractedUnionType = result[variable.name];
-      console.log(`type stored in uniontag:${extractedUnionType}`);
-      console.log(`result[${variable.name}] =${result[variable.name]}`);
 
       let name = variable.name.substr(0, variable.name.length - 1);
       let unionType = kinds[name].message.variables[1];
@@ -100,12 +93,7 @@ function processVariable(bigInt, variable, from, result) {
     case 'unionTag': // union tags are always unsigned integers. the value represents the index of the type to be used
     case 'int':
       if (variable.kind === 'unionTag') {
-        console.log('START uniontag processvariable');
-        console.log(variable);
-        let nbBits = BigInt(variable.bits);
-        let wordValue = (bigInt >> (from - nbBits)) & BigInt(n2 ** nbBits - n1);
-        console.log(wordValue.toString(2));
-        console.log('END uniontag processvariable');
+        console.log('process unionTag');
       }
 
       value = parseInt(bigInt, variable, from);
