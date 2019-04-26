@@ -3,8 +3,7 @@
 let EventEmitter = require('eventemitter3');
 
 let kinds = require('./kinds.json');
-
-let { bufferToJSON } = require('./');
+let bufferToJSON = require('./util/bufferToJSON');
 
 
 class UAVCANCodec extends EventEmitter {
