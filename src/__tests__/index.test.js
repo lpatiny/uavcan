@@ -66,7 +66,7 @@ describe('uavtest', () => {
     let kindGetSet = kinds[11];
 
     let data = [
-      0x01, 0xFF, 0x03, 0x00, 0x00,
+      0b00000001, 0b11111111, 0b00000011, 0x00, 0x00,
       0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00,
       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
       0xFF, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -85,18 +85,18 @@ describe('uavtest', () => {
     console.log(result);
 
     expect(result).toStrictEqual({ void0: 0,
-      Value0: BigInt(1),
+      Value0: (1),
       value: BigInt(1023),
       void1: 0,
-      Value1: BigInt(1),
+      Value1: (1),
       defaultValue: BigInt(0),
       void2: 0,
-      NumericValue2: BigInt(1),
+      NumericValue2: (1),
       maxValue: BigInt(1023),
       void3: 0,
-      NumericValue3: BigInt(1),
+      NumericValue3: (1),
       minValue: BigInt(0),
-      name: [0, 0, 1, 145, 201, 165, 217, 149, 201, 204] });
+      name: [100, 114, 105, 118, 101, 114, 115] });
   });
 
   it('gps', () => {

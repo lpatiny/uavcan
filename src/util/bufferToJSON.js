@@ -44,7 +44,6 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
     if (variable.kind === 'void') {
       variable.name = `${variable.kind}${voidCount}`;
       voidCount++;
-      variable.bits = 0;
     } else if (
       kinds[variable.kind] &&
       kinds[variable.kind].type === 'message'
@@ -92,12 +91,10 @@ function processVariable(bigInt, variable, from, result) {
     case 'void': // void is just padding and can contain anything. it is not actively read.
     case 'unionTag': // union tags are always unsigned integers. the value represents the index of the type to be used
     case 'int':
-      if (variable.kind === 'unionTag') {
-        console.log('process unionTag');
-      }
 
       value = parseInt(bigInt, variable, from);
       from -= BigInt(variable.bits);
+
       break;
     case 'float':
       value = parseFloat(bigInt, variable, from);
@@ -125,11 +122,6 @@ function processVariable(bigInt, variable, from, result) {
 
   result[variable.name] = value;
   return from;
-}
-
-function getIntSign(int, len) {
-  let sign = BigInt(int) >> (BigInt(len) - n1);
-  return sign;
 }
 
 function getTwosComplement(val, len) {
