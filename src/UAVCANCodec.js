@@ -29,7 +29,6 @@ class UAVCANCodec extends EventEmitter {
       requestNotResponse: Boolean(canId[2] >> 7),
       serviceTypeId: Number(canId[1])
     };
-
     return id;
   }
 
@@ -45,6 +44,27 @@ class UAVCANCodec extends EventEmitter {
     return tail;
   }
 
+  /* Puts together a transfer from multiple payploads */
+  assembleTransfer(canPayload, startOfTransfer, endOfTransfer) {
+    let tail = this.parseTail(canPayload);
+
+    // end of multiframe transfer
+    if (!tail.startOfTransfer && tail.endOfTransfer) {
+      this.emit('message', 'multi');
+      return true;
+      // beginning of multiframe transfer
+    } else if (tail.startOfTransfer && !tail.endOfTransfer) {
+      return false;
+      // mid multiframe transfer
+    } else if (!tail.startOfTransfer && !tail.endOfTransfer) {
+      return false;
+      // single frame transfer
+    } else if (tail.startOfTransfer && tail.endOfTransfer) {
+      this.emit('message', 'single');
+      return true;
+    }
+  }
+
   /**
  * Fires an event with the decoded UAVCAN message.
  * @param {*} canId uint8
@@ -52,23 +72,25 @@ class UAVCANCodec extends EventEmitter {
  * @param {*} canPayload uint8[8]
  */
   decode(canId, extended = true, canPayload) {
-    let tail = this.parseTail(canPayload);
+    let id = this.parseCanId(canId);
+    let transferAssembled = this.assembleTransfer(canPayload);
 
-    console.log(this.parseCanId(canId));
+    if (transferAssembled) {
+      if (id.serviceNotMessage) {
+        // service
+        console.log('service assembled');
 
-    // end of multiframe transfer
-    if (!tail.startOfTransfer && tail.endOfTransfer) {
-      this.emit('message', 'multi');
-
-      // beginning of multiframe transfer
-    } else if (tail.startOfTransfer && !tail.endOfTransfer) {
-
-      // mid multiframe transfer
-    } else if (!tail.startOfTransfer && !tail.endOfTransfer) {
-
-      // single frame transfer
-    } else if (tail.startOfTransfer && tail.endOfTransfer) {
-      this.emit('message', 'single');
+        if (id.requestNotResponse) {
+          // request
+          console.log('request assembled');
+        } else {
+          // response
+          console.log('response assembled');
+        }
+      } else {
+        // message
+        console.log('message assembled');
+      }
     }
   }
 }

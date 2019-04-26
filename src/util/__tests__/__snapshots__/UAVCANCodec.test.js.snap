@@ -11,3 +11,12 @@ Object {
   "sourceNodeId": 111,
 }
 `;
+
+exports[`UAVCANCodec tail 1`] = `
+Object {
+  "endOfTransfer": true,
+  "startOfTransfer": true,
+  "toggle": false,
+  "transferId": 3,
+}
+`;

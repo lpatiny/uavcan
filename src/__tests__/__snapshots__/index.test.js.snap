@@ -10,23 +10,3 @@ Object {
   "longitudeDeg1E7": 15,
 }
 `;
-
-exports[`uavtest requestParam 1`] = `
-Object {
-  "Value0": 1,
-  "index": 1,
-  "name": Array [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-  ],
-  "value": 123n,
-}
-`;
-
-exports[`uavtest responseParam 1`] = `0`;
