@@ -5,7 +5,7 @@ const { join } = require('path');
 
 const convertOne = require('./convertOne');
 
-const source = join(__dirname, '../../dsdl');
+const source = join(__dirname, '../../public_regulated_data_types');
 const destination = join(__dirname, '../../dsdlJSON');
 const combined = join(__dirname, '../kinds.json');
 
