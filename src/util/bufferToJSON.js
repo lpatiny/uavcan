@@ -20,6 +20,7 @@ const kinds = require('../kinds.json');
  */
 function bufferToJSON(data, kind, isService = false, isRequest = false) {
   let buffer;
+
   if (Array.isArray(data)) {
     buffer = Buffer.from(data);
   } else if (Buffer.isBuffer(data)) {
