@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UAVCANCodec id 1`] = `
+Object {
+  "destinationNodeId": 114,
+  "messageTypeId": 16370,
+  "priority": 24,
+  "requestNotResponse": true,
+  "serviceNotMessage": false,
+  "serviceTypeId": 63,
+  "sourceNodeId": 111,
+}
+`;
