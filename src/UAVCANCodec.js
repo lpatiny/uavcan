@@ -62,8 +62,9 @@ class UAVCANCodec extends EventEmitter {
     if (!tail.startOfTransfer && tail.endOfTransfer) {
       let transferLength = canPayload.length - 1;
       let transferPayload = Buffer.from(canPayload.toString('hex', 0, transferLength), 'hex');
+      let priorPayload = this._transfers[transferId].payload;
 
-      this._transfers[transferId].payload = Buffer.concat([this._transfers[transferId].payload, transferPayload]);
+      this._transfers[transferId].payload = Buffer.concat([priorPayload, transferPayload]);
       this._transfers[transferId].toggle = tail.toggle;
 
       return transferId;
@@ -76,7 +77,9 @@ class UAVCANCodec extends EventEmitter {
       // mid multiframe transfer
     } else if (!tail.startOfTransfer && !tail.endOfTransfer) {
       let transferPayload = Buffer.from(canPayload.toString('hex', 0, 7), 'hex');
-      this._transfers[transferId].payload = Buffer.concat([this._transfers[transferId].payload, transferPayload]);
+      let priorPayload = this._transfers[transferId].payload;
+
+      this._transfers[transferId].payload = Buffer.concat([priorPayload, transferPayload]);
       this._transfers[transferId].toggle = tail.toggle;
 
       // single frame transfer
