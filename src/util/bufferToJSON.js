@@ -37,9 +37,18 @@ function bufferToJSON(data, kindReference, isService = false, isRequest = false)
   let from = BigInt(buffer.length * 8);
 
   let transfer = {};
-  if (!isService) transfer = kind.message;
-  if (isService && isRequest) transfer = kind.request;
-  if (isService && !isRequest) transfer = kind.response;
+  if (!isService) {
+    transfer = kind.message;
+  } else if (isService) {
+    if (isRequest) {
+      transfer = kind.request;
+    } else {
+      transfer = kind.response;
+    }
+  } else {
+    throw new Error('bufferToJSON: Not a service or message');
+  }
+
 
   let unionDidPreceed = 0;
   let extractedUnionType = -1;

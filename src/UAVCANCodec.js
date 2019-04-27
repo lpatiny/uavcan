@@ -62,6 +62,7 @@ class UAVCANCodec extends EventEmitter {
     if (!tail.startOfTransfer && tail.endOfTransfer) {
       let transferLength = canPayload.length - 1;
       let transferPayload = Buffer.from(canPayload.toString('hex', 0, transferLength), 'hex');
+
       this._transfers[transferId].payload = Buffer.concat([this._transfers[transferId].payload, transferPayload]);
       this._transfers[transferId].toggle = tail.toggle;
 
