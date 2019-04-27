@@ -13,13 +13,15 @@ const { byteToFloat16 } = require('float16');
 
 const kinds = require('../kinds.json');
 
+let called = 0;
 /**
  *
  * @param {*} data Buffer
  * @param {*} kind
  */
-function bufferToJSON(data, kind, isService = false, isRequest = false) {
+function bufferToJSON(data, kindReference, isService = false, isRequest = false) {
   let buffer;
+  let kind = JSON.parse(JSON.stringify(kindReference));
 
   if (Array.isArray(data)) {
     buffer = Buffer.from(data);
@@ -28,12 +30,13 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
   } else {
     throw new Error('bufferToJSON, data should be a uint8 array');
   }
+
   let bigInt = BigInt(`0x${buffer.toString('hex')}`);
 
   let result = {};
   let from = BigInt(buffer.length * 8);
 
-  let transfer;
+  let transfer = {};
   if (!isService) transfer = kind.message;
   if (isService && isRequest) transfer = kind.request;
   if (isService && !isRequest) transfer = kind.response;
@@ -43,6 +46,7 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
   let unionTagCount = 0;
   let voidCount = 0;
   let unionTagValueName = '';
+
 
   for (let variable of transfer.variables) {
     if (variable.kind === 'void') {

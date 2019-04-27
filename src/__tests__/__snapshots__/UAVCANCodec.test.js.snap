@@ -12,9 +12,10 @@ Object {
 }
 `;
 
-exports[`UAVCANCodec packet_multi_response 1`] = `
-Object {
-  "id": Object {
+exports[`UAVCANCodec packet_interleaved 1`] = `
+UAVCANTransfer {
+  "crc": Array [],
+  "decodedCanId": Object {
     "destinationNodeId": 127,
     "messageTypeId": 2943,
     "priority": 30,
@@ -23,7 +24,32 @@ Object {
     "serviceTypeId": 11,
     "sourceNodeId": 127,
   },
-  "rawTransfer": Object {
+  "decodedTransfer": Object {
+    "NumericValue2": 1,
+    "NumericValue3": 1,
+    "Value0": 1,
+    "Value1": 1,
+    "defaultValue": 0,
+    "maxValue": 1023,
+    "minValue": 0,
+    "name": Array [
+      100,
+      114,
+      105,
+      118,
+      101,
+      114,
+      115,
+    ],
+    "nameStr": "drivers",
+    "value": 1023,
+    "void0": 0,
+    "void1": 0,
+    "void2": 0,
+    "void3": 0,
+  },
+  "id": 3,
+  "payload": Object {
     "data": Array [
       1,
       255,
@@ -71,7 +97,23 @@ Object {
     ],
     "type": "Buffer",
   },
-  "transfer": Object {
+  "toggle": false,
+}
+`;
+
+exports[`UAVCANCodec packet_subsequent 1`] = `
+UAVCANTransfer {
+  "crc": Array [],
+  "decodedCanId": Object {
+    "destinationNodeId": 127,
+    "messageTypeId": 2943,
+    "priority": 30,
+    "requestNotResponse": false,
+    "serviceNotMessage": true,
+    "serviceTypeId": 11,
+    "sourceNodeId": 127,
+  },
+  "decodedTransfer": Object {
     "NumericValue2": 1,
     "NumericValue3": 1,
     "Value0": 1,
@@ -95,6 +137,56 @@ Object {
     "void2": 0,
     "void3": 0,
   },
+  "id": 3,
+  "payload": Object {
+    "data": Array [
+      1,
+      255,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      255,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      100,
+      114,
+      105,
+      118,
+      101,
+      114,
+      115,
+    ],
+    "type": "Buffer",
+  },
+  "toggle": false,
 }
 `;
 
