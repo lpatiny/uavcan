@@ -143,7 +143,7 @@ class UAVCANCodec extends EventEmitter {
       this._transfers[transferAssembledId].decodedTransfer = decodedTransfer;
 
       this.emit('rx', this._transfers[transferAssembledId]);
-      delete this._transfers[transferAssembledId];
+      // delete this._transfers[transferAssembledId];
     }
   }
 }
