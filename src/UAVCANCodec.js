@@ -61,10 +61,11 @@ class UAVCANCodec extends EventEmitter {
     if (tail.startOfTransfer && tail.endOfTransfer) {
 
     } else {
-      console.log(tail);
-      console.log(transferId);
-      console.log(canId);
-      console.log(canPayload);
+      console.log('-----------------');
+      console.log(`tail: ${tail}`);
+      console.log(`transferId: ${transferId}`);
+      console.log(`canId: ${canId}`);
+      console.log(`canPayload: ${canPayload}`);
     }
 
 
