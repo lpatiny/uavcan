@@ -58,6 +58,9 @@ class UAVCANCodec extends EventEmitter {
     let tail = this.parseTail(canPayload);
     let transferId = String(tail.transferId);
 
+    console.log(tail);
+    console.trace(transferId);
+    console.log(transferId);
     // end of multiframe transfer
     if (!tail.startOfTransfer && tail.endOfTransfer) {
       let transferLength = canPayload.length - 1;
