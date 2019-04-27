@@ -58,8 +58,16 @@ class UAVCANCodec extends EventEmitter {
     let tail = this.parseTail(canPayload);
     let transferId = String(`${tail.transferId} ${canId.sourceNodeId} ${canId.destinationNodeId}`);
 
-    console.log(tail);
-    console.log(transferId);
+    if (tail.startOfTransfer && tail.endOfTransfer) {
+
+    } else {
+      console.log(tail);
+      console.log(transferId);
+      console.log(canId);
+      console.log(canPayload);
+    }
+
+
     if (tail.transferId === 0) { // fixme
       return -1;
     }
@@ -69,7 +77,7 @@ class UAVCANCodec extends EventEmitter {
       let transferLength = canPayload.length - 1;
       let transferPayload = Buffer.from(canPayload.toString('hex', 0, transferLength), 'hex');
 
-
+      console.log(this._transfers[transferId]);
       let priorPayload = this._transfers[transferId].payload;
 
       this._transfers[transferId].payload = Buffer.concat([priorPayload, transferPayload]);
