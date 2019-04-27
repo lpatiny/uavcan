@@ -56,7 +56,9 @@ function bufferToJSON(data, kindReference, isService = false, isRequest = false)
   let voidCount = 0;
   let unionTagValueName = '';
 
-  console.trace(transfer);
+  if (isService) {
+    console.trace(transfer);
+  }
 
   for (let variable of transfer.variables) {
     if (variable.kind === 'void') {
