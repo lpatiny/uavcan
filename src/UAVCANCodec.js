@@ -56,7 +56,7 @@ class UAVCANCodec extends EventEmitter {
   /* Puts together a transfer from multiple payploads */
   assembleTransfer(canPayload) {
     let tail = this.parseTail(canPayload);
-    let transferId = tail.transferId;
+    let transferId = String(tail.transferId);
 
     // end of multiframe transfer
     if (!tail.startOfTransfer && tail.endOfTransfer) {
