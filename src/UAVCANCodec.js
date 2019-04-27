@@ -54,9 +54,9 @@ class UAVCANCodec extends EventEmitter {
   }
 
   /* Puts together a transfer from multiple payploads */
-  assembleTransfer(canPayload) {
+  assembleTransfer(canPayload, canId) {
     let tail = this.parseTail(canPayload);
-    let transferId = String(tail.transferId);
+    let transferId = String(`${tail.transferId} ${canId.sourceNodeId} ${canId.destinationNodeId}`);
 
     console.log(tail);
     console.log(transferId);
@@ -122,7 +122,7 @@ class UAVCANCodec extends EventEmitter {
  */
   decode(canId, canPayload) {
     let id = this.parseCanId(canId);
-    let transferAssembledId = this.assembleTransfer(canPayload);
+    let transferAssembledId = this.assembleTransfer(canPayload, id);
     let decodedTransfer;
 
 
