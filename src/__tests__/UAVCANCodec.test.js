@@ -17,6 +17,30 @@ describe('UAVCANCodec', () => {
   });
 
 
+  it('single_message_keyValue_float', () => {
+    expect.assertions(1);
+    const myCodecMulti = new UAVCANCodec();
+
+    function testfnMultiPacket() {
+      return new Promise(function (resolve, reject) {
+        let canId = [0x18, 0x3F, 0xF2, 0x66];
+        let canPayloadFull = [[0x0, 0x0, 0x6C, 0x42, 0x64, 0x65, 0x66, 0xC8]];
+
+        myCodecMulti.on('rx', (arg) => {
+          // console.log(`single_message_keyValue_float event: ${JSON.stringify(arg.decodedTransfer)}`);
+          resolve(arg.decodedTransfer);
+        });
+
+        for (let i = 0; i < canPayloadFull.length; i++) {
+          myCodecMulti.decode(Buffer.from(canId), Buffer.from(canPayloadFull[i]));
+        }
+      });
+    }
+
+    expect(testfnMultiPacket()).resolves.toStrictEqual({ value: 59.0, key: [100, 101, 102], keyStr: 'def' });
+  });
+
+
   it('single_message', () => {
     let canId = [0x18, 0x3f, 0xf2, 0x6f]; // sent by socketcan: 6f550118
     let id = (new UAVCANCodec()).parseCanId(canId);

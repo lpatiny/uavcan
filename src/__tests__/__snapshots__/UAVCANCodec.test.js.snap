@@ -190,6 +190,44 @@ UAVCANTransfer {
 }
 `;
 
+exports[`UAVCANCodec single_message_keyValue_float 1`] = `
+UAVCANTransfer {
+  "crc": Array [],
+  "decodedCanId": Object {
+    "destinationNodeId": 114,
+    "messageTypeId": 16370,
+    "priority": 24,
+    "requestNotResponse": true,
+    "serviceNotMessage": false,
+    "serviceTypeId": 63,
+    "sourceNodeId": 102,
+  },
+  "decodedTransfer": Object {
+    "key": Array [
+      100,
+      101,
+      102,
+    ],
+    "keyStr": "def",
+    "value": 3.883558564029798e-41,
+  },
+  "id": "8 102 114",
+  "payload": Object {
+    "data": Array [
+      0,
+      0,
+      108,
+      66,
+      100,
+      101,
+      102,
+    ],
+    "type": "Buffer",
+  },
+  "toggle": false,
+}
+`;
+
 exports[`UAVCANCodec tail 1`] = `
 Object {
   "endOfTransfer": true,
