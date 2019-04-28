@@ -58,14 +58,12 @@ class UAVCANCodec extends EventEmitter {
     let tail = this.parseTail(canPayload);
     let transferId = String(`${tail.transferId} ${canId.sourceNodeId} ${canId.destinationNodeId}`);
 
-    if (tail.transferId === 0) { // fixme
-      return -1;
-    }
-
     // end of multiframe transfer
     if (!tail.startOfTransfer && tail.endOfTransfer) {
       let transferLength = canPayload.length - 1;
       let transferPayload = Buffer.from(canPayload.toString('hex', 0, transferLength), 'hex');
+
+      if (this._transfers[transferId] === undefined) throw new Error('Bad data');
 
       let priorPayload = this._transfers[transferId].payload;
 
@@ -82,6 +80,9 @@ class UAVCANCodec extends EventEmitter {
       // mid multiframe transfer
     } else if (!tail.startOfTransfer && !tail.endOfTransfer) {
       let transferPayload = Buffer.from(canPayload.toString('hex', 0, 7), 'hex');
+
+      if (this._transfers[transferId] === undefined) throw new Error('Bad data');
+
       let priorPayload = this._transfers[transferId].payload;
 
       this._transfers[transferId].payload = Buffer.concat([priorPayload, transferPayload]);
@@ -121,8 +122,7 @@ class UAVCANCodec extends EventEmitter {
     let transferAssembledId = this.assembleTransfer(canPayload, id);
     let decodedTransfer;
 
-
-    if (transferAssembledId >= 0) {
+    if (transferAssembledId !== -1) {
       if (id.serviceNotMessage) {
         // service
         if (id.requestNotResponse) {

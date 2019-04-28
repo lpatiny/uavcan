@@ -23,7 +23,8 @@ describe('UAVCANCodec', () => {
 
     let canPayload = [0, 0, 0x7c, 0x42, 0x64, 0x65, 0x66, 0xd2];
     let assembled = (new UAVCANCodec()).assembleTransfer(Buffer.from(canPayload), id);
-    expect(assembled).toStrictEqual(18);
+    // console.log(assembled);
+    expect(assembled).toStrictEqual('18 111 114');
   });
 
   it('single_request', () => {
@@ -32,24 +33,30 @@ describe('UAVCANCodec', () => {
 
     let canPayload = [0, 0, 0xc3];
     let assembled = (new UAVCANCodec()).assembleTransfer(Buffer.from(canPayload), id);
-
-    expect(assembled).toStrictEqual(3);
+    // console.log(assembled);
+    expect(assembled).toStrictEqual('3 127 111');
   });
 
   // 00 01 1d 00 00 00 00 00 00 00 64 72
 
   it('bad_data', () => {
+    let result;
     let canId = [0x1e, 0x0b, 0x7f, 0xff];
     let canPayload = [[0x00, 0x01, 0x1d, 0x00, 0x00, 0x00, 0x00, 0x00], [0x00, 0x00, 0x64, 0x72]];
     let id = (new UAVCANCodec()).parseCanId(canId);
-    console.log(id);
-    let assembled = (new UAVCANCodec()).assembleTransfer(Buffer.from(canPayload), id);
+    try {
+      let assembled = (new UAVCANCodec()).assembleTransfer(Buffer.from(canPayload), id);
+    } catch (error) {
+      result = error.message;
+    }
 
-    expect(assembled).toStrictEqual(3);
+    expect(result).toStrictEqual('Bad data');
   });
 
   it('multi_response', () => {
     let canId = [0x1e, 0x0b, 0x7f, 0xff];
+    let id = (new UAVCANCodec()).parseCanId(canId);
+
     let canPayloadFull = [
       [0xE9, 0xE2, 0x01, 0xFF, 0x03, 0x00, 0x00, 0x83],
       [0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x23],
@@ -62,11 +69,10 @@ describe('UAVCANCodec', () => {
     let myCodec = new UAVCANCodec();
     let assembled = false;
     for (let i = 0; i < canPayloadFull.length; i++) {
-      assembled = myCodec.assembleTransfer(Buffer.from(canPayloadFull[i]));
+      assembled = myCodec.assembleTransfer(Buffer.from(canPayloadFull[i]), id);
     }
 
-
-    expect(assembled).toStrictEqual(3);
+    expect(assembled).toStrictEqual('3 127 127');
   });
 
   it('packet_interleaved', () => {
@@ -98,7 +104,7 @@ describe('UAVCANCodec', () => {
         ];
 
         myCodecMulti.on('rx', (arg) => {
-          console.log(`packet1 event: ${JSON.stringify(arg)}`);
+          // console.log(`packet1 event: ${JSON.stringify(arg)}`);
           resolve(arg);
         });
 
@@ -129,7 +135,7 @@ describe('UAVCANCodec', () => {
         ];
 
         myCodecMulti.on('rx', (arg) => {
-          console.log(`packet1 event: ${JSON.stringify(arg)}`);
+          // console.log(`packet1 event: ${JSON.stringify(arg)}`);
           resolve(arg);
         });
 

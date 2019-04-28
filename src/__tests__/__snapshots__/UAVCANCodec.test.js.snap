@@ -48,7 +48,7 @@ UAVCANTransfer {
     "void2": 0,
     "void3": 0,
   },
-  "id": 3,
+  "id": "3 127 127",
   "payload": Object {
     "data": Array [
       1,
@@ -137,7 +137,7 @@ UAVCANTransfer {
     "void2": 0,
     "void3": 0,
   },
-  "id": 3,
+  "id": "3 127 127",
   "payload": Object {
     "data": Array [
       1,
