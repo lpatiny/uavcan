@@ -94,25 +94,6 @@ class UAVCANCodec extends EventEmitter {
 
       return transferId;
     }
-
-
-    if (tail.startOfTransfer && tail.endOfTransfer) {
-
-    } else {
-      console.log('-----------------');
-      console.log('tail:');
-      console.log(tail);
-      console.log('transferId:');
-      console.log(transferId);
-      console.log('canId:');
-      console.log(canId);
-      console.log('canPayload:');
-      console.log(canPayload);
-      console.log('this._transfers[transferId]');
-      console.log(this._transfers[transferId]);
-    }
-
-
     return -1;
   }
 
@@ -160,7 +141,7 @@ class UAVCANCodec extends EventEmitter {
       this._transfers[transferAssembledId].decodedTransfer = decodedTransfer;
 
       this.emit('rx', this._transfers[transferAssembledId]);
-      // delete this._transfers[transferAssembledId];
+      delete this._transfers[transferAssembledId];
     }
   }
 }
