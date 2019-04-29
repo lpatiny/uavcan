@@ -2,24 +2,22 @@
 
 /* global BigInt */
 
-const n1 = BigInt(1);
-const n2 = BigInt(2);
-const n0 = BigInt(0);
-const n8 = BigInt(8);
-const n255 = BigInt(255);
-const n128 = BigInt(128);
-
-const { byteToFloat16 } = require('float16');
-
 const kinds = require('../kinds.json');
 
-let called = 0;
+const parseFloat = require('./parseFloat');
+const parseInt = require('./parseInt');
+
 /**
  *
  * @param {*} data Buffer
  * @param {*} kind
  */
-function bufferToJSON(data, kindReference, isService = false, isRequest = false) {
+function bufferToJSON(
+  data,
+  kindReference,
+  isService = false,
+  isRequest = false
+) {
   let buffer;
   let kind = JSON.parse(JSON.stringify(kindReference));
 
@@ -49,7 +47,6 @@ function bufferToJSON(data, kindReference, isService = false, isRequest = false)
     throw new Error('bufferToJSON: Not a service or message');
   }
 
-
   let unionDidPreceed = 0;
   let extractedUnionType = -1;
   let unionTagCount = 0;
@@ -76,8 +73,6 @@ function bufferToJSON(data, kindReference, isService = false, isRequest = false)
       unionTagCount++;
     }
     from = processVariable(bigInt, variable, from, result);
-
-
     // very implicit, FIXME
     if (result.name) {
       result.nameStr = nameToString(result.name);
@@ -86,7 +81,6 @@ function bufferToJSON(data, kindReference, isService = false, isRequest = false)
     if (result.key) {
       result.keyStr = nameToString(result.key);
     }
-
 
     if (unionDidPreceed) {
       unionDidPreceed = 0;
@@ -122,7 +116,6 @@ function processVariable(bigInt, variable, from, result) {
     case 'void': // void is just padding and can contain anything. it is not actively read.
     case 'unionTag': // union tags are always unsigned integers. the value represents the index of the type to be used
     case 'int':
-
       value = parseInt(bigInt, variable, from);
       from -= BigInt(variable.bits);
 
@@ -154,68 +147,6 @@ function processVariable(bigInt, variable, from, result) {
 
   result[variable.name] = value;
   return from;
-}
-
-function getTwosComplement(val, len) {
-  if (len) {
-    let mask = n2 ** (len - n1);
-    return -(val & mask) + (val & ~mask);
-  } else {
-    return 0;
-  }
-}
-
-function parseInt(bigInt, variable, from) {
-  let nbBits = BigInt(variable.bits);
-  let byteValue = n0;
-  let value = BigInt(0);
-
-  let i;
-  for (i = n8; i <= nbBits; i = i + n8) {
-    byteValue = (bigInt >> (from - i)) & n255;
-    value = value | (byteValue << (i - n8));
-  }
-
-  if (!variable.unsigned && nbBits > 7) {
-    value = getTwosComplement(value, nbBits);
-  } else if (nbBits < 8) {
-    // handle integers smaller than 8bits
-    let wordValue = (bigInt >> (from - nbBits)) & BigInt(n2 ** nbBits - n1);
-    value = getTwosComplement(wordValue, nbBits);
-  }
-
-  return Number(value);
-  /* FUTURE, when json.stringify knows how to handle bigint
-  if (variable.bits < 53) {
-    return Number(value); // can only store 53 bits in javascript for an integer
-  } else {
-    return value;
-  }
-  */
-}
-
-// can only parse float16 and float32 and float64
-function parseFloat(bigInt, variable, from) {
-  if (![16, 32, 64].includes(variable.bits)) {
-    throw new Error('Float parsing only valid for number of bits 16, 32 or 64');
-  }
-  // we will create a buffer
-  let bytes = [];
-  for (let i = 0; i < variable.bits / 8; i++) {
-    bytes.push(Number((bigInt >> (from - n8)) & n255));
-    from -= n8;
-  }
-  let buffer = Buffer.from(bytes);
-  switch (variable.bits) {
-    case 16:
-      return byteToFloat16((bytes[0] << 8) | bytes[1]);
-    case 32:
-      return buffer.readFloatBE();
-    case 64:
-      return buffer.readDoubleBE();
-    default:
-      return undefined;
-  }
 }
 
 module.exports = bufferToJSON;
