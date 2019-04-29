@@ -7,6 +7,8 @@ const kinds = require('../kinds.json');
 const parseFloat = require('./parseFloat');
 const parseInt = require('./parseInt');
 
+const n1 = BigInt(1);
+
 /**
  *
  * @param {*} data Buffer
@@ -116,18 +118,24 @@ function processVariable(bigInt, variable, from, result) {
     case 'void': // void is just padding and can contain anything. it is not actively read.
     case 'unionTag': // union tags are always unsigned integers. the value represents the index of the type to be used
     case 'int':
-      value = parseInt(bigInt, variable, from);
-      from -= BigInt(variable.bits);
-
+      {
+        let currentValue = getCurrentValue(bigInt, variable.bits, from);
+        value = parseInt(currentValue, variable.bits, variable.unsigned);
+        from -= BigInt(variable.bits);
+      }
       break;
     case 'float':
-      value = parseFloat(bigInt, variable, from);
-      from -= BigInt(variable.bits);
+      {
+        let currentValue = getCurrentValue(bigInt, variable.bits, from);
+        value = parseFloat(currentValue, variable.bits);
+        from -= BigInt(variable.bits);
+      }
       break;
     case 'intArray':
       value = [];
       for (let i = 0; i < variable.length; i++) {
-        value.push(parseInt(bigInt, variable, from));
+        let currentValue = getCurrentValue(bigInt, variable.bits, from);
+        value.push(parseInt(currentValue, variable.bits, variable.unsigned));
         from -= BigInt(variable.bits);
         if (from <= 0) break;
       }
@@ -136,7 +144,8 @@ function processVariable(bigInt, variable, from, result) {
     case 'floatArray':
       value = [];
       for (let i = 0; i < variable.length; i++) {
-        value.push(parseFloat(bigInt, variable, from));
+        let currentValue = getCurrentValue(bigInt, variable.bits, from);
+        value.push(parseFloat(currentValue, variable.bits));
         from -= BigInt(variable.bits);
         if (from <= 0) break;
       }
@@ -150,3 +159,7 @@ function processVariable(bigInt, variable, from, result) {
 }
 
 module.exports = bufferToJSON;
+
+function getCurrentValue(bigInt, nbBits, from) {
+  return (bigInt >> (from - BigInt(nbBits))) & ((n1 >> BigInt(nbBits)) - n1);
+}

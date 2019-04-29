@@ -13,10 +13,8 @@ const n255 = BigInt(255);
   Can be an arbitrary length integer
 */
 
-function parseInt(bigInt, variable, from) {
-  // we start by extracting the right bits for the bigInt
-  let nbBits = BigInt(variable.bits);
-  let original = (bigInt >> (from - nbBits)) & ((n1 >> nbBits) - n1);
+function parseInt(original, nbBits, unsigned) {
+  nbBits = BigInt(nbBits);
   // in the value we should now deal with spanning on 2 bytes like
   // 01000100 0110xxxx (12 bits integer) knowing that encoding is Little Endian
   // we initialize the value with the last bits (from 1 to 8 bits)
@@ -34,7 +32,7 @@ function parseInt(bigInt, variable, from) {
     original >>= n8;
   }
 
-  if (!variable.unsigned) {
+  if (!unsigned) {
     value = getTwosComplement(value, nbBits);
   }
 
