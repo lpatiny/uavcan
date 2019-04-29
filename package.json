@@ -8,6 +8,7 @@
     "src"
   ],
   "scripts": {
+    "build": "cheminfo build --root UAV",
     "eslint": "eslint src",
     "eslint-fix": "npm run eslint -- --fix",
     "test": "npm run test-only && npm run eslint",
@@ -30,6 +31,7 @@
     "testEnvironment": "node"
   },
   "devDependencies": {
+    "cheminfo-tools": "^1.23.2",
     "codecov": "^3.3.0",
     "eslint": "^5.16.0",
     "eslint-config-cheminfo": "^1.20.1",
