@@ -1,12 +1,10 @@
 # uavcan
 
-  [![NPM version][npm-image]][npm-url]
-  [![build status][travis-image]][travis-url]
-  [![Test coverage][codecov-image]][codecov-url]
-  [![David deps][david-image]][david-url]
-  [![npm download][download-image]][download-url]
-  
-
+[![NPM version][npm-image]][npm-url]
+[![build status][travis-image]][travis-url]
+[![Test coverage][codecov-image]][codecov-url]
+[![David deps][david-image]][david-url]
+[![npm download][download-image]][download-url]
 
 ## Installation
 
@@ -17,27 +15,33 @@
 ## Example
 
 ```js
-var can = require('socketcan');
-const {UAVCANCodec} = require('uavcan');
+var can = require("socketcan");
+const { UAVCANCodec } = require("uavcan");
 
 var myCodec = new UAVCANCodec();
 var channel = can.createRawChannel("slcan0", true);
 
-myCodec.on('rx', (arg)=>{
-    if(arg.decodedCanId.messageTypeId === 341 || arg.decodedCanId.serviceTypeId === 11){
-        console.log(arg.decodedTransfer, arg.decodedCanId.sourceNodeId)
-    }
-})
+myCodec.on("rx", arg => {
+  if (
+    arg.decodedCanId.messageTypeId === 341 ||
+    arg.decodedCanId.serviceTypeId === 11
+  ) {
+    console.log(arg.decodedTransfer, arg.decodedCanId.sourceNodeId);
+  }
+});
 
 // Log any message
 channel.addListener("onMessage", function(msg) {
-    let b = Buffer.alloc(4)
-    b.writeUInt32BE(msg.id)
-    myCodec.decode(b, msg.data)
+  let b = Buffer.alloc(4);
+  b.writeUInt32BE(msg.id);
+  myCodec.decode(b, msg.data);
 });
-channel.start()
-```
+channel.start();
 
+//send a message
+var myMessage = new UAVCANTransfer(...);
+myCodec.encode(myMessage, channel.send);
+```
 
 ## License
 
