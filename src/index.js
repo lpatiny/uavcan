@@ -3,5 +3,6 @@
 module.exports = {
   bufferToJSON: require('./util/bufferToJSON'),
   kinds: require('./kinds.json'),
-  UAVCANCodec: require('./UAVCANCodec.js')
+  UAVCANCodec: require('./UAVCANCodec.js'),
+  UAVCANTransfer: require('./UAVCANTransfer.js')
 };

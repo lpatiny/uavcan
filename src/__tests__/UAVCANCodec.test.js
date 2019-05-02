@@ -1,9 +1,26 @@
 'use strict';
 
 const UAVCANCodec = require('../UAVCANCodec');
+const UAVCANTransfer = require('../UAVCANTransfer');
 
 
 describe('UAVCANCodec', () => {
+  it('send', () => {
+    let myCodec = new UAVCANCodec();
+    let payload = [];
+    let crc = [];
+    let transferId = 1;
+    let toggle = false;
+    let myTransfer = new UAVCANTransfer(payload, crc, transferId, toggle);
+
+    myCodec.encode(myTransfer, (arg) => {
+      console.log('tx');
+      console.log(arg);
+    });
+    expect(result).toMatchSnapshot();
+  });
+
+
   it('id', () => {
     let id = Buffer.from([0x18, 0x3f, 0xf2, 0x6f]);
     let result = (new UAVCANCodec()).parseCanId(id);

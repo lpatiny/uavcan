@@ -4,22 +4,8 @@ let EventEmitter = require('eventemitter3');
 
 let kinds = require('./kinds.json');
 let bufferToJSON = require('./util/bufferToJSON');
+let UAVCANTransfer = require('./UAVCANTransfer');
 
-class UAVCANTransfer {
-  constructor(
-    payload = Buffer.from([]),
-    crc = [],
-    transferId = -1,
-    toggle = -1
-  ) {
-    this.payload = payload;
-    this.crc = crc;
-    this.id = transferId; // transfer id
-    this.toggle = toggle;
-    this.decodedTransfer = {};
-    this.decodedCanId = {};
-  }
-}
 
 class UAVCANCodec extends EventEmitter {
   constructor() {
@@ -176,6 +162,7 @@ class UAVCANCodec extends EventEmitter {
     // takes a transfer payload and packs it into 8-byte large can frames
     // can frame contains CRC and tail byte that are added by this function
     // for each frame: txCallback(can_frame)
+    txCallback('his');
   }
 
   /**
