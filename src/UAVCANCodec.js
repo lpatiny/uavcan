@@ -47,11 +47,17 @@ class UAVCANCodec extends EventEmitter {
     return tail;
   }
 
-  /* Puts together a transfer from multiple payploads */
+  /**
+   * Puts together a transfer from multiple fragments
+   * @param {*} canPayload 8 bytes of raw CAN frame data
+   * @param {*} canId 4 bytes of raw CAN ID data
+   */
   assembleTransfer(canPayload, canId) {
-    let tail = this.parseTail(canPayload);
+    let tail = this.parseTail(canPayload); // decodes the content of the last (8th) byte in every fragment
+    let decodedCanId = this.parseCanId(canId);
+
     let transferId = String(
-      `${tail.transferId} ${canId.sourceNodeId} ${canId.destinationNodeId}`
+      `${tail.transferId} ${decodedCanId.sourceNodeId} ${decodedCanId.destinationNodeId}`
     );
 
     // end of multiframe transfer
@@ -73,6 +79,7 @@ class UAVCANCodec extends EventEmitter {
         transferPayload
       ]);
       this._transfers[transferId].toggle = tail.toggle;
+      this._transfers[transferId].decodedCanId = decodedCanId;
 
       return transferId;
 
@@ -83,6 +90,7 @@ class UAVCANCodec extends EventEmitter {
         'hex'
       );
       this._transfers[transferId] = new UAVCANTransfer(
+        canId,
         transferPayload,
         [],
         transferId,
@@ -115,43 +123,19 @@ class UAVCANCodec extends EventEmitter {
         'hex'
       );
       this._transfers[transferId] = new UAVCANTransfer(
+        canId,
         transferPayload,
         [],
         transferId,
         tail.toggle
       );
+      this._transfers[transferId].decodedCanId = decodedCanId;
 
       return transferId;
     }
     return -1;
   }
 
-  getMessageFromTransfer(transferId, canId) {
-    return bufferToJSON(
-      this._transfers[transferId].payload,
-      kinds[canId.messageTypeId],
-      false,
-      false
-    );
-  }
-
-  getRequestFromTransfer(transferId, canId) {
-    return bufferToJSON(
-      this._transfers[transferId].payload,
-      kinds[canId.serviceTypeId],
-      true,
-      true
-    );
-  }
-
-  getResponseFromTransfer(transferId, canId) {
-    return bufferToJSON(
-      this._transfers[transferId].payload,
-      kinds[canId.serviceTypeId],
-      true,
-      false
-    );
-  }
 
   /**
    * Fires an event with the decoded UAVCAN message.
@@ -162,7 +146,11 @@ class UAVCANCodec extends EventEmitter {
     // takes a transfer payload and packs it into 8-byte large can frames
     // can frame contains CRC and tail byte that are added by this function
     // for each frame: txCallback(can_frame)
-    txCallback('his');
+    let payloadToFragment = transfer.payload;
+    let crcToPack = transfer.crc;
+    let transferId = transfer.transferId;
+
+    txCallback(transfer.payload);
   }
 
   /**
@@ -172,38 +160,35 @@ class UAVCANCodec extends EventEmitter {
    * @param {*} canPayload uint8[8]
    */
   decode(canId, canPayload) {
-    let id = this.parseCanId(canId);
-    let transferAssembledId = this.assembleTransfer(canPayload, id);
-    let decodedTransfer;
+    let transferAssembledId = this.assembleTransfer(canPayload, canId);
 
     if (transferAssembledId !== -1) {
       try {
+        let id = this._transfers[transferAssembledId].decodedCanId;
+        let payload = this._transfers[transferAssembledId].payload;
+        let kindToDecode;
+
+        // set kind to associate to transfer based on contents of canId
         if (id.serviceNotMessage) {
-          // service
-          if (id.requestNotResponse) {
-            // request
-            decodedTransfer = this.getRequestFromTransfer(
-              transferAssembledId,
-              id
-            );
-          } else {
-            // response
-            decodedTransfer = this.getResponseFromTransfer(
-              transferAssembledId,
-              id
-            );
-          }
+          kindToDecode = kinds[id.serviceTypeId];
         } else {
-          // message
-          decodedTransfer = this.getMessageFromTransfer(transferAssembledId, id);
+          kindToDecode = kinds[id.messageTypeId];
         }
 
-        this._transfers[transferAssembledId].decodedCanId = id;
+        let decodedTransfer = bufferToJSON(
+          this._transfers[transferAssembledId].payload,
+          kindToDecode,
+          id.serviceNotMessage,
+          id.requestNotResponse
+        );
+
         this._transfers[transferAssembledId].decodedTransfer = decodedTransfer;
 
         this.emit('rx', this._transfers[transferAssembledId]);
       } catch (error) {
+        console.log(this._transfers[transferAssembledId]);
         console.log(error);
+
         this._decodeErrors++;
       }
 

@@ -14,6 +14,15 @@ Object {
 
 exports[`UAVCANCodec packet_interleaved 1`] = `
 UAVCANTransfer {
+  "canId": Object {
+    "data": Array [
+      30,
+      11,
+      127,
+      255,
+    ],
+    "type": "Buffer",
+  },
   "crc": Array [],
   "decodedCanId": Object {
     "destinationNodeId": 127,
@@ -103,6 +112,15 @@ UAVCANTransfer {
 
 exports[`UAVCANCodec packet_subsequent 1`] = `
 UAVCANTransfer {
+  "canId": Object {
+    "data": Array [
+      30,
+      11,
+      127,
+      255,
+    ],
+    "type": "Buffer",
+  },
   "crc": Array [],
   "decodedCanId": Object {
     "destinationNodeId": 127,
@@ -229,205 +247,6 @@ UAVCANTransfer {
 `;
 
 exports[`UAVCANCodec tail 1`] = `
-Object {
-  "endOfTransfer": true,
-  "startOfTransfer": true,
-  "toggle": false,
-  "transferId": 3,
-}
-`;
-
-exports[`encode id 1`] = `
-Object {
-  "destinationNodeId": 114,
-  "messageTypeId": 16370,
-  "priority": 24,
-  "requestNotResponse": true,
-  "serviceNotMessage": false,
-  "serviceTypeId": 63,
-  "sourceNodeId": 111,
-}
-`;
-
-exports[`encode packet_interleaved 1`] = `
-UAVCANTransfer {
-  "crc": Array [],
-  "decodedCanId": Object {
-    "destinationNodeId": 127,
-    "messageTypeId": 2943,
-    "priority": 30,
-    "requestNotResponse": false,
-    "serviceNotMessage": true,
-    "serviceTypeId": 11,
-    "sourceNodeId": 127,
-  },
-  "decodedTransfer": Object {
-    "NumericValue2": 1,
-    "NumericValue3": 1,
-    "Value0": 1,
-    "Value1": 1,
-    "defaultValue": 0,
-    "maxValue": 1023,
-    "minValue": 0,
-    "name": Array [
-      100,
-      114,
-      105,
-      118,
-      101,
-      114,
-      115,
-    ],
-    "nameStr": "drivers",
-    "value": 1023,
-    "void0": 0,
-    "void1": 0,
-    "void2": 0,
-    "void3": 0,
-  },
-  "id": "3 127 127",
-  "payload": Object {
-    "data": Array [
-      1,
-      255,
-      3,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      1,
-      255,
-      3,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      100,
-      114,
-      105,
-      118,
-      101,
-      114,
-      115,
-    ],
-    "type": "Buffer",
-  },
-  "toggle": false,
-}
-`;
-
-exports[`encode packet_subsequent 1`] = `
-UAVCANTransfer {
-  "crc": Array [],
-  "decodedCanId": Object {
-    "destinationNodeId": 127,
-    "messageTypeId": 2943,
-    "priority": 30,
-    "requestNotResponse": false,
-    "serviceNotMessage": true,
-    "serviceTypeId": 11,
-    "sourceNodeId": 127,
-  },
-  "decodedTransfer": Object {
-    "NumericValue2": 1,
-    "NumericValue3": 1,
-    "Value0": 1,
-    "Value1": 1,
-    "defaultValue": 0,
-    "maxValue": 1023,
-    "minValue": 0,
-    "name": Array [
-      100,
-      114,
-      105,
-      118,
-      101,
-      114,
-      115,
-    ],
-    "nameStr": "drivers",
-    "value": 1023,
-    "void0": 0,
-    "void1": 0,
-    "void2": 0,
-    "void3": 0,
-  },
-  "id": "3 127 127",
-  "payload": Object {
-    "data": Array [
-      1,
-      255,
-      3,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      1,
-      255,
-      3,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      100,
-      114,
-      105,
-      118,
-      101,
-      114,
-      115,
-    ],
-    "type": "Buffer",
-  },
-  "toggle": false,
-}
-`;
-
-exports[`encode tail 1`] = `
 Object {
   "endOfTransfer": true,
   "startOfTransfer": true,

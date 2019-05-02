@@ -59,21 +59,18 @@ describe('UAVCANCodec', () => {
 
 
   it('single_message', () => {
-    let canId = [0x18, 0x3f, 0xf2, 0x6f]; // sent by socketcan: 6f550118
-    let id = (new UAVCANCodec()).parseCanId(canId);
+    let canId = Buffer.from([0x18, 0x3f, 0xf2, 0x6f]); // sent by socketcan: 6f550118
 
-    let canPayload = [0, 0, 0x7c, 0x42, 0x64, 0x65, 0x66, 0xd2];
-    let assembled = (new UAVCANCodec()).assembleTransfer(Buffer.from(canPayload), id);
+    let canPayload = Buffer.from([0, 0, 0x7c, 0x42, 0x64, 0x65, 0x66, 0xd2]);
+    let assembled = (new UAVCANCodec()).assembleTransfer(canPayload, canId);
     // console.log(assembled);
     expect(assembled).toStrictEqual('18 111 114');
   });
 
   it('single_request', () => {
-    let canId = [0x1e, 0x0b, 0xef, 0xff];
-    let id = (new UAVCANCodec()).parseCanId(canId);
-
-    let canPayload = [0, 0, 0xc3];
-    let assembled = (new UAVCANCodec()).assembleTransfer(Buffer.from(canPayload), id);
+    let canId = Buffer.from([0x1e, 0x0b, 0xef, 0xff]);
+    let canPayload = Buffer.from([0, 0, 0xc3]);
+    let assembled = (new UAVCANCodec()).assembleTransfer(canPayload, canId);
     // console.log(assembled);
     expect(assembled).toStrictEqual('3 127 111');
   });
@@ -82,11 +79,11 @@ describe('UAVCANCodec', () => {
 
   it('bad_data', () => {
     let result;
-    let canId = [0x1e, 0x0b, 0x7f, 0xff];
-    let canPayload = [[0x00, 0x01, 0x1d, 0x00, 0x00, 0x00, 0x00, 0x00], [0x00, 0x00, 0x64, 0x72]];
-    let id = (new UAVCANCodec()).parseCanId(canId);
+    let canId = Buffer.from([0x1e, 0x0b, 0x7f, 0xff]);
+    let canPayload = Buffer.from([[0x00, 0x01, 0x1d, 0x00, 0x00, 0x00, 0x00, 0x00], [0x00, 0x00, 0x64, 0x72]]);
+
     try {
-      let assembled = (new UAVCANCodec()).assembleTransfer(Buffer.from(canPayload), id);
+      let assembled = (new UAVCANCodec()).assembleTransfer(canPayload, canId);
     } catch (error) {
       result = error.message;
     }
@@ -95,8 +92,7 @@ describe('UAVCANCodec', () => {
   });
 
   it('multi_response', () => {
-    let canId = [0x1e, 0x0b, 0x7f, 0xff];
-    let id = (new UAVCANCodec()).parseCanId(canId);
+    let canId = Buffer.from([0x1e, 0x0b, 0x7f, 0xff]);
 
     let canPayloadFull = [
       [0xE9, 0xE2, 0x01, 0xFF, 0x03, 0x00, 0x00, 0x83],
@@ -110,7 +106,7 @@ describe('UAVCANCodec', () => {
     let myCodec = new UAVCANCodec();
     let assembled = false;
     for (let i = 0; i < canPayloadFull.length; i++) {
-      assembled = myCodec.assembleTransfer(Buffer.from(canPayloadFull[i]), id);
+      assembled = myCodec.assembleTransfer(Buffer.from(canPayloadFull[i]), canId);
     }
 
     expect(assembled).toStrictEqual('3 127 127');
