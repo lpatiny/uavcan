@@ -25,6 +25,7 @@ class UAVCANCodec extends EventEmitter {
   constructor() {
     super();
     this._UAVCANVersion = 0;
+    this._decodeErrors = 0;
 
     this._transfers = {}; // keeps track of all current transfer, indexed by transfer id
   }
@@ -189,30 +190,36 @@ class UAVCANCodec extends EventEmitter {
     let decodedTransfer;
 
     if (transferAssembledId !== -1) {
-      if (id.serviceNotMessage) {
-        // service
-        if (id.requestNotResponse) {
-          // request
-          decodedTransfer = this.getRequestFromTransfer(
-            transferAssembledId,
-            id
-          );
+      try {
+        if (id.serviceNotMessage) {
+          // service
+          if (id.requestNotResponse) {
+            // request
+            decodedTransfer = this.getRequestFromTransfer(
+              transferAssembledId,
+              id
+            );
+          } else {
+            // response
+            decodedTransfer = this.getResponseFromTransfer(
+              transferAssembledId,
+              id
+            );
+          }
         } else {
-          // response
-          decodedTransfer = this.getResponseFromTransfer(
-            transferAssembledId,
-            id
-          );
+          // message
+          decodedTransfer = this.getMessageFromTransfer(transferAssembledId, id);
         }
-      } else {
-        // message
-        decodedTransfer = this.getMessageFromTransfer(transferAssembledId, id);
+
+        this._transfers[transferAssembledId].decodedCanId = id;
+        this._transfers[transferAssembledId].decodedTransfer = decodedTransfer;
+
+        this.emit('rx', this._transfers[transferAssembledId]);
+      } catch (error) {
+        console.log(error);
+        this._decodeErrors++;
       }
 
-      this._transfers[transferAssembledId].decodedCanId = id;
-      this._transfers[transferAssembledId].decodedTransfer = decodedTransfer;
-
-      this.emit('rx', this._transfers[transferAssembledId]);
       delete this._transfers[transferAssembledId];
     }
   }
