@@ -5,7 +5,7 @@ const UAVCANTransfer = require('../UAVCANTransfer');
 
 
 describe('UAVCANCodec', () => {
-  it('send', () => {
+  it('send', () => { // TODO
     let myCodec = new UAVCANCodec();
     let payload = [];
     let crc = [];
@@ -18,6 +18,21 @@ describe('UAVCANCodec', () => {
       console.log(arg);
     });
     expect(result).toMatchSnapshot();
+  });
+
+  it('make_id_service', () => {
+    let canId = Buffer.from([0x1e, 0x0b, 0xef, 0xff]);
+    let result = (new UAVCANCodec()).makeCanId(30, 11, true, true, 111, 127);
+
+    expect(result).toStrictEqual(canId);
+  });
+
+
+  it('make_id_message', () => {
+    let id = Buffer.from([0x18, 0x3f, 0xf2, 0x6f]);
+    let result = (new UAVCANCodec()).makeCanId(24, 16370, false, true, 114, 111);
+
+    expect(result).toStrictEqual(id);
   });
 
 

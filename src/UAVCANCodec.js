@@ -16,6 +16,30 @@ class UAVCANCodec extends EventEmitter {
     this._transfers = {}; // keeps track of all current transfer, indexed by transfer id
   }
 
+  // makes a 4 byte buffer according to UAVCAN spec
+  makeCanId(priority, datatypeId, serviceNotMessage, requestNotResponse, destinationNodeId, sourceNodeId) {
+    let canId = [0x0, 0x0, 0x0, 0x0];
+
+    canId[0] = priority;
+    canId[3] = Number(serviceNotMessage) << 7;
+    canId[3] |= (sourceNodeId & 0b01111111);
+
+    if (serviceNotMessage) {
+      canId[1] = datatypeId;
+
+      if (requestNotResponse) {
+        canId[2] = Number(requestNotResponse) << 7;
+      }
+      canId[2] |= (destinationNodeId & 0b01111111);
+    } else {
+      canId[1] = datatypeId >> 8; // MSB
+      canId[2] = datatypeId & Number(0x00FF);
+    }
+
+    return Buffer.from(canId);
+  }
+
+
   // only distinguishes between service and message frames, ignores anonymous frames!
   // does not accept 11 bit CAN ids
   parseCanId(canId) {
@@ -32,6 +56,14 @@ class UAVCANCodec extends EventEmitter {
       requestNotResponse: Boolean(canId[2] >> 7),
       serviceTypeId: Number(canId[1])
     };
+
+    if (id.serviceNotMessage) {
+      delete id.messageTypeId;
+    } else {
+      delete id.serviceTypeId;
+      delete id.requestNotResponse;
+    }
+
     return id;
   }
 
@@ -149,6 +181,7 @@ class UAVCANCodec extends EventEmitter {
     let payloadToFragment = transfer.payload;
     let crcToPack = transfer.crc;
     let transferId = transfer.transferId;
+
 
     txCallback(transfer.payload);
   }

@@ -5,10 +5,20 @@ Object {
   "destinationNodeId": 114,
   "messageTypeId": 16370,
   "priority": 24,
-  "requestNotResponse": true,
   "serviceNotMessage": false,
-  "serviceTypeId": 63,
   "sourceNodeId": 111,
+}
+`;
+
+exports[`UAVCANCodec make_id 1`] = `
+Object {
+  "data": Array [
+    0,
+    0,
+    0,
+    0,
+  ],
+  "type": "Buffer",
 }
 `;
 
@@ -26,7 +36,6 @@ UAVCANTransfer {
   "crc": Array [],
   "decodedCanId": Object {
     "destinationNodeId": 127,
-    "messageTypeId": 2943,
     "priority": 30,
     "requestNotResponse": false,
     "serviceNotMessage": true,
@@ -124,7 +133,6 @@ UAVCANTransfer {
   "crc": Array [],
   "decodedCanId": Object {
     "destinationNodeId": 127,
-    "messageTypeId": 2943,
     "priority": 30,
     "requestNotResponse": false,
     "serviceNotMessage": true,
@@ -201,44 +209,6 @@ UAVCANTransfer {
       101,
       114,
       115,
-    ],
-    "type": "Buffer",
-  },
-  "toggle": false,
-}
-`;
-
-exports[`UAVCANCodec single_message_keyValue_float 1`] = `
-UAVCANTransfer {
-  "crc": Array [],
-  "decodedCanId": Object {
-    "destinationNodeId": 114,
-    "messageTypeId": 16370,
-    "priority": 24,
-    "requestNotResponse": true,
-    "serviceNotMessage": false,
-    "serviceTypeId": 63,
-    "sourceNodeId": 102,
-  },
-  "decodedTransfer": Object {
-    "key": Array [
-      100,
-      101,
-      102,
-    ],
-    "keyStr": "def",
-    "value": 3.883558564029798e-41,
-  },
-  "id": "8 102 114",
-  "payload": Object {
-    "data": Array [
-      0,
-      0,
-      108,
-      66,
-      100,
-      101,
-      102,
     ],
     "type": "Buffer",
   },
