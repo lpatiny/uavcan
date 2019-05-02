@@ -178,12 +178,36 @@ class UAVCANCodec extends EventEmitter {
     // takes a transfer payload and packs it into 8-byte large can frames
     // can frame contains CRC and tail byte that are added by this function
     // for each frame: txCallback(can_frame)
-    let payloadToFragment = transfer.payload;
+    /* let payloadToFragment = transfer.payload;
     let crcToPack = transfer.crc;
     let transferId = transfer.transferId;
+    let canId = this.makeCanId(transfer.priority, datatypeId, serviceNotMessage, requestNotResponse, destinationNodeId, sourceNodeId);
+    */
 
+    // fill payload
+    /*
 
-    txCallback(transfer.payload);
+   KIND_ID = 341; //id of "message" NodeStatus
+    FILLED_KIND_JSON = {
+      "uptimeSec": 17616,
+      "health": 0,
+      "mode": 0,
+      "subMode": 0,
+      "vendorSpecificStatusCode": 0
+    };
+    transfer.payload = _LUCS_JSON_TO_BUFFER(KIND_ID, FILLED_KIND_JSON);
+
+    */
+
+    // fill sequencing information, compute crc
+    // ...
+
+    // call transmitter and send fragments out
+    /*
+    while(fragment_queue_full){
+      txCallback(transfer.payload);
+    }
+    */
   }
 
   /**
