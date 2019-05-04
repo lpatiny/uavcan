@@ -14,14 +14,8 @@ const n1 = BigInt(1);
  * @param {*} data Buffer
  * @param {*} kind
  */
-function bufferToJSON(
-  data,
-  kindReference,
-  isService = false,
-  isRequest = false
-) {
+function bufferToJSON(data, kind, isService = false, isRequest = false) {
   let buffer;
-  let kind = JSON.parse(JSON.stringify(kindReference));
 
   if (Array.isArray(data)) {
     buffer = Buffer.from(data);
@@ -67,7 +61,7 @@ function bufferToJSON(
     } else if (kinds[variable.kind] && kinds[variable.kind].type === 'union') {
       unionDidPreceed = 1;
       variable.bits = Math.ceil(
-        Math.log(kinds[variable.kind].message.variables.length) / Math.log(2)
+        Math.log2(kinds[variable.kind].message.variables.length)
       );
       unionTagValueName = variable.name;
       variable.name = `${variable.kind}${unionTagCount}`;
