@@ -2,8 +2,7 @@
 
 /* global BigInt */
 
-
-const processVariable = require('./processVariableprocessVariable');
+const processVariable = require('./processVariable');
 /**
  *
  * @param {*} data Buffer
