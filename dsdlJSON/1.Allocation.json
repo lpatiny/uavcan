@@ -4,6 +4,7 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,
@@ -13,9 +14,13 @@
       {
         "length": 16,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "uniqueId",
         "description": ""
       }

@@ -4,6 +4,7 @@
   "request": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 40,
@@ -11,6 +12,7 @@
         "description": ""
       },
       {
+        "type": "object",
         "kind": "Path",
         "name": "path",
         "description": ""
@@ -21,6 +23,7 @@
   "response": {
     "variables": [
       {
+        "type": "object",
         "kind": "Error",
         "name": "error",
         "description": ""
@@ -28,9 +31,13 @@
       {
         "length": 256,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "data",
         "description": ""
       }

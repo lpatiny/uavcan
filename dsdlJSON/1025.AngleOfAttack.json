@@ -4,6 +4,7 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -11,13 +12,17 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "aoa",
         "description": "Radians"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "aoaVariance",
         "description": "Radians^2"

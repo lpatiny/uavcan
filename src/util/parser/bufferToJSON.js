@@ -2,13 +2,8 @@
 
 /* global BigInt */
 
-const kinds = require('../kinds.json');
 
-const parseFloat = require('./parseFloat');
-const parseInt = require('./parseInt');
-
-const n1 = BigInt(1);
-
+const processVariable = require('./processVariableprocessVariable');
 /**
  *
  * @param {*} data Buffer
@@ -50,6 +45,11 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
   let unionTagValueName = '';
 
   for (let variable of transfer.variables) {
+    let currentResult = processVariable(bigInt, variable, from);
+    result[variable.name] = currentResult.value;
+    from = currentResult.from;
+
+    /*
     if (variable.kind === 'void') {
       variable.name = `${variable.kind}${voidCount}`;
       voidCount++;
@@ -96,64 +96,16 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
 
       extractedUnionType = -1;
     }
+    */
   }
+
   return result;
 }
+
+function processObject(bigInt, variable, from) {}
 
 function nameToString(name) {
   return String.fromCharCode.apply(String, name);
 }
 
-function processVariable(bigInt, variable, from, result) {
-  let value;
-
-  switch (variable.kind) {
-    case 'Empty': // same as void but occupies 0 bits
-    case 'void': // void is just padding and can contain anything. it is not actively read.
-    case 'unionTag': // union tags are always unsigned integers. the value represents the index of the type to be used
-    case 'int':
-      {
-        let currentValue = getCurrentValue(bigInt, variable.bits, from);
-        value = parseInt(currentValue, variable.bits, variable.unsigned);
-        from -= BigInt(variable.bits);
-      }
-      break;
-    case 'float':
-      {
-        let currentValue = getCurrentValue(bigInt, variable.bits, from);
-        value = parseFloat(currentValue, variable.bits);
-        from -= BigInt(variable.bits);
-      }
-      break;
-    case 'intArray':
-      value = [];
-      for (let i = 0; i < variable.length; i++) {
-        let currentValue = getCurrentValue(bigInt, variable.bits, from);
-        value.push(parseInt(currentValue, variable.bits, variable.unsigned));
-        from -= BigInt(variable.bits);
-        if (from <= 0) break;
-      }
-
-      break;
-    case 'floatArray':
-      value = [];
-      for (let i = 0; i < variable.length; i++) {
-        let currentValue = getCurrentValue(bigInt, variable.bits, from);
-        value.push(parseFloat(currentValue, variable.bits));
-        from -= BigInt(variable.bits);
-        if (from <= 0) break;
-      }
-      break;
-    default:
-      throw new Error(`Unknown variable kind: ${variable.kind}`);
-  }
-
-  result[variable.name] = value;
-  return from;
-}
-
 module.exports = bufferToJSON;
-
-function getCurrentValue(bigInt, nbBits, from) {
-  return (bigInt >> (from - BigInt(nbBits))) & ((n1 >> BigInt(nbBits)) - n1);
-}

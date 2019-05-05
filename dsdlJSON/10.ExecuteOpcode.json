@@ -4,6 +4,7 @@
   "request": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -11,7 +12,9 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 48,
         "name": "argument",
         "description": ""
@@ -25,7 +28,9 @@
   "response": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 48,
         "name": "argument",
         "description": ""

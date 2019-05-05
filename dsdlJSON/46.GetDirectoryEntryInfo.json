@@ -4,6 +4,7 @@
   "request": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 32,
@@ -11,6 +12,7 @@
         "description": ""
       },
       {
+        "type": "object",
         "kind": "Path",
         "name": "directoryPath",
         "description": ""
@@ -21,16 +23,19 @@
   "response": {
     "variables": [
       {
+        "type": "object",
         "kind": "Error",
         "name": "error",
         "description": ""
       },
       {
+        "type": "object",
         "kind": "EntryType",
         "name": "entryType",
         "description": ""
       },
       {
+        "type": "object",
         "kind": "Path",
         "name": "entryFullPath",
         "description": "Ignored/Empty if such entry does not exist."

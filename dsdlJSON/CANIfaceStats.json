@@ -4,6 +4,7 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 48,
@@ -11,6 +12,7 @@
         "description": "Number of transmitted CAN frames."
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 48,
@@ -18,6 +20,7 @@
         "description": "Number of received CAN frames."
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 48,

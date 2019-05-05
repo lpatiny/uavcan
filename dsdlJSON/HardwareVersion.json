@@ -4,6 +4,7 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -11,6 +12,7 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -19,18 +21,26 @@
       },
       {
         "length": 16,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "uniqueId",
         "description": ""
       },
       {
         "length": 255,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "certificateOfAuthenticity",
         "description": ""
       }

@@ -4,23 +4,29 @@
   "message": {
     "variables": [
       {
+        "type": "object",
         "kind": "Empty",
         "name": "empty",
         "description": "Empty field, used to represent an undefined value."
       },
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 64,
         "name": "integerValue",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 32,
         "name": "realValue",
         "description": "32-bit type is used to simplify implementation on low-end systems"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -30,9 +36,13 @@
       {
         "length": 128,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "stringValue",
         "description": "Length prefix is exactly one byte long, which ensures proper alignment of payload"
       }

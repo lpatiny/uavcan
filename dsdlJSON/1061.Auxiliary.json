@@ -4,48 +4,63 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "gdop",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "pdop",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "hdop",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "vdop",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "tdop",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "ndop",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "edop",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,
@@ -53,6 +68,7 @@
         "description": "All visible sats of all available GNSS (e.g. GPS, GLONASS, etc)"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 6,

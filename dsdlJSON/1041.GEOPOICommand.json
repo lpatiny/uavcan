@@ -4,6 +4,7 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -11,29 +12,37 @@
         "description": ""
       },
       {
+        "type": "object",
         "kind": "Mode",
         "name": "mode",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 32,
         "name": "longitudeDeg1E7",
         "description": "1 LSB = 1e-7 deg"
       },
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 32,
         "name": "latitudeDeg1E7",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 22,
         "name": "heightCm",
         "description": "1 LSB = 10 mm"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 2,

@@ -7,18 +7,21 @@ const float = {
   message: {
     variables: [
       {
+        type: 'var',
         description: '',
         kind: 'float',
         bits: 16,
         name: 'float16'
       },
       {
+        type: 'var',
         description: '',
         kind: 'float',
         bits: 32,
         name: 'float32'
       },
       {
+        type: 'var',
         description: '',
         kind: 'float',
         bits: 64,

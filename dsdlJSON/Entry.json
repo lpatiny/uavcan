@@ -4,6 +4,7 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 32,
@@ -12,18 +13,25 @@
       },
       {
         "length": 16,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "uniqueId",
         "description": "Unique ID of this allocation."
       },
       {
+        "type": "var",
         "kind": "void",
+        "unsigned": false,
         "bits": 1,
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,

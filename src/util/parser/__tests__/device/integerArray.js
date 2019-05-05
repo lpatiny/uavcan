@@ -8,26 +8,38 @@ const integerArray = {
     variables: [
       {
         description: '',
-        kind: 'intArray',
-        bits: 4,
+        type: 'array',
+        kind: {
+          type: 'var',
+          kind: 'int',
+          bits: 4,
+          unsigned: true
+        },
         length: 3,
-        unsigned: true,
         name: 'arrayUint4'
       },
       {
         description: '',
-        kind: 'intArray',
-        bits: 4,
+        type: 'array',
+        kind: {
+          type: 'var',
+          kind: 'int',
+          bits: 4,
+          unsigned: false
+        },
         length: 3,
-        unsigned: false,
         name: 'arrayInt4'
       },
       {
         description: '',
-        kind: 'intArray',
-        bits: 8,
+        type: 'array',
+        kind: {
+          type: 'var',
+          kind: 'int',
+          bits: 8,
+          unsigned: true
+        },
         length: 10,
-        unsigned: true,
         name: 'arrayUint8'
       }
     ]

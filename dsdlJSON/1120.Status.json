@@ -4,6 +4,7 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 2,
@@ -11,6 +12,7 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 30,
@@ -18,11 +20,14 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "void",
+        "unsigned": false,
         "bits": 16,
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,
@@ -30,6 +35,7 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 17,
@@ -37,66 +43,87 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "sparkDwellTimeMs",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "atmosphericPressureKpa",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "intakeManifoldPressureKpa",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "intakeManifoldTemperature",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "coolantTemperature",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "oilPressure",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "oilTemperature",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "fuelPressure",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 32,
         "name": "fuelConsumptionRateCm3Pm",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 32,
         "name": "estimatedConsumedFuelVolumeCm3",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,
@@ -104,6 +131,7 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 6,
@@ -111,6 +139,7 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 3,
@@ -120,7 +149,13 @@
       {
         "length": 16,
         "range": true,
-        "kind": "CylinderStatus[<=16]Array",
+        "type": "array",
+        "kind": {
+          "kind": "CylinderStatus",
+          "unsigned": true,
+          "bits": null,
+          "type": "object"
+        },
         "name": "cylinderStatus",
         "description": ""
       }

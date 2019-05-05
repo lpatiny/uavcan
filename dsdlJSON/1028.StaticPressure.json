@@ -4,13 +4,17 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 32,
         "name": "staticPressure",
         "description": "Pascal"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "staticPressureVariance",
         "description": "Pascal^2"

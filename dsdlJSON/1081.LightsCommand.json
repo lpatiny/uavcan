@@ -6,7 +6,13 @@
       {
         "length": 20,
         "range": true,
-        "kind": "SingleLightCommand[<=20]Array",
+        "type": "array",
+        "kind": {
+          "kind": "SingleLightCommand",
+          "unsigned": false,
+          "bits": null,
+          "type": "object"
+        },
         "name": "commands",
         "description": ""
       }

@@ -4,44 +4,71 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 32,
         "name": "integrationInterval",
         "description": ""
       },
       {
         "length": 3,
-        "kind": "floatArray",
-        "bits": 16,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16
+        },
         "name": "rateGyroLatest",
         "description": "Latest sample, radian/second"
       },
       {
         "length": 3,
-        "kind": "floatArray",
-        "bits": 32,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32
+        },
         "name": "rateGyroIntegral",
         "description": "Integrated samples, radian/second"
       },
       {
         "length": 3,
-        "kind": "floatArray",
-        "bits": 16,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16
+        },
         "name": "accelerometerLatest",
         "description": "Latest sample, meter/(second^2)"
       },
       {
         "length": 3,
-        "kind": "floatArray",
-        "bits": 32,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32
+        },
         "name": "accelerometerIntegral",
         "description": "Integrated samples, meter/(second^2)"
       },
       {
         "length": 36,
         "range": true,
-        "kind": "floatArray",
-        "bits": 16,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16
+        },
         "name": "covariance",
         "description": ""
       }

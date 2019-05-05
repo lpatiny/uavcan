@@ -15,16 +15,27 @@ const combined = join(__dirname, '../kinds.json');
 
 function convert() {
   let files = getFiles(source);
-
-  let full = processFiles(files);
+  let kinds = createTypes(files);
+  let full = processFiles(files, kinds);
   fs.writeFileSync(combined, JSON.stringify(full, undefined, 2));
 }
 
-function processFiles(files) {
-  let full = {};
+function createTypes(files) {
+  let kinds = {};
+  files = files.filter((file) => isNaN(file.id));
   for (let file of files) {
     let definition = fs.readFileSync(file.filename, 'utf8');
-    let result = convertOne(definition);
+    kinds[file.name] = definition.includes('@union') ? 'union' : 'object';
+  }
+  return kinds;
+}
+
+function processFiles(files, kinds) {
+  let full = {};
+
+  for (let file of files) {
+    let definition = fs.readFileSync(file.filename, 'utf8');
+    let result = convertOne(definition, kinds);
     full[file.id] = result;
 
     fs.writeFileSync(

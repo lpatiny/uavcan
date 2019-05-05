@@ -7,6 +7,7 @@ const integer = {
   message: {
     variables: [
       {
+        type: 'var',
         description: '',
         kind: 'int',
         bits: 4,
@@ -14,6 +15,7 @@ const integer = {
         name: 'uint4'
       },
       {
+        type: 'var',
         description: '',
         kind: 'int',
         bits: 4,
@@ -21,6 +23,7 @@ const integer = {
         name: 'int4'
       },
       {
+        type: 'var',
         description: '',
         kind: 'int',
         bits: 8,
@@ -28,6 +31,7 @@ const integer = {
         name: 'uint8'
       },
       {
+        type: 'var',
         description: '',
         kind: 'int',
         bits: 8,
@@ -35,13 +39,21 @@ const integer = {
         name: 'int8'
       },
       {
+        type: 'var',
         description: '',
         kind: 'int',
         bits: 16,
         unsigned: true,
         name: 'uint16'
       },
-      { description: '', kind: 'int', bits: 16, unsigned: false, name: 'int16' }
+      {
+        type: 'var',
+        description: '',
+        kind: 'int',
+        bits: 16,
+        unsigned: false,
+        name: 'int16'
+      }
     ]
   }
 };

@@ -4,18 +4,23 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "hoursToEmptyAt10SecAvgPower",
         "description": "[Hours]"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "hoursToEmptyAt10SecAvgPowerVariance",
         "description": "[Hours^2]"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,
@@ -23,6 +28,7 @@
         "description": "[Percent] Required"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,

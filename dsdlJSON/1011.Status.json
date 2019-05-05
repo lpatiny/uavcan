@@ -4,6 +4,7 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -11,29 +12,38 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "position",
         "description": "meter or radian"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "force",
         "description": "Newton or Newton metre"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "speed",
         "description": "meter per second or radian per second"
       },
       {
+        "type": "var",
         "kind": "void",
+        "unsigned": false,
         "bits": 1,
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,

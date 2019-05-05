@@ -4,11 +4,14 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "void",
+        "unsigned": false,
         "bits": 9,
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,
@@ -16,24 +19,31 @@
         "description": "Unit: percent, from 0% to 100%"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 32,
         "name": "availableFuelVolumeCm3",
         "description": "Unit: centimeter^3"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 32,
         "name": "fuelConsumptionRateCm3Pm",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "fuelTemperature",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,

@@ -5,7 +5,7 @@ const bufferToJSON = require('../bufferToJSON');
 const integer = require('./device/integer');
 
 describe('bufferToJSON int', () => {
-  it('zero', () => {
+  it.only('zero', () => {
     let data = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
     let result = bufferToJSON(data, integer);
     expect(result).toStrictEqual({

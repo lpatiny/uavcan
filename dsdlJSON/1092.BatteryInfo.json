@@ -4,48 +4,63 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "temperature",
         "description": "[Kelvin]"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "voltage",
         "description": "[Volt]"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "current",
         "description": "[Ampere]"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "averagePower10Sec",
         "description": "[Watt] Average power consumption over the last 10 seconds"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "remainingCapacityWh",
         "description": "[Watt hours] Will be increasing during charging"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "fullChargeCapacityWh",
         "description": "[Watt hours] Predicted battery capacity when it is fully charged. Falls with aging"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "hoursToFullCharge",
         "description": "[Hours] Charging is expected to complete in this time; zero if not charging"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 11,
@@ -53,6 +68,7 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,
@@ -60,6 +76,7 @@
         "description": "Health of the battery, in percent, optional"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,
@@ -67,6 +84,7 @@
         "description": "Percent of the full charge [0, 100]. This field is required"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,
@@ -74,6 +92,7 @@
         "description": "SOC error standard deviation; use best guess if unknown"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -81,6 +100,7 @@
         "description": "Identifies the battery within this vehicle, e.g. 0 - primary battery"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 32,
@@ -88,9 +108,13 @@
         "description": "Set to zero if not applicable"
       },
       {
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "modelName",
         "description": "Battery model name"
       }

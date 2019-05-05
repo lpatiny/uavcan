@@ -4,18 +4,23 @@
   "message": {
     "variables": [
       {
+        "type": "object",
         "kind": "Empty",
         "name": "empty",
         "description": "Empty field, used to represent an undefined value."
       },
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 64,
         "name": "integerValue",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 32,
         "name": "realValue",
         "description": ""

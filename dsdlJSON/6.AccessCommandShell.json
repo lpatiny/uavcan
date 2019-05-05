@@ -4,6 +4,7 @@
   "request": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -13,9 +14,13 @@
       {
         "length": 128,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "input",
         "description": ""
       }
@@ -32,12 +37,15 @@
   "response": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 32,
         "name": "lastExitStatus",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -47,9 +55,13 @@
       {
         "length": 256,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "output",
         "description": ""
       }

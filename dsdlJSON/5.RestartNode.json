@@ -4,6 +4,7 @@
   "request": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 40,

@@ -4,6 +4,7 @@
   "request": {
     "variables": [
       {
+        "type": "object",
         "kind": "Path",
         "name": "path",
         "description": ""
@@ -14,6 +15,7 @@
   "response": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 40,
@@ -21,11 +23,13 @@
         "description": ""
       },
       {
+        "type": "object",
         "kind": "Error",
         "name": "error",
         "description": ""
       },
       {
+        "type": "object",
         "kind": "EntryType",
         "name": "entryType",
         "description": ""

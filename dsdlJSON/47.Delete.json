@@ -4,6 +4,7 @@
   "request": {
     "variables": [
       {
+        "type": "object",
         "kind": "Path",
         "name": "path",
         "description": ""
@@ -14,6 +15,7 @@
   "response": {
     "variables": [
       {
+        "type": "object",
         "kind": "Error",
         "name": "error",
         "description": ""

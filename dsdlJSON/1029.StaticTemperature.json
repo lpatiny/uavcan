@@ -4,13 +4,17 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "staticTemperature",
         "description": "Kelvin"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "staticTemperatureVariance",
         "description": "Kelvin^2"

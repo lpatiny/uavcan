@@ -4,6 +4,7 @@
   "request": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -11,6 +12,7 @@
         "description": "If this field is zero, the caller's Node ID will be used instead."
       },
       {
+        "type": "object",
         "kind": "Path",
         "name": "imageFileRemotePath",
         "description": ""
@@ -21,6 +23,7 @@
   "response": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -28,9 +31,13 @@
         "description": ""
       },
       {
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "optionalErrorMessage",
         "description": "Detailed description of the error."
       }

@@ -4,11 +4,13 @@
   "request": {
     "variables": [
       {
+        "type": "object",
         "kind": "Protocol",
         "name": "protocol",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -18,9 +20,13 @@
       {
         "length": 60,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "buffer",
         "description": "TAO rules apply"
       }
@@ -32,9 +38,13 @@
       {
         "length": 60,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "buffer",
         "description": "TAO rules apply"
       }

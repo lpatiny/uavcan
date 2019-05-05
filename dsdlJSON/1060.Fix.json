@@ -4,6 +4,7 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 3,
@@ -11,12 +12,15 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "void",
+        "unsigned": false,
         "bits": 5,
         "name": "#",
         "description": "Reserved space"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -24,37 +28,51 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 37,
         "name": "longitudeDeg1E8",
         "description": "Longitude degrees multiplied by 1e8 (approx. 1 mm per LSB)"
       },
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 37,
         "name": "latitudeDeg1E8",
         "description": "Latitude degrees multiplied by 1e8 (approx. 1 mm per LSB on equator)"
       },
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 27,
         "name": "heightEllipsoidMm",
         "description": "Height above ellipsoid in millimeters"
       },
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 27,
         "name": "heightMslMm",
         "description": "Height above mean sea level in millimeters"
       },
       {
         "length": 3,
-        "kind": "floatArray",
-        "bits": 16,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16
+        },
         "name": "nedVelocity",
         "description": "NED frame (north-east-down) in meters per second"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 6,
@@ -62,6 +80,7 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 2,
@@ -69,6 +88,7 @@
         "description": "= 2"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 2,
@@ -76,6 +96,7 @@
         "description": "= 3"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 2,
@@ -83,29 +104,43 @@
         "description": ""
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "pdop",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "void",
+        "unsigned": false,
         "bits": 4,
         "description": ""
       },
       {
         "length": 9,
         "range": true,
-        "kind": "floatArray",
-        "bits": 16,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16
+        },
         "name": "positionCovariance",
         "description": "m^2"
       },
       {
         "length": 9,
         "range": true,
-        "kind": "floatArray",
-        "bits": 16,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16
+        },
         "name": "velocityCovariance",
         "description": "(m/s)^2"
       }

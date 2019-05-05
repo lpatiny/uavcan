@@ -4,16 +4,22 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "void",
+        "unsigned": false,
         "bits": 6,
         "description": ""
       },
       {
         "length": 92,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "parameterName",
         "description": ""
       }

@@ -4,13 +4,17 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "trueAirspeed",
         "description": "m/s"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "trueAirspeedVariance",
         "description": "(m/s)^2"

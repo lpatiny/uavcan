@@ -4,7 +4,9 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 16,
         "name": "value",
         "description": ""

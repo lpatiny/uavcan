@@ -4,6 +4,7 @@
   "request": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 13,
@@ -11,6 +12,7 @@
         "description": ""
       },
       {
+        "type": "union",
         "kind": "Value",
         "name": "value",
         "description": ""
@@ -18,9 +20,13 @@
       {
         "length": 92,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "name",
         "description": ""
       }
@@ -30,41 +36,53 @@
   "response": {
     "variables": [
       {
+        "type": "var",
         "kind": "void",
+        "unsigned": false,
         "bits": 5,
         "description": ""
       },
       {
+        "type": "union",
         "kind": "Value",
         "name": "value",
         "description": ""
       },
       {
+        "type": "var",
         "kind": "void",
+        "unsigned": false,
         "bits": 5,
         "description": ""
       },
       {
+        "type": "union",
         "kind": "Value",
         "name": "defaultValue",
         "description": "Optional"
       },
       {
+        "type": "var",
         "kind": "void",
+        "unsigned": false,
         "bits": 6,
         "description": ""
       },
       {
+        "type": "union",
         "kind": "NumericValue",
         "name": "maxValue",
         "description": "Optional, not applicable for bool/string"
       },
       {
+        "type": "var",
         "kind": "void",
+        "unsigned": false,
         "bits": 6,
         "description": ""
       },
       {
+        "type": "union",
         "kind": "NumericValue",
         "name": "minValue",
         "description": "Optional, not applicable for bool/string"
@@ -72,9 +90,13 @@
       {
         "length": 92,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "name",
         "description": ""
       }

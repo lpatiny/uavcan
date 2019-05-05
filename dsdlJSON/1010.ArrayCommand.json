@@ -6,7 +6,13 @@
       {
         "length": 15,
         "range": true,
-        "kind": "Command[<=15]Array",
+        "type": "array",
+        "kind": {
+          "kind": "Command",
+          "unsigned": false,
+          "bits": null,
+          "type": "object"
+        },
         "name": "commands",
         "description": ""
       }

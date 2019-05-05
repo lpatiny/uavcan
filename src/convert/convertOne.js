@@ -2,7 +2,7 @@
 
 const camelCase = require('camelcase');
 
-function convertOne(content) {
+function convertOne(content, allKinds) {
   let result = {
     description: '',
     type: 'message',
@@ -58,11 +58,11 @@ function convertOne(content) {
       transferType.variables.push(currentVariable);
     } else if (fields[0].match(/^[A-Z].[A-z]+$/)) {
       // handle linked union fields and types
-      currentVariable = getLinkedVar(fields);
+      currentVariable = getObject(fields, allKinds);
       transferType.variables.push(currentVariable);
     } else if (fields[0].match(/^[A-Z].[A-z]+\[.*$/)) {
       // handle linked array union fields and types
-      currentVariable = getLinkedVarArray(fields);
+      currentVariable = getObjectArray(fields, allKinds);
       transferType.variables.push(currentVariable);
     }
   }
@@ -95,8 +95,14 @@ function convertOne(content) {
 
 module.exports = convertOne;
 
-function getLinkedVar(fields) {
+function getObject(fields, allKinds) {
   let variable = {};
+  if (!allKinds[fields[0]]) {
+    console.error(`Unknown object type: ${fields[0]}`);
+    variable.type = 'object';
+  } else {
+    variable.type = allKinds[fields[0]];
+  }
   variable.kind = fields[0];
   if (fields[1]) variable.name = camelCase(fields[1]);
   variable.description = fields
@@ -106,10 +112,21 @@ function getLinkedVar(fields) {
   return variable;
 }
 
-function getLinkedVarArray(fields) {
+function getObjectArray(fields, allKinds) {
   let variable = parseArraySize(fields[0]);
+  variable.type = 'array';
+  variable.kind = {
+    kind: fields[0].replace(/\[.*$/g, ''),
+    unsigned: fields[0].includes('u'),
+    bits: Number(fields[0].replace(/[a-z]+([0-9]+).*/, '$1'))
+  };
+  if (!allKinds[variable.kind.kind]) {
+    console.error(`Unknown array object type: ${variable.kind.kind}`);
+    variable.kind.type = 'object';
+  } else {
+    variable.kind.type = allKinds[variable.kind.kind];
+  }
 
-  variable.kind = `${fields[0]}Array`;
   if (fields[1]) variable.name = camelCase(fields[1]);
   variable.description = fields
     .slice(2)
@@ -121,8 +138,9 @@ function getLinkedVarArray(fields) {
 
 function getVar(fields) {
   let variable = {};
+  variable.type = 'var';
   variable.kind = fields[0].replace(/[0-9u]/g, '').toLowerCase();
-  if (fields[0].includes('u')) variable.unsigned = true;
+  variable.unsigned = fields[0].includes('u');
   variable.bits = Number(fields[0].replace(/[a-z]/g, ''));
   if (fields[1]) variable.name = camelCase(fields[1]);
   variable.description = fields
@@ -134,9 +152,13 @@ function getVar(fields) {
 
 function getVarArray(fields) {
   let variable = parseArraySize(fields[0]);
-  variable.kind = `${fields[0].replace(/[^a-tv-z]/g, '')}Array`;
-  if (fields[0].includes('u')) variable.unsigned = true;
-  variable.bits = Number(fields[0].replace(/[a-z]+([0-9]+).*/, '$1'));
+  variable.type = 'array';
+  variable.kind = {
+    type: 'var',
+    kind: fields[0].replace(/[^a-tv-z]/g, ''),
+    unsigned: fields[0].includes('u'),
+    bits: Number(fields[0].replace(/[a-z]+([0-9]+).*/, '$1'))
+  };
   variable.name = camelCase(fields[1]);
   variable.description = fields
     .slice(2)

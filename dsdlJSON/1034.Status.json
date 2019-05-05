@@ -4,6 +4,7 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 32,
@@ -11,30 +12,39 @@
         "description": "Resets when the motor restarts"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "voltage",
         "description": "Volt"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "current",
         "description": "Ampere. Can be negative in case of a regenerative braking."
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "temperature",
         "description": "Kelvin"
       },
       {
+        "type": "var",
         "kind": "int",
+        "unsigned": false,
         "bits": 18,
         "name": "rpm",
         "description": "Negative value indicates reverse rotation"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 7,
@@ -42,6 +52,7 @@
         "description": "Instant demand factor in percent (percent of maximum power); range 0% to 127%."
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 5,

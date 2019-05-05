@@ -4,6 +4,7 @@
   "request": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 16,
@@ -11,6 +12,7 @@
         "description": "Ignored if 'name' is non-empty"
       },
       {
+        "type": "object",
         "kind": "DataTypeKind",
         "name": "kind",
         "description": "Ignored if 'name' is non-empty"
@@ -18,9 +20,13 @@
       {
         "length": 80,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "name",
         "description": "Full data type name, e.g. \"uavcan.protocol.GetDataTypeInfo\""
       }
@@ -30,6 +36,7 @@
   "response": {
     "variables": [
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 64,
@@ -37,6 +44,7 @@
         "description": "Data type signature; valid only if the data type is known (see FLAG_KNOWN)"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 16,
@@ -44,11 +52,13 @@
         "description": "Valid only if the data type is known (see FLAG_KNOWN)"
       },
       {
+        "type": "object",
         "kind": "DataTypeKind",
         "name": "kind",
         "description": "Ditto"
       },
       {
+        "type": "var",
         "kind": "int",
         "unsigned": true,
         "bits": 8,
@@ -58,9 +68,13 @@
       {
         "length": 80,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "name",
         "description": "Full data type name"
       }

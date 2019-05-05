@@ -5,20 +5,32 @@
     "variables": [
       {
         "length": 3,
-        "kind": "floatArray",
-        "bits": 32,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32
+        },
         "name": "velocityXyz",
         "description": "XYZ velocity in m/s"
       },
       {
         "length": 3,
-        "kind": "intArray",
-        "bits": 36,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 36
+        },
         "name": "positionXyzMm",
         "description": "XYZ-axis coordinates in mm"
       },
       {
+        "type": "var",
         "kind": "void",
+        "unsigned": false,
         "bits": 6,
         "name": "#",
         "description": "Aligns the following array at byte boundary"
@@ -26,8 +38,13 @@
       {
         "length": 36,
         "range": true,
-        "kind": "floatArray",
-        "bits": 16,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16
+        },
         "name": "covariance",
         "description": "Position and velocity covariance in the ECEF frame. Units are m^2 for position,"
       }

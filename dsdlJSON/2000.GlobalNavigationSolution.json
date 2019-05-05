@@ -4,88 +4,132 @@
   "message": {
     "variables": [
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 64,
         "name": "longitude",
         "description": "required"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 64,
         "name": "latitude",
         "description": "required"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 32,
         "name": "heightEllipsoid",
         "description": "Above ellipsoid (required)"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 32,
         "name": "heightMsl",
         "description": "Above the mean sea level (required)"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 32,
         "name": "heightAgl",
         "description": "Above ground level (provided by radar altimeter or LIDAR) (optional)"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 32,
         "name": "heightBaro",
         "description": "Barometric height (optional)"
       },
       {
+        "type": "var",
         "kind": "float",
+        "unsigned": false,
         "bits": 16,
         "name": "qnhHpa",
         "description": "optional"
       },
       {
         "length": 4,
-        "kind": "floatArray",
-        "bits": 32,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32
+        },
         "name": "orientationXyzw",
         "description": ""
       },
       {
         "length": 36,
         "range": true,
-        "kind": "floatArray",
-        "bits": 16,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16
+        },
         "name": "poseCovariance",
         "description": ""
       },
       {
         "length": 3,
-        "kind": "floatArray",
-        "bits": 32,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32
+        },
         "name": "linearVelocityBody",
         "description": ""
       },
       {
         "length": 3,
-        "kind": "floatArray",
-        "bits": 32,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32
+        },
         "name": "angularVelocityBody",
         "description": ""
       },
       {
         "length": 3,
-        "kind": "floatArray",
-        "bits": 16,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16
+        },
         "name": "linearAccelerationBody",
         "description": ""
       },
       {
         "length": 36,
         "range": true,
-        "kind": "floatArray",
-        "bits": 16,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16
+        },
         "name": "velocityCovariance",
         "description": ""
       }

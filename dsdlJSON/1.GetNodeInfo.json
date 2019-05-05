@@ -4,16 +4,19 @@
   "response": {
     "variables": [
       {
+        "type": "object",
         "kind": "NodeStatus",
         "name": "status",
         "description": ""
       },
       {
+        "type": "object",
         "kind": "SoftwareVersion",
         "name": "softwareVersion",
         "description": ""
       },
       {
+        "type": "object",
         "kind": "HardwareVersion",
         "name": "hardwareVersion",
         "description": ""
@@ -21,9 +24,13 @@
       {
         "length": 80,
         "range": true,
-        "kind": "intArray",
-        "unsigned": true,
-        "bits": 8,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
         "name": "name",
         "description": ""
       }

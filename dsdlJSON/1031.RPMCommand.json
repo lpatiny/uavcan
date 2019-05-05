@@ -6,8 +6,13 @@
       {
         "length": 20,
         "range": true,
-        "kind": "intArray",
-        "bits": 18,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 18
+        },
         "name": "rpm",
         "description": ""
       }

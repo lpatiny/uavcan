@@ -5,8 +5,13 @@
     "variables": [
       {
         "length": 3,
-        "kind": "intArray",
-        "bits": 5,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 5
+        },
         "name": "fixedAxisRollPitchYaw",
         "description": ""
       }
