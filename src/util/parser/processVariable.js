@@ -5,16 +5,16 @@ const processArray = require('./processArray');
 const processUnion = require('./processUnion');
 const processObject = require('./processObject');
 
-function processVariable(bigInt, variable, from) {
+function processVariable(bigValue, variable, from) {
   switch (variable.type) {
     case 'var':
-      return processVar(bigInt, variable, from);
+      return processVar(bigValue, variable, from);
     case 'union':
-      return processUnion(bigInt, variable, from);
+      return processUnion(bigValue, variable, from);
     case 'object':
-      return processObject(bigInt, variable, from);
+      return processObject(bigValue, variable, from);
     case 'array':
-      return processArray(bigInt, variable, from);
+      return processArray(bigValue, variable, from);
     default:
       throw new Error(`Unknown variable kind: ${variable.kind}`);
   }

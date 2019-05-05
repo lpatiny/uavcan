@@ -45,7 +45,12 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
 
   for (let variable of transfer.variables) {
     let currentResult = processVariable(bigInt, variable, from);
-    result[variable.name] = currentResult.value;
+    if (variable.name) {
+      result[variable.name] = currentResult.value;
+      if (currentResult.valueStr) {
+        result[variable.name + 'Str'] = currentResult.valueStr;
+      }
+    }
     from = currentResult.from;
 
     /*
@@ -102,9 +107,5 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
 }
 
 function processObject(bigInt, variable, from) {}
-
-function nameToString(name) {
-  return String.fromCharCode.apply(String, name);
-}
 
 module.exports = bufferToJSON;

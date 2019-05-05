@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  bufferToJSON: require('./util/bufferToJSON'),
+  bufferToJSON: require('./util/parser/bufferToJSON'),
   kinds: require('./kinds.json'),
   UAVCANCodec: require('./UAVCANCodec.js'),
   UAVCANTransfer: require('./UAVCANTransfer.js')

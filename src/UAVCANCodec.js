@@ -3,9 +3,8 @@
 let EventEmitter = require('eventemitter3');
 
 let kinds = require('./kinds.json');
-let bufferToJSON = require('./util/bufferToJSON');
+let bufferToJSON = require('./util/parser/bufferToJSON');
 let UAVCANTransfer = require('./UAVCANTransfer');
-
 
 class UAVCANCodec extends EventEmitter {
   constructor() {
@@ -17,12 +16,19 @@ class UAVCANCodec extends EventEmitter {
   }
 
   // makes a 4 byte buffer according to UAVCAN spec
-  makeCanId(priority, datatypeId, serviceNotMessage, requestNotResponse, destinationNodeId, sourceNodeId) {
+  makeCanId(
+    priority,
+    datatypeId,
+    serviceNotMessage,
+    requestNotResponse,
+    destinationNodeId,
+    sourceNodeId
+  ) {
     let canId = [0x0, 0x0, 0x0, 0x0];
 
     canId[0] = priority;
     canId[3] = Number(serviceNotMessage) << 7;
-    canId[3] |= (sourceNodeId & 0b01111111);
+    canId[3] |= sourceNodeId & 0b01111111;
 
     if (serviceNotMessage) {
       canId[1] = datatypeId;
@@ -30,15 +36,14 @@ class UAVCANCodec extends EventEmitter {
       if (requestNotResponse) {
         canId[2] = Number(requestNotResponse) << 7;
       }
-      canId[2] |= (destinationNodeId & 0b01111111);
+      canId[2] |= destinationNodeId & 0b01111111;
     } else {
       canId[1] = datatypeId >> 8; // MSB
-      canId[2] = datatypeId & Number(0x00FF);
+      canId[2] = datatypeId & Number(0x00ff);
     }
 
     return Buffer.from(canId);
   }
-
 
   // only distinguishes between service and message frames, ignores anonymous frames!
   // does not accept 11 bit CAN ids
@@ -89,7 +94,9 @@ class UAVCANCodec extends EventEmitter {
     let decodedCanId = this.parseCanId(canId);
 
     let transferId = String(
-      `${tail.transferId} ${decodedCanId.sourceNodeId} ${decodedCanId.destinationNodeId}`
+      `${tail.transferId} ${decodedCanId.sourceNodeId} ${
+        decodedCanId.destinationNodeId
+      }`
     );
 
     // end of multiframe transfer
@@ -168,7 +175,6 @@ class UAVCANCodec extends EventEmitter {
     return -1;
   }
 
-
   /**
    * Fires an event with the decoded UAVCAN message.
    * @param {*} transfer UAVCANTransfer
@@ -183,7 +189,6 @@ class UAVCANCodec extends EventEmitter {
     let transferId = transfer.transferId;
     let canId = this.makeCanId(transfer.priority, datatypeId, serviceNotMessage, requestNotResponse, destinationNodeId, sourceNodeId);
     */
-
     // fill payload
     /*
 
@@ -198,10 +203,8 @@ class UAVCANCodec extends EventEmitter {
     transfer.payload = _LUCS_JSON_TO_BUFFER(KIND_ID, FILLED_KIND_JSON);
 
     */
-
     // fill sequencing information, compute crc
     // ...
-
     // call transmitter and send fragments out
     /*
     while(fragment_queue_full){
