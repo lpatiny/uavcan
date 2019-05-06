@@ -2,7 +2,7 @@
 
 /* global BigInt */
 
-const kinds = require('../../kinds.json');
+const kinds = require('../kinds.json');
 const processVariable = require('./processVariable');
 
 function processObject(bigValue, variable, from) {
@@ -21,7 +21,6 @@ function processObject(bigValue, variable, from) {
     from = currentResult.from;
   }
 
-  console.log({ value });
   return {
     value,
     from
