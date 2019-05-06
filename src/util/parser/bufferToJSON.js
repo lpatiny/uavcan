@@ -19,7 +19,7 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
     throw new Error('bufferToJSON, data should be a uint8 array');
   }
 
-  let bigInt = BigInt(`0x${buffer.toString('hex')}`);
+  let bigValue = BigInt(`0x${buffer.toString('hex')}`);
 
   let result = {};
   let from = BigInt(buffer.length * 8);
@@ -44,7 +44,7 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
   let unionTagValueName = '';
 
   for (let variable of transfer.variables) {
-    let currentResult = processVariable(bigInt, variable, from);
+    let currentResult = processVariable(bigValue, variable, from);
     if (variable.name) {
       result[variable.name] = currentResult.value;
       if (currentResult.valueStr) {

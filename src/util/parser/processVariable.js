@@ -3,7 +3,6 @@
 const processVar = require('./processVar');
 const processArray = require('./processArray');
 const processUnion = require('./processUnion');
-const processObject = require('./processObject');
 
 function processVariable(bigValue, variable, from) {
   switch (variable.type) {
@@ -12,6 +11,7 @@ function processVariable(bigValue, variable, from) {
     case 'union':
       return processUnion(bigValue, variable, from);
     case 'object':
+      let processObject = require('./processObject'); // cyclic dependency !!!
       return processObject(bigValue, variable, from);
     case 'array':
       return processArray(bigValue, variable, from);

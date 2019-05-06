@@ -26,7 +26,7 @@ describe('uavtest', () => {
     });
   });
 
-  it('gps', () => {
+  it.only('gps', () => {
     let kindGeo = kinds[1041];
     let data = [12, 14, 15];
 
