@@ -3,7 +3,7 @@
 let EventEmitter = require('eventemitter3');
 
 let kinds = require('./kinds.json');
-let bufferToJSON = require('./util/parser/bufferToJSON');
+let parse = require('./parser/parse');
 let UAVCANTransfer = require('./UAVCANTransfer');
 
 class UAVCANCodec extends EventEmitter {
@@ -235,7 +235,7 @@ class UAVCANCodec extends EventEmitter {
           kindToDecode = kinds[id.messageTypeId];
         }
 
-        let decodedTransfer = bufferToJSON(
+        let decodedTransfer = parse(
           this._transfers[transferAssembledId].payload,
           kindToDecode,
           id.serviceNotMessage,

@@ -2,9 +2,9 @@
 
 /* global BigInt */
 
-const kinds = require('../../kinds.json');
+const kinds = require('../kinds.json');
 
-const parseInt = require('./parseInt');
+const parseInt = require('./util/parseInt');
 const processVar = require('./processVar');
 
 const n1 = BigInt(1);

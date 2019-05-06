@@ -10,18 +10,6 @@ Object {
 }
 `;
 
-exports[`UAVCANCodec make_id 1`] = `
-Object {
-  "data": Array [
-    0,
-    0,
-    0,
-    0,
-  ],
-  "type": "Buffer",
-}
-`;
-
 exports[`UAVCANCodec packet_interleaved 1`] = `
 UAVCANTransfer {
   "canId": Object {
@@ -43,10 +31,6 @@ UAVCANTransfer {
     "sourceNodeId": 127,
   },
   "decodedTransfer": Object {
-    "NumericValue2": 1,
-    "NumericValue3": 1,
-    "Value0": 1,
-    "Value1": 1,
     "defaultValue": 0,
     "maxValue": 1023,
     "minValue": 0,
@@ -61,10 +45,6 @@ UAVCANTransfer {
     ],
     "nameStr": "drivers",
     "value": 1023,
-    "void0": 0,
-    "void1": 0,
-    "void2": 0,
-    "void3": 0,
   },
   "id": "3 127 127",
   "payload": Object {
@@ -140,10 +120,6 @@ UAVCANTransfer {
     "sourceNodeId": 127,
   },
   "decodedTransfer": Object {
-    "NumericValue2": 1,
-    "NumericValue3": 1,
-    "Value0": 1,
-    "Value1": 1,
     "defaultValue": 0,
     "maxValue": 1023,
     "minValue": 0,
@@ -158,10 +134,6 @@ UAVCANTransfer {
     ],
     "nameStr": "drivers",
     "value": 1023,
-    "void0": 0,
-    "void1": 0,
-    "void2": 0,
-    "void3": 0,
   },
   "id": "3 127 127",
   "payload": Object {

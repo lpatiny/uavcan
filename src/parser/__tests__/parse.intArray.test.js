@@ -1,13 +1,13 @@
 'use strict';
 
-const bufferToJSON = require('../bufferToJSON');
+const parse = require('../parse');
 
 const testArray = require('./device/integerArray');
 
-describe('bufferToJSON intArray', () => {
+describe('parse intArray', () => {
   it('device test1 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00', () => {
     let data = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
-    let result = bufferToJSON(data, testArray, false, false);
+    let result = parse(data, testArray, false, false);
 
     expect(result.arrayUint4).toStrictEqual([0, 0, 0]);
     expect(result.arrayInt4).toStrictEqual([0, 0, 0]);
@@ -15,7 +15,7 @@ describe('bufferToJSON intArray', () => {
   });
   it('device test1 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF', () => {
     let data = [0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff];
-    let result = bufferToJSON(data, testArray, false, false);
+    let result = parse(data, testArray, false, false);
 
     expect(result).toStrictEqual({
       arrayUint4: [15, 15, 15],

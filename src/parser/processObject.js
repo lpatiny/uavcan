@@ -5,8 +5,6 @@
 const kinds = require('../../kinds.json');
 const processVariable = require('./processVariable');
 
-console.log({ processVariable });
-
 function processObject(bigValue, variable, from) {
   let value = {};
 

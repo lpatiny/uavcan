@@ -1,10 +1,10 @@
 'use strict';
 
-const bufferToJSON = require('../bufferToJSON');
+const parse = require('../parse');
 
 const float = require('./device/float');
 
-describe('bufferToJSON float', () => {
+describe('parse float', () => {
   it('0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00', () => {
     let data = [
       0x00,
@@ -22,7 +22,7 @@ describe('bufferToJSON float', () => {
       0x00,
       0x00
     ];
-    let result = bufferToJSON(data, float);
+    let result = parse(data, float);
     expect(result).toStrictEqual({
       float16: 0,
       float32: 0,
@@ -47,7 +47,7 @@ describe('bufferToJSON float', () => {
       0xf0,
       0x3f
     ];
-    let result = bufferToJSON(data, float);
+    let result = parse(data, float);
     expect(result).toStrictEqual({
       float16: 1,
       float32: 1,

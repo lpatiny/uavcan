@@ -1,13 +1,13 @@
 'use strict';
 
-const bufferToJSON = require('../bufferToJSON');
+const parse = require('../parse');
 
 const integer = require('./device/integer');
 
-describe('bufferToJSON int', () => {
-  it.only('zero', () => {
+describe('parse int', () => {
+  it('zero', () => {
     let data = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
-    let result = bufferToJSON(data, integer);
+    let result = parse(data, integer);
     expect(result).toStrictEqual({
       uint4: 0,
       int4: 0,
@@ -19,7 +19,7 @@ describe('bufferToJSON int', () => {
   });
   it('generic', () => {
     let data = [0x00, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00];
-    let result = bufferToJSON(data, integer);
+    let result = parse(data, integer);
     expect(result).toStrictEqual({
       uint4: 0,
       int4: 0,
@@ -31,7 +31,7 @@ describe('bufferToJSON int', () => {
   });
   it('one', () => {
     let data = [0b01011001, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff];
-    let result = bufferToJSON(data, integer);
+    let result = parse(data, integer);
     expect(result).toStrictEqual({
       uint4: 5,
       int4: -7,

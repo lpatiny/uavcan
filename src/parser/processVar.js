@@ -3,8 +3,8 @@
 /* global BigInt */
 
 const n1 = BigInt(1);
-const parseFloat = require('./parseFloat');
-const parseInt = require('./parseInt');
+const parseFloat = require('./util/parseFloat');
+const parseInt = require('./util/parseInt');
 
 function processVar(bigInt, variable, from) {
   let value;

@@ -1,10 +1,10 @@
 'use strict';
 
-const bufferToJSON = require('../bufferToJSON');
-const kinds = require('../../../kinds.json');
+const parse = require('../parse');
+const kinds = require('../../kinds.json');
 let kindGetSet = kinds[11];
 
-describe('bufferToJSON testGetSet', () => {
+describe('parse testGetSet', () => {
   it('request', () => {
     let data = [
       0b00000001, // 8bits of index
@@ -26,17 +26,15 @@ describe('bufferToJSON testGetSet', () => {
       0x73 // =s
     ];
 
-    let result = bufferToJSON(data, kindGetSet, true, true);
-    console.log(result);
+    let result = parse(data, kindGetSet, true, true);
     expect(result).toStrictEqual({
       index: 1,
-      //  Value0: 1,
       value: 123,
       name: [100, 114, 105, 118, 101, 114, 115],
       nameStr: 'drivers'
     });
   });
-  it.only('response', () => {
+  it('response', () => {
     let data = [
       0b00000001,
       0b11111111,
@@ -83,7 +81,7 @@ describe('bufferToJSON testGetSet', () => {
       0x73 // =s
     ];
 
-    let result = bufferToJSON(data, kindGetSet, true, false);
+    let result = parse(data, kindGetSet, true, false);
 
     expect(result).toStrictEqual({
       value: 1023,

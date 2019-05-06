@@ -8,7 +8,7 @@ const processVariable = require('./processVariable');
  * @param {*} data Buffer
  * @param {*} kind
  */
-function bufferToJSON(data, kind, isService = false, isRequest = false) {
+function parse(data, kind, isService = false, isRequest = false) {
   let buffer;
 
   if (Array.isArray(data)) {
@@ -16,7 +16,7 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
   } else if (Buffer.isBuffer(data)) {
     buffer = data;
   } else {
-    throw new Error('bufferToJSON, data should be a uint8 array');
+    throw new Error('parse, data should be a uint8 array');
   }
 
   let bigValue = BigInt(`0x${buffer.toString('hex')}`);
@@ -34,7 +34,7 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
       transfer = kind.response;
     }
   } else {
-    throw new Error('bufferToJSON: Not a service or message');
+    throw new Error('parse: Not a service or message');
   }
 
   let unionDidPreceed = 0;
@@ -108,4 +108,4 @@ function bufferToJSON(data, kind, isService = false, isRequest = false) {
 
 function processObject(bigInt, variable, from) {}
 
-module.exports = bufferToJSON;
+module.exports = parse;
