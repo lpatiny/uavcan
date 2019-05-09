@@ -30,5 +30,11 @@ describe('serializeInt ', () => {
     expect(serializeInt(0b1010101011110000, 16, true)).toBe(
       BigInt(0b1111000010101010)
     );
+    expect(serializeInt(0b1010101011110000, 32, true)).toBe(
+      BigInt(0b1111000010101010)
+    );
+    expect(serializeInt(0b1010101011110000, 64, true)).toBe(
+      BigInt(0b1111000010101010)
+    );
   });
 });

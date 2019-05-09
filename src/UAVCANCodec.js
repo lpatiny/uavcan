@@ -4,6 +4,7 @@ let EventEmitter = require('eventemitter3');
 
 let kinds = require('./kinds.json');
 let parse = require('./parser/parse');
+let serializeInt = require('./serializer/serializeInt');
 let UAVCANTransfer = require('./UAVCANTransfer');
 
 class UAVCANCodec extends EventEmitter {
@@ -180,7 +181,7 @@ class UAVCANCodec extends EventEmitter {
    * @param {*} transfer UAVCANTransfer
    * @param {*} txCallback callback function to CAN transmitter (e.g. socketcan)
    */
-  encode(transfer, txCallback) {
+  encode(datatypeId, variables, txCallback, requestNotResponse = true) {
     // takes a transfer payload and packs it into 8-byte large can frames
     // can frame contains CRC and tail byte that are added by this function
     // for each frame: txCallback(can_frame)
@@ -189,6 +190,31 @@ class UAVCANCodec extends EventEmitter {
     let transferId = transfer.transferId;
     let canId = this.makeCanId(transfer.priority, datatypeId, serviceNotMessage, requestNotResponse, destinationNodeId, sourceNodeId);
     */
+    let kindVars = kinds[datatypeId];
+
+    if (kindVars.type === 'message') {
+      kindVars = kindVars.message.variables;
+    } else if (kindVars.type === 'service') {
+      if (requestNotResponse) {
+        kindVars = kindVars.request.variables;
+      } else {
+        kindVars = kindVars.response.variables;
+      }
+    }
+
+    for (let i = 0; i < variables.length; i++) {
+      console.log(`toencode:${variables[i]}`);
+      console.log(`bits:${kindVars[i].bits}`);
+      console.log(`u${kindVars[i].unsigned}`);
+      console.log(
+        `res:${serializeInt(
+          variables[i],
+          kindVars[i].bits,
+          kindVars[i].unsigned
+        ).toString(2)}`
+      );
+    }
+
     // fill payload
     /*
 
