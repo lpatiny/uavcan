@@ -30,11 +30,11 @@ describe('serializeInt ', () => {
     expect(serializeInt(0b1010101011110000, 16, true)).toBe(
       BigInt(0b1111000010101010)
     );
-    expect(serializeInt(0b1010101011110000, 32, true)).toBe(
-      BigInt(0b1111000010101010)
-    );
-    expect(serializeInt(0b1010101011110000, 64, true)).toBe(
-      BigInt(0b1111000010101010)
-    );
+    let res17 = serializeInt(0b1010101011110000, 17, true);
+    console.log(res17);
+    expect(res17).toBe(BigInt(0b1111000010101010));
+    let res64 = serializeInt(0b1010101011110000, 64, true);
+    console.log(res64);
+    expect(res64).toBe(BigInt(0b1111000010101010));
   });
 });
