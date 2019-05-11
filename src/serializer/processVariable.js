@@ -2,7 +2,7 @@
 
 const processVar = require('./processVar');
 //const processArray = require('./processArray');
-//const processUnion = require('./processUnion');
+const processUnion = require('./processUnion');
 
 function processVariable(data, variable, bigResult) {
   switch (variable.type) {
@@ -10,7 +10,8 @@ function processVariable(data, variable, bigResult) {
       processVar(data, variable, bigResult);
       break;
     case 'union':
-    //  return processUnion(data, variable, bigResult);
+      processUnion(data[variable.name], variable, bigResult);
+      break;
     case 'object':
       let processObject = require('./processObject');
       processObject(data[variable.name], variable, bigResult);

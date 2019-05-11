@@ -1,12 +1,12 @@
 'use strict';
 
-const parse = require('../parse');
+const serialize = require('../serialize');
 const kinds = require('../../kinds.json');
 let kindGetSet = kinds[11];
 
-describe('parse testGetSet', () => {
-  it('request', () => {
-    let data = [
+describe('serialize GetSet', () => {
+  it.only('request', () => {
+    let expectedResult = [
       0b00000001, // 8bits of index
       0b00000001, // next 5bits of index, then 3bits of uniontag value
       123, // since uniontag = 1, this value is an int64
@@ -26,16 +26,18 @@ describe('parse testGetSet', () => {
       0x73 // =s
     ];
 
-    let result = parse(data, kindGetSet, true, true);
-    expect(result).toStrictEqual({
+    let data = {
       index: 1,
       value: 123,
       name: [100, 114, 105, 118, 101, 114, 115],
       nameStr: 'drivers'
-    });
+    };
+
+    let result = serialize(data, kindGetSet, true, true);
+    expect(result).toStrictEqual(expectedResult);
   });
   it('response', () => {
-    let data = [
+    let expectedResult = [
       0b00000001,
       0b11111111,
       0b00000011,
@@ -81,15 +83,17 @@ describe('parse testGetSet', () => {
       0x73 // =s
     ];
 
-    let result = parse(data, kindGetSet, true, false);
-
-    expect(result).toStrictEqual({
+    let data = {
       value: 1023,
       defaultValue: 0,
       maxValue: 1023,
       minValue: 0,
       name: [100, 114, 105, 118, 101, 114, 115],
       nameStr: 'drivers'
-    });
+    };
+
+    let result = serialize(data, kindGetSet, true, false);
+
+    expect(result).toStrictEqual(expectedResult);
   });
 });
