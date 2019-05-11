@@ -31,9 +31,15 @@ UAVCANTransfer {
     "sourceNodeId": 127,
   },
   "decodedTransfer": Object {
-    "defaultValue": 0,
-    "maxValue": 1023,
-    "minValue": 0,
+    "defaultValue": Object {
+      "integerValue": 0,
+    },
+    "maxValue": Object {
+      "integerValue": 1023,
+    },
+    "minValue": Object {
+      "integerValue": 0,
+    },
     "name": Array [
       100,
       114,
@@ -44,7 +50,9 @@ UAVCANTransfer {
       115,
     ],
     "nameStr": "drivers",
-    "value": 1023,
+    "value": Object {
+      "integerValue": 1023,
+    },
   },
   "id": "3 127 127",
   "payload": Object {
@@ -120,9 +128,15 @@ UAVCANTransfer {
     "sourceNodeId": 127,
   },
   "decodedTransfer": Object {
-    "defaultValue": 0,
-    "maxValue": 1023,
-    "minValue": 0,
+    "defaultValue": Object {
+      "integerValue": 0,
+    },
+    "maxValue": Object {
+      "integerValue": 1023,
+    },
+    "minValue": Object {
+      "integerValue": 0,
+    },
     "name": Array [
       100,
       114,
@@ -133,7 +147,9 @@ UAVCANTransfer {
       115,
     ],
     "nameStr": "drivers",
-    "value": 1023,
+    "value": Object {
+      "integerValue": 1023,
+    },
   },
   "id": "3 127 127",
   "payload": Object {
