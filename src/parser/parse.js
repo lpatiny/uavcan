@@ -51,6 +51,4 @@ function parse(data, kind, isService = false, isRequest = false) {
   return result;
 }
 
-function processObject(bigInt, variable, from) {}
-
 module.exports = parse;

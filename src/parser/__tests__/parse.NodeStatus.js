@@ -3,7 +3,7 @@
 const parse = require('../parse');
 const kinds = require('../../kinds.json');
 
-describe('uavtest NodeStatus', () => {
+describe('parse NodeStatus', () => {
   it('NodeStatus packet', () => {
     let kindNodeStatus = kinds[341];
     let data = [141, 46, 0, 0, 0, 0, 0, 219];
