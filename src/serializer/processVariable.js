@@ -12,8 +12,9 @@ function processVariable(data, variable, bigResult) {
     case 'union':
     //  return processUnion(data, variable, bigResult);
     case 'object':
-    // let processObject = require('./processObject');
-    //  return processObject(data, variable, bigResult);
+      let processObject = require('./processObject');
+      processObject(data[variable.name], variable, bigResult);
+      break;
     case 'array':
     //  return processArray(bdata, variable, bigResult);
     default:
