@@ -2,7 +2,7 @@
 
 /* global BigInt */
 
-const kinds = require('../DataTypes.json');
+const kinds = require('../kinds.json');
 
 const parseInt = require('./util/parseInt');
 const processVar = require('./processVar');

@@ -1,9 +1,8 @@
 'use strict';
 
 const parse = require('../parse');
-const DataTypes = require('../../DataTypes.json');
-const CommunicationType = require('../../CommunicationTypes');
-let typeGetSet = DataTypes[11];
+const kinds = require('../../kinds.json');
+let kindGetSet = kinds[11];
 
 describe('parse testGetSet', () => {
   it('request', () => {
@@ -27,7 +26,7 @@ describe('parse testGetSet', () => {
       0x73 // =s
     ];
 
-    let result = parse(data, typeGetSet, CommunicationType.TYPE_RESPONSE);
+    let result = parse(data, kindGetSet, true, true);
     expect(result).toStrictEqual({
       index: 1,
       value: 123,
@@ -82,7 +81,7 @@ describe('parse testGetSet', () => {
       0x73 // =s
     ];
 
-    let result = parse(data, typeGetSet, CommunicationType.TYPE_REQUEST);
+    let result = parse(data, kindGetSet, true, false);
 
     expect(result).toStrictEqual({
       value: 1023,

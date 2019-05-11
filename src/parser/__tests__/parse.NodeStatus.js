@@ -1,7 +1,7 @@
 'use strict';
 
 const parse = require('../parse');
-const kinds = require('../../DataTypes.json');
+const kinds = require('../../kinds.json');
 
 describe('uavtest NodeStatus', () => {
   it('NodeStatus packet', () => {

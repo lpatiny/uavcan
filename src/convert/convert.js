@@ -9,7 +9,7 @@ const convertOne = require('./convertOne');
 
 const source = join(__dirname, '../../public_regulated_data_types');
 const destination = join(__dirname, '../../dsdlJSON');
-const combined = join(__dirname, '../DataTypes.json');
+const combined = join(__dirname, '../kinds.json');
 
 // we will process the custom types first, file name does not start with a number
 
@@ -22,7 +22,7 @@ function convert() {
 
 function createTypes(files) {
   let kinds = {};
-  files = files.filter(file => isNaN(file.id));
+  files = files.filter((file) => isNaN(file.id));
   for (let file of files) {
     let definition = fs.readFileSync(file.filename, 'utf8');
     kinds[file.name] = definition.includes('@union') ? 'union' : 'object';
@@ -49,7 +49,7 @@ function processFiles(files, kinds) {
 
 function getFiles(source) {
   let files = find.fileSync(/.*uavcan$/, source);
-  files = files.map(file => {
+  files = files.map((file) => {
     let info = {};
     info.filename = file;
     info.dir = file.replace(/(.*)\/(.*)$/, '$1');

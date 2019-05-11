@@ -2,7 +2,7 @@
 
 /* global BigInt */
 
-const kinds = require('../DataTypes.json');
+const kinds = require('../kinds.json');
 const processVariable = require('./processVariable');
 
 function processObject(bigValue, variable, from) {
