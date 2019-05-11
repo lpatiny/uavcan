@@ -19,7 +19,11 @@ function processUnion(bigValue, variable, from) {
   );
   let unionVariable = unionDefinition.message.variables[variableKind];
   from -= BigInt(nbBits);
-  return processVar(bigValue, unionVariable, from);
+  let result = processVar(bigValue, unionVariable, from);
+  let tmpValue = {};
+  tmpValue[unionVariable.name] = result.value;
+  result.value = tmpValue;
+  return result;
 }
 
 function getCurrentValue(bigValue, nbBits, from) {

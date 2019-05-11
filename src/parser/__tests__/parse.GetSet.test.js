@@ -29,7 +29,7 @@ describe('parse testGetSet', () => {
     let result = parse(data, kindGetSet, true, true);
     expect(result).toStrictEqual({
       index: 1,
-      value: 123,
+      value: { integerValue: 123 },
       name: [100, 114, 105, 118, 101, 114, 115],
       nameStr: 'drivers'
     });
@@ -84,10 +84,10 @@ describe('parse testGetSet', () => {
     let result = parse(data, kindGetSet, true, false);
 
     expect(result).toStrictEqual({
-      value: 1023,
-      defaultValue: 0,
-      maxValue: 1023,
-      minValue: 0,
+      value: { integerValue: 1023 },
+      defaultValue: { integerValue: 0 },
+      maxValue: { integerValue: 1023 },
+      minValue: { integerValue: 0 },
       name: [100, 114, 105, 118, 101, 114, 115],
       nameStr: 'drivers'
     });
