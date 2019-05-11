@@ -34,7 +34,7 @@ describe('parse testGetSet', () => {
       nameStr: 'drivers'
     });
   });
-  it('response', () => {
+  it.only('response', () => {
     let data = [
       0b00000001,
       0b11111111,

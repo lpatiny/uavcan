@@ -5,7 +5,7 @@ const kinds = require('../../kinds.json');
 let kindGetSet = kinds[11];
 
 describe('serialize GetSet', () => {
-  it.only('request', () => {
+  it('request', () => {
     let expectedResult = [
       0b00000001, // 8bits of index
       0b00000001, // next 5bits of index, then 3bits of uniontag value
@@ -84,8 +84,12 @@ describe('serialize GetSet', () => {
     ];
 
     let data = {
-      value: 1023,
-      defaultValue: 0,
+      value: {
+        integerValue: 1023
+      },
+      defaultValue: {
+        integerValue: 0
+      },
       maxValue: {
         integerValue: 1023
       },
