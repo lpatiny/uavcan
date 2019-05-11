@@ -1,0 +1,37 @@
+'use strict';
+
+/* global BigInt */
+
+const n1 = BigInt(1);
+const serializeInt = require('./util/serializeInt');
+
+function processVar(data, variable, bigResult) {
+  switch (variable.kind) {
+    case 'void':
+      bigResult.value <<= BigInt(variable.bits);
+      bigResult.nbBits += variable.bits;
+      break;
+    case 'int': {
+      let value = serializeInt(
+        data[variable.name] || 0,
+        variable.bits,
+        variable.unsigned
+      );
+      bigResult.value <<= BigInt(variable.bits);
+      bigResult.value |= value;
+      bigResult.nbBits += variable.bits;
+      break;
+    }
+    case 'float':
+      throw Error('not implemented');
+      break;
+    default:
+      throw new Error(`Unknown variable kind: ${variable.kind}`);
+  }
+}
+
+function getCurrentValue(bigValue, nbBits, from) {
+  return (bigValue >> (from - BigInt(nbBits))) & ((n1 >> BigInt(nbBits)) - n1);
+}
+
+module.exports = processVar;
