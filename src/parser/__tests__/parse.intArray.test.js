@@ -1,13 +1,14 @@
 'use strict';
 
 const parse = require('../parse');
+const CommunicationType = require('../../CommunicationTypes');
 
 const testArray = require('./device/integerArray');
 
 describe('parse intArray', () => {
-  it('device test1 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00', () => {
+  it.only('device test1 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00', () => {
     let data = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
-    let result = parse(data, testArray, false, false);
+    let result = parse(data, testArray, CommunicationType.TYPE_MESSAGE);
 
     expect(result.arrayUint4).toStrictEqual([0, 0, 0]);
     expect(result.arrayInt4).toStrictEqual([0, 0, 0]);
@@ -15,7 +16,7 @@ describe('parse intArray', () => {
   });
   it('device test1 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF', () => {
     let data = [0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff];
-    let result = parse(data, testArray, false, false);
+    let result = parse(data, testArray, CommunicationType.TYPE_MESSAGE);
 
     expect(result).toStrictEqual({
       arrayUint4: [15, 15, 15],

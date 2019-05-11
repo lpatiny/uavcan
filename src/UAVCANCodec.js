@@ -2,9 +2,9 @@
 
 let EventEmitter = require('eventemitter3');
 
-let kinds = require('./kinds.json');
+let kinds = require('./DataTypes.json');
 let parse = require('./parser/parse');
-let serializeInt = require('./serializer/serializeInt');
+let serializeInt = require('./serializer/util/serializeInt');
 let UAVCANTransfer = require('./UAVCANTransfer');
 
 class UAVCANCodec extends EventEmitter {

@@ -1,0 +1,3880 @@
+{
+  "1": {
+    "description": "This message is used for dynamic Node ID allocation.\nWhen a node needs to request a node ID dynamically, it will transmit an anonymous message transfer of this type.\nIn order to reduce probability of CAN ID collisions when multiple nodes are publishing this request, the CAN ID\nfield of anonymous message transfer includes a Discriminator, which is a special field that has to be filled with\nrandom data by the transmitting node. Since Discriminator collisions are likely to happen (probability approx.\n0.006%), nodes that are requesting dynamic allocations need to be able to handle them correctly. Hence, a collision\nresolution protocol is defined (alike CSMA/CD). The collision resolution protocol is based on two randomized\ntransmission intervals:\n- Request period - Trequest.\n- Follow up delay - Tfollowup.\nRecommended randomization ranges for these intervals are documented in the constants of this message type (see below).\nRandom intervals must be chosen anew per transmission, whereas the Discriminator value is allowed to stay constant\nper node.\nIn the below description the following terms are used:\n- Allocator - the node that serves allocation requests.\n- Allocatee - the node that requests an allocation from the Allocator.\nThe response timeout is not explicitly defined for this protocol, as the Allocatee will request the allocation\nTrequest units of time later again, unless the allocation has been granted. Despite this, the implementation can\nconsider the value of FOLLOWUP_TIMEOUT_MS as an allocation timeout, if necessary.\nOn the allocatee's side the protocol is defined through the following set of rules:\nRule A. On initialization:\n1. The allocatee subscribes to this message.\n2. The allocatee starts the Request Timer with a random interval of Trequest.\nRule B. On expiration of Request Timer:\n1. Request Timer restarts with a random interval of Trequest.\n2. The allocatee broadcasts a first-stage Allocation request message, where the fields are assigned following values:\n   node_id                 - preferred node ID, or zero if the allocatee doesn't have any preference\n   first_part_of_unique_id - true\n   unique_id               - first MAX_LENGTH_OF_UNIQUE_ID_IN_REQUEST bytes of unique ID\nRule C. On any Allocation message, even if other rules also match:\n1. Request Timer restarts with a random interval of Trequest.\nRule D. On an Allocation message WHERE (source node ID is non-anonymous) AND (allocatee's unique ID starts with the\nbytes available in the field unique_id) AND (unique_id is less than 16 bytes long):\n1. The allocatee waits for Tfollowup units of time, while listening for other Allocation messages. If an Allocation\n   message is received during this time, the execution of this rule will be terminated. Also see rule C.\n2. The allocatee broadcasts a second-stage Allocation request message, where the fields are assigned following values:\n   node_id                 - same value as in the first-stage\n   first_part_of_unique_id - false\n   unique_id               - at most MAX_LENGTH_OF_UNIQUE_ID_IN_REQUEST bytes of local unique ID with an offset\n                             equal to number of bytes in the received unique ID\nRule E. On an Allocation message WHERE (source node ID is non-anonymous) AND (unique_id fully matches allocatee's\nunique ID) AND (node_id in the received message is not zero):\n1. Request Timer stops.\n2. The allocatee initializes its node_id with the received value.\n3. The allocatee terminates subscription to Allocation messages.\n4. Exit.\nRecommended randomization range for request period.\nThese definitions have an advisory status; it is OK to pick higher values for both bounds, as it won't affect\nprotocol compatibility. In fact, it is advised to pick higher values if the target application is not concerned\nabout the time it will spend on completing the dynamic node ID allocation procedure, as it will reduce\ninterference with other nodes, possibly of higher importance.\nThe lower bound shall not be lower than FOLLOWUP_TIMEOUT_MS, otherwise the request may conflict with a followup.\nRecommended randomization range for followup delay.\nThe upper bound shall not exceed FOLLOWUP_TIMEOUT_MS, because the allocator will reset the state on its end.\nAllocator will reset its state if there was no follow-up request in this amount of time.\nAny request message can accommodate no more than this number of bytes of unique ID.\nThis limitation is needed to ensure that all request transfers are single-frame.\nThis limitation does not apply to CAN FD transport.\nWhen requesting an allocation, set the field 'node_id' to this value if there's no preference.\nIf transfer is anonymous, this is the preferred ID.\nIf transfer is non-anonymous, this is allocated ID.\nIf the allocatee does not have any preference, this value must be set to zero. In this case, the allocator\nmust choose the highest unused node ID value for this allocation (except 126 and 127, that are reserved for\nnetwork maintenance tools). E.g., if the allocation table is empty and the node has requested an allocation\nwithout any preference, the allocator will grant the node ID 125.\nIf the preferred node ID is not zero, the allocator will traverse the allocation table starting from the\npreferred node ID upward, until a free node ID is found. If a free node ID could not be found, the\nallocator will restart the search from the preferred node ID downward, until a free node ID is found.\nIn pseudocode:\n  int findFreeNodeID(const int preferred)\n  {\n      // Search up\n      int candidate = (preferred > 0) ? preferred : 125;\n      while (candidate <= 125)\n      {\n          if (!isOccupied(candidate))\n              return candidate;\n          candidate++;\n      }\n      // Search down\n      candidate = (preferred > 0) ? preferred : 125;\n      while (candidate > 0)\n      {\n          if (!isOccupied(candidate))\n              return candidate;\n          candidate--;\n      }\n      // Not found\n      return -1;\n  }\nIf transfer is anonymous, this field indicates first-stage request.\nIf transfer is non-anonymous, this field should be assigned zero and ignored.\nIf transfer is anonymous, this array must not contain more than MAX_LENGTH_OF_UNIQUE_ID_IN_REQUEST items.\nNote that array is tail-optimized, i.e. it will not be prepended with length field.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "nodeId",
+          "description": ""
+        },
+        {
+          "length": 16,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "uniqueId",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint16 MAX_REQUEST_PERIOD_MS = 1000     # It is OK to exceed this value",
+        "uint16 MIN_REQUEST_PERIOD_MS = 600      # It is OK to exceed this value",
+        "uint16 MAX_FOLLOWUP_DELAY_MS = 400",
+        "uint16 MIN_FOLLOWUP_DELAY_MS = 0        # Defined only for regularity; will always be zero.",
+        "uint16 FOLLOWUP_TIMEOUT_MS = 500",
+        "uint8 MAX_LENGTH_OF_UNIQUE_ID_IN_REQUEST = 6",
+        "uint7 ANY_NODE_ID = 0"
+      ]
+    }
+  },
+  "2": {
+    "description": "Get the implementation details of a given data type.\nRequest is interpreted as follows:\n - If the field 'name' is empty, the fields 'kind' and 'id' will be used to identify the data type.\n - If the field 'name' is non-empty, it will be used to identify the data type; the\n   fields 'kind' and 'id' will be ignored.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 16,
+          "name": "id",
+          "description": "Ignored if 'name' is non-empty"
+        },
+        {
+          "type": "object",
+          "kind": "DataTypeKind",
+          "name": "kind",
+          "description": "Ignored if 'name' is non-empty"
+        },
+        {
+          "length": 80,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "name",
+          "description": "Full data type name, e.g. \"uavcan.protocol.GetDataTypeInfo\""
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 64,
+          "name": "signature",
+          "description": "Data type signature; valid only if the data type is known (see FLAG_KNOWN)"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 16,
+          "name": "id",
+          "description": "Valid only if the data type is known (see FLAG_KNOWN)"
+        },
+        {
+          "type": "object",
+          "kind": "DataTypeKind",
+          "name": "kind",
+          "description": "Ditto"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "flags",
+          "description": ""
+        },
+        {
+          "length": 80,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "name",
+          "description": "Full data type name"
+        }
+      ],
+      "statics": [
+        "uint8 FLAG_KNOWN      = 1   # This data type is defined",
+        "uint8 FLAG_SUBSCRIBED = 2   # Subscribed to messages of this type",
+        "uint8 FLAG_PUBLISHING = 4   # Publishing messages of this type",
+        "uint8 FLAG_SERVING    = 8   # Providing service of this type"
+      ]
+    }
+  },
+  "4": {
+    "description": "Global time synchronization.\nAny node that publishes timestamped data must use this time reference.\nPlease refer to the specification to learn about the synchronization algorithm.\nBroadcasting period must be within this range.\nSynchronization slaves may switch to a new source if the current master was silent for this amount of time.\nTime in microseconds when the PREVIOUS GlobalTimeSync message was transmitted.\nIf this message is the first one, this field must be zero.",
+    "type": "message",
+    "message": {
+      "variables": [],
+      "statics": [
+        "uint16 MAX_BROADCASTING_PERIOD_MS = 1100            # Milliseconds",
+        "uint16 MIN_BROADCASTING_PERIOD_MS = 40              # Milliseconds",
+        "uint16 RECOMMENDED_BROADCASTER_TIMEOUT_MS = 2200    # Milliseconds"
+      ]
+    }
+  },
+  "5": {
+    "description": "Restart the node.\nSome nodes may require restart before the new configuration will be applied.\nThe request should be rejected if magic_number does not equal MAGIC_NUMBER.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 40,
+          "name": "magicNumber",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint40 MAGIC_NUMBER = 0xACCE551B1E"
+      ]
+    }
+  },
+  "6": {
+    "description": "THIS DEFINITION IS SUBJECT TO CHANGE.\nThis service allows to execute arbitrary commands on the remote node's internal system shell.\nEssentially, this service mimics a typical terminal emulator, with one text input (stdin) and two text\noutputs (stdout and stderr). When there's no process running, the input is directed into the terminal\nhandler itself, which interprets it. If there's a process running, the input will be directed into\nstdin of the running process. It is possible to forcefully return the terminal into a known state by\nmeans of setting the reset flag (see below), in which case the terminal will kill all of the child\nprocesses, if any, and return into the initial idle state.\nThe server is assumed to allocate one independent terminal instance per client, so that different clients\ncan execute commands without interfering with each other.\nInput and output should use this newline character.\nThe server is required to keep the result of the last executed command for at least this time.\nWhen this time expires, the server may remove the results in order to reclaim the memory, but it\nis not guaranteed. Hence, the clients must retrieve the results in this amount of time.\nThese flags control the shell and command execution.\nIf the shell is idle, it will interpret this string.\nIf there's a process running, this string will be piped into its stdin.\nIf RESET_SHELL is set, new input will be interpreted by the shell immediately.\nExit status of the last executed process, or error code of the shell itself.\nDefault value is zero.\nThese flags indicate the status of the shell.\nIn case of a shell error, this string may contain ASCII string explaining the nature of the error.\nOtherwise, if stdout read is requested, this string will contain stdout data. If stderr read is requested,\nthis string will contain stderr data. If both stdout and stderr read is requested, this string will start\nwith stdout and end with stderr, with no separator in between.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "flags",
+          "description": ""
+        },
+        {
+          "length": 128,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "input",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 NEWLINE = '\\n'",
+        "uint8 MIN_OUTPUT_LIFETIME_SEC = 10",
+        "uint8 FLAG_RESET_SHELL          = 1     # Restarts the shell instance anew; may or may not imply CLEAR_OUTPUT_BUFFERS",
+        "uint8 FLAG_CLEAR_OUTPUT_BUFFERS = 2     # Makes stdout and stderr buffers empty",
+        "uint8 FLAG_READ_STDOUT          = 64    # Output will contain stdout",
+        "uint8 FLAG_READ_STDERR          = 128   # Output will be extended with stderr"
+      ]
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 32,
+          "name": "lastExitStatus",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "flags",
+          "description": ""
+        },
+        {
+          "length": 256,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "output",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 FLAG_RUNNING              = 1     # The shell is currently running a process; stdin/out/err are piped to it",
+        "uint8 FLAG_SHELL_ERROR          = 2     # Exit status contains error code, output contains text (e.g. no such command)",
+        "uint8 FLAG_HAS_PENDING_STDOUT   = 64    # There is more stdout to read",
+        "uint8 FLAG_HAS_PENDING_STDERR   = 128   # There is more stderr to read"
+      ]
+    }
+  },
+  "10": {
+    "description": "Service to control the node configuration.\nSAVE operation instructs the remote node to save the current configuration parameters into a non-volatile\nstorage. The node may require a restart in order for some changes to take effect.\nERASE operation instructs the remote node to clear its configuration storage and reinitialize the parameters\nwith their default values. The node may require a restart in order for some changes to take effect.\nOther opcodes may be added in the future (for example, an opcode for switching between multiple configurations).\nReserved, keep zero.\nIf 'ok' (the field below) is true, this value is not used and must be kept zero.\nIf 'ok' is false, this value may contain error code. Error code constants may be defined in the future.\nTrue if the operation has been performed successfully, false otherwise.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "opcode",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 48,
+          "name": "argument",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 OPCODE_SAVE  = 0  # Save all parameters to non-volatile storage.",
+        "uint8 OPCODE_ERASE = 1  # Clear the non-volatile storage; some changes may take effect only after reboot."
+      ]
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 48,
+          "name": "argument",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "11": {
+    "description": "Get or set a parameter by name or by index.\nNote that access by index should only be used to retrieve the list of parameters; it is highly\ndiscouraged to use it for anything else, because persistent ordering is not guaranteed.\nIndex of the parameter starting from 0; ignored if name is nonempty.\nUse index only to retrieve the list of parameters.\nParameter ordering must be well defined (e.g. alphabetical, or any other stable ordering),\nin order for the index access to work.\nIf set - parameter will be assigned this value, then the new value will be returned.\nIf not set - current parameter value will be returned.\nRefer to the definition of Value for details.\nName of the parameter; always preferred over index if nonempty.\nActual parameter value.\nFor set requests, it should contain the actual parameter value after the set request was\nexecuted. The objective is to let the client know if the value could not be updated, e.g.\ndue to its range violation, etc.\nEmpty value (and/or empty name) indicates that there is no such parameter.\nEmpty name (and/or empty value) in response indicates that there is no such parameter.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 13,
+          "name": "index",
+          "description": ""
+        },
+        {
+          "type": "union",
+          "kind": "Value",
+          "name": "value",
+          "description": ""
+        },
+        {
+          "length": 92,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "name",
+          "description": ""
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 5,
+          "description": ""
+        },
+        {
+          "type": "union",
+          "kind": "Value",
+          "name": "value",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 5,
+          "description": ""
+        },
+        {
+          "type": "union",
+          "kind": "Value",
+          "name": "defaultValue",
+          "description": "Optional"
+        },
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 6,
+          "description": ""
+        },
+        {
+          "type": "union",
+          "kind": "NumericValue",
+          "name": "maxValue",
+          "description": "Optional, not applicable for bool/string"
+        },
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 6,
+          "description": ""
+        },
+        {
+          "type": "union",
+          "kind": "NumericValue",
+          "name": "minValue",
+          "description": "Optional, not applicable for bool/string"
+        },
+        {
+          "length": 92,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "name",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "15": {
+    "description": "This service instructs the node to begin the process of automated enumeration.\nThe node will automatically leave enumeration mode upon expiration of this timeout.\nName of the parameter to enumerate, e.g. ESC index.\nIf the name is left empty, the node will infer the parameter name automatically (autodetect).\nIt is highly recommended to always use autodetection in order to avoid dependency on hard-coded parameter names,\nand also allow the enumeratee to possibly enumerate multiple different parameters at once.\nThe rule of thumb is to always leave this parameter empty unless you really know what you're doing.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 16,
+          "name": "timeoutSec",
+          "description": "[Seconds]"
+        },
+        {
+          "length": 92,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "parameterName",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint16 TIMEOUT_CANCEL   = 0     # Stop enumeration immediately",
+        "uint16 TIMEOUT_INFINITE = 65535 # Do not stop until explicitly requested"
+      ]
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "error",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 ERROR_OK                  = 0     # Success",
+        "uint8 ERROR_INVALID_MODE        = 1     # The node cannot perform enumeration in its current operating mode",
+        "uint8 ERROR_INVALID_PARAMETER   = 2     # The node cannot enumerate on the requested parameter, or it doesn't exist",
+        "uint8 ERROR_UNSUPPORTED         = 3     # The node cannot perform enumeration in its current configuration",
+        "uint8 ERROR_UNKNOWN             = 255   # Generic error"
+      ]
+    }
+  },
+  "30": {
+    "description": "THIS DEFINITION IS SUBJECT TO CHANGE.\nThis type is a part of the Raft consensus algorithm.\nPlease refer to the specification for details.\nGiven min election timeout and cluster size, the maximum recommended request interval can be derived as follows:\n  max recommended request interval = (min election timeout) / 2 requests / (cluster size - 1)\nThe equation assumes that the Leader requests one Follower at a time, so that there's at most one pending call\nat any moment. Such behavior is optimal as it creates uniform bus load, but it is actually implementation-specific.\nObviously, request interval can be lower than that if needed, but higher values are not recommended as they may\ncause Followers to initiate premature elections in case of intensive frame losses or delays.\nReal timeout is randomized in the range (MIN, MAX], according to the Raft paper.\nRefer to the Raft paper for explanation.\nWorst-case replication time per Follower can be computed as:\n  worst replication time = (127 log entries) * (2 trips of next_index) * (request interval per Follower)\nRefer to the Raft paper for explanation.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 32,
+          "name": "term",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 32,
+          "name": "prevLogTerm",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "prevLogIndex",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "leaderCommit",
+          "description": ""
+        },
+        {
+          "length": 1,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "kind": "Entry",
+            "unsigned": false,
+            "bits": null,
+            "type": "object"
+          },
+          "name": "entries",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint16 DEFAULT_MIN_ELECTION_TIMEOUT_MS = 2000",
+        "uint16 DEFAULT_MAX_ELECTION_TIMEOUT_MS = 4000"
+      ]
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 32,
+          "name": "term",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "31": {
+    "description": "THIS DEFINITION IS SUBJECT TO CHANGE.\nThis type is a part of the Raft consensus algorithm.\nPlease refer to the specification for details.\nRefer to the Raft paper for explanation.\nRefer to the Raft paper for explanation.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 32,
+          "name": "term",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 32,
+          "name": "lastLogTerm",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "lastLogIndex",
+          "description": ""
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 32,
+          "name": "term",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "40": {
+    "description": "This service initiates firmware update on a remote node.\nThe node that is being updated (slave) will retrieve the firmware image file 'image_file_remote_path' from the node\n'source_node_id' using the file read service, then it will update the firmware and reboot.\nThe slave can explicitly reject this request if it is not possible to update the firmware at the moment\n(e.g. if the node is busy).\nIf the slave node accepts this request, the initiator will get a response immediately, before the update process\nactually begins.\nWhile the firmware is being updated, the slave should set its mode (uavcan.protocol.NodeStatus.mode) to\nMODE_SOFTWARE_UPDATE.\nOther error codes may be added in the future.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "sourceNodeId",
+          "description": "If this field is zero, the caller's Node ID will be used instead."
+        },
+        {
+          "type": "object",
+          "kind": "Path",
+          "name": "imageFileRemotePath",
+          "description": ""
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "error",
+          "description": ""
+        },
+        {
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "optionalErrorMessage",
+          "description": "Detailed description of the error."
+        }
+      ],
+      "statics": [
+        "uint8 ERROR_OK               = 0",
+        "uint8 ERROR_INVALID_MODE     = 1    # Cannot perform the update in the current operating mode or state.",
+        "uint8 ERROR_IN_PROGRESS      = 2    # Firmware update is already in progress, and the slave doesn't want to restart.",
+        "uint8 ERROR_UNKNOWN          = 255"
+      ]
+    }
+  },
+  "45": {
+    "description": "Request info about a remote file system entry (file, directory, etc).\nFile size in bytes.\nShould be set to zero for directories.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "object",
+          "kind": "Path",
+          "name": "path",
+          "description": ""
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 40,
+          "name": "size",
+          "description": ""
+        },
+        {
+          "type": "object",
+          "kind": "Error",
+          "name": "error",
+          "description": ""
+        },
+        {
+          "type": "object",
+          "kind": "EntryType",
+          "name": "entryType",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "46": {
+    "description": "This service can be used to retrieve a remote directory listing, one entry per request.\nThe client should query each entry independently, iterating 'entry_index' from 0 until the last entry is passed,\nin which case the server will report that there is no such entry (via the fields 'entry_type' and 'error').\nThe entry_index shall be applied to the ordered list of directory entries (e.g. alphabetically ordered). The exact\nsorting criteria does not matter as long as it provides the same ordering for subsequent service calls.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 32,
+          "name": "entryIndex",
+          "description": ""
+        },
+        {
+          "type": "object",
+          "kind": "Path",
+          "name": "directoryPath",
+          "description": ""
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "object",
+          "kind": "Error",
+          "name": "error",
+          "description": ""
+        },
+        {
+          "type": "object",
+          "kind": "EntryType",
+          "name": "entryType",
+          "description": ""
+        },
+        {
+          "type": "object",
+          "kind": "Path",
+          "name": "entryFullPath",
+          "description": "Ignored/Empty if such entry does not exist."
+        }
+      ],
+      "statics": []
+    }
+  },
+  "47": {
+    "description": "Delete remote file system entry.\nIf the remote entry is a directory, all nested entries will be removed too.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "object",
+          "kind": "Path",
+          "name": "path",
+          "description": ""
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "object",
+          "kind": "Error",
+          "name": "error",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "48": {
+    "description": "Read file from a remote node.\n\nThere are two possible outcomes of a successful service call:\n 1. Data array size equals its capacity. This means that the end of the file is not reached yet.\n 2. Data array size is less than its capacity, possibly zero. This means that the end of file is reached.\n\nThus, if the client needs to fetch the entire file, it should repeatedly call this service while increasing the\noffset, until incomplete data is returned.\nIf the object pointed by 'path' cannot be read (e.g. it is a directory or it does not exist), appropriate error code\nwill be returned, and data array will be empty.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 40,
+          "name": "offset",
+          "description": ""
+        },
+        {
+          "type": "object",
+          "kind": "Path",
+          "name": "path",
+          "description": ""
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "object",
+          "kind": "Error",
+          "name": "error",
+          "description": ""
+        },
+        {
+          "length": 256,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "data",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "49": {
+    "description": "Write into a remote file.\nThe server shall place the contents of the field 'data' into the file pointed by 'path' at the offset specified by\nthe field 'offset'.\nWhen writing a file, the client should repeatedly call this service with data while advancing offset until the file\nis written completely. When write is complete, the client shall call the service one last time, with the offset\nset to the size of the file and with the data field empty, which will signal the server that the write operation is\ncomplete.\nWhen the write operation is complete, the server shall truncate the resulting file past the specified offset.\nServer implementation advice:\nIt is recommended to implement proper handling of concurrent writes to the same file from different clients, for\nexample by means of creating a staging area for uncompleted writes (like FTP servers do).",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 40,
+          "name": "offset",
+          "description": ""
+        },
+        {
+          "type": "object",
+          "kind": "Path",
+          "name": "path",
+          "description": ""
+        },
+        {
+          "length": 192,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "data",
+          "description": ""
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "type": "object",
+          "kind": "Error",
+          "name": "error",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "63": {
+    "description": "This service carries arbitrary data in the format of the specified high-level protocol.\nThe data will be delivered to the specified node only (not broadcast), and the addressed node\nwill be required to respond (although the response may be empty, if the chosen protocol allows so).\nThe specified protocol applies both to the request and to the response. The channelID allows for\nadditional routing between the source and target nodes.",
+    "type": "service",
+    "request": {
+      "variables": [
+        {
+          "type": "object",
+          "kind": "Protocol",
+          "name": "protocol",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "channelId",
+          "description": ""
+        },
+        {
+          "length": 60,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "buffer",
+          "description": "TAO rules apply"
+        }
+      ],
+      "statics": []
+    },
+    "response": {
+      "variables": [
+        {
+          "length": 60,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "buffer",
+          "description": "TAO rules apply"
+        }
+      ],
+      "statics": []
+    }
+  },
+  "341": {
+    "description": "Abstract node status information.\nAll UAVCAN nodes are required to publish this message periodically.\nPublication period may vary within these limits.\nIt is NOT recommended to change it at run time.\nIf a node fails to publish this message in this amount of time, it should be considered offline.\nUptime counter should never overflow.\nOther nodes may detect that a remote node has restarted when this value goes backwards.\nAbstract node health.\nCurrent mode.\nMode OFFLINE can be actually reported by the node to explicitly inform other network\nparticipants that the sending node is about to shutdown. In this case other nodes will not\nhave to wait OFFLINE_TIMEOUT_MS before they detect that the node is no longer available.\nReserved values can be used in future revisions of the specification.\nNot used currently, keep zero when publishing, ignore when receiving.\nOptional, vendor-specific node status code, e.g. a fault code or a status bitmask.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 32,
+          "name": "uptimeSec",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 2,
+          "name": "health",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 3,
+          "name": "mode",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 3,
+          "name": "subMode",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 16,
+          "name": "vendorSpecificStatusCode",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint16 MAX_BROADCASTING_PERIOD_MS = 1000",
+        "uint16 MIN_BROADCASTING_PERIOD_MS = 2",
+        "uint16 OFFLINE_TIMEOUT_MS = 3000",
+        "uint2 HEALTH_OK         = 0     # The node is functioning properly.",
+        "uint2 HEALTH_WARNING    = 1     # A critical parameter went out of range or the node encountered a minor failure.",
+        "uint2 HEALTH_ERROR      = 2     # The node encountered a major failure.",
+        "uint2 HEALTH_CRITICAL   = 3     # The node suffered a fatal malfunction.",
+        "uint3 MODE_OPERATIONAL      = 0         # Normal operating mode.",
+        "uint3 MODE_INITIALIZATION   = 1         # Initialization is in progress; this mode is entered immediately after startup.",
+        "uint3 MODE_MAINTENANCE      = 2         # E.g. calibration, the bootloader is running, etc.",
+        "uint3 MODE_SOFTWARE_UPDATE  = 3         # New software/firmware is being loaded.",
+        "uint3 MODE_OFFLINE          = 7         # The node is no longer available."
+      ]
+    }
+  },
+  "380": {
+    "description": "This message will be broadcasted when the node receives user input in the process of enumeration.\nThis field is unused; keep it empty\nName of the enumerated parameter.\nThis field must always be populated by the enumeratee.\nIf multiple parameters were enumerated at once (e.g. ESC index and the direction of rotation),\nthe field should contain the name of the most important parameter.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 6,
+          "description": ""
+        },
+        {
+          "length": 92,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "parameterName",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "390": {
+    "description": "THIS DEFINITION IS SUBJECT TO CHANGE.\nThis message is used by allocation servers to find each other's node ID.\nPlease refer to the specification for details.\nA server should stop publishing this message as soon as it has discovered all other nodes in the cluster.\nAn exception applies: when a server receives a Discovery message from another server where the list\nof known nodes is incomplete (i.e. len(known_nodes) < configured_cluster_size), the server must\npublish a discovery message once. This condition allows other servers to quickly re-discover the cluster\nafter restart.\nThis message should be broadcasted by the server at this interval until all other servers are discovered.\nNumber of servers in the cluster as configured on the sender.\nNode ID of servers that are known to the publishing server, including the publishing server itself.\nCapacity of this array defines maximum size of the server cluster.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "configuredClusterSize",
+          "description": ""
+        },
+        {
+          "length": 5,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "knownNodes",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint16 BROADCASTING_PERIOD_MS = 1000"
+      ]
+    }
+  },
+  "1000": {
+    "description": "Inertial data and orientation in body frame.\nNormalized quaternion\nrad/sec\nm/s^2",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "length": 4,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "orientationXyzw",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 4,
+          "description": ""
+        },
+        {
+          "length": 9,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "orientationCovariance",
+          "description": ""
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "angularVelocity",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 4,
+          "description": ""
+        },
+        {
+          "length": 9,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "angularVelocityCovariance",
+          "description": ""
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "linearAcceleration",
+          "description": ""
+        },
+        {
+          "length": 9,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "linearAccelerationCovariance",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1001": {
+    "description": "Magnetic field readings, in Gauss, in body frame.\nSI units are avoided because of float16 range limitations.\nThis message is deprecated. Use the newer 1002.MagneticFieldStrength2.uavcan message.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "magneticFieldGa",
+          "description": ""
+        },
+        {
+          "length": 9,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "magneticFieldCovariance",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1002": {
+    "description": "Magnetic field readings, in Gauss, in body frame.\nSI units are avoided because of float16 range limitations.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "sensorId",
+          "description": ""
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "magneticFieldGa",
+          "description": ""
+        },
+        {
+          "length": 9,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "magneticFieldCovariance",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1003": {
+    "description": "Raw IMU data with timestamps.\nTHIS DEFINITION MAY BE CHANGED IN A NON-BACKWARD-COMPATIBLE WAY IN THE FUTURE.\nData acquisition timestamp in the bus shared time base.\nIntegration interval, seconds.\nSet to a non-positive value if the integrated samples are not available\n(in this case, only the latest point samples will be valid).\nAngular velocity samples in radian/second.\nThe samples are represented in the body frame, the axes are ordered as follows:\n  1. angular velocity around X (roll rate)\n  2. angular velocity around Y (pitch rate)\n  3. angular velocity around Z (yaw rate)\nLinear acceleration samples in meter/(second^2).\nThe samples are represented in the body frame, the axes are ordered as follows:\n  1. linear acceleration along X (forward positive)\n  2. linear acceleration along Y (right positive)\n  3. linear acceleration along Z (down positive)\nCovariance matrix. The diagonal entries are ordered as follows:\n  1. roll rate                (radian^2)/(second^2)\n  2. pitch rate               (radian^2)/(second^2)\n  3. yaw rate                 (radian^2)/(second^2)\n  4. forward acceleration     (meter^2)/(second^4)\n  5. rightward acceleration   (meter^2)/(second^4)\n  6. downward acceleration    (meter^2)/(second^4)",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "integrationInterval",
+          "description": ""
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "rateGyroLatest",
+          "description": "Latest sample, radian/second"
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 32
+          },
+          "name": "rateGyroIntegral",
+          "description": "Integrated samples, radian/second"
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "accelerometerLatest",
+          "description": "Latest sample, meter/(second^2)"
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 32
+          },
+          "name": "accelerometerIntegral",
+          "description": "Integrated samples, meter/(second^2)"
+        },
+        {
+          "length": 36,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "covariance",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1010": {
+    "description": "Actuator commands.\nThe system supports up to 256 actuators; up to 15 of them can be commanded with one message.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "length": 15,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "kind": "Command",
+            "unsigned": false,
+            "bits": null,
+            "type": "object"
+          },
+          "name": "commands",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1011": {
+    "description": "Generic actuator feedback, if available.\nUnknown fields should be set to NAN.\nWhether the units are linear or angular depends on the actuator type (refer to the Command data type).",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "actuatorId",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "position",
+          "description": "meter or radian"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "force",
+          "description": "Newton or Newton metre"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "speed",
+          "description": "meter per second or radian per second"
+        },
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 1,
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "powerRatingPct",
+          "description": "0 - unloaded, 100 - full load"
+        }
+      ],
+      "statics": [
+        "uint7 POWER_RATING_PCT_UNKNOWN = 127"
+      ]
+    }
+  },
+  "1020": {
+    "description": "TAS.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "trueAirspeed",
+          "description": "m/s"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "trueAirspeedVariance",
+          "description": "(m/s)^2"
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1021": {
+    "description": "IAS.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "indicatedAirspeed",
+          "description": "m/s"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "indicatedAirspeedVariance",
+          "description": "(m/s)^2"
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1025": {
+    "description": "Angle of attack.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "sensorId",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "aoa",
+          "description": "Radians"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "aoaVariance",
+          "description": "Radians^2"
+        }
+      ],
+      "statics": [
+        "uint8 SENSOR_ID_LEFT = 254",
+        "uint8 SENSOR_ID_RIGHT = 255"
+      ]
+    }
+  },
+  "1026": {
+    "description": "Body sideslip in radians.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "sideslipAngle",
+          "description": "Radians"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "sideslipAngleVariance",
+          "description": "Radians^2"
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1027": {
+    "description": "Raw Air Data.\nNote: unused vars should be assigned NaN\nHeater State\n\nPressure Data\nTemperature Data",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "flags",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "staticPressure",
+          "description": "Pascal"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "differentialPressure",
+          "description": "Pascal"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "staticPressureSensorTemperature",
+          "description": "Kelvin"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "differentialPressureSensorTemperature",
+          "description": "Kelvin"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "staticAirTemperature",
+          "description": "Kelvin"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "pitotTemperature",
+          "description": "Kelvin"
+        },
+        {
+          "length": 16,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "covariance",
+          "description": "order of diagonal elements : "
+        }
+      ],
+      "statics": [
+        "uint8 FLAG_HEATER_AVAILABLE      = 1",
+        "uint8 FLAG_HEATER_WORKING        = 2",
+        "uint8 FLAG_HEATER_OVERCURRENT    = 4",
+        "uint8 FLAG_HEATER_OPENCIRCUIT    = 8"
+      ]
+    }
+  },
+  "1028": {
+    "description": "Static pressure.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "staticPressure",
+          "description": "Pascal"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "staticPressureVariance",
+          "description": "Pascal^2"
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1029": {
+    "description": "Static temperature.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "staticTemperature",
+          "description": "Kelvin"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "staticTemperatureVariance",
+          "description": "Kelvin^2"
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1030": {
+    "description": "Raw ESC command normalized into [-8192, 8191]; negative values indicate reverse rotation.\nThe ESC should normalize the setpoint into its effective input range.\nNon-zero setpoint value below minimum should be interpreted as min valid setpoint for the given motor.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "length": 20,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": false,
+            "bits": 14
+          },
+          "name": "cmd",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1031": {
+    "description": "Simple RPM setpoint.\nThe ESC should automatically clamp the setpoint according to the minimum and maximum supported RPM;\nfor example, given a ESC that operates in the range 100 to 10000 RPM, a setpoint of 1 RPM will be clamped to 100 RPM.\nNegative values indicate reverse rotation.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "length": 20,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": false,
+            "bits": 18
+          },
+          "name": "rpm",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1034": {
+    "description": "Generic ESC status.\nUnknown fields should be set to NAN.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 32,
+          "name": "errorCount",
+          "description": "Resets when the motor restarts"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "voltage",
+          "description": "Volt"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "current",
+          "description": "Ampere. Can be negative in case of a regenerative braking."
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "temperature",
+          "description": "Kelvin"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 18,
+          "name": "rpm",
+          "description": "Negative value indicates reverse rotation"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "powerRatingPct",
+          "description": "Instant demand factor in percent (percent of maximum power); range 0% to 127%."
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 5,
+          "name": "escIndex",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1040": {
+    "description": "Generic camera gimbal control.\nThis message can only be used in the following modes:\n - COMMAND_MODE_ANGULAR_VELOCITY\n - COMMAND_MODE_ORIENTATION_FIXED_FRAME\n - COMMAND_MODE_ORIENTATION_BODY_FRAME\nTarget operation mode - how to handle this message.\nSee the list of acceptable modes above.\nIn the angular velocity mode, this field contains a rate quaternion.\nIn the orientation mode, this field contains orientation either in fixed frame or in body frame.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "gimbalId",
+          "description": ""
+        },
+        {
+          "type": "object",
+          "kind": "Mode",
+          "name": "mode",
+          "description": ""
+        },
+        {
+          "length": 4,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "quaternionXyzw",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1041": {
+    "description": "Generic camera gimbal control.\nThis message can only be used in the following modes:\n - COMMAND_MODE_GEO_POI\nTarget operation mode - how to handle this message.\nSee the list of acceptable modes above.\nCoordinates of the POI (point of interest).",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "gimbalId",
+          "description": ""
+        },
+        {
+          "type": "object",
+          "kind": "Mode",
+          "name": "mode",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 32,
+          "name": "longitudeDeg1E7",
+          "description": "1 LSB = 1e-7 deg"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 32,
+          "name": "latitudeDeg1E7",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 22,
+          "name": "heightCm",
+          "description": "1 LSB = 10 mm"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 2,
+          "name": "heightReference",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint2 HEIGHT_REFERENCE_ELLIPSOID = 0",
+        "uint2 HEIGHT_REFERENCE_MEAN_SEA_LEVEL = 1"
+      ]
+    }
+  },
+  "1044": {
+    "description": "Generic gimbal status.\nCamera axis orientation in body frame (not in fixed frame).\nPlease refer to the UAVCAN coordinate frame conventions.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "gimbalId",
+          "description": ""
+        },
+        {
+          "type": "object",
+          "kind": "Mode",
+          "name": "mode",
+          "description": ""
+        },
+        {
+          "length": 4,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "cameraOrientationInBodyFrameXyzw",
+          "description": ""
+        },
+        {
+          "length": 9,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "cameraOrientationInBodyFrameCovariance",
+          "description": "+inf for non-existent axes"
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1050": {
+    "description": "Generic narrow-beam range sensor data.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "sensorId",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "fieldOfView",
+          "description": "Radians"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 5,
+          "name": "sensorType",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 3,
+          "name": "readingType",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "range",
+          "description": "Meters"
+        }
+      ],
+      "statics": [
+        "uint5 SENSOR_TYPE_UNDEFINED = 0",
+        "uint5 SENSOR_TYPE_SONAR     = 1",
+        "uint5 SENSOR_TYPE_LIDAR     = 2",
+        "uint5 SENSOR_TYPE_RADAR     = 3",
+        "uint3 READING_TYPE_UNDEFINED   = 0   # Range is unknown",
+        "uint3 READING_TYPE_VALID_RANGE = 1   # Range field contains valid distance",
+        "uint3 READING_TYPE_TOO_CLOSE   = 2   # Range field contains min range for the sensor",
+        "uint3 READING_TYPE_TOO_FAR     = 3   # Range field contains max range for the sensor"
+      ]
+    }
+  },
+  "1060": {
+    "description": "GNSS navigation solution with uncertainty.\nThis message is deprecated. Use the newer 1063.Fix2.uavcan message.\nTime solution.\nTime standard (GPS, UTC, TAI, etc) is defined in the field below.\nTime standard used in the GNSS timestamp field.\nIf known, the number of leap seconds allows to perform conversions between some time standards.\nPosition and velocity solution\nFix status\nPrecision",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 3,
+          "name": "gnssTimeStandard",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 5,
+          "name": "#",
+          "description": "Reserved space"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "numLeapSeconds",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 37,
+          "name": "longitudeDeg1E8",
+          "description": "Longitude degrees multiplied by 1e8 (approx. 1 mm per LSB)"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 37,
+          "name": "latitudeDeg1E8",
+          "description": "Latitude degrees multiplied by 1e8 (approx. 1 mm per LSB on equator)"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 27,
+          "name": "heightEllipsoidMm",
+          "description": "Height above ellipsoid in millimeters"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 27,
+          "name": "heightMslMm",
+          "description": "Height above mean sea level in millimeters"
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "nedVelocity",
+          "description": "NED frame (north-east-down) in meters per second"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 6,
+          "name": "satsUsed",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 2,
+          "name": "status2DFix",
+          "description": "= 2"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 2,
+          "name": "status3DFix",
+          "description": "= 3"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 2,
+          "name": "status",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "pdop",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 4,
+          "description": ""
+        },
+        {
+          "length": 9,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "positionCovariance",
+          "description": "m^2"
+        },
+        {
+          "length": 9,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "velocityCovariance",
+          "description": "(m/s)^2"
+        }
+      ],
+      "statics": [
+        "uint3 GNSS_TIME_STANDARD_NONE = 0  # Time is unknown",
+        "uint3 GNSS_TIME_STANDARD_TAI  = 1",
+        "uint3 GNSS_TIME_STANDARD_UTC  = 2",
+        "uint3 GNSS_TIME_STANDARD_GPS  = 3",
+        "uint8 NUM_LEAP_SECONDS_UNKNOWN = 0",
+        "uint2 STATUS_NO_FIX    = 0",
+        "uint2 STATUS_TIME_ONLY = 1"
+      ]
+    }
+  },
+  "1061": {
+    "description": "GNSS low priority auxiliary info.\nUnknown DOP parameters should be set to NAN.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "gdop",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "pdop",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "hdop",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "vdop",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "tdop",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "ndop",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "edop",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "satsVisible",
+          "description": "All visible sats of all available GNSS (e.g. GPS, GLONASS, etc)"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 6,
+          "name": "satsUsed",
+          "description": "All used sats of all available GNSS"
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1062": {
+    "description": "GNSS RTCM SC-104 protocol raw stream container.\nRTCM messages that are longer than max data size can be split over multiple consecutive messages.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "protocolIdRtcm2",
+          "description": "= 2"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "protocolIdRtcm3",
+          "description": "= 3"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "protocolId",
+          "description": ""
+        },
+        {
+          "length": 128,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "data",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 PROTOCOL_ID_UNKNOWN = 0"
+      ]
+    }
+  },
+  "1063": {
+    "description": "GNSS ECEF and LLA navigation solution with uncertainty.\nGlobal network-synchronized time, if available, otherwise zero.\nTime solution.\nThe method and number of leap seconds which were in use for deriving the timestamp are\ndefined in the fields below.\nMethod used for deriving the GNSS timestamp field.\nThis data type relies on the following definitions:\n  Leap seconds  - Accumulated one-second adjustments applied to UTC since 1972.\n                  For reference, on May 2017, the number of leap seconds was equal 27.\n                  The number of leap seconds is taken from the field num_leap_seconds.\n                  Refer to https://en.wikipedia.org/wiki/Leap_second for a general overview.\n  TAI timestamp - The number of microseconds between the current TAI time and\n                  the TAI time at UTC 1970-01-01T00:00:00.\n  UTC timestamp - The number of microseconds between the current UTC time and\n                  UTC 1970-01-01T00:00:00.\n                  UTC can be expressed via TAI as follows (in seconds):\n                      UTC = TAI - num_leap_seconds - 10\n                  And via GPS (in seconds):\n                      UTC = GPS - num_leap_seconds + 9\n  GPS timestamp - The number of microseconds between the current GPS time and\n                  the GPS time at UTC 1970-01-01T00:00:00.\n                  GPS time can be expressed via TAI as follows (in seconds):\n                      GPS = TAI - 19\nAccumulated one-second adjustments applied to UTC since 1972.\nThe number must agree with the currently correct number of UTC leap seconds. If this cannot\nbe garanteed, the field must be set to NUM_LEAP_SECONDS_UNKNOWN.\nPosition and velocity solution\nFix status\nGNSS Mode\nGNSS Sub mode\nPrecision\nPosition and velocity solution in ECEF, if available",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 3,
+          "name": "gnssTimeStandard",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 13,
+          "name": "#",
+          "description": "Reserved space"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "numLeapSeconds",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 37,
+          "name": "longitudeDeg1E8",
+          "description": "Longitude degrees multiplied by 1e8 (approx. 1 mm per LSB)"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 37,
+          "name": "latitudeDeg1E8",
+          "description": "Latitude degrees multiplied by 1e8 (approx. 1 mm per LSB on equator)"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 27,
+          "name": "heightEllipsoidMm",
+          "description": "Height above ellipsoid in millimeters"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 27,
+          "name": "heightMslMm",
+          "description": "Height above mean sea level in millimeters"
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 32
+          },
+          "name": "nedVelocity",
+          "description": "NED frame (north-east-down) in meters per second"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 6,
+          "name": "satsUsed",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 2,
+          "name": "status2DFix",
+          "description": "= 2"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 2,
+          "name": "status3DFix",
+          "description": "= 3"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 2,
+          "name": "status",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 4,
+          "name": "mode",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 6,
+          "name": "subMode",
+          "description": ""
+        },
+        {
+          "length": 36,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "covariance",
+          "description": "Position and velocity covariance. Units are"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "pdop",
+          "description": ""
+        },
+        {
+          "length": 1,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "kind": "ECEFPositionVelocity",
+            "unsigned": false,
+            "bits": null,
+            "type": "object"
+          },
+          "name": "ecefPositionVelocity",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint3 GNSS_TIME_STANDARD_NONE = 0  # Time is unknown",
+        "uint3 GNSS_TIME_STANDARD_TAI  = 1",
+        "uint3 GNSS_TIME_STANDARD_UTC  = 2",
+        "uint3 GNSS_TIME_STANDARD_GPS  = 3",
+        "uint8 NUM_LEAP_SECONDS_UNKNOWN = 0",
+        "uint2 STATUS_NO_FIX    = 0",
+        "uint2 STATUS_TIME_ONLY = 1",
+        "uint4 MODE_SINGLE      = 0",
+        "uint4 MODE_DGPS        = 1",
+        "uint4 MODE_RTK         = 2",
+        "uint4 MODE_PPP         = 3",
+        "uint6 SUB_MODE_DGPS_OTHER    = 0",
+        "uint6 SUB_MODE_DGPS_SBAS     = 1",
+        "uint6 SUB_MODE_RTK_FLOAT     = 0",
+        "uint6 SUB_MODE_RTK_FIXED     = 1"
+      ]
+    }
+  },
+  "1070": {
+    "description": "Generic cargo holder/hardpoint command.\nEither a binary command (0 - release, 1+ - hold) or bitmask",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "hardpointId",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 16,
+          "name": "command",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1071": {
+    "description": "Generic cargo holder/hardpoint status.\nMeaning is the same as for the command field in the Command message",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "hardpointId",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "payloadWeight",
+          "description": "Newton"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "payloadWeightVariance",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 16,
+          "name": "status",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1080": {
+    "description": "Nodes that are capable of producing sounds should obey.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "frequency",
+          "description": "Hz"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "duration",
+          "description": "Sec"
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1081": {
+    "description": "Lights control command.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "length": 20,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "kind": "SingleLightCommand",
+            "unsigned": false,
+            "bits": null,
+            "type": "object"
+          },
+          "name": "commands",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1090": {
+    "description": "Primary power supply status.\nTypical publishing rate should be around 1~2 Hz.\nHow many hours left to full discharge at average load over the last 10 seconds.\nTrue if the publishing node senses that an external power source can be used, e.g. to charge batteries.\nRemaining energy estimate in percent.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "hoursToEmptyAt10SecAvgPower",
+          "description": "[Hours]"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "hoursToEmptyAt10SecAvgPowerVariance",
+          "description": "[Hours^2]"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "remainingEnergyPct",
+          "description": "[Percent] Required"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "remainingEnergyPctStdev",
+          "description": "[Percent] Error standard deviation. Use best guess if unknown."
+        }
+      ],
+      "statics": []
+    }
+  },
+  "1091": {
+    "description": "Generic electrical circuit info.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 16,
+          "name": "circuitId",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "voltage",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "current",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "errorFlags",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 ERROR_FLAG_OVERVOLTAGE  = 1",
+        "uint8 ERROR_FLAG_UNDERVOLTAGE = 2",
+        "uint8 ERROR_FLAG_OVERCURRENT  = 4",
+        "uint8 ERROR_FLAG_UNDERCURRENT = 8"
+      ]
+    }
+  },
+  "1092": {
+    "description": "Single battery info.\nTypical publishing rate should be around 0.2~1 Hz.\nPlease refer to the Smart Battery data specification for some elaboration.\nPrimary parameters.\nSome fields can be set to NAN if their values are unknown.\nFull charge capacity is expected to slowly reduce as the battery is aging. Normally its estimate is updated after\nevery charging cycle.\nStatus flags.\nNotes:\n - CHARGING must be always set as long as the battery is connected to a charger, even if the charging is complete.\n - CHARGED must be cleared immediately when the charger is disconnected.\nState of Health (SOH) estimate, in percent.\nhttp://en.wikipedia.org/wiki/State_of_health\nRelative State of Charge (SOC) estimate, in percent.\nhttp://en.wikipedia.org/wiki/State_of_charge\nBattery identification.\nModel instance ID must be unique within the same battery model name.\nModel name is a human-readable string that normally should include the vendor name, model name, and chemistry\ntype of this battery. This field should be assumed case-insensitive. Example: \"Zubax Smart Battery v1.1 LiPo\".",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "temperature",
+          "description": "[Kelvin]"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "voltage",
+          "description": "[Volt]"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "current",
+          "description": "[Ampere]"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "averagePower10Sec",
+          "description": "[Watt] Average power consumption over the last 10 seconds"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "remainingCapacityWh",
+          "description": "[Watt hours] Will be increasing during charging"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "fullChargeCapacityWh",
+          "description": "[Watt hours] Predicted battery capacity when it is fully charged. Falls with aging"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "hoursToFullCharge",
+          "description": "[Hours] Charging is expected to complete in this time; zero if not charging"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 11,
+          "name": "statusFlags",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "stateOfHealthPct",
+          "description": "Health of the battery, in percent, optional"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "stateOfChargePct",
+          "description": "Percent of the full charge [0, 100]. This field is required"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "stateOfChargePctStdev",
+          "description": "SOC error standard deviation; use best guess if unknown"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "batteryId",
+          "description": "Identifies the battery within this vehicle, e.g. 0 - primary battery"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 32,
+          "name": "modelInstanceId",
+          "description": "Set to zero if not applicable"
+        },
+        {
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "modelName",
+          "description": "Battery model name"
+        }
+      ],
+      "statics": [
+        "uint11 STATUS_FLAG_IN_USE       = 1     # The battery is currently used as a power supply",
+        "uint11 STATUS_FLAG_CHARGING     = 2     # Charger is active",
+        "uint11 STATUS_FLAG_CHARGED      = 4     # Charging complete, but the charger is still active",
+        "uint11 STATUS_FLAG_TEMP_HOT     = 8     # Battery temperature is above normal",
+        "uint11 STATUS_FLAG_TEMP_COLD    = 16    # Battery temperature is below normal",
+        "uint11 STATUS_FLAG_OVERLOAD     = 32    # Safe operating area violation",
+        "uint11 STATUS_FLAG_BAD_BATTERY  = 64    # This battery should not be used anymore (e.g. low SOH)",
+        "uint11 STATUS_FLAG_NEED_SERVICE = 128   # This battery requires maintenance (e.g. balancing, full recharge)",
+        "uint11 STATUS_FLAG_BMS_ERROR    = 256   # Battery management system/controller error, smart battery interface error",
+        "uint11 STATUS_FLAG_RESERVED_A   = 512   # Keep zero",
+        "uint11 STATUS_FLAG_RESERVED_B   = 1024  # Keep zero",
+        "uint7 STATE_OF_HEALTH_UNKNOWN = 127     # Use this constant if SOH cannot be estimated"
+      ]
+    }
+  },
+  "1100": {
+    "description": "This message represents the system arming status.\nSome nodes may refuse to operate unless the system is fully armed.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "status",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 STATUS_DISARMED           = 0",
+        "uint8 STATUS_FULLY_ARMED        = 255"
+      ]
+    }
+  },
+  "1110": {
+    "description": "Generic device temperature",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 16,
+          "name": "deviceId",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "temperature",
+          "description": "in kelvin"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "errorFlags",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 ERROR_FLAG_OVERHEATING = 1",
+        "uint8 ERROR_FLAG_OVERCOOLING = 2"
+      ]
+    }
+  },
+  "1120": {
+    "description": "Generic status message of a piston engine control system.\nAll integer fields are required unless stated otherwise.\nAll floating point fields are optional unless stated otherwise; unknown/unapplicable fields should be set to NaN.\nAbstract engine state. The flags defined below can provide further elaboration.\nThis is a required field.\nThe engine is not running. This is the default state.\nNext states: STARTING, FAULT\nThe engine is starting. This is a transient state.\nNext states: STOPPED, RUNNING, FAULT\nThe engine is running normally.\nSome error flags may be set to indicate non-fatal issues, e.g. overheating.\nNext states: STOPPED, FAULT\nThe engine can no longer function.\nThe error flags may contain additional information about the nature of the fault.\nNext states: STOPPED.\nGeneral status flags.\nNote that not all flags are required. Those that aren't are prepended with a validity flag, which is, obviously,\nalways required; when the validity flag is set, it is assumed that the relevant flags are set correctly.\nIf the validity flag is cleared, then the state of the relevant flags should be ignored.\nAll unused bits must be cleared.\nGeneral error. This flag is required, and it can be used to indicate an error condition\nthat does not fit any of the other flags.\nNote that the vendor may also report additional status information via the vendor specific status code\nfield of the NodeStatus message.\nError of the crankshaft sensor. This flag is optional.\nTemperature levels. These flags are optional; either none of them or all of them are supported.\nFuel pressure. These flags are optional; either none of them or all of them are supported.\nDetonation warning. This flag is optional.\nThis warning is cleared immediately after broadcasting is done if detonation is no longer happening.\nMisfire warning. This flag is optional.\nThis warning is cleared immediately after broadcasting is done if misfire is no longer happening.\nOil pressure. These flags are optional; either none of them or all of them are supported.\nDebris warning. This flag is optional.\nReserved space\nEngine load estimate.\nUnit: percent.\nRange: [0, 127].\nEngine speed.\nUnit: revolutions per minute.\nSpark dwell time.\nUnit: millisecond.\nAtmospheric (barometric) pressure.\nUnit: kilopascal.\nEngine intake manifold pressure.\nUnit: kilopascal.\nEngine intake manifold temperature.\nUnit: kelvin.\nEngine coolant temperature.\nUnit: kelvin.\nOil pressure.\nUnit: kilopascal.\nOil temperature.\nUnit: kelvin.\nFuel pressure.\nUnit: kilopascal.\nInstant fuel consumption estimate.\nThe estimated value should be low-pass filtered in order to prevent aliasing effects.\nUnit: (centimeter^3)/minute.\nEstimate of the consumed fuel since the start of the engine.\nThis variable MUST be reset when the engine is stopped.\nUnit: centimeter^3.\nThrottle position.\nUnit: percent.\nThe index of the publishing ECU.\nSpark plug activity report.\nCan be used during pre-flight tests of the spark subsystem.\nPer-cylinder status information.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 2,
+          "name": "state",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 30,
+          "name": "flags",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 16,
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "engineLoadPercent",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 17,
+          "name": "engineSpeedRpm",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "sparkDwellTimeMs",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "atmosphericPressureKpa",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "intakeManifoldPressureKpa",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "intakeManifoldTemperature",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "coolantTemperature",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "oilPressure",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "oilTemperature",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "fuelPressure",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "fuelConsumptionRateCm3Pm",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "estimatedConsumedFuelVolumeCm3",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "throttlePositionPercent",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 6,
+          "name": "ecuIndex",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 3,
+          "name": "sparkPlugUsage",
+          "description": ""
+        },
+        {
+          "length": 16,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "kind": "CylinderStatus",
+            "unsigned": true,
+            "bits": null,
+            "type": "object"
+          },
+          "name": "cylinderStatus",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint2 STATE_STOPPED = 0",
+        "uint2 STATE_STARTING = 1",
+        "uint2 STATE_RUNNING = 2",
+        "uint2 STATE_FAULT = 3",
+        "uint30 FLAG_GENERAL_ERROR                       = 1",
+        "uint30 FLAG_CRANKSHAFT_SENSOR_ERROR_SUPPORTED   = 2",
+        "uint30 FLAG_CRANKSHAFT_SENSOR_ERROR             = 4",
+        "uint30 FLAG_TEMPERATURE_SUPPORTED               = 8",
+        "uint30 FLAG_TEMPERATURE_BELOW_NOMINAL           = 16      # Under-temperature warning",
+        "uint30 FLAG_TEMPERATURE_ABOVE_NOMINAL           = 32      # Over-temperature warning",
+        "uint30 FLAG_TEMPERATURE_OVERHEATING             = 64      # Critical overheating",
+        "uint30 FLAG_TEMPERATURE_EGT_ABOVE_NOMINAL       = 128     # Exhaust gas over-temperature warning",
+        "uint30 FLAG_FUEL_PRESSURE_SUPPORTED             = 256",
+        "uint30 FLAG_FUEL_PRESSURE_BELOW_NOMINAL         = 512     # Under-pressure warning",
+        "uint30 FLAG_FUEL_PRESSURE_ABOVE_NOMINAL         = 1024    # Over-pressure warning",
+        "uint30 FLAG_DETONATION_SUPPORTED                = 2048",
+        "uint30 FLAG_DETONATION_OBSERVED                 = 4096    # Detonation condition observed warning",
+        "uint30 FLAG_MISFIRE_SUPPORTED                   = 8192",
+        "uint30 FLAG_MISFIRE_OBSERVED                    = 16384   # Misfire condition observed warning",
+        "uint30 FLAG_OIL_PRESSURE_SUPPORTED              = 32768",
+        "uint30 FLAG_OIL_PRESSURE_BELOW_NOMINAL          = 65536   # Under-pressure warning",
+        "uint30 FLAG_OIL_PRESSURE_ABOVE_NOMINAL          = 131072  # Over-pressure warning",
+        "uint30 FLAG_DEBRIS_SUPPORTED                    = 262144",
+        "uint30 FLAG_DEBRIS_DETECTED                     = 524288  # Detection of debris warning",
+        "uint3 SPARK_PLUG_SINGLE         = 0",
+        "uint3 SPARK_PLUG_FIRST_ACTIVE   = 1",
+        "uint3 SPARK_PLUG_SECOND_ACTIVE  = 2",
+        "uint3 SPARK_PLUG_BOTH_ACTIVE    = 3"
+      ]
+    }
+  },
+  "1129": {
+    "description": "Generic fuel tank status message.\nAll fields are required unless stated otherwise. Unpopulated optional fields should be set to NaN.\nReserved for future use.\nThe estimated amount of fuel.\nThe reported values can be either measured directly using appropriate sensors,\nor they can be estimated by fusing the data provided by various sensors.\nFor example, a Kalman filter can be used to fuse the data from fuel level sensors and flow sensors.\nAll fields are required.\nEstimate of the current fuel consumption rate.\nThe flow can be negative if the fuel is being transferred between the tanks or during refueling.\nThis field is required.\nUnit: (centimeter^3)/minute\nFuel temperature.\nThis field is optional, set to NaN if not provided.\nUnit: kelvin\nThe ID of the current fuel tank.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 9,
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "availableFuelVolumePercent",
+          "description": "Unit: percent, from 0% to 100%"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "availableFuelVolumeCm3",
+          "description": "Unit: centimeter^3"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "fuelConsumptionRateCm3Pm",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "fuelTemperature",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "fuelTankId",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "2000": {
+    "description": "Inertial data and orientation in body frame with fused location.\nFields marked as optional should be set to NaN if the corresponding value is unknown.\nGlobal network synchronized timestamp, if known.\nSet to zero if the timestamp is not known.\nGeo location [angular degree].\nHeight estimates [meter].\nAtmospheric pressure adjusted to sea level [hectopascal].\nRotation quaternion between the NED frame and the body frame.\nZero rotation corresponds to the following orientation:\n  X facing north\n  Y facing east\n  Z facing down\nColumn order:\n  longitude                                   [meter^2]\n  latitude                                    [meter^2]\n  height (MSL or ellipsoid, whichever worse)  [meter^2]\n  roll angle                                  [radian^2]\n  pitch angle                                 [radian^2]\n  yaw angle                                   [radian^2]\nLinear velocity in the body frame, X-Y-Z [meter/second].\nAngular velocity in the body frame, roll-pitch-yaw [radian/second].\nLow resolution estimate of the linear acceleration in the body frame [(meter/second)^2].\nThis estimate should be properly downsampled in order to avoid aliasing effects.\nColumn order:\n  X velocity      [(meter/second)^2]\n  Y velocity      [(meter/second)^2]\n  Z velocity      [(meter/second)^2]\n  roll velocity   [(radian/second)^2]\n  pitch velocity  [(radian/second)^2]\n  yaw velocity    [(radian/second)^2]",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 64,
+          "name": "longitude",
+          "description": "required"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 64,
+          "name": "latitude",
+          "description": "required"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "heightEllipsoid",
+          "description": "Above ellipsoid (required)"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "heightMsl",
+          "description": "Above the mean sea level (required)"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "heightAgl",
+          "description": "Above ground level (provided by radar altimeter or LIDAR) (optional)"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "heightBaro",
+          "description": "Barometric height (optional)"
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "qnhHpa",
+          "description": "optional"
+        },
+        {
+          "length": 4,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 32
+          },
+          "name": "orientationXyzw",
+          "description": ""
+        },
+        {
+          "length": 36,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "poseCovariance",
+          "description": ""
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 32
+          },
+          "name": "linearVelocityBody",
+          "description": ""
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 32
+          },
+          "name": "angularVelocityBody",
+          "description": ""
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "linearAccelerationBody",
+          "description": ""
+        },
+        {
+          "length": 36,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "velocityCovariance",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "2010": {
+    "description": "This message struct carries arbitrary data in the format of the specified high-level protocol.\nThe data will be delivered to all nodes that are interested in tunneled protocols.\nFiner addressing schemes may be implemented using the means provided by the encapsulated protocol.\nThe channelID allows for additional routing between the source and target nodes.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "object",
+          "kind": "Protocol",
+          "name": "protocol",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "channelId",
+          "description": ""
+        },
+        {
+          "length": 60,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "buffer",
+          "description": "TAO rules apply"
+        }
+      ],
+      "statics": []
+    }
+  },
+  "16370": {
+    "description": "Generic named parameter (key/value pair).\nIntegers are exactly representable in the range (-2^24, 2^24) which is (-16'777'216, 16'777'216).\nTail array optimization is enabled, so if key length does not exceed 3 characters, the whole\nmessage can fit into one CAN frame. The message always fits into one CAN FD frame.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "value",
+          "description": ""
+        },
+        {
+          "length": 58,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "key",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "16383": {
+    "description": "Generic log message.\nAll items are byte aligned.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "object",
+          "kind": "LogLevel",
+          "name": "level",
+          "description": ""
+        },
+        {
+          "length": 31,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "source",
+          "description": ""
+        },
+        {
+          "length": 90,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "text",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "CANIfaceStats": {
+    "description": "Single CAN iface statistics.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 48,
+          "name": "framesTx",
+          "description": "Number of transmitted CAN frames."
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 48,
+          "name": "framesRx",
+          "description": "Number of received CAN frames."
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 48,
+          "name": "errors",
+          "description": "Number of errors in the CAN layer."
+        }
+      ],
+      "statics": []
+    }
+  },
+  "CoarseOrientation": {
+    "description": "Nested type.\nCoarse, low-resolution 3D orientation represented as fixed axes in 16 bit.\nRoll, pitch, yaw angles in radians should be multiplied by\nANGLE_MULTIPLIER in order to convert them to the coarse representation.\nANGLE_MULTIPLIER = NORM / PI\nWhere NORM is 12, because it:\n - Fits the maximum range of a signed 5 bit integer\n - Allows to exactly represent the following angles:\n   0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, and negatives",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": false,
+            "bits": 5
+          },
+          "name": "fixedAxisRollPitchYaw",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "float32 ANGLE_MULTIPLIER = 4.7746482927568605"
+      ]
+    }
+  },
+  "Command": {
+    "description": "Nested type.\nSingle actuator command.\nWhether the units are linear or angular depends on the actuator type.\nValue of the above type",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "actuatorId",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "commandType",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "commandValue",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 COMMAND_TYPE_UNITLESS     = 0     # [-1, 1]",
+        "uint8 COMMAND_TYPE_POSITION     = 1     # meter or radian",
+        "uint8 COMMAND_TYPE_FORCE        = 2     # Newton or Newton metre",
+        "uint8 COMMAND_TYPE_SPEED        = 3     # meter per second or radian per second"
+      ]
+    }
+  },
+  "CylinderStatus": {
+    "description": "Cylinder state information.\nThis is a nested data type.\nAll unknown parameters should be set to NaN.\nCylinder ignition timing.\nUnits: angular degrees of the crankshaft.\nFuel injection time.\nUnits: millisecond.\nCylinder head temperature (CHT).\nUnits: kelvin.\nExhaust gas temperature (EGT).\nSet to NaN if this cylinder is not equipped with an EGT sensor.\nSet this field to the same value for all cylinders if there is a single shared EGT sensor.\nUnits: kelvin.\nEstimated lambda coefficient.\nThis parameter is mostly useful for monitoring and tuning purposes.\nUnit: dimensionless ratio",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "ignitionTimingDeg",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "injectionTimeMs",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "cylinderHeadTemperature",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "exhaustGasTemperature",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16,
+          "name": "lambdaCoefficient",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "DataTypeKind": {
+    "description": "Data type kind (message or service).",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "value",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 SERVICE = 0",
+        "uint8 MESSAGE = 1"
+      ]
+    }
+  },
+  "ECEFPositionVelocity": {
+    "description": "Nested type.\nGNSS ECEF high resolution position and velocity.\nECEF is an acronym for Earth-Centered-Earth-Fixed, which is a cartesian\ncoordinate system which rotates with the earth. The origin (0,0,0) is\nlocated at the center of the earth. The x-axis is a vector pointing from\nthe origin with positive direction towards 0 degrees latitude and\nlongitude (equator, at the prime meridian). The z-axis is a vector\npointing from the origin towards the north-pole. The y-axis completes a\nright-handed coordinate system.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 32
+          },
+          "name": "velocityXyz",
+          "description": "XYZ velocity in m/s"
+        },
+        {
+          "length": 3,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": false,
+            "bits": 36
+          },
+          "name": "positionXyzMm",
+          "description": "XYZ-axis coordinates in mm"
+        },
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 6,
+          "name": "#",
+          "description": "Aligns the following array at byte boundary"
+        },
+        {
+          "length": 36,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "float",
+            "unsigned": false,
+            "bits": 16
+          },
+          "name": "covariance",
+          "description": "Position and velocity covariance in the ECEF frame. Units are m^2 for position,"
+        }
+      ],
+      "statics": []
+    }
+  },
+  "Empty": {
+    "description": "Ex nihilo nihil fit.",
+    "type": "message"
+  },
+  "Entry": {
+    "description": "THIS DEFINITION IS SUBJECT TO CHANGE.\nOne dynamic node ID allocation entry.\nThis type is a part of the Raft consensus algorithm.\nPlease refer to the specification for details.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 32,
+          "name": "term",
+          "description": "Refer to the Raft paper for explanation."
+        },
+        {
+          "length": 16,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "uniqueId",
+          "description": "Unique ID of this allocation."
+        },
+        {
+          "type": "var",
+          "kind": "void",
+          "unsigned": false,
+          "bits": 1,
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 7,
+          "name": "nodeId",
+          "description": "Node ID of this allocation."
+        }
+      ],
+      "statics": []
+    }
+  },
+  "EntryType": {
+    "description": "Nested type.\nRepresents the type of the file system entry (e.g. file or directory).\nIf such entry does not exist, 'flags' must be set to zero.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "flags",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 FLAG_FILE      = 1        # Excludes FLAG_DIRECTORY",
+        "uint8 FLAG_DIRECTORY = 2        # Excludes FLAG_FILE",
+        "uint8 FLAG_SYMLINK   = 4        # Link target is either FLAG_FILE or FLAG_DIRECTORY",
+        "uint8 FLAG_READABLE  = 8",
+        "uint8 FLAG_WRITEABLE = 16"
+      ]
+    }
+  },
+  "Error": {
+    "description": "Nested type.\nFile operation result code.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 16,
+          "name": "value",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "int16 OK                = 0",
+        "int16 UNKNOWN_ERROR     = 32767",
+        "int16 NOT_FOUND         = 2",
+        "int16 IO_ERROR          = 5",
+        "int16 ACCESS_DENIED     = 13",
+        "int16 IS_DIRECTORY      = 21 # I.e. attempt to read/write on a path that points to a directory",
+        "int16 INVALID_VALUE     = 22 # E.g. file name is not valid for the target file system",
+        "int16 FILE_TOO_LARGE    = 27",
+        "int16 OUT_OF_SPACE      = 28",
+        "int16 NOT_IMPLEMENTED   = 38"
+      ]
+    }
+  },
+  "HardwareVersion": {
+    "description": "Nested type.\nGeneric hardware version information.\nThese values should remain unchanged for the device's lifetime.\nHardware version code.\nUnique ID is a 128 bit long sequence that is globally unique for each node.\nAll zeros is not a valid UID.\nIf filled with zeros, assume that the value is undefined.\nCertificate of authenticity (COA) of the hardware, 255 bytes max.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "major",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "minor",
+          "description": ""
+        },
+        {
+          "length": 16,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "uniqueId",
+          "description": ""
+        },
+        {
+          "length": 255,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "certificateOfAuthenticity",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "LogLevel": {
+    "description": "Log message severity",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 3,
+          "name": "value",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint3 DEBUG    = 0",
+        "uint3 INFO     = 1",
+        "uint3 WARNING  = 2",
+        "uint3 ERROR    = 3"
+      ]
+    }
+  },
+  "Mode": {
+    "description": "Gimbal operating mode",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "commandMode",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 COMMAND_MODE_ANGULAR_VELOCITY        = 0",
+        "uint8 COMMAND_MODE_ORIENTATION_FIXED_FRAME = 1",
+        "uint8 COMMAND_MODE_ORIENTATION_BODY_FRAME  = 2",
+        "uint8 COMMAND_MODE_GEO_POI                 = 3"
+      ]
+    }
+  },
+  "NumericValue": {
+    "description": "Numeric-only value.\nThis is a union, which means that this structure can contain either one of the fields below.\nThe structure is prefixed with tag - a selector value that indicates which particular field is encoded.",
+    "type": "union",
+    "message": {
+      "variables": [
+        {
+          "type": "object",
+          "kind": "Empty",
+          "name": "empty",
+          "description": "Empty field, used to represent an undefined value."
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 64,
+          "name": "integerValue",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "realValue",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "Path": {
+    "description": "Nested type.\nFile system path in UTF8.\nThe only valid separator is forward slash.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "length": 200,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "path",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 SEPARATOR = '/'"
+      ]
+    }
+  },
+  "Protocol": {
+    "description": "This enumeration specifies the encapsulated protocol.\nNew protocols are likely to be added in the future.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "protocol",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 MAVLINK                   = 0     # MAVLink"
+      ]
+    }
+  },
+  "RGB565": {
+    "description": "Nested type.\nRGB color in the standard 5-6-5 16-bit palette.\nMonocolor lights should interpret this as brightness setpoint: from zero (0, 0, 0) to full brightness (31, 63, 31).",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 5,
+          "name": "red",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 6,
+          "name": "green",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 5,
+          "name": "blue",
+          "description": ""
+        }
+      ],
+      "statics": []
+    }
+  },
+  "SingleLightCommand": {
+    "description": "Nested type.\nControls single light source, color or monochrome.\nCommon aircraft lights IDs\ninform the crew working on the apron around noisy airplanes, wearing hearing protection,\nthat the engines are turned on. Also called beacon light\na red light is mounted on the left, or port, side of the craft and a green on the right,\nor starboard, side both 110 degree, and tail white light of 140 degree. Also called navigation lights\nhigh-intensity burst of white light, to help other pilots recognize the\naircraft's position in low-visibility conditions\npositioned on the outer side just in front of the engine cowlings on the fuselage\nlights that highlite on the logo painted on the tail or other visible surface.\nAlso called vertical tail flood lights\nhelp the pilots see the area in front of them and also shows other traffic that they're on the move\nlight up the area in front of the airplane a bit more towards the side, easier for turns\nvery bright, lights up the area in front but a lot more than the taxi light\nvery bright lights on the wings to help the pilots during landing by\nlighting up the area where they're going to touch down\nusually yellow electroluminescent lightstrips designed to use\nduring formation flying at night or under low visibility conditions",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "lightId",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 LIGHT_ID_ANTI_COLLISION = 246",
+        "uint8 LIGHT_ID_RIGHT_OF_WAY   = 247",
+        "uint8 LIGHT_ID_STROBE         = 248",
+        "uint8 LIGHT_ID_WING           = 249",
+        "uint8 LIGHT_ID_LOGO           = 250",
+        "uint8 LIGHT_ID_TAXI           = 251",
+        "uint8 LIGHT_ID_TURN_OFF       = 252",
+        "uint8 LIGHT_ID_TAKE_OFF       = 253",
+        "uint8 LIGHT_ID_LANDING        = 254",
+        "uint8 LIGHT_ID_FORMATION      = 255"
+      ]
+    }
+  },
+  "SoftwareVersion": {
+    "description": "Nested type.\nGeneric software version information.\nPrimary version numbers.\nIf both fields are set to zero, the version is considered unknown.\nThis mask indicates which optional fields (see below) are set.\nVCS commit hash or revision number, e.g. git short commit hash. Optional.\nThe value of an arbitrary hash function applied to the firmware image.\nThis field is used to detect whether the firmware running on the node is EXACTLY THE SAME\nas a certain specific revision. This field provides the absolute identity guarantee, unlike\nthe version fields above, which can be the same for different builds of the firmware.\nThe exact hash function and the methods of its application are implementation defined.\nHowever, implementations are recommended to adhere to the following guidelines,\nfully or partially:\n  - The hash function should be CRC-64-WE, the same that is used for computing DSDL signatures.\n  - The hash function should be applied to the entire application image padded to 8 bytes.\n  - If the computed image CRC is stored within the firmware image itself, the value of\n    the hash function becomes ill-defined, because it becomes recursively dependent on itself.\n    In order to circumvent this issue, while computing or checking the CRC, its value stored\n    within the image should be zeroed out.",
+    "type": "message",
+    "message": {
+      "variables": [
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "major",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "minor",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "optionalFieldFlags",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 32,
+          "name": "vcsCommit",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 64,
+          "name": "imageCrc",
+          "description": ""
+        }
+      ],
+      "statics": [
+        "uint8 OPTIONAL_FIELD_FLAG_VCS_COMMIT = 1",
+        "uint8 OPTIONAL_FIELD_FLAG_IMAGE_CRC  = 2"
+      ]
+    }
+  },
+  "Timestamp": {
+    "description": "Global timestamp in microseconds, 7 bytes.\nUse this data type for timestamp fields in messages, like follows:\n  uavcan.Timestamp timestamp",
+    "type": "message",
+    "message": {
+      "variables": [],
+      "statics": [
+        "uint56 UNKNOWN = 0"
+      ]
+    }
+  },
+  "Value": {
+    "description": "Single parameter value.\nThis is a union, which means that this structure can contain either one of the fields below.\nThe structure is prefixed with tag - a selector value that indicates which particular field is encoded.",
+    "type": "union",
+    "message": {
+      "variables": [
+        {
+          "type": "object",
+          "kind": "Empty",
+          "name": "empty",
+          "description": "Empty field, used to represent an undefined value."
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": false,
+          "bits": 64,
+          "name": "integerValue",
+          "description": ""
+        },
+        {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32,
+          "name": "realValue",
+          "description": "32-bit type is used to simplify implementation on low-end systems"
+        },
+        {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8,
+          "name": "booleanValue",
+          "description": "8-bit value is used for alignment reasons"
+        },
+        {
+          "length": 128,
+          "range": true,
+          "type": "array",
+          "kind": {
+            "type": "var",
+            "kind": "int",
+            "unsigned": true,
+            "bits": 8
+          },
+          "name": "stringValue",
+          "description": "Length prefix is exactly one byte long, which ensures proper alignment of payload"
+        }
+      ],
+      "statics": []
+    }
+  }
+}
