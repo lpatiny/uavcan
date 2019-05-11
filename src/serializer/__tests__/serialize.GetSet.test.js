@@ -28,7 +28,7 @@ describe('serialize GetSet', () => {
 
     let data = {
       index: 1,
-      value: 123,
+      value: { integerValue: 123 },
       name: [100, 114, 105, 118, 101, 114, 115],
       nameStr: 'drivers'
     };
@@ -86,8 +86,10 @@ describe('serialize GetSet', () => {
     let data = {
       value: 1023,
       defaultValue: 0,
-      maxValue: 1023,
-      minValue: 0,
+      maxValue: {
+        integerValue: 1023
+      },
+      minValue: { integerValue: 0 },
       name: [100, 114, 105, 118, 101, 114, 115],
       nameStr: 'drivers'
     };

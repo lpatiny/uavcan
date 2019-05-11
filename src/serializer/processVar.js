@@ -12,17 +12,19 @@ function processVar(data, variable, bigResult) {
       bigResult.nbBits += variable.bits;
       break;
     case 'int': {
-      let value = serializeInt(
-        data[variable.name] || 0,
-        variable.bits,
-        variable.unsigned
-      );
+      if (data === undefined) {
+        throw Error('Undefined variable: ' + JSON.stringify(variable));
+      }
+      let value = serializeInt(data, variable.bits, variable.unsigned);
       bigResult.value <<= BigInt(variable.bits);
       bigResult.value |= value;
       bigResult.nbBits += variable.bits;
       break;
     }
     case 'float':
+      if (data === undefined) {
+        throw Error('Undefined variable: ' + JSON.stringify(variable));
+      }
       throw Error('not implemented');
       break;
     default:

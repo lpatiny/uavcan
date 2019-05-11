@@ -30,6 +30,7 @@ function serialize(data, kind, isService = false, isRequest = false) {
   for (let variable of transfer.variables) {
     processVariable(data, variable, bigResult);
   }
+
   return bigIntToByteArray(bigResult);
 }
 

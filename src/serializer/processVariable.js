@@ -1,13 +1,13 @@
 'use strict';
 
 const processVar = require('./processVar');
-//const processArray = require('./processArray');
+const processArray = require('./processArray');
 const processUnion = require('./processUnion');
 
 function processVariable(data, variable, bigResult) {
   switch (variable.type) {
     case 'var':
-      processVar(data, variable, bigResult);
+      processVar(data[variable.name], variable, bigResult);
       break;
     case 'union':
       processUnion(data[variable.name], variable, bigResult);
@@ -17,7 +17,8 @@ function processVariable(data, variable, bigResult) {
       processObject(data[variable.name], variable, bigResult);
       break;
     case 'array':
-    //  return processArray(bdata, variable, bigResult);
+      processArray(data, variable, bigResult);
+      break;
     default:
       throw Error(`Unknown variable kind: ${variable.kind}`);
   }
