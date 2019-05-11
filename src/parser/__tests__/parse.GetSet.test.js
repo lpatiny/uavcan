@@ -2,6 +2,7 @@
 
 const parse = require('../parse');
 const kinds = require('../../kinds.json');
+
 let kindGetSet = kinds[11];
 
 describe('parse testGetSet', () => {

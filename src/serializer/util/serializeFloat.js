@@ -13,9 +13,10 @@ function serializeFloat(value, nbBits) {
   }
 
   switch (nbBits) {
-    case 16:
+    case 16: {
       let result = float16ToByte(value);
       return BigInt((result >> 8) | ((result & 255) << 8));
+    }
     case 32: {
       let buffer = new Buffer(4);
       buffer.writeFloatBE(value);

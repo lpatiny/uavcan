@@ -14,7 +14,7 @@ function processVar(data, variable, bigResult) {
       break;
     case 'int': {
       if (data === undefined) {
-        throw Error('Undefined variable: ' + JSON.stringify(variable));
+        throw Error(`Undefined variable: ${JSON.stringify(variable)}`);
       }
       let value = serializeInt(data, variable.bits, variable.unsigned);
       bigResult.value <<= BigInt(variable.bits);
@@ -24,7 +24,7 @@ function processVar(data, variable, bigResult) {
     }
     case 'float':
       if (data === undefined) {
-        throw Error('Undefined variable: ' + JSON.stringify(variable));
+        throw Error(`Undefined variable: ${JSON.stringify(variable)}`);
       }
       let value = serializeFloat(data, variable.bits, variable.unsigned);
       bigResult.value <<= BigInt(variable.bits);

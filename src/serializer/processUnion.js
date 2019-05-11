@@ -25,7 +25,7 @@ function processUnion(data, variable, bigResult) {
   }
   if (index === undefined) {
     throw Error(
-      'Variable of unionDefinition not found: ' + JSON.stringify(data)
+      `Variable of unionDefinition not found: ${JSON.stringify(data)}`
     );
   }
 

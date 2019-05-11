@@ -1,5 +1,7 @@
 'use strict';
 
+/* global BigInt */
+
 let EventEmitter = require('eventemitter3');
 
 let kinds = require('./kinds.json');

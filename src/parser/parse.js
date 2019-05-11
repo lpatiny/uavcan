@@ -42,7 +42,7 @@ function parse(data, kind, isService = false, isRequest = false) {
     if (variable.name) {
       result[variable.name] = currentResult.value;
       if (currentResult.valueStr) {
-        result[variable.name + 'Str'] = currentResult.valueStr;
+        result[`${variable.name}Str`] = currentResult.valueStr;
       }
     }
     from = currentResult.from;

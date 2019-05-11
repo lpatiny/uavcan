@@ -2,6 +2,7 @@
 
 const serialize = require('../serialize');
 const kinds = require('../../kinds.json');
+
 let kindGetSet = kinds[11];
 
 describe('serialize GetSet', () => {

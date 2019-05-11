@@ -9,7 +9,7 @@ describe('uavtest gps', () => {
     let data = [12, 14, 15];
 
     let result = parse(data, kindGeo);
-    expect(result).toEqual({
+    expect(result).toStrictEqual({
       gimbalId: 12,
       heightCm: 0,
       heightReference: 0,

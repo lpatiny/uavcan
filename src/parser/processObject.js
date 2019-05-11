@@ -1,8 +1,7 @@
 'use strict';
 
-/* global BigInt */
-
 const kinds = require('../kinds.json');
+
 const processVariable = require('./processVariable');
 
 function processObject(bigValue, variable, from) {
@@ -15,7 +14,7 @@ function processObject(bigValue, variable, from) {
     if (variable.name) {
       value[variable.name] = currentResult.value;
       if (currentResult.valueStr) {
-        value[variable.name + 'Str'] = currentResult.valueStr;
+        value[`${variable.name}Str`] = currentResult.valueStr;
       }
     }
     from = currentResult.from;
