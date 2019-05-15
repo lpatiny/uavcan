@@ -18,15 +18,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cheminfo/uavcan.git"
+    "url": "git+https://github.com/octanis-instruments/uavcan.git"
   },
   "keywords": [],
   "author": "Luc Patiny",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cheminfo/uavcan/issues"
+    "url": "https://github.com/octanis-instruments/uavcan/issues"
   },
-  "homepage": "https://github.com/cheminfo/uavcan#readme",
+  "homepage": "https://github.com/octanis-instruments/uavcan#readme",
   "jest": {
     "testEnvironment": "node"
   },
