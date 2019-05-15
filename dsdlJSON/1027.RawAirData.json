@@ -79,5 +79,10 @@
       "uint8 FLAG_HEATER_OVERCURRENT    = 4",
       "uint8 FLAG_HEATER_OPENCIRCUIT    = 8"
     ]
+  },
+  "info": {
+    "id": "1027",
+    "hash": "c77df38ba122f5da",
+    "maxBitsLength": 397
   }
 }

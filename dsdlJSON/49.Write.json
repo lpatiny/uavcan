@@ -43,5 +43,10 @@
       }
     ],
     "statics": []
+  },
+  "info": {
+    "id": "49",
+    "hash": "515aa1dc77e58429",
+    "maxBitsLength": 3192
   }
 }

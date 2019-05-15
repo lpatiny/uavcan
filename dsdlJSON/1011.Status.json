@@ -54,5 +54,10 @@
     "statics": [
       "uint7 POWER_RATING_PCT_UNKNOWN = 127"
     ]
+  },
+  "info": {
+    "id": "1011",
+    "hash": "5e9bba44faf1ea04",
+    "maxBitsLength": 64
   }
 }

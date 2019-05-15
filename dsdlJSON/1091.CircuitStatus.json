@@ -42,5 +42,10 @@
       "uint8 ERROR_FLAG_OVERCURRENT  = 4",
       "uint8 ERROR_FLAG_UNDERCURRENT = 8"
     ]
+  },
+  "info": {
+    "id": "1091",
+    "hash": "8313d33d0ddda115",
+    "maxBitsLength": 56
   }
 }

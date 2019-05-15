@@ -133,5 +133,10 @@
       "uint11 STATUS_FLAG_RESERVED_B   = 1024  # Keep zero",
       "uint7 STATE_OF_HEALTH_UNKNOWN = 127     # Use this constant if SOH cannot be estimated"
     ]
+  },
+  "info": {
+    "id": "1092",
+    "hash": "249c26548a711966",
+    "maxBitsLength": 437
   }
 }

@@ -16,5 +16,10 @@
       "uint8 STATUS_DISARMED           = 0",
       "uint8 STATUS_FULLY_ARMED        = 255"
     ]
+  },
+  "info": {
+    "id": "1100",
+    "hash": "8700f375556a8003",
+    "maxBitsLength": 8
   }
 }

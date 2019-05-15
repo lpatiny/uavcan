@@ -5,6 +5,7 @@ const { join } = require('path');
 
 const find = require('find');
 
+const dataTypes = require('./getDataType')();
 const convertOne = require('./convertOne');
 
 const source = join(__dirname, '../../public_regulated_data_types');
@@ -36,6 +37,10 @@ function processFiles(files, kinds) {
   for (let file of files) {
     let definition = fs.readFileSync(file.filename, 'utf8');
     let result = convertOne(definition, kinds);
+    if (dataTypes[file.id]) {
+      result.info = dataTypes[file.id];
+    }
+
     full[file.id] = result;
 
     fs.writeFileSync(

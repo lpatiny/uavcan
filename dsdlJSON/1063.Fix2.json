@@ -171,5 +171,10 @@
       "uint6 SUB_MODE_RTK_FLOAT     = 0",
       "uint6 SUB_MODE_RTK_FIXED     = 1"
     ]
+  },
+  "info": {
+    "id": "1063",
+    "hash": "ca41e7000f37435f",
+    "maxBitsLength": 1769
   }
 }

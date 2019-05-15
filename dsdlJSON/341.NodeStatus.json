@@ -58,5 +58,10 @@
       "uint3 MODE_SOFTWARE_UPDATE  = 3         # New software/firmware is being loaded.",
       "uint3 MODE_OFFLINE          = 7         # The node is no longer available."
     ]
+  },
+  "info": {
+    "id": "341",
+    "hash": "0f0868d0c1a7c6f1",
+    "maxBitsLength": 56
   }
 }

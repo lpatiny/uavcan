@@ -35,6 +35,11 @@
         "uint8 MAX_LENGTH_OF_UNIQUE_ID_IN_REQUEST = 6",
         "uint7 ANY_NODE_ID = 0"
       ]
+    },
+    "info": {
+      "id": "1",
+      "hash": "0b2a812620a11d40",
+      "maxBitsLength": 141
     }
   },
   "2": {
@@ -124,6 +129,11 @@
         "uint8 FLAG_PUBLISHING = 4   # Publishing messages of this type",
         "uint8 FLAG_SERVING    = 8   # Providing service of this type"
       ]
+    },
+    "info": {
+      "id": "2",
+      "hash": "1b283338a7bed2d8",
+      "maxBitsLength": 671
     }
   },
   "4": {
@@ -136,6 +146,11 @@
         "uint16 MIN_BROADCASTING_PERIOD_MS = 40              # Milliseconds",
         "uint16 RECOMMENDED_BROADCASTER_TIMEOUT_MS = 2200    # Milliseconds"
       ]
+    },
+    "info": {
+      "id": "4",
+      "hash": "20271116a793c2db",
+      "maxBitsLength": 56
     }
   },
   "5": {
@@ -155,6 +170,11 @@
       "statics": [
         "uint40 MAGIC_NUMBER = 0xACCE551B1E"
       ]
+    },
+    "info": {
+      "id": "5",
+      "hash": "569e05394a3017f0",
+      "maxBitsLength": 40
     }
   },
   "6": {
@@ -231,6 +251,11 @@
         "uint8 FLAG_HAS_PENDING_STDOUT   = 64    # There is more stdout to read",
         "uint8 FLAG_HAS_PENDING_STDERR   = 128   # There is more stderr to read"
       ]
+    },
+    "info": {
+      "id": "6",
+      "hash": "59276b5921c9246e",
+      "maxBitsLength": 1040
     }
   },
   "10": {
@@ -272,6 +297,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "10",
+      "hash": "3b131ac5eb69d2cd",
+      "maxBitsLength": 56
     }
   },
   "11": {
@@ -378,6 +408,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "11",
+      "hash": "a7b622f939d1a4d5",
+      "maxBitsLength": 1791
     }
   },
   "15": {
@@ -430,6 +465,11 @@
         "uint8 ERROR_UNSUPPORTED         = 3     # The node cannot perform enumeration in its current configuration",
         "uint8 ERROR_UNKNOWN             = 255   # Generic error"
       ]
+    },
+    "info": {
+      "id": "15",
+      "hash": "196ae06426a3b5d8",
+      "maxBitsLength": 759
     }
   },
   "30": {
@@ -500,6 +540,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "30",
+      "hash": "8032c7097b48a3cc",
+      "maxBitsLength": 249
     }
   },
   "31": {
@@ -546,6 +591,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "31",
+      "hash": "cdde07bb89a56356",
+      "maxBitsLength": 72
     }
   },
   "40": {
@@ -598,6 +648,11 @@
         "uint8 ERROR_IN_PROGRESS      = 2    # Firmware update is already in progress, and the slave doesn't want to restart.",
         "uint8 ERROR_UNKNOWN          = 255"
       ]
+    },
+    "info": {
+      "id": "40",
+      "hash": "b7d725df72724126",
+      "maxBitsLength": 1616
     }
   },
   "45": {
@@ -638,6 +693,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "45",
+      "hash": "5004891ee8a27531",
+      "maxBitsLength": 1608
     }
   },
   "46": {
@@ -684,6 +744,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "46",
+      "hash": "8c46e8ab568bda79",
+      "maxBitsLength": 1640
     }
   },
   "47": {
@@ -710,6 +775,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "47",
+      "hash": "78648c99170b47aa",
+      "maxBitsLength": 1608
     }
   },
   "48": {
@@ -757,6 +827,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "48",
+      "hash": "8dcdca939f33f678",
+      "maxBitsLength": 1648
     }
   },
   "49": {
@@ -804,6 +879,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "49",
+      "hash": "515aa1dc77e58429",
+      "maxBitsLength": 3192
     }
   },
   "63": {
@@ -920,6 +1000,11 @@
         "uint3 MODE_SOFTWARE_UPDATE  = 3         # New software/firmware is being loaded.",
         "uint3 MODE_OFFLINE          = 7         # The node is no longer available."
       ]
+    },
+    "info": {
+      "id": "341",
+      "hash": "0f0868d0c1a7c6f1",
+      "maxBitsLength": 56
     }
   },
   "380": {
@@ -949,6 +1034,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "380",
+      "hash": "884cb63050a84f35",
+      "maxBitsLength": 815
     }
   },
   "390": {
@@ -981,6 +1071,11 @@
       "statics": [
         "uint16 BROADCASTING_PERIOD_MS = 1000"
       ]
+    },
+    "info": {
+      "id": "390",
+      "hash": "821ae2f525f69f21",
+      "maxBitsLength": 51
     }
   },
   "1000": {
@@ -1079,6 +1174,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1000",
+      "hash": "72a63a3c6f41fa9b",
+      "maxBitsLength": 668
     }
   },
   "1001": {
@@ -1113,6 +1213,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1001",
+      "hash": "e2a7d4a9460bc2f2",
+      "maxBitsLength": 196
     }
   },
   "1002": {
@@ -1155,6 +1260,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1002",
+      "hash": "b6ac0c442430297e",
+      "maxBitsLength": 204
     }
   },
   "1003": {
@@ -1233,6 +1343,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1003",
+      "hash": "8280632c40e574b5",
+      "maxBitsLength": 958
     }
   },
   "1010": {
@@ -1255,6 +1370,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1010",
+      "hash": "d8a7486238ec3af3",
+      "maxBitsLength": 484
     }
   },
   "1011": {
@@ -1313,6 +1433,11 @@
       "statics": [
         "uint7 POWER_RATING_PCT_UNKNOWN = 127"
       ]
+    },
+    "info": {
+      "id": "1011",
+      "hash": "5e9bba44faf1ea04",
+      "maxBitsLength": 64
     }
   },
   "1020": {
@@ -1338,6 +1463,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1020",
+      "hash": "306f69e0a591afaa",
+      "maxBitsLength": 32
     }
   },
   "1021": {
@@ -1363,6 +1493,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1021",
+      "hash": "0a1892d72ab8945f",
+      "maxBitsLength": 32
     }
   },
   "1025": {
@@ -1399,6 +1534,11 @@
         "uint8 SENSOR_ID_LEFT = 254",
         "uint8 SENSOR_ID_RIGHT = 255"
       ]
+    },
+    "info": {
+      "id": "1025",
+      "hash": "d5513c3f7afac74e",
+      "maxBitsLength": 40
     }
   },
   "1026": {
@@ -1424,6 +1564,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1026",
+      "hash": "7b48e55fcff42a57",
+      "maxBitsLength": 32
     }
   },
   "1027": {
@@ -1507,6 +1652,11 @@
         "uint8 FLAG_HEATER_OVERCURRENT    = 4",
         "uint8 FLAG_HEATER_OPENCIRCUIT    = 8"
       ]
+    },
+    "info": {
+      "id": "1027",
+      "hash": "c77df38ba122f5da",
+      "maxBitsLength": 397
     }
   },
   "1028": {
@@ -1532,6 +1682,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1028",
+      "hash": "cdc7c43412bdc89a",
+      "maxBitsLength": 48
     }
   },
   "1029": {
@@ -1557,6 +1712,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1029",
+      "hash": "49272a6477d96271",
+      "maxBitsLength": 32
     }
   },
   "1030": {
@@ -1579,6 +1739,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1030",
+      "hash": "217f5c87d7ec951d",
+      "maxBitsLength": 285
     }
   },
   "1031": {
@@ -1601,6 +1766,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1031",
+      "hash": "ce0f9f621cf7e70b",
+      "maxBitsLength": 365
     }
   },
   "1034": {
@@ -1666,6 +1836,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1034",
+      "hash": "a9af28aea2fbb254",
+      "maxBitsLength": 110
     }
   },
   "1040": {
@@ -1701,6 +1876,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1040",
+      "hash": "4af6e57b2b2be29c",
+      "maxBitsLength": 80
     }
   },
   "1041": {
@@ -1759,6 +1939,11 @@
         "uint2 HEIGHT_REFERENCE_ELLIPSOID = 0",
         "uint2 HEIGHT_REFERENCE_MEAN_SEA_LEVEL = 1"
       ]
+    },
+    "info": {
+      "id": "1041",
+      "hash": "9371428a92f01fd6",
+      "maxBitsLength": 104
     }
   },
   "1044": {
@@ -1807,6 +1992,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1044",
+      "hash": "b9f127865be0d61e",
+      "maxBitsLength": 228
     }
   },
   "1050": {
@@ -1865,6 +2055,11 @@
         "uint3 READING_TYPE_TOO_CLOSE   = 2   # Range field contains min range for the sensor",
         "uint3 READING_TYPE_TOO_FAR     = 3   # Range field contains max range for the sensor"
       ]
+    },
+    "info": {
+      "id": "1050",
+      "hash": "68fffe70fc771952",
+      "maxBitsLength": 120
     }
   },
   "1060": {
@@ -2023,6 +2218,11 @@
         "uint2 STATUS_NO_FIX    = 0",
         "uint2 STATUS_TIME_ONLY = 1"
       ]
+    },
+    "info": {
+      "id": "1060",
+      "hash": "54c1572b9e07f297",
+      "maxBitsLength": 628
     }
   },
   "1061": {
@@ -2104,6 +2304,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1061",
+      "hash": "9be8bdc4c3dbbfd2",
+      "maxBitsLength": 125
     }
   },
   "1062": {
@@ -2152,6 +2357,11 @@
       "statics": [
         "uint8 PROTOCOL_ID_UNKNOWN = 0"
       ]
+    },
+    "info": {
+      "id": "1062",
+      "hash": "1f56030ecb171501",
+      "maxBitsLength": 1040
     }
   },
   "1063": {
@@ -2327,6 +2537,11 @@
         "uint6 SUB_MODE_RTK_FLOAT     = 0",
         "uint6 SUB_MODE_RTK_FIXED     = 1"
       ]
+    },
+    "info": {
+      "id": "1063",
+      "hash": "ca41e7000f37435f",
+      "maxBitsLength": 1769
     }
   },
   "1070": {
@@ -2352,6 +2567,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1070",
+      "hash": "a1a036268b0c3455",
+      "maxBitsLength": 24
     }
   },
   "1071": {
@@ -2393,6 +2613,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1071",
+      "hash": "624a519d42553d82",
+      "maxBitsLength": 56
     }
   },
   "1080": {
@@ -2418,6 +2643,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1080",
+      "hash": "be9ea9fec2b15d52",
+      "maxBitsLength": 32
     }
   },
   "1081": {
@@ -2440,6 +2670,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1081",
+      "hash": "2031d93c8bdd1ec4",
+      "maxBitsLength": 485
     }
   },
   "1090": {
@@ -2481,6 +2716,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1090",
+      "hash": "bba05074ad757480",
+      "maxBitsLength": 47
     }
   },
   "1091": {
@@ -2527,6 +2767,11 @@
         "uint8 ERROR_FLAG_OVERCURRENT  = 4",
         "uint8 ERROR_FLAG_UNDERCURRENT = 8"
       ]
+    },
+    "info": {
+      "id": "1091",
+      "hash": "8313d33d0ddda115",
+      "maxBitsLength": 56
     }
   },
   "1092": {
@@ -2664,6 +2909,11 @@
         "uint11 STATUS_FLAG_RESERVED_B   = 1024  # Keep zero",
         "uint7 STATE_OF_HEALTH_UNKNOWN = 127     # Use this constant if SOH cannot be estimated"
       ]
+    },
+    "info": {
+      "id": "1092",
+      "hash": "249c26548a711966",
+      "maxBitsLength": 437
     }
   },
   "1100": {
@@ -2684,6 +2934,11 @@
         "uint8 STATUS_DISARMED           = 0",
         "uint8 STATUS_FULLY_ARMED        = 255"
       ]
+    },
+    "info": {
+      "id": "1100",
+      "hash": "8700f375556a8003",
+      "maxBitsLength": 8
     }
   },
   "1110": {
@@ -2720,6 +2975,11 @@
         "uint8 ERROR_FLAG_OVERHEATING = 1",
         "uint8 ERROR_FLAG_OVERCOOLING = 2"
       ]
+    },
+    "info": {
+      "id": "1110",
+      "hash": "70261c28a94144c6",
+      "maxBitsLength": 40
     }
   },
   "1120": {
@@ -2914,6 +3174,11 @@
         "uint3 SPARK_PLUG_SECOND_ACTIVE  = 2",
         "uint3 SPARK_PLUG_BOTH_ACTIVE    = 3"
       ]
+    },
+    "info": {
+      "id": "1120",
+      "hash": "d38aa3ee75537ec6",
+      "maxBitsLength": 1565
     }
   },
   "1129": {
@@ -2970,6 +3235,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "1129",
+      "hash": "286b4a387ba84bc4",
+      "maxBitsLength": 104
     }
   },
   "2000": {
@@ -3109,6 +3379,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "2000",
+      "hash": "463b10cccbe51c3d",
+      "maxBitsLength": 1860
     }
   },
   "2010": {
@@ -3175,6 +3450,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "16370",
+      "hash": "e02f25d6e0c98ae0",
+      "maxBitsLength": 502
     }
   },
   "16383": {
@@ -3216,6 +3496,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "id": "16383",
+      "hash": "d654a48e0c049d75",
+      "maxBitsLength": 983
     }
   },
   "CANIfaceStats": {

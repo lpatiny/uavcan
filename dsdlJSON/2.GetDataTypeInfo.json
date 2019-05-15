@@ -85,5 +85,10 @@
       "uint8 FLAG_PUBLISHING = 4   # Publishing messages of this type",
       "uint8 FLAG_SERVING    = 8   # Providing service of this type"
     ]
+  },
+  "info": {
+    "id": "2",
+    "hash": "1b283338a7bed2d8",
+    "maxBitsLength": 671
   }
 }

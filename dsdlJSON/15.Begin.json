@@ -48,5 +48,10 @@
       "uint8 ERROR_UNSUPPORTED         = 3     # The node cannot perform enumeration in its current configuration",
       "uint8 ERROR_UNKNOWN             = 255   # Generic error"
     ]
+  },
+  "info": {
+    "id": "15",
+    "hash": "196ae06426a3b5d8",
+    "maxBitsLength": 759
   }
 }

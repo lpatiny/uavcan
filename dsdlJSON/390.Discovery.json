@@ -28,5 +28,10 @@
     "statics": [
       "uint16 BROADCASTING_PERIOD_MS = 1000"
     ]
+  },
+  "info": {
+    "id": "390",
+    "hash": "821ae2f525f69f21",
+    "maxBitsLength": 51
   }
 }

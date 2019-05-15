@@ -72,5 +72,10 @@
       "uint8 FLAG_HAS_PENDING_STDOUT   = 64    # There is more stdout to read",
       "uint8 FLAG_HAS_PENDING_STDERR   = 128   # There is more stderr to read"
     ]
+  },
+  "info": {
+    "id": "6",
+    "hash": "59276b5921c9246e",
+    "maxBitsLength": 1040
   }
 }

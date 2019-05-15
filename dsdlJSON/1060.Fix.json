@@ -154,5 +154,10 @@
       "uint2 STATUS_NO_FIX    = 0",
       "uint2 STATUS_TIME_ONLY = 1"
     ]
+  },
+  "info": {
+    "id": "1060",
+    "hash": "54c1572b9e07f297",
+    "maxBitsLength": 628
   }
 }

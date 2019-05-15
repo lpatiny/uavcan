@@ -44,5 +44,10 @@
     "statics": [
       "uint8 PROTOCOL_ID_UNKNOWN = 0"
     ]
+  },
+  "info": {
+    "id": "1062",
+    "hash": "1f56030ecb171501",
+    "maxBitsLength": 1040
   }
 }

@@ -15,5 +15,10 @@
     "statics": [
       "uint40 MAGIC_NUMBER = 0xACCE551B1E"
     ]
+  },
+  "info": {
+    "id": "5",
+    "hash": "569e05394a3017f0",
+    "maxBitsLength": 40
   }
 }

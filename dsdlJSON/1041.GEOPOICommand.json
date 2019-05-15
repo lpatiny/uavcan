@@ -54,5 +54,10 @@
       "uint2 HEIGHT_REFERENCE_ELLIPSOID = 0",
       "uint2 HEIGHT_REFERENCE_MEAN_SEA_LEVEL = 1"
     ]
+  },
+  "info": {
+    "id": "1041",
+    "hash": "9371428a92f01fd6",
+    "maxBitsLength": 104
   }
 }

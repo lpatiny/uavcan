@@ -190,5 +190,10 @@
       "uint3 SPARK_PLUG_SECOND_ACTIVE  = 2",
       "uint3 SPARK_PLUG_BOTH_ACTIVE    = 3"
     ]
+  },
+  "info": {
+    "id": "1120",
+    "hash": "d38aa3ee75537ec6",
+    "maxBitsLength": 1565
   }
 }

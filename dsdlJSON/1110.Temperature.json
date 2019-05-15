@@ -32,5 +32,10 @@
       "uint8 ERROR_FLAG_OVERHEATING = 1",
       "uint8 ERROR_FLAG_OVERCOOLING = 2"
     ]
+  },
+  "info": {
+    "id": "1110",
+    "hash": "70261c28a94144c6",
+    "maxBitsLength": 40
   }
 }

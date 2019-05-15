@@ -8,5 +8,10 @@
       "uint16 MIN_BROADCASTING_PERIOD_MS = 40              # Milliseconds",
       "uint16 RECOMMENDED_BROADCASTER_TIMEOUT_MS = 2200    # Milliseconds"
     ]
+  },
+  "info": {
+    "id": "4",
+    "hash": "20271116a793c2db",
+    "maxBitsLength": 56
   }
 }

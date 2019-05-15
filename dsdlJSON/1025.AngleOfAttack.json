@@ -32,5 +32,10 @@
       "uint8 SENSOR_ID_LEFT = 254",
       "uint8 SENSOR_ID_RIGHT = 255"
     ]
+  },
+  "info": {
+    "id": "1025",
+    "hash": "d5513c3f7afac74e",
+    "maxBitsLength": 40
   }
 }
