@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.protocol.file.Path",
   "description": "Nested type.\nFile system path in UTF8.\nThe only valid separator is forward slash.",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -20,5 +21,9 @@
     "statics": [
       "uint8 SEPARATOR = '/'"
     ]
+  },
+  "info": {
+    "hash": "12aefc50878a43e2",
+    "maxBitsLength": 1608
   }
 }

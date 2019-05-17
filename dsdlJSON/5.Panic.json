@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.protocol.Panic",
   "description": "This message may be published periodically to inform network participants that the system has encountered\nan unrecoverable fault and is not capable of further operation.\nNodes that are expected to react to this message should wait for at least MIN_MESSAGES subsequent messages\nwith any reason text from any sender published with the interval no higher than MAX_INTERVAL_MS before\nundertaking any emergency actions.\nShort description that would fit a single CAN frame.",
   "type": "message",
   "message": {
@@ -23,8 +24,8 @@
     ]
   },
   "info": {
-    "id": "5",
-    "hash": "569e05394a3017f0",
-    "maxBitsLength": 40
+    "dataTypeID": 5,
+    "hash": "8b79b4101811c1d7",
+    "maxBitsLength": 59
   }
 }

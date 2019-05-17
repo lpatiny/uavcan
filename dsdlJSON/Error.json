@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.protocol.file.Error",
   "description": "Nested type.\nFile operation result code.",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -24,5 +25,9 @@
       "int16 OUT_OF_SPACE      = 28",
       "int16 NOT_IMPLEMENTED   = 38"
     ]
+  },
+  "info": {
+    "hash": "a83071ffea4fae15",
+    "maxBitsLength": 16
   }
 }

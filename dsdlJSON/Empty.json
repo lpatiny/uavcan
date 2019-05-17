@@ -1,4 +1,13 @@
 {
+  "id": "uavcan.protocol.param.Empty",
   "description": "Ex nihilo nihil fit.",
-  "type": "message"
+  "type": "object",
+  "message": {
+    "variables": [],
+    "statics": []
+  },
+  "info": {
+    "hash": "6c4d0e8ef37361df",
+    "maxBitsLength": 0
+  }
 }

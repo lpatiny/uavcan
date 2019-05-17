@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.protocol.enumeration.Begin",
   "description": "This service instructs the node to begin the process of automated enumeration.\nThe node will automatically leave enumeration mode upon expiration of this timeout.\nName of the parameter to enumerate, e.g. ESC index.\nIf the name is left empty, the node will infer the parameter name automatically (autodetect).\nIt is highly recommended to always use autodetection in order to avoid dependency on hard-coded parameter names,\nand also allow the enumeratee to possibly enumerate multiple different parameters at once.\nThe rule of thumb is to always leave this parameter empty unless you really know what you're doing.",
   "type": "service",
   "request": {
@@ -48,10 +49,5 @@
       "uint8 ERROR_UNSUPPORTED         = 3     # The node cannot perform enumeration in its current configuration",
       "uint8 ERROR_UNKNOWN             = 255   # Generic error"
     ]
-  },
-  "info": {
-    "id": "15",
-    "hash": "196ae06426a3b5d8",
-    "maxBitsLength": 759
   }
 }

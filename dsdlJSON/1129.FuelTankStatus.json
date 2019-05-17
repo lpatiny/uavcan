@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.ice.FuelTankStatus",
   "description": "Generic fuel tank status message.\nAll fields are required unless stated otherwise. Unpopulated optional fields should be set to NaN.\nReserved for future use.\nThe estimated amount of fuel.\nThe reported values can be either measured directly using appropriate sensors,\nor they can be estimated by fusing the data provided by various sensors.\nFor example, a Kalman filter can be used to fuse the data from fuel level sensors and flow sensors.\nAll fields are required.\nEstimate of the current fuel consumption rate.\nThe flow can be negative if the fuel is being transferred between the tanks or during refueling.\nThis field is required.\nUnit: (centimeter^3)/minute\nFuel temperature.\nThis field is optional, set to NaN if not provided.\nUnit: kelvin\nThe ID of the current fuel tank.",
   "type": "message",
   "message": {
@@ -54,7 +55,7 @@
     "statics": []
   },
   "info": {
-    "id": "1129",
+    "dataTypeID": 1129,
     "hash": "286b4a387ba84bc4",
     "maxBitsLength": 104
   }

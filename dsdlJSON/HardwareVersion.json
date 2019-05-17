@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.protocol.HardwareVersion",
   "description": "Nested type.\nGeneric hardware version information.\nThese values should remain unchanged for the device's lifetime.\nHardware version code.\nUnique ID is a 128 bit long sequence that is globally unique for each node.\nAll zeros is not a valid UID.\nIf filled with zeros, assume that the value is undefined.\nCertificate of authenticity (COA) of the hardware, 255 bytes max.",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -46,5 +47,9 @@
       }
     ],
     "statics": []
+  },
+  "info": {
+    "hash": "0ad5c4c933f4a0c4",
+    "maxBitsLength": 2192
   }
 }

@@ -1,11 +1,11 @@
 'use strict';
 
-const kinds = require('../kinds.json');
+const dataTypes = require('../dataTypes.json');
 
 const processVariable = require('./processVariable');
 
 function processObject(data, variable, bigResult) {
-  let variables = kinds[variable.kind].message.variables;
+  let variables = dataTypes[variable.kind].message.variables;
 
   for (let variable of variables) {
     processVariable(data, variable, bigResult);

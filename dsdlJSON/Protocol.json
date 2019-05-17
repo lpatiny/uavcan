@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.tunnel.Protocol",
   "description": "This enumeration specifies the encapsulated protocol.\nNew protocols are likely to be added in the future.",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {

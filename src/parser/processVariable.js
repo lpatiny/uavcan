@@ -16,7 +16,7 @@ function processVariable(bigValue, variable, from) {
     case 'array':
       return processArray(bigValue, variable, from);
     default:
-      throw new Error(`Unknown variable kind: ${variable.kind}`);
+      throw new Error(`Unknown variable dataType: ${variable.type}`);
   }
 }
 

@@ -1,6 +1,11 @@
 {
+  "id": "uavcan.protocol.GetTransportStats",
   "description": "Get transport statistics.\nUAVCAN transport layer statistics.\nCAN bus statistics, for each interface independently.",
   "type": "service",
+  "request": {
+    "variables": [],
+    "statics": []
+  },
   "response": {
     "variables": [
       {
@@ -32,20 +37,51 @@
         "range": true,
         "type": "array",
         "kind": {
-          "kind": "CANIfaceStats",
-          "unsigned": false,
-          "bits": null,
-          "type": "object"
+          "kind": "uavcan.protocol.CANIfaceStats",
+          "type": {
+            "id": "uavcan.protocol.CANIfaceStats",
+            "description": "Single CAN iface statistics.",
+            "type": "object",
+            "message": {
+              "variables": [
+                {
+                  "type": "var",
+                  "kind": "int",
+                  "unsigned": true,
+                  "bits": 48,
+                  "name": "framesTx",
+                  "description": "Number of transmitted CAN frames."
+                },
+                {
+                  "type": "var",
+                  "kind": "int",
+                  "unsigned": true,
+                  "bits": 48,
+                  "name": "framesRx",
+                  "description": "Number of received CAN frames."
+                },
+                {
+                  "type": "var",
+                  "kind": "int",
+                  "unsigned": true,
+                  "bits": 48,
+                  "name": "errors",
+                  "description": "Number of errors in the CAN layer."
+                }
+              ],
+              "statics": []
+            },
+            "info": {
+              "hash": "13b106f0c44ca350",
+              "maxBitsLength": 144
+            }
+          },
+          "bits": null
         },
         "name": "canIfaceStats",
         "description": ""
       }
     ],
     "statics": []
-  },
-  "info": {
-    "id": "4",
-    "hash": "20271116a793c2db",
-    "maxBitsLength": 56
   }
 }

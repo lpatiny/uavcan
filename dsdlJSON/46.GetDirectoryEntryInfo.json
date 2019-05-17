@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.protocol.file.GetDirectoryEntryInfo",
   "description": "This service can be used to retrieve a remote directory listing, one entry per request.\nThe client should query each entry independently, iterating 'entry_index' from 0 until the last entry is passed,\nin which case the server will report that there is no such entry (via the fields 'entry_type' and 'error').\nThe entry_index shall be applied to the ordered list of directory entries (e.g. alphabetically ordered). The exact\nsorting criteria does not matter as long as it provides the same ordering for subsequent service calls.",
   "type": "service",
   "request": {
@@ -13,7 +14,7 @@
       },
       {
         "type": "object",
-        "kind": "Path",
+        "kind": "uavcan.protocol.file.Path",
         "name": "directoryPath",
         "description": ""
       }
@@ -24,28 +25,23 @@
     "variables": [
       {
         "type": "object",
-        "kind": "Error",
+        "kind": "uavcan.protocol.file.Error",
         "name": "error",
         "description": ""
       },
       {
         "type": "object",
-        "kind": "EntryType",
+        "kind": "uavcan.protocol.file.EntryType",
         "name": "entryType",
         "description": ""
       },
       {
         "type": "object",
-        "kind": "Path",
+        "kind": "uavcan.protocol.file.Path",
         "name": "entryFullPath",
         "description": "Ignored/Empty if such entry does not exist."
       }
     ],
     "statics": []
-  },
-  "info": {
-    "id": "46",
-    "hash": "8c46e8ab568bda79",
-    "maxBitsLength": 1640
   }
 }

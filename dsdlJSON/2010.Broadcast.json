@@ -1,11 +1,12 @@
 {
+  "id": "uavcan.tunnel.Broadcast",
   "description": "This message struct carries arbitrary data in the format of the specified high-level protocol.\nThe data will be delivered to all nodes that are interested in tunneled protocols.\nFiner addressing schemes may be implemented using the means provided by the encapsulated protocol.\nThe channelID allows for additional routing between the source and target nodes.",
   "type": "message",
   "message": {
     "variables": [
       {
         "type": "object",
-        "kind": "Protocol",
+        "kind": "uavcan.tunnel.Protocol",
         "name": "protocol",
         "description": ""
       },

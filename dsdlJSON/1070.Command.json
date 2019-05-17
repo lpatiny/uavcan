@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.hardpoint.Command",
   "description": "Generic cargo holder/hardpoint command.\nEither a binary command (0 - release, 1+ - hold) or bitmask",
   "type": "message",
   "message": {
@@ -23,7 +24,7 @@
     "statics": []
   },
   "info": {
-    "id": "1070",
+    "dataTypeID": 1070,
     "hash": "a1a036268b0c3455",
     "maxBitsLength": 24
   }

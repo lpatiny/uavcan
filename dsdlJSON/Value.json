@@ -1,11 +1,11 @@
 {
+  "id": "uavcan.protocol.param.Value",
   "description": "Single parameter value.\nThis is a union, which means that this structure can contain either one of the fields below.\nThe structure is prefixed with tag - a selector value that indicates which particular field is encoded.",
   "type": "union",
   "message": {
     "variables": [
       {
-        "type": "object",
-        "kind": "Empty",
+        "kind": "uavcan.protocol.param.Empty",
         "name": "empty",
         "description": "Empty field, used to represent an undefined value."
       },
@@ -48,5 +48,9 @@
       }
     ],
     "statics": []
+  },
+  "info": {
+    "hash": "29f14bf484727267",
+    "maxBitsLength": 1035
   }
 }

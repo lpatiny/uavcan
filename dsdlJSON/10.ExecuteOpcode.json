@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.protocol.param.ExecuteOpcode",
   "description": "Service to control the node configuration.\nSAVE operation instructs the remote node to save the current configuration parameters into a non-volatile\nstorage. The node may require a restart in order for some changes to take effect.\nERASE operation instructs the remote node to clear its configuration storage and reinitialize the parameters\nwith their default values. The node may require a restart in order for some changes to take effect.\nOther opcodes may be added in the future (for example, an opcode for switching between multiple configurations).\nReserved, keep zero.\nIf 'ok' (the field below) is true, this value is not used and must be kept zero.\nIf 'ok' is false, this value may contain error code. Error code constants may be defined in the future.\nTrue if the operation has been performed successfully, false otherwise.",
   "type": "service",
   "request": {
@@ -37,10 +38,5 @@
       }
     ],
     "statics": []
-  },
-  "info": {
-    "id": "10",
-    "hash": "3b131ac5eb69d2cd",
-    "maxBitsLength": 56
   }
 }

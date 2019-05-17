@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.range_sensor.Measurement",
   "description": "Generic narrow-beam range sensor data.",
   "type": "message",
   "message": {
@@ -56,7 +57,7 @@
     ]
   },
   "info": {
-    "id": "1050",
+    "dataTypeID": 1050,
     "hash": "68fffe70fc771952",
     "maxBitsLength": 120
   }

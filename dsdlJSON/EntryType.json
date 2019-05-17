@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.protocol.file.EntryType",
   "description": "Nested type.\nRepresents the type of the file system entry (e.g. file or directory).\nIf such entry does not exist, 'flags' must be set to zero.",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -19,5 +20,9 @@
       "uint8 FLAG_READABLE  = 8",
       "uint8 FLAG_WRITEABLE = 16"
     ]
+  },
+  "info": {
+    "hash": "6924572fbb2086e5",
+    "maxBitsLength": 8
   }
 }

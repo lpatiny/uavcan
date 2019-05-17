@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.protocol.CANIfaceStats",
   "description": "Single CAN iface statistics.",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -29,5 +30,9 @@
       }
     ],
     "statics": []
+  },
+  "info": {
+    "hash": "13b106f0c44ca350",
+    "maxBitsLength": 144
   }
 }

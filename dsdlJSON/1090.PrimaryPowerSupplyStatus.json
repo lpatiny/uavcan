@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.power.PrimaryPowerSupplyStatus",
   "description": "Primary power supply status.\nTypical publishing rate should be around 1~2 Hz.\nHow many hours left to full discharge at average load over the last 10 seconds.\nTrue if the publishing node senses that an external power source can be used, e.g. to charge batteries.\nRemaining energy estimate in percent.",
   "type": "message",
   "message": {
@@ -39,7 +40,7 @@
     "statics": []
   },
   "info": {
-    "id": "1090",
+    "dataTypeID": 1090,
     "hash": "bba05074ad757480",
     "maxBitsLength": 47
   }

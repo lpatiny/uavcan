@@ -1,11 +1,11 @@
 'use strict';
 
 const serialize = require('../serialize');
-const kinds = require('../../kinds.json');
+const kinds = require('../../dataTypes.json');
 
 describe('serialize gps', () => {
   it('one packet', () => {
-    let kindGeo = kinds[1041];
+    let kindGeo = kinds['uavcan.equipment.camera_gimbal.GEOPOICommand'];
     let data = {
       gimbalId: 12,
       heightCm: 0,

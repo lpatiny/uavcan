@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.protocol.dynamic_node_id.server.Entry",
   "description": "THIS DEFINITION IS SUBJECT TO CHANGE.\nOne dynamic node ID allocation entry.\nThis type is a part of the Raft consensus algorithm.\nPlease refer to the specification for details.",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -40,5 +41,9 @@
       }
     ],
     "statics": []
+  },
+  "info": {
+    "hash": "7faa779d64fa75c2",
+    "maxBitsLength": 168
   }
 }

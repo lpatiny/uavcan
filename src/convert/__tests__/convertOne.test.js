@@ -14,22 +14,14 @@ describe('convert', () => {
 
     let content = fs.readFileSync(source, 'utf8');
 
-    let result = convertOne(content, 'MagneticFieldStrength2');
-
-    // console.log(JSON.stringify(result, undefined, 2));
-
-    expect(result).toMatchSnapshot();
-  });
-
-  it('requestresponse', () => {
-    const source = join(
-      __dirname,
-      '../../../public_regulated_data_types/uavcan/protocol/param/11.GetSet.uavcan'
+    let result = convertOne(
+      content,
+      {},
+      {
+        name: '1002.MagneticFieldStrength2.uavcan',
+        id: 'uavcan.equipment.ahrs.MagneticFieldStrength2'
+      }
     );
-
-    let content = fs.readFileSync(source, 'utf8');
-
-    let result = convertOne(content, 'GetSet');
 
     // console.log(JSON.stringify(result, undefined, 2));
 

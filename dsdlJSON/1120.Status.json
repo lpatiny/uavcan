@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.ice.reciprocating.Status",
   "description": "Generic status message of a piston engine control system.\nAll integer fields are required unless stated otherwise.\nAll floating point fields are optional unless stated otherwise; unknown/unapplicable fields should be set to NaN.\nAbstract engine state. The flags defined below can provide further elaboration.\nThis is a required field.\nThe engine is not running. This is the default state.\nNext states: STARTING, FAULT\nThe engine is starting. This is a transient state.\nNext states: STOPPED, RUNNING, FAULT\nThe engine is running normally.\nSome error flags may be set to indicate non-fatal issues, e.g. overheating.\nNext states: STOPPED, FAULT\nThe engine can no longer function.\nThe error flags may contain additional information about the nature of the fault.\nNext states: STOPPED.\nGeneral status flags.\nNote that not all flags are required. Those that aren't are prepended with a validity flag, which is, obviously,\nalways required; when the validity flag is set, it is assumed that the relevant flags are set correctly.\nIf the validity flag is cleared, then the state of the relevant flags should be ignored.\nAll unused bits must be cleared.\nGeneral error. This flag is required, and it can be used to indicate an error condition\nthat does not fit any of the other flags.\nNote that the vendor may also report additional status information via the vendor specific status code\nfield of the NodeStatus message.\nError of the crankshaft sensor. This flag is optional.\nTemperature levels. These flags are optional; either none of them or all of them are supported.\nFuel pressure. These flags are optional; either none of them or all of them are supported.\nDetonation warning. This flag is optional.\nThis warning is cleared immediately after broadcasting is done if detonation is no longer happening.\nMisfire warning. This flag is optional.\nThis warning is cleared immediately after broadcasting is done if misfire is no longer happening.\nOil pressure. These flags are optional; either none of them or all of them are supported.\nDebris warning. This flag is optional.\nReserved space\nEngine load estimate.\nUnit: percent.\nRange: [0, 127].\nEngine speed.\nUnit: revolutions per minute.\nSpark dwell time.\nUnit: millisecond.\nAtmospheric (barometric) pressure.\nUnit: kilopascal.\nEngine intake manifold pressure.\nUnit: kilopascal.\nEngine intake manifold temperature.\nUnit: kelvin.\nEngine coolant temperature.\nUnit: kelvin.\nOil pressure.\nUnit: kilopascal.\nOil temperature.\nUnit: kelvin.\nFuel pressure.\nUnit: kilopascal.\nInstant fuel consumption estimate.\nThe estimated value should be low-pass filtered in order to prevent aliasing effects.\nUnit: (centimeter^3)/minute.\nEstimate of the consumed fuel since the start of the engine.\nThis variable MUST be reset when the engine is stopped.\nUnit: centimeter^3.\nThrottle position.\nUnit: percent.\nThe index of the publishing ECU.\nSpark plug activity report.\nCan be used during pre-flight tests of the spark subsystem.\nPer-cylinder status information.",
   "type": "message",
   "message": {
@@ -151,10 +152,62 @@
         "range": true,
         "type": "array",
         "kind": {
-          "kind": "CylinderStatus",
-          "unsigned": true,
-          "bits": null,
-          "type": "object"
+          "kind": "uavcan.equipment.ice.reciprocating.CylinderStatus",
+          "type": {
+            "id": "uavcan.equipment.ice.reciprocating.CylinderStatus",
+            "description": "Cylinder state information.\nThis is a nested data type.\nAll unknown parameters should be set to NaN.\nCylinder ignition timing.\nUnits: angular degrees of the crankshaft.\nFuel injection time.\nUnits: millisecond.\nCylinder head temperature (CHT).\nUnits: kelvin.\nExhaust gas temperature (EGT).\nSet to NaN if this cylinder is not equipped with an EGT sensor.\nSet this field to the same value for all cylinders if there is a single shared EGT sensor.\nUnits: kelvin.\nEstimated lambda coefficient.\nThis parameter is mostly useful for monitoring and tuning purposes.\nUnit: dimensionless ratio",
+            "type": "object",
+            "message": {
+              "variables": [
+                {
+                  "type": "var",
+                  "kind": "float",
+                  "unsigned": false,
+                  "bits": 16,
+                  "name": "ignitionTimingDeg",
+                  "description": ""
+                },
+                {
+                  "type": "var",
+                  "kind": "float",
+                  "unsigned": false,
+                  "bits": 16,
+                  "name": "injectionTimeMs",
+                  "description": ""
+                },
+                {
+                  "type": "var",
+                  "kind": "float",
+                  "unsigned": false,
+                  "bits": 16,
+                  "name": "cylinderHeadTemperature",
+                  "description": ""
+                },
+                {
+                  "type": "var",
+                  "kind": "float",
+                  "unsigned": false,
+                  "bits": 16,
+                  "name": "exhaustGasTemperature",
+                  "description": ""
+                },
+                {
+                  "type": "var",
+                  "kind": "float",
+                  "unsigned": false,
+                  "bits": 16,
+                  "name": "lambdaCoefficient",
+                  "description": ""
+                }
+              ],
+              "statics": []
+            },
+            "info": {
+              "hash": "d68ac83a89d5b36b",
+              "maxBitsLength": 80
+            }
+          },
+          "bits": null
         },
         "name": "cylinderStatus",
         "description": ""
@@ -192,7 +245,7 @@
     ]
   },
   "info": {
-    "id": "1120",
+    "dataTypeID": 1120,
     "hash": "d38aa3ee75537ec6",
     "maxBitsLength": 1565
   }

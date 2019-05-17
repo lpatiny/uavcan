@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.actuator.Status",
   "description": "Generic actuator feedback, if available.\nUnknown fields should be set to NAN.\nWhether the units are linear or angular depends on the actuator type (refer to the Command data type).",
   "type": "message",
   "message": {
@@ -56,7 +57,7 @@
     ]
   },
   "info": {
-    "id": "1011",
+    "dataTypeID": 1011,
     "hash": "5e9bba44faf1ea04",
     "maxBitsLength": 64
   }

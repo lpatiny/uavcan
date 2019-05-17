@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.equipment.actuator.Command",
   "description": "Nested type.\nSingle actuator command.\nWhether the units are linear or angular depends on the actuator type.\nValue of the above type",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -34,5 +35,9 @@
       "uint8 COMMAND_TYPE_FORCE        = 2     # Newton or Newton metre",
       "uint8 COMMAND_TYPE_SPEED        = 3     # meter per second or radian per second"
     ]
+  },
+  "info": {
+    "hash": "8d9a6a920c1d616c",
+    "maxBitsLength": 32
   }
 }

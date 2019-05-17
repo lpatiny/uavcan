@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.device.Temperature",
   "description": "Generic device temperature",
   "type": "message",
   "message": {
@@ -34,7 +35,7 @@
     ]
   },
   "info": {
-    "id": "1110",
+    "dataTypeID": 1110,
     "hash": "70261c28a94144c6",
     "maxBitsLength": 40
   }

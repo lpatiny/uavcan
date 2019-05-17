@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.air_data.AngleOfAttack",
   "description": "Angle of attack.",
   "type": "message",
   "message": {
@@ -34,7 +35,7 @@
     ]
   },
   "info": {
-    "id": "1025",
+    "dataTypeID": 1025,
     "hash": "d5513c3f7afac74e",
     "maxBitsLength": 40
   }

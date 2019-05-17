@@ -6,17 +6,17 @@ const processVariable = require('./processVariable');
 /**
  *
  * @param {*} data Buffer
- * @param {*} kind
+ * @param {*} dataType
  */
-function serialize(data, kind, isService = false, isRequest = false) {
+function serialize(data, dataType, isService = false, isRequest = false) {
   let transfer = {};
   if (!isService) {
-    transfer = kind.message;
+    transfer = dataType.message;
   } else if (isService) {
     if (isRequest) {
-      transfer = kind.request;
+      transfer = dataType.request;
     } else {
-      transfer = kind.response;
+      transfer = dataType.response;
     }
   } else {
     throw new Error('parse: Not a service or message');

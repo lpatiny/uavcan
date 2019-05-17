@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.gnss.Auxiliary",
   "description": "GNSS low priority auxiliary info.\nUnknown DOP parameters should be set to NAN.",
   "type": "message",
   "message": {
@@ -79,7 +80,7 @@
     "statics": []
   },
   "info": {
-    "id": "1061",
+    "dataTypeID": 1061,
     "hash": "9be8bdc4c3dbbfd2",
     "maxBitsLength": 125
   }

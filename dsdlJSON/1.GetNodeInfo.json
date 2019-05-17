@@ -1,23 +1,28 @@
 {
+  "id": "uavcan.protocol.GetNodeInfo",
   "description": "Full node info request.\nNote that all fields of the response section are byte-aligned.\nCurrent node status\nVersion information shall not be changed while the node is running.\nHuman readable non-empty ASCII node name.\nNode name shall not be changed while the node is running.\nEmpty string is not a valid node name.\nAllowed characters are: a-z (lowercase ASCII letters) 0-9 (decimal digits) . (dot) - (dash) _ (underscore).\nNode name is a reversed internet domain name (like Java packages), e.g. \"com.manufacturer.project.product\".",
   "type": "service",
+  "request": {
+    "variables": [],
+    "statics": []
+  },
   "response": {
     "variables": [
       {
-        "type": "object",
-        "kind": "NodeStatus",
+        "type": "message",
+        "kind": "uavcan.protocol.NodeStatus",
         "name": "status",
         "description": ""
       },
       {
         "type": "object",
-        "kind": "SoftwareVersion",
+        "kind": "uavcan.protocol.SoftwareVersion",
         "name": "softwareVersion",
         "description": ""
       },
       {
         "type": "object",
-        "kind": "HardwareVersion",
+        "kind": "uavcan.protocol.HardwareVersion",
         "name": "hardwareVersion",
         "description": ""
       },
@@ -36,10 +41,5 @@
       }
     ],
     "statics": []
-  },
-  "info": {
-    "id": "1",
-    "hash": "0b2a812620a11d40",
-    "maxBitsLength": 141
   }
 }

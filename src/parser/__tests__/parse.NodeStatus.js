@@ -1,11 +1,11 @@
 'use strict';
 
 const parse = require('../parse');
-const kinds = require('../../kinds.json');
+const kinds = require('../../dataTypes.json');
 
 describe('parse NodeStatus', () => {
   it('NodeStatus packet', () => {
-    let kindNodeStatus = kinds[341];
+    let kindNodeStatus = kinds['uavcan.protocol.NodeStatus'];
     let data = [141, 46, 0, 0, 0, 0, 0, 219];
 
     let result = parse(data, kindNodeStatus);

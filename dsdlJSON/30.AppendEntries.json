@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.protocol.dynamic_node_id.server.AppendEntries",
   "description": "THIS DEFINITION IS SUBJECT TO CHANGE.\nThis type is a part of the Raft consensus algorithm.\nPlease refer to the specification for details.\nGiven min election timeout and cluster size, the maximum recommended request interval can be derived as follows:\n  max recommended request interval = (min election timeout) / 2 requests / (cluster size - 1)\nThe equation assumes that the Leader requests one Follower at a time, so that there's at most one pending call\nat any moment. Such behavior is optimal as it creates uniform bus load, but it is actually implementation-specific.\nObviously, request interval can be lower than that if needed, but higher values are not recommended as they may\ncause Followers to initiate premature elections in case of intensive frame losses or delays.\nReal timeout is randomized in the range (MIN, MAX], according to the Raft paper.\nRefer to the Raft paper for explanation.\nWorst-case replication time per Follower can be computed as:\n  worst replication time = (127 log entries) * (2 trips of next_index) * (request interval per Follower)\nRefer to the Raft paper for explanation.",
   "type": "service",
   "request": {
@@ -40,10 +41,57 @@
         "range": true,
         "type": "array",
         "kind": {
-          "kind": "Entry",
-          "unsigned": false,
-          "bits": null,
-          "type": "object"
+          "kind": "uavcan.protocol.dynamic_node_id.server.Entry",
+          "type": {
+            "id": "uavcan.protocol.dynamic_node_id.server.Entry",
+            "description": "THIS DEFINITION IS SUBJECT TO CHANGE.\nOne dynamic node ID allocation entry.\nThis type is a part of the Raft consensus algorithm.\nPlease refer to the specification for details.",
+            "type": "object",
+            "message": {
+              "variables": [
+                {
+                  "type": "var",
+                  "kind": "int",
+                  "unsigned": true,
+                  "bits": 32,
+                  "name": "term",
+                  "description": "Refer to the Raft paper for explanation."
+                },
+                {
+                  "length": 16,
+                  "type": "array",
+                  "kind": {
+                    "type": "var",
+                    "kind": "int",
+                    "unsigned": true,
+                    "bits": 8
+                  },
+                  "name": "uniqueId",
+                  "description": "Unique ID of this allocation."
+                },
+                {
+                  "type": "var",
+                  "kind": "void",
+                  "unsigned": false,
+                  "bits": 1,
+                  "description": ""
+                },
+                {
+                  "type": "var",
+                  "kind": "int",
+                  "unsigned": true,
+                  "bits": 7,
+                  "name": "nodeId",
+                  "description": "Node ID of this allocation."
+                }
+              ],
+              "statics": []
+            },
+            "info": {
+              "hash": "7faa779d64fa75c2",
+              "maxBitsLength": 168
+            }
+          },
+          "bits": null
         },
         "name": "entries",
         "description": ""
@@ -66,10 +114,5 @@
       }
     ],
     "statics": []
-  },
-  "info": {
-    "id": "30",
-    "hash": "8032c7097b48a3cc",
-    "maxBitsLength": 249
   }
 }

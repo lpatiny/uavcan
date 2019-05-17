@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.hardpoint.Status",
   "description": "Generic cargo holder/hardpoint status.\nMeaning is the same as for the command field in the Command message",
   "type": "message",
   "message": {
@@ -39,7 +40,7 @@
     "statics": []
   },
   "info": {
-    "id": "1071",
+    "dataTypeID": 1071,
     "hash": "624a519d42553d82",
     "maxBitsLength": 56
   }

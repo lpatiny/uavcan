@@ -1,9 +1,9 @@
 'use strict';
 
 const parse = require('../parse');
-const kinds = require('../../kinds.json');
+const kinds = require('../../dataTypes.json');
 
-let kindGetSet = kinds[11];
+let kindGetSet = kinds['uavcan.protocol.param.GetSet'];
 
 describe('parse testGetSet', () => {
   it('request', () => {

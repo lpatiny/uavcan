@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.esc.RPMCommand",
   "description": "Simple RPM setpoint.\nThe ESC should automatically clamp the setpoint according to the minimum and maximum supported RPM;\nfor example, given a ESC that operates in the range 100 to 10000 RPM, a setpoint of 1 RPM will be clamped to 100 RPM.\nNegative values indicate reverse rotation.",
   "type": "message",
   "message": {
@@ -20,7 +21,7 @@
     "statics": []
   },
   "info": {
-    "id": "1031",
+    "dataTypeID": 1031,
     "hash": "ce0f9f621cf7e70b",
     "maxBitsLength": 365
   }

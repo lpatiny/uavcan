@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.protocol.RestartNode",
   "description": "Restart the node.\nSome nodes may require restart before the new configuration will be applied.\nThe request should be rejected if magic_number does not equal MAGIC_NUMBER.",
   "type": "service",
   "request": {
@@ -16,9 +17,8 @@
       "uint40 MAGIC_NUMBER = 0xACCE551B1E"
     ]
   },
-  "info": {
-    "id": "5",
-    "hash": "569e05394a3017f0",
-    "maxBitsLength": 40
+  "response": {
+    "variables": [],
+    "statics": []
   }
 }

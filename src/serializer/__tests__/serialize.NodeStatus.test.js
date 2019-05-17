@@ -1,11 +1,11 @@
 'use strict';
 
 const serialize = require('../serialize');
-const kinds = require('../../kinds.json');
+const kinds = require('../../dataTypes.json');
 
 describe('serialize NodeStatus', () => {
   it('NodeStatus packet', () => {
-    let kindNodeStatus = kinds[341];
+    let kindNodeStatus = kinds['uavcan.protocol.NodeStatus'];
     let data = {
       uptimeSec: 11917,
       health: 0,

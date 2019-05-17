@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.equipment.camera_gimbal.Mode",
   "description": "Gimbal operating mode",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -18,5 +19,9 @@
       "uint8 COMMAND_MODE_ORIENTATION_BODY_FRAME  = 2",
       "uint8 COMMAND_MODE_GEO_POI                 = 3"
     ]
+  },
+  "info": {
+    "hash": "9108c7785aeb69c4",
+    "maxBitsLength": 8
   }
 }

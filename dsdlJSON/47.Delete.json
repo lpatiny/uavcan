@@ -1,11 +1,12 @@
 {
+  "id": "uavcan.protocol.file.Delete",
   "description": "Delete remote file system entry.\nIf the remote entry is a directory, all nested entries will be removed too.",
   "type": "service",
   "request": {
     "variables": [
       {
         "type": "object",
-        "kind": "Path",
+        "kind": "uavcan.protocol.file.Path",
         "name": "path",
         "description": ""
       }
@@ -16,16 +17,11 @@
     "variables": [
       {
         "type": "object",
-        "kind": "Error",
+        "kind": "uavcan.protocol.file.Error",
         "name": "error",
         "description": ""
       }
     ],
     "statics": []
-  },
-  "info": {
-    "id": "47",
-    "hash": "78648c99170b47aa",
-    "maxBitsLength": 1608
   }
 }

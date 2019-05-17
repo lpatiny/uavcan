@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.equipment.ice.reciprocating.CylinderStatus",
   "description": "Cylinder state information.\nThis is a nested data type.\nAll unknown parameters should be set to NaN.\nCylinder ignition timing.\nUnits: angular degrees of the crankshaft.\nFuel injection time.\nUnits: millisecond.\nCylinder head temperature (CHT).\nUnits: kelvin.\nExhaust gas temperature (EGT).\nSet to NaN if this cylinder is not equipped with an EGT sensor.\nSet this field to the same value for all cylinders if there is a single shared EGT sensor.\nUnits: kelvin.\nEstimated lambda coefficient.\nThis parameter is mostly useful for monitoring and tuning purposes.\nUnit: dimensionless ratio",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -45,5 +46,9 @@
       }
     ],
     "statics": []
+  },
+  "info": {
+    "hash": "d68ac83a89d5b36b",
+    "maxBitsLength": 80
   }
 }

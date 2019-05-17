@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.esc.Status",
   "description": "Generic ESC status.\nUnknown fields should be set to NAN.",
   "type": "message",
   "message": {
@@ -63,7 +64,7 @@
     "statics": []
   },
   "info": {
-    "id": "1034",
+    "dataTypeID": 1034,
     "hash": "a9af28aea2fbb254",
     "maxBitsLength": 110
   }

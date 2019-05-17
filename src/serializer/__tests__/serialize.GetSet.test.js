@@ -1,9 +1,9 @@
 'use strict';
 
 const serialize = require('../serialize');
-const kinds = require('../../kinds.json');
+const kinds = require('../../dataTypes.json');
 
-let kindGetSet = kinds[11];
+let kindGetSet = kinds['uavcan.protocol.param.GetSet'];
 
 describe('serialize GetSet', () => {
   it('request', () => {

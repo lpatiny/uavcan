@@ -3,17 +3,16 @@
 const fs = require('fs');
 const { join } = require('path');
 
-function getDataType() {
+function getDataTypeSignatures() {
   let data = fs.readFileSync(join(__dirname, 'datatype_sig.txt'), 'utf8');
 
   let lines = data.split(/[\r\n]+/).slice(2);
   let result = {};
   for (let line of lines) {
     let fields = line.split(/ +/);
-
-    if (!isNaN(fields[1])) {
-      result[fields[1]] = {
-        id: fields[1],
+    if (fields.length === 4) {
+      result[fields[0]] = {
+        dataTypeID: fields[1] === 'N/A' ? undefined : Number(fields[1]),
         hash: fields[2].substring(2),
         maxBitsLength: Number(fields[3])
       };
@@ -22,6 +21,6 @@ function getDataType() {
   return result;
 }
 
-getDataType();
+getDataTypeSignatures();
 
-module.exports = getDataType;
+module.exports = getDataTypeSignatures;

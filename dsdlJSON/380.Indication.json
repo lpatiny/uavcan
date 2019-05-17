@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.protocol.enumeration.Indication",
   "description": "This message will be broadcasted when the node receives user input in the process of enumeration.\nThis field is unused; keep it empty\nName of the enumerated parameter.\nThis field must always be populated by the enumeratee.\nIf multiple parameters were enumerated at once (e.g. ESC index and the direction of rotation),\nthe field should contain the name of the most important parameter.",
   "type": "message",
   "message": {
@@ -27,7 +28,7 @@
     "statics": []
   },
   "info": {
-    "id": "380",
+    "dataTypeID": 380,
     "hash": "884cb63050a84f35",
     "maxBitsLength": 815
   }

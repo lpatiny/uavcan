@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.protocol.debug.LogLevel",
   "description": "Log message severity",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -18,5 +19,9 @@
       "uint3 WARNING  = 2",
       "uint3 ERROR    = 3"
     ]
+  },
+  "info": {
+    "hash": "711bf141af572346",
+    "maxBitsLength": 3
   }
 }

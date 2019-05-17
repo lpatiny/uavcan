@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.ahrs.MagneticFieldStrength",
   "description": "Magnetic field readings, in Gauss, in body frame.\nSI units are avoided because of float16 range limitations.\nThis message is deprecated. Use the newer 1002.MagneticFieldStrength2.uavcan message.",
   "type": "message",
   "message": {
@@ -32,7 +33,7 @@
     "statics": []
   },
   "info": {
-    "id": "1001",
+    "dataTypeID": 1001,
     "hash": "e2a7d4a9460bc2f2",
     "maxBitsLength": 196
   }

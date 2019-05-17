@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.ahrs.MagneticFieldStrength2",
   "description": "Magnetic field readings, in Gauss, in body frame.\nSI units are avoided because of float16 range limitations.",
   "type": "message",
   "message": {
@@ -40,7 +41,7 @@
     "statics": []
   },
   "info": {
-    "id": "1002",
+    "dataTypeID": 1002,
     "hash": "b6ac0c442430297e",
     "maxBitsLength": 204
   }

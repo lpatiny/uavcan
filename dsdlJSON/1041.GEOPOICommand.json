@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.camera_gimbal.GEOPOICommand",
   "description": "Generic camera gimbal control.\nThis message can only be used in the following modes:\n - COMMAND_MODE_GEO_POI\nTarget operation mode - how to handle this message.\nSee the list of acceptable modes above.\nCoordinates of the POI (point of interest).",
   "type": "message",
   "message": {
@@ -13,7 +14,7 @@
       },
       {
         "type": "object",
-        "kind": "Mode",
+        "kind": "uavcan.equipment.camera_gimbal.Mode",
         "name": "mode",
         "description": ""
       },
@@ -56,7 +57,7 @@
     ]
   },
   "info": {
-    "id": "1041",
+    "dataTypeID": 1041,
     "hash": "9371428a92f01fd6",
     "maxBitsLength": 104
   }

@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.equipment.gnss.ECEFPositionVelocity",
   "description": "Nested type.\nGNSS ECEF high resolution position and velocity.\nECEF is an acronym for Earth-Centered-Earth-Fixed, which is a cartesian\ncoordinate system which rotates with the earth. The origin (0,0,0) is\nlocated at the center of the earth. The x-axis is a vector pointing from\nthe origin with positive direction towards 0 degrees latitude and\nlongitude (equator, at the prime meridian). The z-axis is a vector\npointing from the origin towards the north-pole. The y-axis completes a\nright-handed coordinate system.",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -50,5 +51,9 @@
       }
     ],
     "statics": []
+  },
+  "info": {
+    "hash": "24a5da4abee3a248",
+    "maxBitsLength": 792
   }
 }

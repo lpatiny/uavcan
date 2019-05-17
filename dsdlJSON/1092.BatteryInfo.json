@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.power.BatteryInfo",
   "description": "Single battery info.\nTypical publishing rate should be around 0.2~1 Hz.\nPlease refer to the Smart Battery data specification for some elaboration.\nPrimary parameters.\nSome fields can be set to NAN if their values are unknown.\nFull charge capacity is expected to slowly reduce as the battery is aging. Normally its estimate is updated after\nevery charging cycle.\nStatus flags.\nNotes:\n - CHARGING must be always set as long as the battery is connected to a charger, even if the charging is complete.\n - CHARGED must be cleared immediately when the charger is disconnected.\nState of Health (SOH) estimate, in percent.\nhttp://en.wikipedia.org/wiki/State_of_health\nRelative State of Charge (SOC) estimate, in percent.\nhttp://en.wikipedia.org/wiki/State_of_charge\nBattery identification.\nModel instance ID must be unique within the same battery model name.\nModel name is a human-readable string that normally should include the vendor name, model name, and chemistry\ntype of this battery. This field should be assumed case-insensitive. Example: \"Zubax Smart Battery v1.1 LiPo\".",
   "type": "message",
   "message": {
@@ -135,7 +136,7 @@
     ]
   },
   "info": {
-    "id": "1092",
+    "dataTypeID": 1092,
     "hash": "249c26548a711966",
     "maxBitsLength": 437
   }

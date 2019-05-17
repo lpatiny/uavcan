@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.air_data.TrueAirspeed",
   "description": "TAS.",
   "type": "message",
   "message": {
@@ -23,7 +24,7 @@
     "statics": []
   },
   "info": {
-    "id": "1020",
+    "dataTypeID": 1020,
     "hash": "306f69e0a591afaa",
     "maxBitsLength": 32
   }

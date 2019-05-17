@@ -1,11 +1,12 @@
 {
+  "id": "uavcan.protocol.debug.LogMessage",
   "description": "Generic log message.\nAll items are byte aligned.",
   "type": "message",
   "message": {
     "variables": [
       {
         "type": "object",
-        "kind": "LogLevel",
+        "kind": "uavcan.protocol.debug.LogLevel",
         "name": "level",
         "description": ""
       },
@@ -39,7 +40,7 @@
     "statics": []
   },
   "info": {
-    "id": "16383",
+    "dataTypeID": 16383,
     "hash": "d654a48e0c049d75",
     "maxBitsLength": 983
   }

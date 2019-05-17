@@ -2,10 +2,11 @@
 
 const camelCase = require('camelcase');
 
-function convertOne(content, allKinds) {
+function convertOne(content, allDataTypes, file) {
   let result = {
+    id: file.id,
     description: '',
-    type: 'message',
+    type: isNaN(file.name.split('.')[0]) ? 'object' : 'message',
     message: {
       variables: [],
       statics: []
@@ -58,36 +59,21 @@ function convertOne(content, allKinds) {
       transferType.variables.push(currentVariable);
     } else if (fields[0].match(/^[A-Z].[A-z]+$/)) {
       // handle linked union fields and types
-      currentVariable = getObject(fields, allKinds);
+      currentVariable = getObject(fields, allDataTypes, file);
       transferType.variables.push(currentVariable);
     } else if (fields[0].match(/^[A-Z].[A-z]+\[.*$/)) {
       // handle linked array union fields and types
-      currentVariable = getObjectArray(fields, allKinds);
+      currentVariable = getObjectArray(fields, allDataTypes, file);
       transferType.variables.push(currentVariable);
     }
   }
 
   // clean up object
-  if (
-    result.request &&
-    result.request.variables.length === 0 &&
-    result.request.statics.length === 0
-  ) {
-    delete result.request;
-  }
-  if (
-    result.response &&
-    result.response.variables.length === 0 &&
-    result.response.statics.length === 0
-  ) {
-    delete result.response;
-  }
-  if (
-    result.message &&
-    result.message.variables.length === 0 &&
-    result.message.statics.length === 0
-  ) {
+  if (result.type === 'service') {
     delete result.message;
+  } else {
+    delete result.request;
+    delete result.response;
   }
 
   return result;
@@ -95,15 +81,16 @@ function convertOne(content, allKinds) {
 
 module.exports = convertOne;
 
-function getObject(fields, allKinds) {
+function getObject(fields, allDataTypes, file) {
   let variable = {};
-  if (!allKinds[fields[0]]) {
-    console.error(`Unknown object type: ${fields[0]}`);
-    variable.type = 'object';
-  } else {
-    variable.type = allKinds[fields[0]];
+
+  let objectKind = fields[0];
+  if (!fields[0].includes('.')) objectKind = `${file.parent}.${objectKind}`;
+  if (!allDataTypes[objectKind]) {
+    console.error(`Unknown object type: ${objectKind}`, file);
   }
-  variable.kind = fields[0];
+  variable.type = allDataTypes[objectKind].type;
+  variable.kind = objectKind;
   if (fields[1]) variable.name = camelCase(fields[1]);
   variable.description = fields
     .slice(2)
@@ -112,12 +99,14 @@ function getObject(fields, allKinds) {
   return variable;
 }
 
-function getObjectArray(fields, allKinds) {
+function getObjectArray(fields, allKinds, file) {
   let variable = parseArraySize(fields[0]);
+  let objectKind = fields[0].replace(/\[.*$/g, '');
+  if (!fields[0].includes('.')) objectKind = `${file.parent}.${objectKind}`;
   variable.type = 'array';
   variable.kind = {
-    kind: fields[0].replace(/\[.*$/g, ''),
-    unsigned: fields[0].includes('u'),
+    kind: objectKind,
+    type: 'object',
     bits: Number(fields[0].replace(/[a-z]+([0-9]+).*/, '$1'))
   };
   if (!allKinds[variable.kind.kind]) {

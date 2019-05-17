@@ -7,7 +7,7 @@ describe('UAVCANCodec', () => {
   it('send', () => {
     let myCodec = new UAVCANCodec();
     let variables = [15, 0, 1, 0, 32];
-    let kindId = 341;
+    let kindId = 'uavcan.protocol.NodeStatus';
 
     myCodec.encode(kindId, variables, (arg) => {
       console.log('tx');

@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.camera_gimbal.Status",
   "description": "Generic gimbal status.\nCamera axis orientation in body frame (not in fixed frame).\nPlease refer to the UAVCAN coordinate frame conventions.",
   "type": "message",
   "message": {
@@ -13,7 +14,7 @@
       },
       {
         "type": "object",
-        "kind": "Mode",
+        "kind": "uavcan.equipment.camera_gimbal.Mode",
         "name": "mode",
         "description": ""
       },
@@ -46,7 +47,7 @@
     "statics": []
   },
   "info": {
-    "id": "1044",
+    "dataTypeID": 1044,
     "hash": "b9f127865be0d61e",
     "maxBitsLength": 228
   }

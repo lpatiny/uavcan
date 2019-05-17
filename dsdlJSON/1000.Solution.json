@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.ahrs.Solution",
   "description": "Inertial data and orientation in body frame.\nNormalized quaternion\nrad/sec\nm/s^2",
   "type": "message",
   "message": {
@@ -96,7 +97,7 @@
     "statics": []
   },
   "info": {
-    "id": "1000",
+    "dataTypeID": 1000,
     "hash": "72a63a3c6f41fa9b",
     "maxBitsLength": 668
   }

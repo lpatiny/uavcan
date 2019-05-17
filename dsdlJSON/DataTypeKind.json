@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.protocol.DataTypeKind",
   "description": "Data type kind (message or service).",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -16,5 +17,9 @@
       "uint8 SERVICE = 0",
       "uint8 MESSAGE = 1"
     ]
+  },
+  "info": {
+    "hash": "9420a73e008e5930",
+    "maxBitsLength": 8
   }
 }

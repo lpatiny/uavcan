@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.indication.BeepCommand",
   "description": "Nodes that are capable of producing sounds should obey.",
   "type": "message",
   "message": {
@@ -23,7 +24,7 @@
     "statics": []
   },
   "info": {
-    "id": "1080",
+    "dataTypeID": 1080,
     "hash": "be9ea9fec2b15d52",
     "maxBitsLength": 32
   }

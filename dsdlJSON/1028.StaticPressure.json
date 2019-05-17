@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.air_data.StaticPressure",
   "description": "Static pressure.",
   "type": "message",
   "message": {
@@ -23,7 +24,7 @@
     "statics": []
   },
   "info": {
-    "id": "1028",
+    "dataTypeID": 1028,
     "hash": "cdc7c43412bdc89a",
     "maxBitsLength": 48
   }

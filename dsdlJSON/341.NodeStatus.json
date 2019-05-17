@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.protocol.NodeStatus",
   "description": "Abstract node status information.\nAll UAVCAN nodes are required to publish this message periodically.\nPublication period may vary within these limits.\nIt is NOT recommended to change it at run time.\nIf a node fails to publish this message in this amount of time, it should be considered offline.\nUptime counter should never overflow.\nOther nodes may detect that a remote node has restarted when this value goes backwards.\nAbstract node health.\nCurrent mode.\nMode OFFLINE can be actually reported by the node to explicitly inform other network\nparticipants that the sending node is about to shutdown. In this case other nodes will not\nhave to wait OFFLINE_TIMEOUT_MS before they detect that the node is no longer available.\nReserved values can be used in future revisions of the specification.\nNot used currently, keep zero when publishing, ignore when receiving.\nOptional, vendor-specific node status code, e.g. a fault code or a status bitmask.",
   "type": "message",
   "message": {
@@ -60,7 +61,7 @@
     ]
   },
   "info": {
-    "id": "341",
+    "dataTypeID": 341,
     "hash": "0f0868d0c1a7c6f1",
     "maxBitsLength": 56
   }

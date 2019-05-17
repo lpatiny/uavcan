@@ -1,11 +1,11 @@
 'use strict';
 
 const parse = require('../parse');
-const kinds = require('../../kinds.json');
+const dataTypes = require('../../dataTypes.json');
 
 describe('uavtest gps', () => {
   it('one packet', () => {
-    let kindGeo = kinds[1041];
+    let kindGeo = dataTypes['uavcan.equipment.camera_gimbal.GEOPOICommand'];
     let data = [12, 14, 15];
 
     let result = parse(data, kindGeo);

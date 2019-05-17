@@ -2,14 +2,14 @@
 
 /* global BigInt */
 
-const kinds = require('../kinds.json');
+const dataTypes = require('../dataTypes.json');
 
 const processVar = require('./processVar');
 
 const n1 = BigInt(1);
 
 function processUnion(data, variable, bigResult) {
-  let unionDefinition = kinds[variable.kind];
+  let unionDefinition = dataTypes[variable.kind];
   let variables = unionDefinition.message.variables;
   let nbBits = Math.ceil(Math.log2(variables.length));
 

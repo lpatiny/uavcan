@@ -1,6 +1,7 @@
 {
+  "id": "uavcan.CoarseOrientation",
   "description": "Nested type.\nCoarse, low-resolution 3D orientation represented as fixed axes in 16 bit.\nRoll, pitch, yaw angles in radians should be multiplied by\nANGLE_MULTIPLIER in order to convert them to the coarse representation.\nANGLE_MULTIPLIER = NORM / PI\nWhere NORM is 12, because it:\n - Fits the maximum range of a signed 5 bit integer\n - Allows to exactly represent the following angles:\n   0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, and negatives",
-  "type": "message",
+  "type": "object",
   "message": {
     "variables": [
       {
@@ -19,5 +20,9 @@
     "statics": [
       "float32 ANGLE_MULTIPLIER = 4.7746482927568605"
     ]
+  },
+  "info": {
+    "hash": "271ba10b0dac9e52",
+    "maxBitsLength": 16
   }
 }

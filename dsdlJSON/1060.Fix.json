@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.gnss.Fix",
   "description": "GNSS navigation solution with uncertainty.\nThis message is deprecated. Use the newer 1063.Fix2.uavcan message.\nTime solution.\nTime standard (GPS, UTC, TAI, etc) is defined in the field below.\nTime standard used in the GNSS timestamp field.\nIf known, the number of leap seconds allows to perform conversions between some time standards.\nPosition and velocity solution\nFix status\nPrecision",
   "type": "message",
   "message": {
@@ -156,7 +157,7 @@
     ]
   },
   "info": {
-    "id": "1060",
+    "dataTypeID": 1060,
     "hash": "54c1572b9e07f297",
     "maxBitsLength": 628
   }

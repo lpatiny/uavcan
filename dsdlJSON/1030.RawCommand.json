@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.esc.RawCommand",
   "description": "Raw ESC command normalized into [-8192, 8191]; negative values indicate reverse rotation.\nThe ESC should normalize the setpoint into its effective input range.\nNon-zero setpoint value below minimum should be interpreted as min valid setpoint for the given motor.",
   "type": "message",
   "message": {
@@ -20,7 +21,7 @@
     "statics": []
   },
   "info": {
-    "id": "1030",
+    "dataTypeID": 1030,
     "hash": "217f5c87d7ec951d",
     "maxBitsLength": 285
   }

@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.gnss.RTCMStream",
   "description": "GNSS RTCM SC-104 protocol raw stream container.\nRTCM messages that are longer than max data size can be split over multiple consecutive messages.",
   "type": "message",
   "message": {
@@ -46,7 +47,7 @@
     ]
   },
   "info": {
-    "id": "1062",
+    "dataTypeID": 1062,
     "hash": "1f56030ecb171501",
     "maxBitsLength": 1040
   }

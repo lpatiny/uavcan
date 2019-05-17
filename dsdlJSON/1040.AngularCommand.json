@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.camera_gimbal.AngularCommand",
   "description": "Generic camera gimbal control.\nThis message can only be used in the following modes:\n - COMMAND_MODE_ANGULAR_VELOCITY\n - COMMAND_MODE_ORIENTATION_FIXED_FRAME\n - COMMAND_MODE_ORIENTATION_BODY_FRAME\nTarget operation mode - how to handle this message.\nSee the list of acceptable modes above.\nIn the angular velocity mode, this field contains a rate quaternion.\nIn the orientation mode, this field contains orientation either in fixed frame or in body frame.",
   "type": "message",
   "message": {
@@ -13,7 +14,7 @@
       },
       {
         "type": "object",
-        "kind": "Mode",
+        "kind": "uavcan.equipment.camera_gimbal.Mode",
         "name": "mode",
         "description": ""
       },
@@ -33,7 +34,7 @@
     "statics": []
   },
   "info": {
-    "id": "1040",
+    "dataTypeID": 1040,
     "hash": "4af6e57b2b2be29c",
     "maxBitsLength": 80
   }

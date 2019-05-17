@@ -1,4 +1,5 @@
 {
+  "id": "uavcan.equipment.air_data.RawAirData",
   "description": "Raw Air Data.\nNote: unused vars should be assigned NaN\nHeater State\n\nPressure Data\nTemperature Data",
   "type": "message",
   "message": {
@@ -81,7 +82,7 @@
     ]
   },
   "info": {
-    "id": "1027",
+    "dataTypeID": 1027,
     "hash": "c77df38ba122f5da",
     "maxBitsLength": 397
   }
