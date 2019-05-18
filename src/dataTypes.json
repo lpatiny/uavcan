@@ -891,6 +891,11 @@
         "uint8 FLAG_HAS_PENDING_STDOUT   = 64    # There is more stdout to read",
         "uint8 FLAG_HAS_PENDING_STDERR   = 128   # There is more stderr to read"
       ]
+    },
+    "info": {
+      "dataTypeID": 6,
+      "hash": "59276b5921c9246e",
+      "maxBitsLength": 1040
     }
   },
   "uavcan.protocol.RestartNode": {
@@ -915,6 +920,11 @@
     "response": {
       "variables": [],
       "statics": []
+    },
+    "info": {
+      "dataTypeID": 5,
+      "hash": "569e05394a3017f0",
+      "maxBitsLength": 40
     }
   },
   "uavcan.protocol.Panic": {
@@ -994,6 +1004,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "dataTypeID": 49,
+      "hash": "515aa1dc77e58429",
+      "maxBitsLength": 3192
     }
   },
   "uavcan.protocol.file.Read": {
@@ -1042,6 +1057,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "dataTypeID": 48,
+      "hash": "8dcdca939f33f678",
+      "maxBitsLength": 1648
     }
   },
   "uavcan.protocol.file.Delete": {
@@ -1069,6 +1089,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "dataTypeID": 47,
+      "hash": "78648c99170b47aa",
+      "maxBitsLength": 1608
     }
   },
   "uavcan.protocol.file.GetDirectoryEntryInfo": {
@@ -1116,6 +1141,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "dataTypeID": 46,
+      "hash": "8c46e8ab568bda79",
+      "maxBitsLength": 1640
     }
   },
   "uavcan.protocol.file.GetInfo": {
@@ -1157,6 +1187,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "dataTypeID": 45,
+      "hash": "5004891ee8a27531",
+      "maxBitsLength": 1608
     }
   },
   "uavcan.protocol.file.BeginFirmwareUpdate": {
@@ -1210,6 +1245,11 @@
         "uint8 ERROR_IN_PROGRESS      = 2    # Firmware update is already in progress, and the slave doesn't want to restart.",
         "uint8 ERROR_UNKNOWN          = 255"
       ]
+    },
+    "info": {
+      "dataTypeID": 40,
+      "hash": "b7d725df72724126",
+      "maxBitsLength": 1616
     }
   },
   "uavcan.protocol.GlobalTimeSync": {
@@ -1315,6 +1355,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "dataTypeID": 4,
+      "hash": "be6f76a7ec312b04",
+      "maxBitsLength": 0
     }
   },
   "uavcan.protocol.dynamic_node_id.server.Discovery": {
@@ -1503,6 +1548,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "dataTypeID": 31,
+      "hash": "cdde07bb89a56356",
+      "maxBitsLength": 72
     }
   },
   "uavcan.protocol.dynamic_node_id.server.AppendEntries": {
@@ -1621,6 +1671,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "dataTypeID": 30,
+      "hash": "8032c7097b48a3cc",
+      "maxBitsLength": 249
     }
   },
   "uavcan.tunnel.Broadcast": {
@@ -1893,6 +1948,11 @@
         "uint8 FLAG_PUBLISHING = 4   # Publishing messages of this type",
         "uint8 FLAG_SERVING    = 8   # Providing service of this type"
       ]
+    },
+    "info": {
+      "dataTypeID": 2,
+      "hash": "1b283338a7bed2d8",
+      "maxBitsLength": 671
     }
   },
   "uavcan.protocol.debug.LogMessage": {
@@ -2029,6 +2089,11 @@
         "uint8 ERROR_UNSUPPORTED         = 3     # The node cannot perform enumeration in its current configuration",
         "uint8 ERROR_UNKNOWN             = 255   # Generic error"
       ]
+    },
+    "info": {
+      "dataTypeID": 15,
+      "hash": "196ae06426a3b5d8",
+      "maxBitsLength": 759
     }
   },
   "uavcan.equipment.ice.FuelTankStatus": {
@@ -2518,6 +2583,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "dataTypeID": 11,
+      "hash": "a7b622f939d1a4d5",
+      "maxBitsLength": 1791
     }
   },
   "uavcan.equipment.power.BatteryInfo": {
@@ -4558,6 +4628,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "dataTypeID": 10,
+      "hash": "3b131ac5eb69d2cd",
+      "maxBitsLength": 56
     }
   },
   "uavcan.protocol.GetNodeInfo": {
@@ -4603,6 +4678,11 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "dataTypeID": 1,
+      "hash": "ee468a8121c46a9e",
+      "maxBitsLength": 0
     }
   },
   "uavcan.protocol.dynamic_node_id.Allocation": {

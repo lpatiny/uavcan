@@ -49,5 +49,10 @@
       "uint8 ERROR_IN_PROGRESS      = 2    # Firmware update is already in progress, and the slave doesn't want to restart.",
       "uint8 ERROR_UNKNOWN          = 255"
     ]
+  },
+  "info": {
+    "dataTypeID": 40,
+    "hash": "b7d725df72724126",
+    "maxBitsLength": 1616
   }
 }

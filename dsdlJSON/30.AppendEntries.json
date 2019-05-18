@@ -114,5 +114,10 @@
       }
     ],
     "statics": []
+  },
+  "info": {
+    "dataTypeID": 30,
+    "hash": "8032c7097b48a3cc",
+    "maxBitsLength": 249
   }
 }

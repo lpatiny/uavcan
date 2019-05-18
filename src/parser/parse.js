@@ -9,21 +9,25 @@ const processVariable = require('./processVariable');
  * @param {*} dataType
  */
 function parse(data, dataType, isService = false, isRequest = false) {
-  let buffer;
+  let bigValue;
+  let from;
 
-  if (Array.isArray(data)) {
-    buffer = Buffer.from(data);
+  if (typeof data === 'string') {
+    bigValue = BigInt(`0x${data}`);
+    from = BigInt((data.length / 2) * 8);
+  } else if (Array.isArray(data)) {
+    bigValue = BigInt(`0x${Buffer.from(data).toString('hex')}`);
+    from = BigInt(data.length * 8);
   } else if (Buffer.isBuffer(data)) {
-    buffer = data;
+    bigValue = BigInt(`0x${data.toString('hex')}`);
+    from = BigInt(data.length * 8);
   } else {
-    throw new Error('parse, data should be a uint8 array');
+    throw new Error(
+      'parse, data should be a hex string, buffer or uint8 array'
+    );
   }
 
-  let bigValue = BigInt(`0x${buffer.toString('hex')}`);
-
   let result = {};
-  let from = BigInt(buffer.length * 8);
-
   let transfer = {};
   if (!isService) {
     transfer = dataType.message;

@@ -10,7 +10,7 @@ function getDataTypeSignatures() {
   let result = {};
   for (let line of lines) {
     let fields = line.split(/ +/);
-    if (fields.length === 4) {
+    if (fields.length >= 4) {
       result[fields[0]] = {
         dataTypeID: fields[1] === 'N/A' ? undefined : Number(fields[1]),
         hash: fields[2].substring(2),
