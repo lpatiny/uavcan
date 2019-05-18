@@ -18,7 +18,7 @@ function serializeFloat(value, nbBits) {
       return BigInt((result >> 8) | ((result & 255) << 8));
     }
     case 32: {
-      let buffer = new Buffer(4);
+      let buffer = Buffer.from(new Array(4));
       buffer.writeFloatBE(value);
       let result = n0;
       for (let i = 0; i < 4; i++) {
@@ -27,7 +27,7 @@ function serializeFloat(value, nbBits) {
       return result;
     }
     case 64: {
-      let buffer = new Buffer(8);
+      let buffer = Buffer.from(new Array(8));
       buffer.writeDoubleBE(value);
       let result = n0;
       for (let i = 0; i < 8; i++) {

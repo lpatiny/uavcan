@@ -2,7 +2,7 @@
 
 const DataTypesManager = require('../DataTypesManager');
 
-describe('DataTypesManager', () => {
+describe.skip('DataTypesManager', () => {
   it('get service by ID', () => {
     let dataType = DataTypesManager.getServiceByID(1);
     expect(dataType.id).toBe('uavcan.protocol.GetNodeInfo');

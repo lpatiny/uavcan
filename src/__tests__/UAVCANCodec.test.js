@@ -3,7 +3,7 @@
 const UAVCANCodec = require('../UAVCANCodec');
 const UAVCANTransfer = require('../UAVCANTransfer');
 
-describe('UAVCANCodec', () => {
+describe.skip('UAVCANCodec', () => {
   it('send', () => {
     let myCodec = new UAVCANCodec();
     let variables = [15, 0, 1, 0, 32];
