@@ -6,7 +6,7 @@ const kinds = require('../../dataTypes.json');
 describe('parse NodeStatus', () => {
   it('NodeStatus packet', () => {
     let kindNodeStatus = kinds['uavcan.protocol.NodeStatus'];
-    let data = [141, 46, 0, 0, 0, 0, 0, 219];
+    let data = [141, 46, 0, 0, 0, 0, 0];
 
     let result = parse(data, kindNodeStatus);
     expect(result).toStrictEqual({
