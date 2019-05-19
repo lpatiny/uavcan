@@ -6,8 +6,6 @@ const dataTypes = require('../dataTypes.json');
 
 const processVar = require('./processVar');
 
-const n1 = BigInt(1);
-
 function processUnion(data, variable, bigResult) {
   let unionDefinition = dataTypes[variable.kind];
   let variables = unionDefinition.message.variables;
@@ -30,11 +28,9 @@ function processUnion(data, variable, bigResult) {
   }
 
   processVar(index, { kind: 'int', bits: nbBits, unsigned: true }, bigResult);
-  processVar(data[variables[index].name], variables[index], bigResult);
-}
+  let processVariable = require('./processVariable');
 
-function getCurrentValue(bigValue, nbBits, from) {
-  return (bigValue >> (from - BigInt(nbBits))) & ((n1 >> BigInt(nbBits)) - n1);
+  processVariable(data, variables[index], bigResult);
 }
 
 module.exports = processUnion;

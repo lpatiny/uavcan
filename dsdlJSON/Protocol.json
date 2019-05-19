@@ -16,5 +16,8 @@
     "statics": [
       "uint8 MAVLINK                   = 0     # MAVLink"
     ]
+  },
+  "info": {
+    "type": "object"
   }
 }

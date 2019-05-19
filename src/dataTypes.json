@@ -6,6 +6,7 @@
     "message": {
       "variables": [
         {
+          "type": "object",
           "kind": "uavcan.protocol.param.Empty",
           "name": "empty",
           "description": "Empty field, used to represent an undefined value."
@@ -52,7 +53,8 @@
     },
     "info": {
       "hash": "29f14bf484727267",
-      "maxBitsLength": 1035
+      "maxBitsLength": 1035,
+      "type": "union"
     }
   },
   "uavcan.Timestamp": {
@@ -67,7 +69,8 @@
     },
     "info": {
       "hash": "05bd0b5c81087e0d",
-      "maxBitsLength": 56
+      "maxBitsLength": 56,
+      "type": "object"
     }
   },
   "uavcan.protocol.SoftwareVersion": {
@@ -124,7 +127,8 @@
     },
     "info": {
       "hash": "dd46fd376527fea1",
-      "maxBitsLength": 120
+      "maxBitsLength": 120,
+      "type": "object"
     }
   },
   "uavcan.equipment.indication.SingleLightCommand": {
@@ -157,7 +161,8 @@
     },
     "info": {
       "hash": "e894b8b589807007",
-      "maxBitsLength": 24
+      "maxBitsLength": 24,
+      "type": "object"
     }
   },
   "uavcan.equipment.indication.RGB565": {
@@ -195,7 +200,8 @@
     },
     "info": {
       "hash": "58a7cef41951ec34",
-      "maxBitsLength": 16
+      "maxBitsLength": 16,
+      "type": "object"
     }
   },
   "uavcan.tunnel.Protocol": {
@@ -216,6 +222,9 @@
       "statics": [
         "uint8 MAVLINK                   = 0     # MAVLink"
       ]
+    },
+    "info": {
+      "type": "object"
     }
   },
   "uavcan.protocol.file.Path": {
@@ -244,7 +253,8 @@
     },
     "info": {
       "hash": "12aefc50878a43e2",
-      "maxBitsLength": 1608
+      "maxBitsLength": 1608,
+      "type": "object"
     }
   },
   "uavcan.protocol.param.NumericValue": {
@@ -254,6 +264,7 @@
     "message": {
       "variables": [
         {
+          "type": "object",
           "kind": "uavcan.protocol.param.Empty",
           "name": "empty",
           "description": "Empty field, used to represent an undefined value."
@@ -279,7 +290,8 @@
     },
     "info": {
       "hash": "0da6d6fea22e3587",
-      "maxBitsLength": 66
+      "maxBitsLength": 66,
+      "type": "union"
     }
   },
   "uavcan.equipment.camera_gimbal.Mode": {
@@ -306,7 +318,8 @@
     },
     "info": {
       "hash": "9108c7785aeb69c4",
-      "maxBitsLength": 8
+      "maxBitsLength": 8,
+      "type": "object"
     }
   },
   "uavcan.protocol.debug.LogLevel": {
@@ -333,7 +346,8 @@
     },
     "info": {
       "hash": "711bf141af572346",
-      "maxBitsLength": 3
+      "maxBitsLength": 3,
+      "type": "object"
     }
   },
   "uavcan.protocol.HardwareVersion": {
@@ -388,7 +402,8 @@
     },
     "info": {
       "hash": "0ad5c4c933f4a0c4",
-      "maxBitsLength": 2192
+      "maxBitsLength": 2192,
+      "type": "object"
     }
   },
   "uavcan.protocol.file.Error": {
@@ -421,7 +436,8 @@
     },
     "info": {
       "hash": "a83071ffea4fae15",
-      "maxBitsLength": 16
+      "maxBitsLength": 16,
+      "type": "object"
     }
   },
   "uavcan.protocol.file.EntryType": {
@@ -449,7 +465,8 @@
     },
     "info": {
       "hash": "6924572fbb2086e5",
-      "maxBitsLength": 8
+      "maxBitsLength": 8,
+      "type": "object"
     }
   },
   "uavcan.protocol.dynamic_node_id.server.Entry": {
@@ -498,7 +515,8 @@
     },
     "info": {
       "hash": "7faa779d64fa75c2",
-      "maxBitsLength": 168
+      "maxBitsLength": 168,
+      "type": "object"
     }
   },
   "uavcan.protocol.param.Empty": {
@@ -511,7 +529,8 @@
     },
     "info": {
       "hash": "6c4d0e8ef37361df",
-      "maxBitsLength": 0
+      "maxBitsLength": 0,
+      "type": "object"
     }
   },
   "uavcan.equipment.gnss.ECEFPositionVelocity": {
@@ -570,7 +589,8 @@
     },
     "info": {
       "hash": "24a5da4abee3a248",
-      "maxBitsLength": 792
+      "maxBitsLength": 792,
+      "type": "object"
     }
   },
   "uavcan.protocol.DataTypeKind": {
@@ -595,7 +615,8 @@
     },
     "info": {
       "hash": "9420a73e008e5930",
-      "maxBitsLength": 8
+      "maxBitsLength": 8,
+      "type": "object"
     }
   },
   "uavcan.equipment.ice.reciprocating.CylinderStatus": {
@@ -649,7 +670,8 @@
     },
     "info": {
       "hash": "d68ac83a89d5b36b",
-      "maxBitsLength": 80
+      "maxBitsLength": 80,
+      "type": "object"
     }
   },
   "uavcan.equipment.actuator.Command": {
@@ -692,7 +714,8 @@
     },
     "info": {
       "hash": "8d9a6a920c1d616c",
-      "maxBitsLength": 32
+      "maxBitsLength": 32,
+      "type": "object"
     }
   },
   "uavcan.CoarseOrientation": {
@@ -720,7 +743,8 @@
     },
     "info": {
       "hash": "271ba10b0dac9e52",
-      "maxBitsLength": 16
+      "maxBitsLength": 16,
+      "type": "object"
     }
   },
   "uavcan.protocol.CANIfaceStats": {
@@ -758,7 +782,8 @@
     },
     "info": {
       "hash": "13b106f0c44ca350",
-      "maxBitsLength": 144
+      "maxBitsLength": 144,
+      "type": "object"
     }
   },
   "uavcan.tunnel.Call": {
@@ -814,6 +839,9 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "type": "object"
     }
   },
   "uavcan.protocol.AccessCommandShell": {
@@ -895,7 +923,8 @@
     "info": {
       "dataTypeID": 6,
       "hash": "59276b5921c9246e",
-      "maxBitsLength": 1040
+      "maxBitsLength": 1040,
+      "type": "object"
     }
   },
   "uavcan.protocol.RestartNode": {
@@ -924,7 +953,8 @@
     "info": {
       "dataTypeID": 5,
       "hash": "569e05394a3017f0",
-      "maxBitsLength": 40
+      "maxBitsLength": 40,
+      "type": "object"
     }
   },
   "uavcan.protocol.Panic": {
@@ -955,7 +985,8 @@
     "info": {
       "dataTypeID": 5,
       "hash": "8b79b4101811c1d7",
-      "maxBitsLength": 59
+      "maxBitsLength": 59,
+      "type": "object"
     }
   },
   "uavcan.protocol.file.Write": {
@@ -1008,7 +1039,8 @@
     "info": {
       "dataTypeID": 49,
       "hash": "515aa1dc77e58429",
-      "maxBitsLength": 3192
+      "maxBitsLength": 3192,
+      "type": "object"
     }
   },
   "uavcan.protocol.file.Read": {
@@ -1061,7 +1093,8 @@
     "info": {
       "dataTypeID": 48,
       "hash": "8dcdca939f33f678",
-      "maxBitsLength": 1648
+      "maxBitsLength": 1648,
+      "type": "object"
     }
   },
   "uavcan.protocol.file.Delete": {
@@ -1093,7 +1126,8 @@
     "info": {
       "dataTypeID": 47,
       "hash": "78648c99170b47aa",
-      "maxBitsLength": 1608
+      "maxBitsLength": 1608,
+      "type": "object"
     }
   },
   "uavcan.protocol.file.GetDirectoryEntryInfo": {
@@ -1145,7 +1179,8 @@
     "info": {
       "dataTypeID": 46,
       "hash": "8c46e8ab568bda79",
-      "maxBitsLength": 1640
+      "maxBitsLength": 1640,
+      "type": "object"
     }
   },
   "uavcan.protocol.file.GetInfo": {
@@ -1191,7 +1226,8 @@
     "info": {
       "dataTypeID": 45,
       "hash": "5004891ee8a27531",
-      "maxBitsLength": 1608
+      "maxBitsLength": 1608,
+      "type": "object"
     }
   },
   "uavcan.protocol.file.BeginFirmwareUpdate": {
@@ -1249,7 +1285,8 @@
     "info": {
       "dataTypeID": 40,
       "hash": "b7d725df72724126",
-      "maxBitsLength": 1616
+      "maxBitsLength": 1616,
+      "type": "object"
     }
   },
   "uavcan.protocol.GlobalTimeSync": {
@@ -1267,7 +1304,8 @@
     "info": {
       "dataTypeID": 4,
       "hash": "20271116a793c2db",
-      "maxBitsLength": 56
+      "maxBitsLength": 56,
+      "type": "object"
     }
   },
   "uavcan.protocol.GetTransportStats": {
@@ -1345,7 +1383,8 @@
               },
               "info": {
                 "hash": "13b106f0c44ca350",
-                "maxBitsLength": 144
+                "maxBitsLength": 144,
+                "type": "object"
               }
             },
             "bits": null
@@ -1359,7 +1398,8 @@
     "info": {
       "dataTypeID": 4,
       "hash": "be6f76a7ec312b04",
-      "maxBitsLength": 0
+      "maxBitsLength": 0,
+      "type": "object"
     }
   },
   "uavcan.protocol.dynamic_node_id.server.Discovery": {
@@ -1397,7 +1437,8 @@
     "info": {
       "dataTypeID": 390,
       "hash": "821ae2f525f69f21",
-      "maxBitsLength": 51
+      "maxBitsLength": 51,
+      "type": "object"
     }
   },
   "uavcan.protocol.enumeration.Indication": {
@@ -1432,7 +1473,8 @@
     "info": {
       "dataTypeID": 380,
       "hash": "884cb63050a84f35",
-      "maxBitsLength": 815
+      "maxBitsLength": 815,
+      "type": "object"
     }
   },
   "uavcan.protocol.NodeStatus": {
@@ -1500,7 +1542,8 @@
     "info": {
       "dataTypeID": 341,
       "hash": "0f0868d0c1a7c6f1",
-      "maxBitsLength": 56
+      "maxBitsLength": 56,
+      "type": "object"
     }
   },
   "uavcan.protocol.dynamic_node_id.server.RequestVote": {
@@ -1552,7 +1595,8 @@
     "info": {
       "dataTypeID": 31,
       "hash": "cdde07bb89a56356",
-      "maxBitsLength": 72
+      "maxBitsLength": 72,
+      "type": "object"
     }
   },
   "uavcan.protocol.dynamic_node_id.server.AppendEntries": {
@@ -1645,7 +1689,8 @@
               },
               "info": {
                 "hash": "7faa779d64fa75c2",
-                "maxBitsLength": 168
+                "maxBitsLength": 168,
+                "type": "object"
               }
             },
             "bits": null
@@ -1675,7 +1720,8 @@
     "info": {
       "dataTypeID": 30,
       "hash": "8032c7097b48a3cc",
-      "maxBitsLength": 249
+      "maxBitsLength": 249,
+      "type": "object"
     }
   },
   "uavcan.tunnel.Broadcast": {
@@ -1713,6 +1759,9 @@
         }
       ],
       "statics": []
+    },
+    "info": {
+      "type": "object"
     }
   },
   "uavcan.navigation.GlobalNavigationSolution": {
@@ -1857,7 +1906,8 @@
     "info": {
       "dataTypeID": 2000,
       "hash": "463b10cccbe51c3d",
-      "maxBitsLength": 1860
+      "maxBitsLength": 1860,
+      "type": "object"
     }
   },
   "uavcan.protocol.GetDataTypeInfo": {
@@ -1952,7 +2002,8 @@
     "info": {
       "dataTypeID": 2,
       "hash": "1b283338a7bed2d8",
-      "maxBitsLength": 671
+      "maxBitsLength": 671,
+      "type": "object"
     }
   },
   "uavcan.protocol.debug.LogMessage": {
@@ -1999,7 +2050,8 @@
     "info": {
       "dataTypeID": 16383,
       "hash": "d654a48e0c049d75",
-      "maxBitsLength": 983
+      "maxBitsLength": 983,
+      "type": "object"
     }
   },
   "uavcan.protocol.debug.KeyValue": {
@@ -2035,7 +2087,8 @@
     "info": {
       "dataTypeID": 16370,
       "hash": "e02f25d6e0c98ae0",
-      "maxBitsLength": 502
+      "maxBitsLength": 502,
+      "type": "object"
     }
   },
   "uavcan.protocol.enumeration.Begin": {
@@ -2093,7 +2146,8 @@
     "info": {
       "dataTypeID": 15,
       "hash": "196ae06426a3b5d8",
-      "maxBitsLength": 759
+      "maxBitsLength": 759,
+      "type": "object"
     }
   },
   "uavcan.equipment.ice.FuelTankStatus": {
@@ -2155,7 +2209,8 @@
     "info": {
       "dataTypeID": 1129,
       "hash": "286b4a387ba84bc4",
-      "maxBitsLength": 104
+      "maxBitsLength": 104,
+      "type": "object"
     }
   },
   "uavcan.equipment.ice.reciprocating.Status": {
@@ -2364,7 +2419,8 @@
               },
               "info": {
                 "hash": "d68ac83a89d5b36b",
-                "maxBitsLength": 80
+                "maxBitsLength": 80,
+                "type": "object"
               }
             },
             "bits": null
@@ -2407,7 +2463,8 @@
     "info": {
       "dataTypeID": 1120,
       "hash": "d38aa3ee75537ec6",
-      "maxBitsLength": 1565
+      "maxBitsLength": 1565,
+      "type": "object"
     }
   },
   "uavcan.equipment.device.Temperature": {
@@ -2449,7 +2506,8 @@
     "info": {
       "dataTypeID": 1110,
       "hash": "70261c28a94144c6",
-      "maxBitsLength": 40
+      "maxBitsLength": 40,
+      "type": "object"
     }
   },
   "uavcan.equipment.safety.ArmingStatus": {
@@ -2475,7 +2533,8 @@
     "info": {
       "dataTypeID": 1100,
       "hash": "8700f375556a8003",
-      "maxBitsLength": 8
+      "maxBitsLength": 8,
+      "type": "object"
     }
   },
   "uavcan.protocol.param.GetSet": {
@@ -2587,7 +2646,8 @@
     "info": {
       "dataTypeID": 11,
       "hash": "a7b622f939d1a4d5",
-      "maxBitsLength": 1791
+      "maxBitsLength": 1791,
+      "type": "object"
     }
   },
   "uavcan.equipment.power.BatteryInfo": {
@@ -2730,7 +2790,8 @@
     "info": {
       "dataTypeID": 1092,
       "hash": "249c26548a711966",
-      "maxBitsLength": 437
+      "maxBitsLength": 437,
+      "type": "object"
     }
   },
   "uavcan.equipment.power.CircuitStatus": {
@@ -2782,7 +2843,8 @@
     "info": {
       "dataTypeID": 1091,
       "hash": "8313d33d0ddda115",
-      "maxBitsLength": 56
+      "maxBitsLength": 56,
+      "type": "object"
     }
   },
   "uavcan.equipment.power.PrimaryPowerSupplyStatus": {
@@ -2829,7 +2891,8 @@
     "info": {
       "dataTypeID": 1090,
       "hash": "bba05074ad757480",
-      "maxBitsLength": 47
+      "maxBitsLength": 47,
+      "type": "object"
     }
   },
   "uavcan.equipment.indication.LightsCommand": {
@@ -2874,7 +2937,8 @@
               },
               "info": {
                 "hash": "e894b8b589807007",
-                "maxBitsLength": 24
+                "maxBitsLength": 24,
+                "type": "object"
               }
             },
             "bits": null
@@ -2888,7 +2952,8 @@
     "info": {
       "dataTypeID": 1081,
       "hash": "2031d93c8bdd1ec4",
-      "maxBitsLength": 485
+      "maxBitsLength": 485,
+      "type": "object"
     }
   },
   "uavcan.equipment.indication.BeepCommand": {
@@ -2919,7 +2984,8 @@
     "info": {
       "dataTypeID": 1080,
       "hash": "be9ea9fec2b15d52",
-      "maxBitsLength": 32
+      "maxBitsLength": 32,
+      "type": "object"
     }
   },
   "uavcan.equipment.hardpoint.Status": {
@@ -2966,7 +3032,8 @@
     "info": {
       "dataTypeID": 1071,
       "hash": "624a519d42553d82",
-      "maxBitsLength": 56
+      "maxBitsLength": 56,
+      "type": "object"
     }
   },
   "uavcan.equipment.hardpoint.Command": {
@@ -2997,7 +3064,8 @@
     "info": {
       "dataTypeID": 1070,
       "hash": "a1a036268b0c3455",
-      "maxBitsLength": 24
+      "maxBitsLength": 24,
+      "type": "object"
     }
   },
   "uavcan.equipment.gnss.Fix2": {
@@ -3205,7 +3273,8 @@
               },
               "info": {
                 "hash": "24a5da4abee3a248",
-                "maxBitsLength": 792
+                "maxBitsLength": 792,
+                "type": "object"
               }
             },
             "bits": null
@@ -3235,7 +3304,8 @@
     "info": {
       "dataTypeID": 1063,
       "hash": "ca41e7000f37435f",
-      "maxBitsLength": 1769
+      "maxBitsLength": 1769,
+      "type": "object"
     }
   },
   "uavcan.equipment.gnss.RTCMStream": {
@@ -3289,7 +3359,8 @@
     "info": {
       "dataTypeID": 1062,
       "hash": "1f56030ecb171501",
-      "maxBitsLength": 1040
+      "maxBitsLength": 1040,
+      "type": "object"
     }
   },
   "uavcan.equipment.gnss.Auxiliary": {
@@ -3376,7 +3447,8 @@
     "info": {
       "dataTypeID": 1061,
       "hash": "9be8bdc4c3dbbfd2",
-      "maxBitsLength": 125
+      "maxBitsLength": 125,
+      "type": "object"
     }
   },
   "uavcan.equipment.gnss.Fix": {
@@ -3540,7 +3612,8 @@
     "info": {
       "dataTypeID": 1060,
       "hash": "54c1572b9e07f297",
-      "maxBitsLength": 628
+      "maxBitsLength": 628,
+      "type": "object"
     }
   },
   "uavcan.equipment.range_sensor.Measurement": {
@@ -3604,7 +3677,8 @@
     "info": {
       "dataTypeID": 1050,
       "hash": "68fffe70fc771952",
-      "maxBitsLength": 120
+      "maxBitsLength": 120,
+      "type": "object"
     }
   },
   "uavcan.equipment.camera_gimbal.Status": {
@@ -3658,7 +3732,8 @@
     "info": {
       "dataTypeID": 1044,
       "hash": "b9f127865be0d61e",
-      "maxBitsLength": 228
+      "maxBitsLength": 228,
+      "type": "object"
     }
   },
   "uavcan.equipment.camera_gimbal.GEOPOICommand": {
@@ -3722,7 +3797,8 @@
     "info": {
       "dataTypeID": 1041,
       "hash": "9371428a92f01fd6",
-      "maxBitsLength": 104
+      "maxBitsLength": 104,
+      "type": "object"
     }
   },
   "uavcan.equipment.camera_gimbal.AngularCommand": {
@@ -3763,7 +3839,8 @@
     "info": {
       "dataTypeID": 1040,
       "hash": "4af6e57b2b2be29c",
-      "maxBitsLength": 80
+      "maxBitsLength": 80,
+      "type": "object"
     }
   },
   "uavcan.equipment.esc.Status": {
@@ -3834,7 +3911,8 @@
     "info": {
       "dataTypeID": 1034,
       "hash": "a9af28aea2fbb254",
-      "maxBitsLength": 110
+      "maxBitsLength": 110,
+      "type": "object"
     }
   },
   "uavcan.equipment.esc.RPMCommand": {
@@ -3862,7 +3940,8 @@
     "info": {
       "dataTypeID": 1031,
       "hash": "ce0f9f621cf7e70b",
-      "maxBitsLength": 365
+      "maxBitsLength": 365,
+      "type": "object"
     }
   },
   "uavcan.equipment.esc.RawCommand": {
@@ -3890,7 +3969,8 @@
     "info": {
       "dataTypeID": 1030,
       "hash": "217f5c87d7ec951d",
-      "maxBitsLength": 285
+      "maxBitsLength": 285,
+      "type": "object"
     }
   },
   "uavcan.equipment.air_data.StaticTemperature": {
@@ -3921,7 +4001,8 @@
     "info": {
       "dataTypeID": 1029,
       "hash": "49272a6477d96271",
-      "maxBitsLength": 32
+      "maxBitsLength": 32,
+      "type": "object"
     }
   },
   "uavcan.equipment.air_data.StaticPressure": {
@@ -3952,7 +4033,8 @@
     "info": {
       "dataTypeID": 1028,
       "hash": "cdc7c43412bdc89a",
-      "maxBitsLength": 48
+      "maxBitsLength": 48,
+      "type": "object"
     }
   },
   "uavcan.equipment.air_data.RawAirData": {
@@ -4041,7 +4123,8 @@
     "info": {
       "dataTypeID": 1027,
       "hash": "c77df38ba122f5da",
-      "maxBitsLength": 397
+      "maxBitsLength": 397,
+      "type": "object"
     }
   },
   "uavcan.equipment.air_data.Sideslip": {
@@ -4072,7 +4155,8 @@
     "info": {
       "dataTypeID": 1026,
       "hash": "7b48e55fcff42a57",
-      "maxBitsLength": 32
+      "maxBitsLength": 32,
+      "type": "object"
     }
   },
   "uavcan.equipment.air_data.AngleOfAttack": {
@@ -4114,7 +4198,8 @@
     "info": {
       "dataTypeID": 1025,
       "hash": "d5513c3f7afac74e",
-      "maxBitsLength": 40
+      "maxBitsLength": 40,
+      "type": "object"
     }
   },
   "uavcan.equipment.air_data.IndicatedAirspeed": {
@@ -4145,7 +4230,8 @@
     "info": {
       "dataTypeID": 1021,
       "hash": "0a1892d72ab8945f",
-      "maxBitsLength": 32
+      "maxBitsLength": 32,
+      "type": "object"
     }
   },
   "uavcan.equipment.air_data.TrueAirspeed": {
@@ -4176,7 +4262,8 @@
     "info": {
       "dataTypeID": 1020,
       "hash": "306f69e0a591afaa",
-      "maxBitsLength": 32
+      "maxBitsLength": 32,
+      "type": "object"
     }
   },
   "uavcan.equipment.actuator.Status": {
@@ -4240,7 +4327,8 @@
     "info": {
       "dataTypeID": 1011,
       "hash": "5e9bba44faf1ea04",
-      "maxBitsLength": 64
+      "maxBitsLength": 64,
+      "type": "object"
     }
   },
   "uavcan.equipment.actuator.ArrayCommand": {
@@ -4295,7 +4383,8 @@
               },
               "info": {
                 "hash": "8d9a6a920c1d616c",
-                "maxBitsLength": 32
+                "maxBitsLength": 32,
+                "type": "object"
               }
             },
             "bits": null
@@ -4309,7 +4398,8 @@
     "info": {
       "dataTypeID": 1010,
       "hash": "d8a7486238ec3af3",
-      "maxBitsLength": 484
+      "maxBitsLength": 484,
+      "type": "object"
     }
   },
   "uavcan.equipment.ahrs.RawIMU": {
@@ -4393,7 +4483,8 @@
     "info": {
       "dataTypeID": 1003,
       "hash": "8280632c40e574b5",
-      "maxBitsLength": 958
+      "maxBitsLength": 958,
+      "type": "object"
     }
   },
   "uavcan.equipment.ahrs.MagneticFieldStrength2": {
@@ -4441,7 +4532,8 @@
     "info": {
       "dataTypeID": 1002,
       "hash": "b6ac0c442430297e",
-      "maxBitsLength": 204
+      "maxBitsLength": 204,
+      "type": "object"
     }
   },
   "uavcan.equipment.ahrs.MagneticFieldStrength": {
@@ -4481,7 +4573,8 @@
     "info": {
       "dataTypeID": 1001,
       "hash": "e2a7d4a9460bc2f2",
-      "maxBitsLength": 196
+      "maxBitsLength": 196,
+      "type": "object"
     }
   },
   "uavcan.equipment.ahrs.Solution": {
@@ -4585,7 +4678,8 @@
     "info": {
       "dataTypeID": 1000,
       "hash": "72a63a3c6f41fa9b",
-      "maxBitsLength": 668
+      "maxBitsLength": 668,
+      "type": "object"
     }
   },
   "uavcan.protocol.param.ExecuteOpcode": {
@@ -4632,7 +4726,8 @@
     "info": {
       "dataTypeID": 10,
       "hash": "3b131ac5eb69d2cd",
-      "maxBitsLength": 56
+      "maxBitsLength": 56,
+      "type": "object"
     }
   },
   "uavcan.protocol.GetNodeInfo": {
@@ -4682,7 +4777,8 @@
     "info": {
       "dataTypeID": 1,
       "hash": "ee468a8121c46a9e",
-      "maxBitsLength": 0
+      "maxBitsLength": 0,
+      "type": "object"
     }
   },
   "uavcan.protocol.dynamic_node_id.Allocation": {
@@ -4726,7 +4822,8 @@
     "info": {
       "dataTypeID": 1,
       "hash": "0b2a812620a11d40",
-      "maxBitsLength": 141
+      "maxBitsLength": 141,
+      "type": "object"
     }
   }
 }

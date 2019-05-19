@@ -6,6 +6,18 @@ const kinds = require('../../dataTypes.json');
 let kindGetSet = kinds['uavcan.protocol.param.GetSet'];
 
 describe('parse testGetSet', () => {
+  it('small request', () => {
+    let data = [0x05, 0x00];
+
+    let result = parse(data, kindGetSet, true, true);
+    expect(result).toStrictEqual({
+      index: 5,
+      value: { empty: {} },
+      name: [],
+      nameStr: ''
+    });
+  });
+
   it('request', () => {
     let data = [
       0b00000001, // 8bits of index

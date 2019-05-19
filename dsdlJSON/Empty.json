@@ -8,6 +8,7 @@
   },
   "info": {
     "hash": "6c4d0e8ef37361df",
-    "maxBitsLength": 0
+    "maxBitsLength": 0,
+    "type": "object"
   }
 }

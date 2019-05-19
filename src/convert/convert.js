@@ -22,13 +22,15 @@ function convert() {
 }
 
 function createTypes(files) {
-  let kinds = {};
   files = files.filter((file) => isNaN(file.id));
+
   for (let file of files) {
     let definition = fs.readFileSync(file.filename, 'utf8');
-    kinds[file.name] = definition.includes('@union') ? 'union' : 'object';
+    if (!dataTypes[file.id]) dataTypes[file.id] = {};
+    dataTypes[file.id].type = definition.includes('@union')
+      ? 'union'
+      : 'object';
   }
-  return kinds;
 }
 
 function processFiles(files, dataTypes) {

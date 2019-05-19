@@ -21,6 +21,7 @@
   "info": {
     "dataTypeID": 1100,
     "hash": "8700f375556a8003",
-    "maxBitsLength": 8
+    "maxBitsLength": 8,
+    "type": "object"
   }
 }

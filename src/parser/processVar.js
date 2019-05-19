@@ -9,6 +9,9 @@ const parseInt = require('./util/parseInt');
 function processVar(bigInt, variable, from) {
   let value;
   switch (variable.kind) {
+    case 'uavcan.protocol.param.Empty':
+      value = true;
+      break;
     case 'void': // void is just padding and can contain anything. it is not actively read.
     case 'int':
       {

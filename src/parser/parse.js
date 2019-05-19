@@ -45,7 +45,7 @@ function parse(data, dataType, isService = false, isRequest = false) {
     let currentResult = processVariable(bigValue, variable, from);
     if (variable.name) {
       result[variable.name] = currentResult.value;
-      if (currentResult.valueStr) {
+      if (currentResult.valueStr !== undefined) {
         result[`${variable.name}Str`] = currentResult.valueStr;
       }
     }

@@ -6,6 +6,33 @@ const kinds = require('../../dataTypes.json');
 let kindGetSet = kinds['uavcan.protocol.param.GetSet'];
 
 describe('serialize GetSet', () => {
+  it('small request', () => {
+    let expectedResult = [0x05, 0x00];
+
+    let data = {
+      index: 5,
+      value: { empty: false },
+      name: [],
+      nameStr: ''
+    };
+
+    let result = serialize(data, kindGetSet, true, true);
+    expect(result).toStrictEqual(expectedResult);
+  });
+
+  it('small request only nameStr', () => {
+    let expectedResult = [0x05, 0x00];
+
+    let data = {
+      index: 5,
+      value: { empty: false },
+      nameStr: ''
+    };
+
+    let result = serialize(data, kindGetSet, true, true);
+    expect(result).toStrictEqual(expectedResult);
+  });
+
   it('request', () => {
     let expectedResult = [
       0b00000001, // 8bits of index

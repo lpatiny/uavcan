@@ -88,7 +88,8 @@
             },
             "info": {
               "hash": "7faa779d64fa75c2",
-              "maxBitsLength": 168
+              "maxBitsLength": 168,
+              "type": "object"
             }
           },
           "bits": null
@@ -118,6 +119,7 @@
   "info": {
     "dataTypeID": 30,
     "hash": "8032c7097b48a3cc",
-    "maxBitsLength": 249
+    "maxBitsLength": 249,
+    "type": "object"
   }
 }

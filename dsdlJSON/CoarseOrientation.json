@@ -23,6 +23,7 @@
   },
   "info": {
     "hash": "271ba10b0dac9e52",
-    "maxBitsLength": 16
+    "maxBitsLength": 16,
+    "type": "object"
   }
 }

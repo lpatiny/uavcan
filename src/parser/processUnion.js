@@ -19,7 +19,8 @@ function processUnion(bigValue, variable, from) {
   );
   let unionVariable = unionDefinition.message.variables[variableKind];
   from -= BigInt(nbBits);
-  let result = processVar(bigValue, unionVariable, from);
+  let processVariable = require('./processVariable');
+  let result = processVariable(bigValue, unionVariable, from);
   let tmpValue = {};
   tmpValue[unionVariable.name] = result.value;
   result.value = tmpValue;

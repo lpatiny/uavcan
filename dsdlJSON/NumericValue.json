@@ -5,6 +5,7 @@
   "message": {
     "variables": [
       {
+        "type": "object",
         "kind": "uavcan.protocol.param.Empty",
         "name": "empty",
         "description": "Empty field, used to represent an undefined value."
@@ -30,6 +31,7 @@
   },
   "info": {
     "hash": "0da6d6fea22e3587",
-    "maxBitsLength": 66
+    "maxBitsLength": 66,
+    "type": "union"
   }
 }

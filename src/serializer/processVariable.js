@@ -17,6 +17,15 @@ function processVariable(data, variable, bigResult) {
       processObject(data[variable.name], variable, bigResult);
       break;
     case 'array':
+      if (
+        data[variable.name] === undefined &&
+        data[`${variable.name}Str`] !== undefined
+      ) {
+        data[variable.name] = data[`${variable.name}Str`]
+          .split(/(.)/)
+          .filter((a) => a)
+          .map((a) => a.charCodeAt(0));
+      }
       processArray(data, variable, bigResult);
       break;
     default:

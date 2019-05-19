@@ -204,7 +204,8 @@
             },
             "info": {
               "hash": "d68ac83a89d5b36b",
-              "maxBitsLength": 80
+              "maxBitsLength": 80,
+              "type": "object"
             }
           },
           "bits": null
@@ -247,6 +248,7 @@
   "info": {
     "dataTypeID": 1120,
     "hash": "d38aa3ee75537ec6",
-    "maxBitsLength": 1565
+    "maxBitsLength": 1565,
+    "type": "object"
   }
 }

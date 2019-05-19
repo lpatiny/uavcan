@@ -54,6 +54,7 @@
   },
   "info": {
     "hash": "24a5da4abee3a248",
-    "maxBitsLength": 792
+    "maxBitsLength": 792,
+    "type": "object"
   }
 }

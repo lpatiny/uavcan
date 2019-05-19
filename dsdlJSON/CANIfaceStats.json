@@ -33,6 +33,7 @@
   },
   "info": {
     "hash": "13b106f0c44ca350",
-    "maxBitsLength": 144
+    "maxBitsLength": 144,
+    "type": "object"
   }
 }

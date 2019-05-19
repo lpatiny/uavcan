@@ -63,6 +63,7 @@
   "info": {
     "dataTypeID": 341,
     "hash": "0f0868d0c1a7c6f1",
-    "maxBitsLength": 56
+    "maxBitsLength": 56,
+    "type": "object"
   }
 }
