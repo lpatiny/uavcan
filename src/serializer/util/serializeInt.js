@@ -1,6 +1,5 @@
 'use strict';
 
-/* global BigInt */
 
 /*
   Can be an arbitrary length integer

@@ -1,6 +1,5 @@
 'use strict';
 
-/* global BigInt */
 
 const serializeInt = require('../serializeInt');
 

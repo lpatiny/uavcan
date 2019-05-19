@@ -1,7 +1,5 @@
 'use strict';
 
-/* global BigInt */
-
 const dataTypes = require('../dataTypes.json');
 
 const parseInt = require('./util/parseInt');

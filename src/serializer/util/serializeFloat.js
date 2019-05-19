@@ -1,6 +1,5 @@
 'use strict';
 
-/* global BigInt */
 
 const { float16ToByte } = require('float16');
 

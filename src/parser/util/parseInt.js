@@ -1,6 +1,5 @@
 'use strict';
 
-/* global BigInt */
 
 const n0 = BigInt(0);
 const n1 = BigInt(1);

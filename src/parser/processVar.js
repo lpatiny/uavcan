@@ -1,7 +1,5 @@
 'use strict';
 
-/* global BigInt */
-
 const n1 = BigInt(1);
 const parseFloat = require('./util/parseFloat');
 const parseInt = require('./util/parseInt');

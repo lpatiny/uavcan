@@ -1,6 +1,5 @@
 'use strict';
 
-/* global BigInt */
 
 const serializeFloat = require('../serializeFloat');
 

@@ -1,7 +1,5 @@
 'use strict';
 
-/* global BigInt */
-
 const processVariable = require('./processVariable');
 /**
  *

@@ -1,7 +1,5 @@
 'use strict';
 
-/* global BigInt */
-
 const dataTypes = require('../dataTypes.json');
 
 const processVar = require('./processVar');

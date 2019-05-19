@@ -1,7 +1,5 @@
 'use strict';
 
-/* global BigInt */
-
 const processVar = require('./processVar');
 
 function processArray(data, variable, bigResult) {
