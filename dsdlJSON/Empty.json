@@ -7,7 +7,16 @@
     "statics": []
   },
   "info": {
-    "hash": "6c4d0e8ef37361df",
+    "hash": [
+      108,
+      77,
+      14,
+      142,
+      243,
+      115,
+      97,
+      223
+    ],
     "maxBitsLength": 0,
     "type": "object"
   }

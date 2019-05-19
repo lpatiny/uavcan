@@ -26,7 +26,14 @@ function getMessageByID(id) {
   return messages[id];
 }
 
+function getDataTypeHash(dataTypeLongID) {
+  let dataType = dataTypes[dataTypeLongID];
+  if (!dataType || !dataType.info || !dataType.info.hash) return [];
+  return dataType.info.hash;
+}
+
 module.exports = {
   getMessageByID,
-  getServiceByID
+  getServiceByID,
+  getDataTypeHash
 };

@@ -12,6 +12,7 @@ function processVariable(data, variable, bigResult) {
     case 'union':
       processUnion(data[variable.name], variable, bigResult);
       break;
+    case 'message':
     case 'object':
       let processObject = require('./processObject');
       processObject(data[variable.name], variable, bigResult);

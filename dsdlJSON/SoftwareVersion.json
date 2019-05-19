@@ -51,7 +51,16 @@
     ]
   },
   "info": {
-    "hash": "dd46fd376527fea1",
+    "hash": [
+      221,
+      70,
+      253,
+      55,
+      101,
+      39,
+      254,
+      161
+    ],
     "maxBitsLength": 120,
     "type": "object"
   }

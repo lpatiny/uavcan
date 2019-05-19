@@ -27,7 +27,16 @@
     ]
   },
   "info": {
-    "hash": "a83071ffea4fae15",
+    "hash": [
+      168,
+      48,
+      113,
+      255,
+      234,
+      79,
+      174,
+      21
+    ],
     "maxBitsLength": 16,
     "type": "object"
   }

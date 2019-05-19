@@ -32,7 +32,16 @@
     "statics": []
   },
   "info": {
-    "hash": "58a7cef41951ec34",
+    "hash": [
+      88,
+      167,
+      206,
+      244,
+      25,
+      81,
+      236,
+      52
+    ],
     "maxBitsLength": 16,
     "type": "object"
   }

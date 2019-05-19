@@ -11,13 +11,17 @@ function parse(data, dataType, isService = false, isRequest = false) {
   let from;
 
   if (typeof data === 'string') {
-    bigValue = BigInt(`0x${data}`);
+    bigValue = data ? BigInt(`0x${data}`) : BigInt(0);
     from = BigInt((data.length / 2) * 8);
   } else if (Array.isArray(data)) {
-    bigValue = BigInt(`0x${Buffer.from(data).toString('hex')}`);
+    bigValue =
+      data.length > 0
+        ? BigInt(`0x${Buffer.from(data).toString('hex')}`)
+        : BigInt(0);
     from = BigInt(data.length * 8);
   } else if (Buffer.isBuffer(data)) {
-    bigValue = BigInt(`0x${data.toString('hex')}`);
+    bigValue =
+      data.length > 0 ? BigInt(`0x${data.toString('hex')}`) : BigInt(0);
     from = BigInt(data.length * 8);
   } else {
     throw new Error(

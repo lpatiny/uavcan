@@ -22,7 +22,16 @@
   },
   "info": {
     "dataTypeID": 1030,
-    "hash": "217f5c87d7ec951d",
+    "hash": [
+      33,
+      127,
+      92,
+      135,
+      215,
+      236,
+      149,
+      29
+    ],
     "maxBitsLength": 285,
     "type": "object"
   }

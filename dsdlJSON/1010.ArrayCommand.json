@@ -49,7 +49,16 @@
               ]
             },
             "info": {
-              "hash": "8d9a6a920c1d616c",
+              "hash": [
+                141,
+                154,
+                106,
+                146,
+                12,
+                29,
+                97,
+                108
+              ],
               "maxBitsLength": 32,
               "type": "object"
             }
@@ -64,7 +73,16 @@
   },
   "info": {
     "dataTypeID": 1010,
-    "hash": "d8a7486238ec3af3",
+    "hash": [
+      216,
+      167,
+      72,
+      98,
+      56,
+      236,
+      58,
+      243
+    ],
     "maxBitsLength": 484,
     "type": "object"
   }

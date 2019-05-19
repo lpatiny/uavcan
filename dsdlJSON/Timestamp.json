@@ -9,7 +9,16 @@
     ]
   },
   "info": {
-    "hash": "05bd0b5c81087e0d",
+    "hash": [
+      5,
+      189,
+      11,
+      92,
+      129,
+      8,
+      126,
+      13
+    ],
     "maxBitsLength": 56,
     "type": "object"
   }

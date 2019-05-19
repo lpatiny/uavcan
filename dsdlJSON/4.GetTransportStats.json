@@ -72,7 +72,16 @@
               "statics": []
             },
             "info": {
-              "hash": "13b106f0c44ca350",
+              "hash": [
+                19,
+                177,
+                6,
+                240,
+                196,
+                76,
+                163,
+                80
+              ],
               "maxBitsLength": 144,
               "type": "object"
             }
@@ -87,7 +96,16 @@
   },
   "info": {
     "dataTypeID": 4,
-    "hash": "be6f76a7ec312b04",
+    "hash": [
+      190,
+      111,
+      118,
+      167,
+      236,
+      49,
+      43,
+      4
+    ],
     "maxBitsLength": 0,
     "type": "object"
   }

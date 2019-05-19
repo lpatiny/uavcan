@@ -13,7 +13,11 @@ function getDataTypeSignatures() {
     if (fields.length >= 4) {
       result[fields[0]] = {
         dataTypeID: fields[1] === 'N/A' ? undefined : Number(fields[1]),
-        hash: fields[2].substring(2),
+        hash: fields[2]
+          .substring(2)
+          .split(/(..)/)
+          .filter((a) => a)
+          .map((a) => Number(`0x${a}`)),
         maxBitsLength: Number(fields[3])
       };
     }
