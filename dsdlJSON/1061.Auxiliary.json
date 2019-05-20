@@ -82,15 +82,16 @@
   "info": {
     "dataTypeID": 1061,
     "hash": [
-      155,
-      232,
-      189,
-      196,
-      195,
-      219,
+      210,
       191,
-      210
+      219,
+      195,
+      196,
+      189,
+      232,
+      155
     ],
+    "hashStr": "9be8bdc4c3dbbfd2",
     "maxBitsLength": 125,
     "type": "object"
   }

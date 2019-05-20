@@ -8,5 +8,8 @@ module.exports = {
   dataTypes: require('./dataTypes.json'),
   DataTypesManager: require('./DataTypesManager'),
   UAVCANCodec: require('./UAVCANCodec.js'),
-  UAVCANTransfer: require('./UAVCANTransfer.js')
+  UAVCANTransfer: require('./UAVCANTransfer.js'),
+  prependCRC: require('./util/CRC').prependCRC,
+  getData: require('./util/CRC').getData,
+  validateCRC: require('./util/CRC').validateCRC
 };

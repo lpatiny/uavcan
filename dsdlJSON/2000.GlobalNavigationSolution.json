@@ -140,15 +140,16 @@
   "info": {
     "dataTypeID": 2000,
     "hash": [
-      70,
-      59,
-      16,
-      204,
-      203,
-      229,
+      61,
       28,
-      61
+      229,
+      203,
+      204,
+      16,
+      59,
+      70
     ],
+    "hashStr": "463b10cccbe51c3d",
     "maxBitsLength": 1860,
     "type": "object"
   }

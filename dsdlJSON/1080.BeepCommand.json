@@ -26,15 +26,16 @@
   "info": {
     "dataTypeID": 1080,
     "hash": [
-      190,
-      158,
-      169,
-      254,
-      194,
-      177,
+      82,
       93,
-      82
+      177,
+      194,
+      254,
+      169,
+      158,
+      190
     ],
+    "hashStr": "be9ea9fec2b15d52",
     "maxBitsLength": 32,
     "type": "object"
   }

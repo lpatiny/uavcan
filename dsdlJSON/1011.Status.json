@@ -59,15 +59,16 @@
   "info": {
     "dataTypeID": 1011,
     "hash": [
-      94,
-      155,
-      186,
-      68,
-      250,
-      241,
+      4,
       234,
-      4
+      241,
+      250,
+      68,
+      186,
+      155,
+      94
     ],
+    "hashStr": "5e9bba44faf1ea04",
     "maxBitsLength": 64,
     "type": "object"
   }

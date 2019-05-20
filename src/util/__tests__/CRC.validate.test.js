@@ -1,10 +1,12 @@
 'use strict';
 
-const checkCRC = require('../checkCRC');
+const { validateCRC } = require('../CRC');
 
-describe('parse checkRRC', () => {
+describe('validate CRC', () => {
   it('long byte array', () => {
     let data = [
+      0x33,
+      0x1e,
       0xc2,
       0x51,
       0x01,
@@ -84,8 +86,7 @@ describe('parse checkRRC', () => {
       0x65,
       0x32
     ];
-    let result = checkCRC(data, [0x33, 0x1e], 'uavcan.protocol.GetNodeInfo');
-
+    let result = validateCRC(data, 'uavcan.protocol.GetNodeInfo');
     expect(result).toBe(true);
   });
 });

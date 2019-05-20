@@ -32,14 +32,15 @@
     "dataTypeID": 16370,
     "hash": [
       224,
-      47,
-      37,
-      214,
-      224,
-      201,
       138,
+      201,
+      224,
+      214,
+      37,
+      47,
       224
     ],
+    "hashStr": "e02f25d6e0c98ae0",
     "maxBitsLength": 502,
     "type": "object"
   }

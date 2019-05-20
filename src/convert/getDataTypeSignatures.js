@@ -17,7 +17,9 @@ function getDataTypeSignatures() {
           .substring(2)
           .split(/(..)/)
           .filter((a) => a)
-          .map((a) => Number(`0x${a}`)),
+          .map((a) => Number(`0x${a}`))
+          .reverse(),
+        hashStr: fields[2].substring(2),
         maxBitsLength: Number(fields[3])
       };
     }

@@ -36,15 +36,16 @@
   "info": {
     "dataTypeID": 1040,
     "hash": [
-      74,
-      246,
-      229,
-      123,
-      43,
-      43,
+      156,
       226,
-      156
+      43,
+      43,
+      123,
+      229,
+      246,
+      74
     ],
+    "hashStr": "4af6e57b2b2be29c",
     "maxBitsLength": 80,
     "type": "object"
   }

@@ -18,12 +18,13 @@ for (let key in dataTypes) {
     }
   }
 }
-function getServiceByID(id) {
-  return services[id];
+
+function getServiceByID(dataTypeID) {
+  return services[dataTypeID];
 }
 
-function getMessageByID(id) {
-  return messages[id];
+function getMessageByID(dataTypeID) {
+  return messages[dataTypeID];
 }
 
 function getDataTypeHash(dataTypeLongID) {
@@ -32,8 +33,21 @@ function getDataTypeHash(dataTypeLongID) {
   return dataType.info.hash;
 }
 
+function getDataType(dataTypeID, isService) {
+  if (dataTypes[dataTypeID]) return dataTypes[dataTypeID];
+  if (isService) {
+    let dataType = getServiceByID(dataTypeID);
+    if (dataType) return dataType;
+  } else {
+    let dataType = getMessageByID(dataTypeID);
+    if (dataType) return dataType;
+  }
+  throw new Error(`Unknown dataType: ${dataTypeID} - isService: ${isService}`);
+}
+
 module.exports = {
   getMessageByID,
   getServiceByID,
-  getDataTypeHash
+  getDataTypeHash,
+  dataTypes
 };
