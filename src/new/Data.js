@@ -27,12 +27,12 @@ getCRCData() {
     
 }
 
-Data.prototype.fromObject(object, dataType) {
+Data.prototype.fromObject(object, dataType, isService, isRequest) {
 
     return new Data();
 }
 
-Data.prototype.fromCRCData(bytes, dataType) {
+Data.prototype.fromCRCData(bytes, dataType, isService, isRequest) {
 
     throw Error('Wrong CRC')
     return new Data(bytes, dataType);
