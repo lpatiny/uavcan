@@ -1,0 +1,37 @@
+{
+  "id": "uavcan.equipment.safety.ArmingStatus",
+  "description": "This message represents the system arming status.\nSome nodes may refuse to operate unless the system is fully armed.",
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "status",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint8 STATUS_DISARMED           = 0",
+      "uint8 STATUS_FULLY_ARMED        = 255"
+    ]
+  },
+  "info": {
+    "dataTypeID": 1100,
+    "hash": [
+      3,
+      128,
+      106,
+      85,
+      117,
+      243,
+      0,
+      135
+    ],
+    "hashStr": "8700f375556a8003",
+    "maxBitsLength": 8,
+    "type": "object"
+  }
+}

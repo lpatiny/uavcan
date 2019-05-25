@@ -1,0 +1,63 @@
+{
+  "id": "uavcan.equipment.power.CircuitStatus",
+  "description": "Generic electrical circuit info.",
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 16,
+        "name": "circuitId",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "voltage",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "current",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "errorFlags",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint8 ERROR_FLAG_OVERVOLTAGE  = 1",
+      "uint8 ERROR_FLAG_UNDERVOLTAGE = 2",
+      "uint8 ERROR_FLAG_OVERCURRENT  = 4",
+      "uint8 ERROR_FLAG_UNDERCURRENT = 8"
+    ]
+  },
+  "info": {
+    "dataTypeID": 1091,
+    "hash": [
+      21,
+      161,
+      221,
+      13,
+      61,
+      211,
+      19,
+      131
+    ],
+    "hashStr": "8313d33d0ddda115",
+    "maxBitsLength": 56,
+    "type": "object"
+  }
+}

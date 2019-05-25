@@ -1,0 +1,58 @@
+{
+  "id": "uavcan.protocol.debug.LogMessage",
+  "description": "Generic log message.\nAll items are byte aligned.",
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "type": "object",
+        "kind": "uavcan.protocol.debug.LogLevel",
+        "name": "level",
+        "description": ""
+      },
+      {
+        "length": 31,
+        "range": true,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
+        "name": "source",
+        "description": ""
+      },
+      {
+        "length": 90,
+        "range": true,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
+        "name": "text",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "info": {
+    "dataTypeID": 16383,
+    "hash": [
+      117,
+      157,
+      4,
+      12,
+      142,
+      164,
+      84,
+      214
+    ],
+    "hashStr": "d654a48e0c049d75",
+    "maxBitsLength": 983,
+    "type": "object"
+  }
+}

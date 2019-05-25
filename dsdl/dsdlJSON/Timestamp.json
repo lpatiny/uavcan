@@ -1,0 +1,26 @@
+{
+  "id": "uavcan.Timestamp",
+  "description": "Global timestamp in microseconds, 7 bytes.\nUse this data type for timestamp fields in messages, like follows:\n  uavcan.Timestamp timestamp",
+  "type": "object",
+  "message": {
+    "variables": [],
+    "statics": [
+      "uint56 UNKNOWN = 0"
+    ]
+  },
+  "info": {
+    "hash": [
+      13,
+      126,
+      8,
+      129,
+      92,
+      11,
+      189,
+      5
+    ],
+    "hashStr": "05bd0b5c81087e0d",
+    "maxBitsLength": 56,
+    "type": "object"
+  }
+}

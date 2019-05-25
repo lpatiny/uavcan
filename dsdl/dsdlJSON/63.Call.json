@@ -1,0 +1,58 @@
+{
+  "id": "uavcan.tunnel.Call",
+  "description": "This service carries arbitrary data in the format of the specified high-level protocol.\nThe data will be delivered to the specified node only (not broadcast), and the addressed node\nwill be required to respond (although the response may be empty, if the chosen protocol allows so).\nThe specified protocol applies both to the request and to the response. The channelID allows for\nadditional routing between the source and target nodes.",
+  "type": "service",
+  "request": {
+    "variables": [
+      {
+        "type": "object",
+        "kind": "uavcan.tunnel.Protocol",
+        "name": "protocol",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "channelId",
+        "description": ""
+      },
+      {
+        "length": 60,
+        "range": true,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
+        "name": "buffer",
+        "description": "TAO rules apply"
+      }
+    ],
+    "statics": []
+  },
+  "response": {
+    "variables": [
+      {
+        "length": 60,
+        "range": true,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
+        "name": "buffer",
+        "description": "TAO rules apply"
+      }
+    ],
+    "statics": []
+  },
+  "info": {
+    "type": "object"
+  }
+}

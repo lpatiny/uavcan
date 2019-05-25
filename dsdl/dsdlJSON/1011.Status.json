@@ -1,0 +1,75 @@
+{
+  "id": "uavcan.equipment.actuator.Status",
+  "description": "Generic actuator feedback, if available.\nUnknown fields should be set to NAN.\nWhether the units are linear or angular depends on the actuator type (refer to the Command data type).",
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "actuatorId",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "position",
+        "description": "meter or radian"
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "force",
+        "description": "Newton or Newton metre"
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "speed",
+        "description": "meter per second or radian per second"
+      },
+      {
+        "type": "var",
+        "kind": "void",
+        "unsigned": false,
+        "bits": 1,
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "powerRatingPct",
+        "description": "0 - unloaded, 100 - full load"
+      }
+    ],
+    "statics": [
+      "uint7 POWER_RATING_PCT_UNKNOWN = 127"
+    ]
+  },
+  "info": {
+    "dataTypeID": 1011,
+    "hash": [
+      4,
+      234,
+      241,
+      250,
+      68,
+      186,
+      155,
+      94
+    ],
+    "hashStr": "5e9bba44faf1ea04",
+    "maxBitsLength": 64,
+    "type": "object"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "uavcan.equipment.air_data.Sideslip",
+  "description": "Body sideslip in radians.",
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "sideslipAngle",
+        "description": "Radians"
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "sideslipAngleVariance",
+        "description": "Radians^2"
+      }
+    ],
+    "statics": []
+  },
+  "info": {
+    "dataTypeID": 1026,
+    "hash": [
+      87,
+      42,
+      244,
+      207,
+      95,
+      229,
+      72,
+      123
+    ],
+    "hashStr": "7b48e55fcff42a57",
+    "maxBitsLength": 32,
+    "type": "object"
+  }
+}

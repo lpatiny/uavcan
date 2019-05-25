@@ -1,0 +1,17 @@
+'use strict';
+
+const { getBytesWithoutCRC } = require('../CRC');
+
+describe('validate CRC', () => {
+  it('long byte array', () => {
+    let bytes = [0x33, 0x1e, 0xc2, 0x51, 0x01, 0x00, 0x00, 0x00];
+    let result = getBytesWithoutCRC(bytes);
+    expect(result).toStrictEqual([0xc2, 0x51, 0x01, 0x00, 0x00, 0x00]);
+  });
+
+  it('short byte array', () => {
+    let bytes = [0x1e, 0xc2, 0x51, 0x01, 0x00, 0x00, 0x11];
+    let result = getBytesWithoutCRC(bytes);
+    expect(result).toStrictEqual([0x1e, 0xc2, 0x51, 0x01, 0x00, 0x00, 0x11]);
+  });
+});

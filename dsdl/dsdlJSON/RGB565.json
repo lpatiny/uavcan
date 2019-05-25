@@ -1,0 +1,49 @@
+{
+  "id": "uavcan.equipment.indication.RGB565",
+  "description": "Nested type.\nRGB color in the standard 5-6-5 16-bit palette.\nMonocolor lights should interpret this as brightness setpoint: from zero (0, 0, 0) to full brightness (31, 63, 31).",
+  "type": "object",
+  "message": {
+    "variables": [
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 5,
+        "name": "red",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 6,
+        "name": "green",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 5,
+        "name": "blue",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "info": {
+    "hash": [
+      52,
+      236,
+      81,
+      25,
+      244,
+      206,
+      167,
+      88
+    ],
+    "hashStr": "58a7cef41951ec34",
+    "maxBitsLength": 16,
+    "type": "object"
+  }
+}

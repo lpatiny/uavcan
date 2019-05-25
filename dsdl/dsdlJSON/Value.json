@@ -1,0 +1,68 @@
+{
+  "id": "uavcan.protocol.param.Value",
+  "description": "Single parameter value.\nThis is a union, which means that this structure can contain either one of the fields below.\nThe structure is prefixed with tag - a selector value that indicates which particular field is encoded.",
+  "type": "union",
+  "message": {
+    "variables": [
+      {
+        "type": "object",
+        "kind": "uavcan.protocol.param.Empty",
+        "name": "empty",
+        "description": "Empty field, used to represent an undefined value."
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": false,
+        "bits": 64,
+        "name": "integerValue",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 32,
+        "name": "realValue",
+        "description": "32-bit type is used to simplify implementation on low-end systems"
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "booleanValue",
+        "description": "8-bit value is used for alignment reasons"
+      },
+      {
+        "length": 128,
+        "range": true,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "int",
+          "unsigned": true,
+          "bits": 8
+        },
+        "name": "stringValue",
+        "description": "Length prefix is exactly one byte long, which ensures proper alignment of payload"
+      }
+    ],
+    "statics": []
+  },
+  "info": {
+    "hash": [
+      103,
+      114,
+      114,
+      132,
+      244,
+      75,
+      241,
+      41
+    ],
+    "hashStr": "29f14bf484727267",
+    "maxBitsLength": 1035,
+    "type": "union"
+  }
+}

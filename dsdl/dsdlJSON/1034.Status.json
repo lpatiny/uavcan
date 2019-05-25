@@ -1,0 +1,82 @@
+{
+  "id": "uavcan.equipment.esc.Status",
+  "description": "Generic ESC status.\nUnknown fields should be set to NAN.",
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 32,
+        "name": "errorCount",
+        "description": "Resets when the motor restarts"
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "voltage",
+        "description": "Volt"
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "current",
+        "description": "Ampere. Can be negative in case of a regenerative braking."
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "temperature",
+        "description": "Kelvin"
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": false,
+        "bits": 18,
+        "name": "rpm",
+        "description": "Negative value indicates reverse rotation"
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "powerRatingPct",
+        "description": "Instant demand factor in percent (percent of maximum power); range 0% to 127%."
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 5,
+        "name": "escIndex",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "info": {
+    "dataTypeID": 1034,
+    "hash": [
+      84,
+      178,
+      251,
+      162,
+      174,
+      40,
+      175,
+      169
+    ],
+    "hashStr": "a9af28aea2fbb254",
+    "maxBitsLength": 110,
+    "type": "object"
+  }
+}

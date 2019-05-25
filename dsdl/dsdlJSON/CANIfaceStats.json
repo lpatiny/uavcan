@@ -1,0 +1,49 @@
+{
+  "id": "uavcan.protocol.CANIfaceStats",
+  "description": "Single CAN iface statistics.",
+  "type": "object",
+  "message": {
+    "variables": [
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 48,
+        "name": "framesTx",
+        "description": "Number of transmitted CAN frames."
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 48,
+        "name": "framesRx",
+        "description": "Number of received CAN frames."
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 48,
+        "name": "errors",
+        "description": "Number of errors in the CAN layer."
+      }
+    ],
+    "statics": []
+  },
+  "info": {
+    "hash": [
+      80,
+      163,
+      76,
+      196,
+      240,
+      6,
+      177,
+      19
+    ],
+    "hashStr": "13b106f0c44ca350",
+    "maxBitsLength": 144,
+    "type": "object"
+  }
+}

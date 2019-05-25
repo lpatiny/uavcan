@@ -1,0 +1,260 @@
+{
+  "id": "uavcan.equipment.gnss.Fix2",
+  "description": "GNSS ECEF and LLA navigation solution with uncertainty.\nGlobal network-synchronized time, if available, otherwise zero.\nTime solution.\nThe method and number of leap seconds which were in use for deriving the timestamp are\ndefined in the fields below.\nMethod used for deriving the GNSS timestamp field.\nThis data type relies on the following definitions:\n  Leap seconds  - Accumulated one-second adjustments applied to UTC since 1972.\n                  For reference, on May 2017, the number of leap seconds was equal 27.\n                  The number of leap seconds is taken from the field num_leap_seconds.\n                  Refer to https://en.wikipedia.org/wiki/Leap_second for a general overview.\n  TAI timestamp - The number of microseconds between the current TAI time and\n                  the TAI time at UTC 1970-01-01T00:00:00.\n  UTC timestamp - The number of microseconds between the current UTC time and\n                  UTC 1970-01-01T00:00:00.\n                  UTC can be expressed via TAI as follows (in seconds):\n                      UTC = TAI - num_leap_seconds - 10\n                  And via GPS (in seconds):\n                      UTC = GPS - num_leap_seconds + 9\n  GPS timestamp - The number of microseconds between the current GPS time and\n                  the GPS time at UTC 1970-01-01T00:00:00.\n                  GPS time can be expressed via TAI as follows (in seconds):\n                      GPS = TAI - 19\nAccumulated one-second adjustments applied to UTC since 1972.\nThe number must agree with the currently correct number of UTC leap seconds. If this cannot\nbe garanteed, the field must be set to NUM_LEAP_SECONDS_UNKNOWN.\nPosition and velocity solution\nFix status\nGNSS Mode\nGNSS Sub mode\nPrecision\nPosition and velocity solution in ECEF, if available",
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 3,
+        "name": "gnssTimeStandard",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "void",
+        "unsigned": false,
+        "bits": 13,
+        "name": "#",
+        "description": "Reserved space"
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "numLeapSeconds",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": false,
+        "bits": 37,
+        "name": "longitudeDeg1E8",
+        "description": "Longitude degrees multiplied by 1e8 (approx. 1 mm per LSB)"
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": false,
+        "bits": 37,
+        "name": "latitudeDeg1E8",
+        "description": "Latitude degrees multiplied by 1e8 (approx. 1 mm per LSB on equator)"
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": false,
+        "bits": 27,
+        "name": "heightEllipsoidMm",
+        "description": "Height above ellipsoid in millimeters"
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": false,
+        "bits": 27,
+        "name": "heightMslMm",
+        "description": "Height above mean sea level in millimeters"
+      },
+      {
+        "length": 3,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 32
+        },
+        "name": "nedVelocity",
+        "description": "NED frame (north-east-down) in meters per second"
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 6,
+        "name": "satsUsed",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 2,
+        "name": "status2DFix",
+        "description": "= 2"
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 2,
+        "name": "status3DFix",
+        "description": "= 3"
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 2,
+        "name": "status",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 4,
+        "name": "mode",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 6,
+        "name": "subMode",
+        "description": ""
+      },
+      {
+        "length": 36,
+        "range": true,
+        "type": "array",
+        "kind": {
+          "type": "var",
+          "kind": "float",
+          "unsigned": false,
+          "bits": 16
+        },
+        "name": "covariance",
+        "description": "Position and velocity covariance. Units are"
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "pdop",
+        "description": ""
+      },
+      {
+        "length": 1,
+        "range": true,
+        "type": "array",
+        "kind": {
+          "kind": "uavcan.equipment.gnss.ECEFPositionVelocity",
+          "type": {
+            "id": "uavcan.equipment.gnss.ECEFPositionVelocity",
+            "description": "Nested type.\nGNSS ECEF high resolution position and velocity.\nECEF is an acronym for Earth-Centered-Earth-Fixed, which is a cartesian\ncoordinate system which rotates with the earth. The origin (0,0,0) is\nlocated at the center of the earth. The x-axis is a vector pointing from\nthe origin with positive direction towards 0 degrees latitude and\nlongitude (equator, at the prime meridian). The z-axis is a vector\npointing from the origin towards the north-pole. The y-axis completes a\nright-handed coordinate system.",
+            "type": "object",
+            "message": {
+              "variables": [
+                {
+                  "length": 3,
+                  "type": "array",
+                  "kind": {
+                    "type": "var",
+                    "kind": "float",
+                    "unsigned": false,
+                    "bits": 32
+                  },
+                  "name": "velocityXyz",
+                  "description": "XYZ velocity in m/s"
+                },
+                {
+                  "length": 3,
+                  "type": "array",
+                  "kind": {
+                    "type": "var",
+                    "kind": "int",
+                    "unsigned": false,
+                    "bits": 36
+                  },
+                  "name": "positionXyzMm",
+                  "description": "XYZ-axis coordinates in mm"
+                },
+                {
+                  "type": "var",
+                  "kind": "void",
+                  "unsigned": false,
+                  "bits": 6,
+                  "name": "#",
+                  "description": "Aligns the following array at byte boundary"
+                },
+                {
+                  "length": 36,
+                  "range": true,
+                  "type": "array",
+                  "kind": {
+                    "type": "var",
+                    "kind": "float",
+                    "unsigned": false,
+                    "bits": 16
+                  },
+                  "name": "covariance",
+                  "description": "Position and velocity covariance in the ECEF frame. Units are m^2 for position,"
+                }
+              ],
+              "statics": []
+            },
+            "info": {
+              "hash": [
+                72,
+                162,
+                227,
+                190,
+                74,
+                218,
+                165,
+                36
+              ],
+              "hashStr": "24a5da4abee3a248",
+              "maxBitsLength": 792,
+              "type": "object"
+            }
+          },
+          "bits": null
+        },
+        "name": "ecefPositionVelocity",
+        "description": ""
+      }
+    ],
+    "statics": [
+      "uint3 GNSS_TIME_STANDARD_NONE = 0  # Time is unknown",
+      "uint3 GNSS_TIME_STANDARD_TAI  = 1",
+      "uint3 GNSS_TIME_STANDARD_UTC  = 2",
+      "uint3 GNSS_TIME_STANDARD_GPS  = 3",
+      "uint8 NUM_LEAP_SECONDS_UNKNOWN = 0",
+      "uint2 STATUS_NO_FIX    = 0",
+      "uint2 STATUS_TIME_ONLY = 1",
+      "uint4 MODE_SINGLE      = 0",
+      "uint4 MODE_DGPS        = 1",
+      "uint4 MODE_RTK         = 2",
+      "uint4 MODE_PPP         = 3",
+      "uint6 SUB_MODE_DGPS_OTHER    = 0",
+      "uint6 SUB_MODE_DGPS_SBAS     = 1",
+      "uint6 SUB_MODE_RTK_FLOAT     = 0",
+      "uint6 SUB_MODE_RTK_FIXED     = 1"
+    ]
+  },
+  "info": {
+    "dataTypeID": 1063,
+    "hash": [
+      95,
+      67,
+      55,
+      15,
+      0,
+      231,
+      65,
+      202
+    ],
+    "hashStr": "ca41e7000f37435f",
+    "maxBitsLength": 1769,
+    "type": "object"
+  }
+}

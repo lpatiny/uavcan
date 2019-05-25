@@ -1,0 +1,58 @@
+{
+  "id": "uavcan.equipment.power.PrimaryPowerSupplyStatus",
+  "description": "Primary power supply status.\nTypical publishing rate should be around 1~2 Hz.\nHow many hours left to full discharge at average load over the last 10 seconds.\nTrue if the publishing node senses that an external power source can be used, e.g. to charge batteries.\nRemaining energy estimate in percent.",
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "hoursToEmptyAt10SecAvgPower",
+        "description": "[Hours]"
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "hoursToEmptyAt10SecAvgPowerVariance",
+        "description": "[Hours^2]"
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "remainingEnergyPct",
+        "description": "[Percent] Required"
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 7,
+        "name": "remainingEnergyPctStdev",
+        "description": "[Percent] Error standard deviation. Use best guess if unknown."
+      }
+    ],
+    "statics": []
+  },
+  "info": {
+    "dataTypeID": 1090,
+    "hash": [
+      128,
+      116,
+      117,
+      173,
+      116,
+      80,
+      160,
+      187
+    ],
+    "hashStr": "bba05074ad757480",
+    "maxBitsLength": 47,
+    "type": "object"
+  }
+}

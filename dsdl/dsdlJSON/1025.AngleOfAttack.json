@@ -1,0 +1,53 @@
+{
+  "id": "uavcan.equipment.air_data.AngleOfAttack",
+  "description": "Angle of attack.",
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "sensorId",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "aoa",
+        "description": "Radians"
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "aoaVariance",
+        "description": "Radians^2"
+      }
+    ],
+    "statics": [
+      "uint8 SENSOR_ID_LEFT = 254",
+      "uint8 SENSOR_ID_RIGHT = 255"
+    ]
+  },
+  "info": {
+    "dataTypeID": 1025,
+    "hash": [
+      78,
+      199,
+      250,
+      122,
+      63,
+      60,
+      81,
+      213
+    ],
+    "hashStr": "d5513c3f7afac74e",
+    "maxBitsLength": 40,
+    "type": "object"
+  }
+}

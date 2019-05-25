@@ -1,0 +1,58 @@
+{
+  "id": "uavcan.equipment.hardpoint.Status",
+  "description": "Generic cargo holder/hardpoint status.\nMeaning is the same as for the command field in the Command message",
+  "type": "message",
+  "message": {
+    "variables": [
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 8,
+        "name": "hardpointId",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "payloadWeight",
+        "description": "Newton"
+      },
+      {
+        "type": "var",
+        "kind": "float",
+        "unsigned": false,
+        "bits": 16,
+        "name": "payloadWeightVariance",
+        "description": ""
+      },
+      {
+        "type": "var",
+        "kind": "int",
+        "unsigned": true,
+        "bits": 16,
+        "name": "status",
+        "description": ""
+      }
+    ],
+    "statics": []
+  },
+  "info": {
+    "dataTypeID": 1071,
+    "hash": [
+      130,
+      61,
+      85,
+      66,
+      157,
+      81,
+      74,
+      98
+    ],
+    "hashStr": "624a519d42553d82",
+    "maxBitsLength": 56,
+    "type": "object"
+  }
+}
