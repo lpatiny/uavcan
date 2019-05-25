@@ -5,7 +5,6 @@ const kinds = require('../../dataTypes.json');
 
 describe('serialize gps', () => {
   it('one packet', () => {
-    let kindGeo = kinds['uavcan.equipment.camera_gimbal.GEOPOICommand'];
     let data = {
       gimbalId: 12,
       heightCm: 0,
@@ -16,7 +15,10 @@ describe('serialize gps', () => {
         commandMode: 14
       }
     };
-    let result = serialize(data, kindGeo);
+    let result = serialize(
+      data,
+      'uavcan.equipment.camera_gimbal.GEOPOICommand'
+    );
     expect(result).toStrictEqual([12, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   });
 });

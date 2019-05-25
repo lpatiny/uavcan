@@ -1,9 +1,6 @@
 'use strict';
 
 const serialize = require('../serialize');
-const kinds = require('../../dataTypes.json');
-
-let kindGetSet = kinds['uavcan.protocol.param.GetSet'];
 
 describe('serialize GetSet', () => {
   it('small request', () => {
@@ -16,7 +13,7 @@ describe('serialize GetSet', () => {
       nameStr: ''
     };
 
-    let result = serialize(data, kindGetSet, true, true);
+    let result = serialize(data, 'uavcan.protocol.param.GetSet', true, true);
     expect(result).toStrictEqual(expectedResult);
   });
 
@@ -29,7 +26,7 @@ describe('serialize GetSet', () => {
       nameStr: ''
     };
 
-    let result = serialize(data, kindGetSet, true, true);
+    let result = serialize(data, 'uavcan.protocol.param.GetSet', true, true);
     expect(result).toStrictEqual(expectedResult);
   });
 
@@ -61,7 +58,7 @@ describe('serialize GetSet', () => {
       nameStr: 'drivers'
     };
 
-    let result = serialize(data, kindGetSet, true, true);
+    let result = serialize(data, 'uavcan.protocol.param.GetSet', true, true);
     expect(result).toStrictEqual(expectedResult);
   });
   it('response', () => {
@@ -126,7 +123,7 @@ describe('serialize GetSet', () => {
       nameStr: 'drivers'
     };
 
-    let result = serialize(data, kindGetSet, true, false);
+    let result = serialize(data, 'uavcan.protocol.param.GetSet', true, false);
 
     expect(result).toStrictEqual(expectedResult);
   });

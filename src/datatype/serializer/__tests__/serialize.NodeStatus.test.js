@@ -1,11 +1,9 @@
 'use strict';
 
 const serialize = require('../serialize');
-const kinds = require('../../dataTypes.json');
 
 describe('serialize NodeStatus', () => {
   it('NodeStatus packet', () => {
-    let kindNodeStatus = kinds['uavcan.protocol.NodeStatus'];
     let data = {
       uptimeSec: 11917,
       health: 0,
@@ -13,7 +11,7 @@ describe('serialize NodeStatus', () => {
       subMode: 0,
       vendorSpecificStatusCode: 0
     };
-    let result = serialize(data, kindNodeStatus);
+    let result = serialize(data, 'uavcan.protocol.NodeStatus');
     expect(result).toStrictEqual([141, 46, 0, 0, 0, 0, 0]);
   });
 });

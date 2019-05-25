@@ -9,7 +9,7 @@ describe('convert', () => {
   it('simple', () => {
     const source = join(
       __dirname,
-      '../../../public_regulated_data_types/uavcan/equipment/ahrs/1002.MagneticFieldStrength2.uavcan'
+      '../../public_regulated_data_types/uavcan/equipment/ahrs/1002.MagneticFieldStrength2.uavcan'
     );
 
     let content = fs.readFileSync(source, 'utf8');
