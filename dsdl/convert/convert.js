@@ -10,7 +10,7 @@ const convertOne = require('./convertOne');
 
 const source = join(__dirname, '../public_regulated_data_types/');
 const destination = join(__dirname, '../dsdlJSON');
-const combined = join(__dirname, '../../src/datatype/dataTypes.json');
+const combined = join(__dirname, '../../src/data/dataTypes.json');
 
 // we will process the custom types first, file name does not start with a number
 

@@ -44,9 +44,8 @@
   "dependencies": {
     "camelcase": "^5.3.1",
     "crc-can": "0.0.3",
-    "eventemitter3": "^3.1.0",
+    "debug": "^4.1.1",
     "find": "^0.3.0",
-    "float16": "0.0.0",
-    "yaml": "^1.5.1"
+    "float16": "0.0.0"
   }
 }
