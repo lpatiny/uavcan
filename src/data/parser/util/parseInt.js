@@ -1,7 +1,5 @@
 'use strict';
 
-
-const n0 = BigInt(0);
 const n1 = BigInt(1);
 const n2 = BigInt(2);
 const n3 = BigInt(3);

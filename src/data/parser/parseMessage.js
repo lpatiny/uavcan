@@ -1,8 +1,8 @@
 'use strict';
 
-const parse = require('./parse');
-
 const { getMessageByID } = require('../DataTypesManager');
+
+const parse = require('./parse');
 
 function parseMessage(data, dataTypeID) {
   let dataType = getMessageByID(dataTypeID);

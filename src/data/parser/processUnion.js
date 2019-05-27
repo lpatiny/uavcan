@@ -3,7 +3,6 @@
 const dataTypes = require('../dataTypes.json');
 
 const parseInt = require('./util/parseInt');
-const processVar = require('./processVar');
 
 const n1 = BigInt(1);
 

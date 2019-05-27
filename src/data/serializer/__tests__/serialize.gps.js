@@ -1,7 +1,6 @@
 'use strict';
 
 const serialize = require('../serialize');
-const kinds = require('../../dataTypes.json');
 
 describe('serialize gps', () => {
   it('one packet', () => {

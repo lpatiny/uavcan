@@ -1,10 +1,10 @@
 'use strict';
 
-const parseUavcanFrame = require('../parseFrame');
+const parseFrame = require('../parseFrame');
 
-describe('parseUavcanFrame', () => {
+describe('parseFrame', () => {
   it('1801550c f15f0100000000df', () => {
-    let result = parseUavcanFrame(Number('0x1801550c'), [
+    let result = parseFrame(Number('0x1801550c'), [
       0xf1,
       0x5f,
       0x01,
