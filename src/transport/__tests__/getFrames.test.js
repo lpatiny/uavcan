@@ -1,6 +1,7 @@
 'use strict';
 
 const getFrames = require('../getFrames');
+const Data = require('../../data/Data');
 
 describe('getFrames', () => {
   it('1801550c f15f0100000000df', () => {
@@ -24,12 +25,9 @@ describe('getFrames', () => {
       nodeID: 12
     };
 
-    let result = getFrames(
-      [0xf1, 0x5f, 0x01, 0x00, 0x00, 0x00, 0x00],
-      sourceNode,
-      { destinationNodeID: 12 }
-    );
+    let data = new Data([0xf1, 0x5f, 0x01, 0x00, 0x00, 0x00, 0x00]);
 
+    let result = getFrames(data, sourceNode, { destinationNodeID: 12 });
     expect(result).toStrictEqual(expected);
   });
 });

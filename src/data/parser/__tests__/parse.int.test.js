@@ -2,7 +2,7 @@
 
 const parse = require('../parse');
 
-const integer = require('./device/integer');
+const integer = require('./device/integer.json');
 
 describe('parse int', () => {
   it('zero', () => {

@@ -26,7 +26,7 @@ function processArray(bigInt, variable, from) {
 }
 
 function getValueStr(value) {
-  return String.fromCharCode.apply(String, value);
+  return String.fromCharCode(...value);
 }
 
 module.exports = processArray;

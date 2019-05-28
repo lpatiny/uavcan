@@ -2,7 +2,7 @@
 
 const parse = require('../parse');
 
-const float = require('./device/float');
+const float = require('./device/float.json');
 
 describe('parse float', () => {
   it('0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00', () => {

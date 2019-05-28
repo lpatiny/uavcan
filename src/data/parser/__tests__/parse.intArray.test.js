@@ -2,7 +2,7 @@
 
 const parse = require('../parse');
 
-const testArray = require('./device/integerArray');
+const testArray = require('./device/integerArray.json');
 
 describe('parse intArray', () => {
   it('device test1 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00', () => {

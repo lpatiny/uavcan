@@ -18,13 +18,18 @@ class Data {
     const { isService = false, isRequest = false, hasCRC = true } = options;
     if (Array.isArray(data) || Buffer.isBuffer(data)) {
       if (hasCRC) {
-        getBytesFromCRCData(data, dataTypeID, isService, isRequest);
+        this.bytes = getBytesFromCRCData(
+          data,
+          dataTypeID,
+          isService,
+          isRequest
+        );
       } else {
         this.bytes = data;
       }
     } else {
       // expected to be an object
-      getBytesFromObject(data, dataTypeID, isService, isRequest);
+      this.bytes = getBytesFromObject(data, dataTypeID, isService, isRequest);
     }
 
     this.dataTypeID = dataTypeID;
@@ -46,7 +51,8 @@ function getBytesFromObject(object, dataTypeID, isService, isRequest) {
 }
 
 function getBytesFromCRCData(bytes, dataTypeID, isService, isRequest) {
-  if (!CRC.validateDataWithCRC(bytes, dataTypeID, isService, isRequest)) {
+  if (bytes.length < 8) return bytes;
+  if (!CRC.checkCRC(bytes, dataTypeID, isService, isRequest)) {
     throw Error('Wrong CRC');
   }
 

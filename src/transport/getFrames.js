@@ -2,22 +2,24 @@
 
 /**
  *
- * @param {array} bytes
+ * @param {Data} data
  * @param {Node} sourceNode
  * @param {object} options
  * @param {number} [options.priority=24]
  * @param {number} [options.destinationNodeID]
- * @param {number} [options.isService=false]
- * @param {number} [options.isRequest=false]
- * @param {number} [options.dataTypeID=1]
  * @param {number} [options.discriminator=random]
  */
 
-function getFrames(bytes, sourceNode, options = {}) {
+function getFrames(data, sourceNode, options = {}) {
+  let bytes = data.toBytesWithCRC();
   // TODO could be improved to have a counter by type of data
   sourceNode.transferID = (sourceNode.transferID + 1) % 32;
   options = Object.assign({}, options);
   options.sourceNodeID = sourceNode ? sourceNode.nodeID : 0;
+  options.isRequest = data.isRequest;
+  options.isService = data.isService;
+  options.dataTypeID = data.dataTypeID;
+
   let header = serializeHeader(options);
   sourceNode.toggleBit = 0;
   let frames = [];
