@@ -3,7 +3,7 @@
 const CRC = require('./util/CRC');
 const serialize = require('./serializer/serialize');
 const parse = require('./parser/parse');
-
+const { getDataType } = require('./DataTypesManager');
 /**
  * Create an instance an object containing uavcan data
  * {array|object} [data] a byte array or an object
@@ -33,6 +33,7 @@ class Data {
     }
 
     this.dataTypeID = dataTypeID;
+    this.dataTypeFullID = getDataType(dataTypeID, isService).id;
     this.isService = isService;
     this.isRequest = isRequest;
   }

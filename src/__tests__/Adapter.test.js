@@ -6,7 +6,7 @@ const TestAdapter = require('../adapter/TestAdapter');
 
 const testAdapter = new TestAdapter();
 
-describe('Node', () => {
+describe('Adapter', () => {
   let node = new Node(5, testAdapter);
   it('send frames to node ', () => {
     let data = new Data([1, 2, 3, 4], 1, {
@@ -39,12 +39,15 @@ describe('Node', () => {
     });
   });
 
-  it('receive frame', () => {
-    let callback = jest.fn();
-    testAdapter.on('frame', callback);
+  it('receive node info request frame', () => {
+    let callbackFrame = jest.fn();
+    testAdapter.on('frame', callbackFrame);
+
+    let callbackUAVCAN = jest.fn();
+    testAdapter.on('uavcan', callbackUAVCAN);
 
     testAdapter.receiveFrame('T18018a85501020304c1');
-    expect(callback).toHaveBeenCalledWith({
+    expect(callbackFrame).toHaveBeenCalledWith({
       event: 'RX',
       value: {
         frame: {
@@ -64,6 +67,23 @@ describe('Node', () => {
           destinationNodeID: 10
         },
         text: 'T18018a85501020304c1'
+      }
+    });
+
+    testAdapter.receiveFrame('T18018a85501020304c1');
+    expect(callbackUAVCAN).toHaveBeenCalledWith({
+      event: 'Service request',
+      value: {
+        bytes: [1, 2, 3, 4],
+        dataTypeFullID: 'uavcan.protocol.GetNodeInfo',
+        dataTypeID: 1,
+        destinationNodeID: 10,
+        isRequest: true,
+        isService: true,
+        priority: 24,
+        sourceNodeID: 5,
+        transferID: 1,
+        value: {}
       }
     });
   });

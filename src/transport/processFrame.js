@@ -74,7 +74,7 @@ function emitUAVCAN(frame, bytes, adapter) {
 
   let toSend = {
     dataTypeID: frame.dataTypeID,
-    dataTypeFullID: frame.dataTypeFullID,
+    dataTypeFullID: data.dataTypeFullID,
     bytes,
     priority: frame.priority,
     sourceNodeID: frame.sourceNodeID,
