@@ -65,7 +65,7 @@ function emitUAVCAN(frame, bytes, adapter) {
       kind = 'Service response';
     }
   } else {
-    if (frame.destinationNodeID) {
+    if (frame.sourceNodeID) {
       kind = 'Message';
     } else {
       kind = 'Anonymous message';
@@ -78,12 +78,18 @@ function emitUAVCAN(frame, bytes, adapter) {
     bytes,
     priority: frame.priority,
     sourceNodeID: frame.sourceNodeID,
-    destinationNodeID: frame.destinationNodeID,
     isService: frame.isService,
-    isRequest: frame.isRequest,
     transferID: frame.transferID,
     value: data.toObject()
   };
+
+  if (frame.destinationNodeID !== undefined) {
+    toSend.destinationNodeID = frame.destinationNodeID;
+  }
+  if (frame.isRequest !== undefined) {
+    toSend.isRequest = frame.isRequest;
+  }
+
   adapter.emit('uavcan', {
     event: kind,
     value: toSend

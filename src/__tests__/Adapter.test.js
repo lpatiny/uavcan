@@ -70,7 +70,6 @@ describe('Adapter', () => {
       }
     });
 
-    testAdapter.receiveFrame('T18018a85501020304c1');
     expect(callbackUAVCAN).toHaveBeenCalledWith({
       event: 'Service request',
       value: {
@@ -84,6 +83,56 @@ describe('Adapter', () => {
         sourceNodeID: 5,
         transferID: 1,
         value: {}
+      }
+    });
+  });
+
+  it('receive message frame', () => {
+    let callbackFrame = jest.fn();
+    testAdapter.on('frame', callbackFrame);
+
+    let callbackUAVCAN = jest.fn();
+    testAdapter.on('uavcan', callbackUAVCAN);
+
+    testAdapter.receiveFrame('T1801550c8f15f0100000000df');
+    expect(callbackFrame).toHaveBeenCalledWith({
+      event: 'RX',
+      value: {
+        frame: {
+          bytes: [241, 95, 1, 0, 0, 0, 0],
+          endTransfer: true,
+          frameID: 402740492,
+          payload: [241, 95, 1, 0, 0, 0, 0, 223],
+          startTransfer: true,
+          sourceNodeID: 12,
+          tailByte: 223,
+          toggleBit: 0,
+          transferID: 31,
+          priority: 24,
+          isService: false,
+          dataTypeID: 341
+        },
+        text: 'T1801550c8f15f0100000000df'
+      }
+    });
+
+    expect(callbackUAVCAN).toHaveBeenCalledWith({
+      event: 'Message',
+      value: {
+        bytes: [241, 95, 1, 0, 0, 0, 0],
+        dataTypeFullID: 'uavcan.protocol.NodeStatus',
+        dataTypeID: 341,
+        isService: false,
+        priority: 24,
+        sourceNodeID: 12,
+        transferID: 31,
+        value: {
+          uptimeSec: 90097,
+          health: 0,
+          mode: 0,
+          subMode: 0,
+          vendorSpecificStatusCode: 0
+        }
       }
     });
   });
