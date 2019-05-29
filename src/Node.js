@@ -7,10 +7,16 @@ const getFrames = require('./transport/getFrames');
 class Node {
   constructor(nodeID, adapter) {
     this.nodeID = nodeID;
-    this.transferID = 0;
-    this.toggleBit = false;
     this.adapter = adapter;
-    this.data = new Array(32);
+    this.transferID = 0;
+    // data should contain an array of objects with
+    this.data = [];
+    for (let i = 0; i < 32; i++) {
+      this.data.push({
+        bytes: [],
+        toggleBit: 0
+      });
+    }
   }
 
   /**

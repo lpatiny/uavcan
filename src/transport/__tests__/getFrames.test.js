@@ -10,22 +10,27 @@ describe('getFrames', () => {
         startTransfer: true,
         endTransfer: true,
         toggleBit: 0,
+        isRequest: false,
+        isService: false,
         transferID: 11,
-        dataLength: 7,
-        data: [241, 95, 1, 0, 0, 0, 0],
+        bytes: [241, 95, 1, 0, 0, 0, 0],
         tailByte: 203,
         payload: [241, 95, 1, 0, 0, 0, 0, 203],
-        header: 402653452
+        frameID: 402653452
       }
     ];
 
     let sourceNode = {
       transferID: 10,
-      toggleBit: false,
+      data: {
+        11: {
+          toggleBit: 0
+        }
+      },
       nodeID: 12
     };
 
-    let data = new Data([0xf1, 0x5f, 0x01, 0x00, 0x00, 0x00, 0x00]);
+    let data = new Data([0xf1, 0x5f, 0x01, 0x00, 0x00, 0x00, 0x00], 1);
 
     let result = getFrames(data, sourceNode, { destinationNodeID: 12 });
     expect(result).toStrictEqual(expected);

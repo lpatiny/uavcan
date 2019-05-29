@@ -19,32 +19,33 @@ function getFrames(data, sourceNode, options = {}) {
   options.isRequest = data.isRequest;
   options.isService = data.isService;
   options.dataTypeID = data.dataTypeID;
-
-  let header = serializeHeader(options);
+  let frameID = serializeFrameID(options);
   sourceNode.toggleBit = 0;
   let frames = [];
   for (let i = 0; i < bytes.length || i === 0; i += 7) {
-    let data = [];
+    let frameBytes = [];
     let j = i;
     for (j; j < Math.min(i + 7, bytes.length); j++) {
-      data.push(bytes[j] & 255);
+      frameBytes.push(bytes[j] & 255);
     }
+
     let tailByte =
       ((i === 0) << 7) |
       ((j === bytes.length) << 6) |
-      (sourceNode.toggleBit << 5) |
+      (sourceNode.data[sourceNode.transferID].toggleBit << 5) |
       sourceNode.transferID;
-    let payload = data.slice(0).concat(tailByte);
+    let payload = frameBytes.slice(0).concat(tailByte);
     frames.push({
       startTransfer: i === 0,
       endTransfer: j === bytes.length,
-      toggleBit: sourceNode.toggleBit,
+      toggleBit: sourceNode.data[sourceNode.transferID].toggleBit,
       transferID: sourceNode.transferID,
-      dataLength: data.length,
-      data,
+      isRequest: options.isRequest,
+      isService: options.isService,
+      bytes: frameBytes,
       tailByte,
       payload,
-      header
+      frameID
     });
     sourceNode.toggleBit = !sourceNode.toggleBit;
   }
@@ -53,7 +54,7 @@ function getFrames(data, sourceNode, options = {}) {
 
 module.exports = getFrames;
 
-function serializeHeader(options = {}) {
+function serializeFrameID(options = {}) {
   let {
     priority = 24,
     sourceNodeID,
@@ -64,24 +65,24 @@ function serializeHeader(options = {}) {
     discriminator = Math.floor(Math.random(1) * 16384)
   } = options;
 
-  let header = 0;
+  let frameID = 0;
 
-  header |= (priority & 31) << 24;
+  frameID |= (priority & 31) << 24;
   if (isService) {
-    header |= sourceNodeID & 127;
-    header |= 1 << 7;
-    header |= (destinationNodeID & 127) << 8;
-    header |= (isRequest & 1) << 15;
-    header |= (dataTypeID & 255) << 16;
+    frameID |= sourceNodeID & 127;
+    frameID |= 1 << 7;
+    frameID |= (destinationNodeID & 127) << 8;
+    frameID |= (isRequest & 1) << 15;
+    frameID |= (dataTypeID & 255) << 16;
   } else {
     if (sourceNodeID) {
-      header |= sourceNodeID & 127;
-      header |= (dataTypeID & 65535) << 8;
+      frameID |= sourceNodeID & 127;
+      frameID |= (dataTypeID & 65535) << 8;
     } else {
-      header |= (dataTypeID & 3) << 8;
-      header |= (discriminator & 16383) << 10;
+      frameID |= (dataTypeID & 3) << 8;
+      frameID |= (discriminator & 16383) << 10;
     }
   }
 
-  return header;
+  return frameID;
 }

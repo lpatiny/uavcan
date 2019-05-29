@@ -9,9 +9,9 @@ const parse = require('./parser/parse');
  * {array|object} [data] a byte array or an object
  * {object} [dataTypeID] data type ID of full data type ID
  * {object} [options={}]
- * {boolean} [isService=false]
- * {boolean} [isRequest=false]
- * {boolean} [hasCRC=true] will check and remove CRC if data length is greater than 7
+ * {boolean} [options.isService=false]
+ * {boolean} [options.isRequest=false]
+ * {boolean} [options.hasCRC=true] will check and remove CRC if data length is greater than 7
  */
 class Data {
   constructor(data, dataTypeID, options = {}) {

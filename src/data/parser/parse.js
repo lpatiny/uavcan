@@ -1,5 +1,7 @@
 'use strict';
 
+const { getDataType } = require('../DataTypesManager');
+
 const processVariable = require('./processVariable');
 /**
  *
@@ -7,6 +9,9 @@ const processVariable = require('./processVariable');
  * @param {*} dataType
  */
 function parse(data, dataType, isService = false, isRequest = false) {
+  if (Number.isInteger(dataType)) {
+    dataType = getDataType(dataType, isService);
+  }
   let bigValue;
   let from;
 

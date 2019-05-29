@@ -19,11 +19,13 @@ describe('parseFrame', () => {
       priority: 24,
       isService: false,
       sourceNodeID: 12,
+      frameID: 402740492,
       dataTypeID: 341,
-      dataLength: 7,
-      data: [241, 95, 1, 0, 0, 0, 0],
-      startTransfer: 1,
-      endTransfer: 1,
+      bytes: [241, 95, 1, 0, 0, 0, 0],
+      payload: [241, 95, 1, 0, 0, 0, 0, 223],
+      startTransfer: true,
+      endTransfer: true,
+      tailByte: 223,
       toggleBit: 0,
       transferID: 31
     });
