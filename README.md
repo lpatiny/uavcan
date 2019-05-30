@@ -6,6 +6,26 @@
 [![David deps][david-image]][david-url]
 [![npm download][download-image]][download-url]
 
+## Description
+
+This library contains many utilities allowing to use the UAVCAN protocol directly in javascript.
+
+An example of implementation is available in the project: https://github.com/octanis-instruments/slcan
+
+Here are the various utilities that are available:
+* Data:
+  * `Data`: a class that allows to deal with UAVCAN data object. It will convert a javascript object to a byte array and the opposite based on the dataTypeID and  isService / isRequest flags
+  * `DataTypesManager`: helper to convert dataTypeID to fullDataTypeID and retrieve information about a specific dataTypeFullID
+  * `dataTypes`: a json containing the description of all the data types
+* Transport: 
+  * `getFrames`: Convert a byte array in frames that can be send with the adapter
+  * `parseFrame`: Parse the received frame
+  * `Node`: a class that corresponds to a Node on the can bus that will receive and send frames. It belongs to a specific Adapter that connects the CAN bus to the computer
+  * `DefaultAdapter`: A basic implementation of an adapter that should be extended in order to implement a connection between the computer and the CAN bus. This adapter implements `EventEmitter` and will generate events for `frame` (RX and TX) as well as `data` when the frames are assemble and a new valid data is received.
+* Utilities
+  * bytesToHex: converts an array of bytes to an hexadecimal string
+  * hexToBytes: converts an hexadecimal string to an array of bytes
+
 ## Installation
 
 `$ npm install uavcan`
@@ -15,32 +35,7 @@
 ## Example
 
 ```js
-var can = require("socketcan");
-const { UAVCANCodec } = require("uavcan");
 
-var myCodec = new UAVCANCodec();
-var channel = can.createRawChannel("slcan0", true);
-
-myCodec.on("rx", arg => {
-  if (
-    arg.decodedCanId.messageTypeId === 341 ||
-    arg.decodedCanId.serviceTypeId === 11
-  ) {
-    console.log(arg.decodedTransfer, arg.decodedCanId.sourceNodeId);
-  }
-});
-
-// Log any message
-channel.addListener("onMessage", function(msg) {
-  let b = Buffer.alloc(4);
-  b.writeUInt32BE(msg.id);
-  myCodec.decode(b, msg.data);
-});
-channel.start();
-
-//send a message
-var myMessage = new UAVCANTransfer(...);
-myCodec.encode(myMessage, channel.send);
 ```
 
 ## License

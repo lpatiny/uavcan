@@ -19,19 +19,33 @@ for (let key in dataTypes) {
   }
 }
 
+/**
+ * Returns the datatype structure as an object for a service based
+ * on the ID
+ * @param {number|string} [dataTypeID] Either a number of the datatype full ID
+ * @returns {object} datatype structure
+ */
 function getServiceByID(dataTypeID) {
   if (dataTypes[dataTypeID]) return dataTypes[dataTypeID];
   return services[dataTypeID];
 }
 
+/**
+ * Returns the datatype structure as an object for a messaged based
+ * on the ID
+ * @param {number|string} [dataTypeID] Either a number of the datatype full ID
+ * @returns {object} datatype structure
+ */
 function getMessageByID(dataTypeID) {
   if (dataTypes[dataTypeID]) return dataTypes[dataTypeID];
   return messages[dataTypeID];
 }
 
 /**
- *
- * @param {Return the hash } dataTypeID
+ * Returns the hash
+ * @param {number|string} [dataTypeID] Either a number of the datatype full ID
+ * @param {boolean} [isServicde]
+ * @returns {array} array of bytes of the datatype hash
  */
 function getDataTypeHash(dataTypeID, isService) {
   let dataType = getDataType(dataTypeID, isService);
@@ -42,8 +56,8 @@ function getDataTypeHash(dataTypeID, isService) {
 /**
  * Returns information about the datatype based etierh on the
  * full data type or the data type number and the flag isService
- * @param {*} dataTypeID
- * @param {*} isService
+ * @param {number|string} [dataTypeID] Either a number of the datatype full ID
+ * @param {boolean} [isService]
  */
 function getDataType(dataTypeID, isService) {
   // if it is a full name

@@ -4,13 +4,15 @@ const CRC = require('./util/CRC');
 const serialize = require('./serializer/serialize');
 const parse = require('./parser/parse');
 const { getDataType } = require('./DataTypesManager');
+
 /**
  * Create an instance an object containing uavcan data
- * {array|object} [data] a byte array or an object
- * {object} [dataTypeID] data type ID of full data type ID
+ * {array|object} [data] a byte array or an object. If it is an object the value will be
+ *                      parsed based on dataTypeID and isService.
+ * {number|string} [dataTypeID] data type ID of full data type ID. If this value
  * {object} [options={}]
- * {boolean} [options.isService=false]
- * {boolean} [options.isRequest=false]
+ * {boolean} [options.isService=false] specify if data is a service
+ * {boolean} [options.isRequest=false] in case of service tells if it is request or response
  * {boolean} [options.hasCRC=true] will check and remove CRC if data length is greater than 7
  */
 class Data {
@@ -38,10 +40,18 @@ class Data {
     this.isRequest = isRequest;
   }
 
+  /**
+   * Returns data as a javascript object that has the structure determined
+   * by the dataTypeID
+   */
   toObject() {
     return parse(this.bytes, this.dataTypeID, this.isService, this.isRequest);
   }
 
+  /**
+   * Returns data as a byte array with the CRC in case the length of the byges
+   * if greater than 7
+   */
   toBytesWithCRC() {
     return CRC.prependCRC(this.bytes, this.dataTypeID, this.isService);
   }
@@ -56,7 +66,6 @@ function getBytesFromCRCData(bytes, dataTypeID, isService, isRequest) {
   if (!CRC.checkCRC(bytes, dataTypeID, isService, isRequest)) {
     throw Error('Wrong CRC');
   }
-
   return bytes.slice(2);
 }
 
