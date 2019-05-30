@@ -23,6 +23,9 @@ class Node {
    * Send a data object
    * @param {Data} data
    * @param {object} [options={}]
+   * @param {number} [options.priority=24]
+   * @param {number} [options.destinationNodeID]
+   * @param {number} [options.discriminator=random]
    */
   send(data, options = {}) {
     let frames = getFrames(data, this, options);

@@ -1,8 +1,8 @@
 'use strict';
 
-const Node = require('../Node');
-const Data = require('../data/Data');
-const TestAdapter = require('../adapter/TestAdapter');
+const Node = require('../../Node');
+const Data = require('../../data/Data');
+const TestAdapter = require('../TestAdapter');
 
 const testAdapter = new TestAdapter();
 
@@ -46,7 +46,7 @@ describe('Adapter', () => {
     let callbackUAVCAN = jest.fn();
     testAdapter.on('uavcan', callbackUAVCAN);
 
-    testAdapter.receiveFrame('T18018a85501020304c1');
+    testAdapter.receiveFrame('18018a85501020304c1');
     expect(callbackFrame).toHaveBeenCalledWith({
       event: 'RX',
       value: {
@@ -66,7 +66,7 @@ describe('Adapter', () => {
           dataTypeID: 1,
           destinationNodeID: 10
         },
-        text: 'T18018a85501020304c1'
+        text: '18018a85501020304c1'
       }
     });
 
@@ -94,7 +94,7 @@ describe('Adapter', () => {
     let callbackUAVCAN = jest.fn();
     testAdapter.on('uavcan', callbackUAVCAN);
 
-    testAdapter.receiveFrame('T1801550c8f15f0100000000df');
+    testAdapter.receiveFrame('1801550c8f15f0100000000df');
     expect(callbackFrame).toHaveBeenCalledWith({
       event: 'RX',
       value: {
@@ -112,7 +112,7 @@ describe('Adapter', () => {
           isService: false,
           dataTypeID: 341
         },
-        text: 'T1801550c8f15f0100000000df'
+        text: '1801550c8f15f0100000000df'
       }
     });
 

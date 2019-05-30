@@ -8,5 +8,6 @@ module.exports = {
   hexToBytes: require('./util/hexToBytes'),
   DataTypesManager: require('./data/DataTypesManager'),
   dataTypes: require('./data/dataTypes.json'),
-  Node: require('./Node')
+  Node: require('./Node'),
+  DefaultAdapter: require('./adapter/DefaultAdapter')
 };
