@@ -33,9 +33,9 @@ class Data {
       // expected to be an object
       this.bytes = getBytesFromObject(data, dataTypeID, isService, isRequest);
     }
-
-    this.dataTypeID = dataTypeID;
-    this.dataTypeFullID = getDataType(dataTypeID, isService).id;
+    let dataType = getDataType(dataTypeID, isService);
+    this.dataTypeID = dataType.info.dataTypeID;
+    this.dataTypeFullID = dataType.id;
     this.isService = isService;
     this.isRequest = isRequest;
   }

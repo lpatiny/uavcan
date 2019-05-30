@@ -25,6 +25,9 @@ describe('Adapter', () => {
         frame: {
           isService: true,
           isRequest: true,
+          dataTypeID: 1,
+          destinationNodeID: 10,
+          sourceNodeID: 5,
           bytes: [1, 2, 3, 4],
           endTransfer: true,
           frameID: 402754181,

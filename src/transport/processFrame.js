@@ -1,5 +1,7 @@
 'use strict';
 
+const debug = require('debug')('uavcan.transport.processFrame');
+
 const Data = require('../data/Data');
 
 function processFrame(frame, adapter) {
@@ -89,6 +91,7 @@ function emitUAVCAN(frame, bytes, adapter) {
   if (frame.isRequest !== undefined) {
     toSend.isRequest = frame.isRequest;
   }
+  debug(toSend);
 
   adapter.emit('uavcan', {
     event: kind,

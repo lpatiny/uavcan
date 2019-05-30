@@ -16,8 +16,8 @@ function getFrames(data, sourceNode, options = {}) {
   sourceNode.transferID = (sourceNode.transferID + 1) % 32;
   options = Object.assign({}, options);
   options.sourceNodeID = sourceNode ? sourceNode.nodeID : 0;
-  options.isRequest = data.isRequest;
   options.isService = data.isService;
+  options.isRequest = data.isRequest;
   options.dataTypeID = data.dataTypeID;
   let frameID = serializeFrameID(options);
   sourceNode.toggleBit = 0;
@@ -36,6 +36,9 @@ function getFrames(data, sourceNode, options = {}) {
       sourceNode.transferID;
     let payload = frameBytes.slice(0).concat(tailByte);
     frames.push({
+      sourceNodeID: options.sourceNodeID,
+      destinationNodeID: options.destinationNodeID,
+      dataTypeID: options.dataTypeID,
       startTransfer: i === 0,
       endTransfer: j === bytes.length,
       toggleBit: sourceNode.data[sourceNode.transferID].toggleBit,
@@ -47,7 +50,8 @@ function getFrames(data, sourceNode, options = {}) {
       payload,
       frameID
     });
-    sourceNode.toggleBit = !sourceNode.toggleBit;
+    sourceNode.data[sourceNode.transferID].toggleBit =
+      !sourceNode.data[sourceNode.transferID].toggleBit & 1;
   }
   return frames;
 }
