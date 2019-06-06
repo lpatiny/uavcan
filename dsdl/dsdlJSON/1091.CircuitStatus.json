@@ -34,15 +34,36 @@
         "unsigned": true,
         "bits": 8,
         "name": "errorFlags",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "ERROR_FLAG_OVERVOLTAGE",
+            "value": 1,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "ERROR_FLAG_UNDERVOLTAGE",
+            "value": 2,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "ERROR_FLAG_OVERCURRENT",
+            "value": 4,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "ERROR_FLAG_UNDERCURRENT",
+            "value": 8,
+            "comment": ""
+          }
+        ]
       }
     ],
-    "statics": [
-      "uint8 ERROR_FLAG_OVERVOLTAGE  = 1",
-      "uint8 ERROR_FLAG_UNDERVOLTAGE = 2",
-      "uint8 ERROR_FLAG_OVERCURRENT  = 4",
-      "uint8 ERROR_FLAG_UNDERCURRENT = 8"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 1091,

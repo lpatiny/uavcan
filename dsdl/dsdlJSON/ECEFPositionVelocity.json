@@ -50,7 +50,7 @@
         "description": "Position and velocity covariance in the ECEF frame. Units are m^2 for position,"
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "hash": [

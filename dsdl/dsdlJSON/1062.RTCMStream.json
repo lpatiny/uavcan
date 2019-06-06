@@ -10,7 +10,15 @@
         "unsigned": true,
         "bits": 8,
         "name": "protocolIdRtcm2",
-        "description": "= 2"
+        "description": "= 2",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "PROTOCOL_ID_UNKNOWN",
+            "value": 0,
+            "comment": ""
+          }
+        ]
       },
       {
         "type": "var",
@@ -42,9 +50,7 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint8 PROTOCOL_ID_UNKNOWN = 0"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 1062,

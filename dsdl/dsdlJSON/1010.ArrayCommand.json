@@ -30,7 +30,33 @@
                   "unsigned": true,
                   "bits": 8,
                   "name": "commandType",
-                  "description": ""
+                  "description": "",
+                  "constants": [
+                    {
+                      "kind": "uint8",
+                      "label": "COMMAND_TYPE_UNITLESS",
+                      "value": 0,
+                      "comment": "[-1, 1]"
+                    },
+                    {
+                      "kind": "uint8",
+                      "label": "COMMAND_TYPE_POSITION",
+                      "value": 1,
+                      "comment": "meter or radian"
+                    },
+                    {
+                      "kind": "uint8",
+                      "label": "COMMAND_TYPE_FORCE",
+                      "value": 2,
+                      "comment": "Newton or Newton metre"
+                    },
+                    {
+                      "kind": "uint8",
+                      "label": "COMMAND_TYPE_SPEED",
+                      "value": 3,
+                      "comment": "meter per second or radian per second"
+                    }
+                  ]
                 },
                 {
                   "type": "var",
@@ -41,12 +67,7 @@
                   "description": ""
                 }
               ],
-              "statics": [
-                "uint8 COMMAND_TYPE_UNITLESS     = 0     # [-1, 1]",
-                "uint8 COMMAND_TYPE_POSITION     = 1     # meter or radian",
-                "uint8 COMMAND_TYPE_FORCE        = 2     # Newton or Newton metre",
-                "uint8 COMMAND_TYPE_SPEED        = 3     # meter per second or radian per second"
-              ]
+              "constants": []
             },
             "info": {
               "hash": [
@@ -70,7 +91,7 @@
         "description": ""
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 1010,

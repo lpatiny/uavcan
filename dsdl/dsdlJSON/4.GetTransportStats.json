@@ -4,7 +4,7 @@
   "type": "service",
   "request": {
     "variables": [],
-    "statics": []
+    "constants": []
   },
   "response": {
     "variables": [
@@ -69,7 +69,7 @@
                   "description": "Number of errors in the CAN layer."
                 }
               ],
-              "statics": []
+              "constants": []
             },
             "info": {
               "hash": [
@@ -93,7 +93,7 @@
         "description": ""
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 4,

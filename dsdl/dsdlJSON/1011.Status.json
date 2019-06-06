@@ -49,12 +49,18 @@
         "unsigned": true,
         "bits": 7,
         "name": "powerRatingPct",
-        "description": "0 - unloaded, 100 - full load"
+        "description": "0 - unloaded, 100 - full load",
+        "constants": [
+          {
+            "kind": "uint7",
+            "label": "POWER_RATING_PCT_UNKNOWN",
+            "value": 127,
+            "comment": ""
+          }
+        ]
       }
     ],
-    "statics": [
-      "uint7 POWER_RATING_PCT_UNKNOWN = 127"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 1011,

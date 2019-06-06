@@ -37,7 +37,7 @@
         "description": ""
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 16383,

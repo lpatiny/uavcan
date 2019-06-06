@@ -10,15 +10,36 @@
         "unsigned": true,
         "bits": 8,
         "name": "commandMode",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "COMMAND_MODE_ANGULAR_VELOCITY",
+            "value": 0,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "COMMAND_MODE_ORIENTATION_FIXED_FRAME",
+            "value": 1,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "COMMAND_MODE_ORIENTATION_BODY_FRAME",
+            "value": 2,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "COMMAND_MODE_GEO_POI",
+            "value": 3,
+            "comment": ""
+          }
+        ]
       }
     ],
-    "statics": [
-      "uint8 COMMAND_MODE_ANGULAR_VELOCITY        = 0",
-      "uint8 COMMAND_MODE_ORIENTATION_FIXED_FRAME = 1",
-      "uint8 COMMAND_MODE_ORIENTATION_BODY_FRAME  = 2",
-      "uint8 COMMAND_MODE_GEO_POI                 = 3"
-    ]
+    "constants": []
   },
   "info": {
     "hash": [

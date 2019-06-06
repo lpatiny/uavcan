@@ -10,16 +10,42 @@
         "unsigned": true,
         "bits": 8,
         "name": "flags",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "FLAG_FILE",
+            "value": 1,
+            "comment": "Excludes FLAG_DIRECTORY"
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_DIRECTORY",
+            "value": 2,
+            "comment": "Excludes FLAG_FILE"
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_SYMLINK",
+            "value": 4,
+            "comment": "Link target is either FLAG_FILE or FLAG_DIRECTORY"
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_READABLE",
+            "value": 8,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_WRITEABLE",
+            "value": 16,
+            "comment": ""
+          }
+        ]
       }
     ],
-    "statics": [
-      "uint8 FLAG_FILE      = 1        # Excludes FLAG_DIRECTORY",
-      "uint8 FLAG_DIRECTORY = 2        # Excludes FLAG_FILE",
-      "uint8 FLAG_SYMLINK   = 4        # Link target is either FLAG_FILE or FLAG_DIRECTORY",
-      "uint8 FLAG_READABLE  = 8",
-      "uint8 FLAG_WRITEABLE = 16"
-    ]
+    "constants": []
   },
   "info": {
     "hash": [

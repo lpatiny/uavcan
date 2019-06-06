@@ -135,7 +135,7 @@
         "description": ""
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 2000,

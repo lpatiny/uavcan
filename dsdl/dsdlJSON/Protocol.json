@@ -10,12 +10,18 @@
         "unsigned": true,
         "bits": 8,
         "name": "protocol",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "MAVLINK",
+            "value": 0,
+            "comment": "MAVLink"
+          }
+        ]
       }
     ],
-    "statics": [
-      "uint8 MAVLINK                   = 0     # MAVLink"
-    ]
+    "constants": []
   },
   "info": {
     "type": "object"

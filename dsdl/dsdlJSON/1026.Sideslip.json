@@ -21,7 +21,7 @@
         "description": "Radians^2"
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 1026,

@@ -19,7 +19,7 @@
         "description": ""
       }
     ],
-    "statics": []
+    "constants": []
   },
   "response": {
     "variables": [
@@ -29,7 +29,33 @@
         "unsigned": true,
         "bits": 8,
         "name": "error",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "ERROR_OK",
+            "value": 0,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "ERROR_INVALID_MODE",
+            "value": 1,
+            "comment": "Cannot perform the update in the current operating mode or state."
+          },
+          {
+            "kind": "uint8",
+            "label": "ERROR_IN_PROGRESS",
+            "value": 2,
+            "comment": "Firmware update is already in progress, and the slave doesn't want to restart."
+          },
+          {
+            "kind": "uint8",
+            "label": "ERROR_UNKNOWN",
+            "value": 255,
+            "comment": ""
+          }
+        ]
       },
       {
         "type": "array",
@@ -43,12 +69,7 @@
         "description": "Detailed description of the error."
       }
     ],
-    "statics": [
-      "uint8 ERROR_OK               = 0",
-      "uint8 ERROR_INVALID_MODE     = 1    # Cannot perform the update in the current operating mode or state.",
-      "uint8 ERROR_IN_PROGRESS      = 2    # Firmware update is already in progress, and the slave doesn't want to restart.",
-      "uint8 ERROR_UNKNOWN          = 255"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 40,

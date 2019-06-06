@@ -10,7 +10,21 @@
         "unsigned": true,
         "bits": 8,
         "name": "opcode",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "OPCODE_SAVE",
+            "value": 0,
+            "comment": "Save all parameters to non-volatile storage."
+          },
+          {
+            "kind": "uint8",
+            "label": "OPCODE_ERASE",
+            "value": 1,
+            "comment": "Clear the non-volatile storage; some changes may take effect only after reboot."
+          }
+        ]
       },
       {
         "type": "var",
@@ -21,10 +35,7 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint8 OPCODE_SAVE  = 0  # Save all parameters to non-volatile storage.",
-      "uint8 OPCODE_ERASE = 1  # Clear the non-volatile storage; some changes may take effect only after reboot."
-    ]
+    "constants": []
   },
   "response": {
     "variables": [
@@ -37,7 +48,7 @@
         "description": ""
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 10,

@@ -10,7 +10,21 @@
         "unsigned": true,
         "bits": 8,
         "name": "sensorId",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "SENSOR_ID_LEFT",
+            "value": 254,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "SENSOR_ID_RIGHT",
+            "value": 255,
+            "comment": ""
+          }
+        ]
       },
       {
         "type": "var",
@@ -29,10 +43,7 @@
         "description": "Radians^2"
       }
     ],
-    "statics": [
-      "uint8 SENSOR_ID_LEFT = 254",
-      "uint8 SENSOR_ID_RIGHT = 255"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 1025,

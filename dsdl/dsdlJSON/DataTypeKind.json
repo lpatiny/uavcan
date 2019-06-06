@@ -10,13 +10,24 @@
         "unsigned": true,
         "bits": 8,
         "name": "value",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "SERVICE",
+            "value": 0,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "MESSAGE",
+            "value": 1,
+            "comment": ""
+          }
+        ]
       }
     ],
-    "statics": [
-      "uint8 SERVICE = 0",
-      "uint8 MESSAGE = 1"
-    ]
+    "constants": []
   },
   "info": {
     "hash": [

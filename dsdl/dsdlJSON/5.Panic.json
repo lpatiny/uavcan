@@ -18,9 +18,19 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint8 MIN_MESSAGES = 3",
-      "uint16 MAX_INTERVAL_MS = 500"
+    "constants": [
+      {
+        "kind": "uint8",
+        "label": "MIN_MESSAGES",
+        "value": 3,
+        "comment": ""
+      },
+      {
+        "kind": "uint16",
+        "label": "MAX_INTERVAL_MS",
+        "value": 500,
+        "comment": ""
+      }
     ]
   },
   "info": {

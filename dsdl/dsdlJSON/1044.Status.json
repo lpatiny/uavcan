@@ -44,7 +44,7 @@
         "description": "+inf for non-existent axes"
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 1044,

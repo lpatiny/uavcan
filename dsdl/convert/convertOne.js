@@ -9,15 +9,15 @@ function convertOne(content, allDataTypes, file) {
     type: isNaN(file.name.split('.')[0]) ? 'object' : 'message',
     message: {
       variables: [],
-      statics: []
+      constants: []
     },
     request: {
       variables: [],
-      statics: []
+      constants: []
     },
     response: {
       variables: [],
-      statics: []
+      constants: []
     }
   };
 
@@ -25,10 +25,15 @@ function convertOne(content, allDataTypes, file) {
   let lines = content.split(/[\r\n]/);
   let inComment = false;
   let transferType = result.message;
+  let constants = [];
 
   for (let line of lines) {
     let fields = line.split(/[ \t]+/);
     if (line.startsWith('#')) {
+      if (constants.length > 0) {
+        transferType.constants.push(...constants);
+        constants = [];
+      }
       if (line === '#') {
         if (inComment) {
           inComment = false;
@@ -49,10 +54,13 @@ function convertOne(content, allDataTypes, file) {
       result.type = 'union';
     } else if (fields[1] && fields[1].match(/^[A-Z_]+$/)) {
       // a constant
-      // todo need to deals with the definitions of constants
-      transferType.statics.push(line);
+      constants.push(getConstant(fields));
     } else if (fields[0].match(/^(float|int|uint|void)[0-9]+$/)) {
       currentVariable = getVar(fields);
+      if (constants.length) {
+        currentVariable.constants = constants;
+        constants = [];
+      }
       transferType.variables.push(currentVariable);
     } else if (fields[0].match(/^(float|int|uint)[0-9]+\[.*$/)) {
       currentVariable = getVarArray(fields);
@@ -80,6 +88,17 @@ function convertOne(content, allDataTypes, file) {
 }
 
 module.exports = convertOne;
+
+function getConstant(fields) {
+  let value = isNaN(fields[3]) ? fields[3] : Number(fields[3]);
+  let result = {
+    kind: fields[0],
+    label: fields[1],
+    value,
+    comment: fields.slice(5).join(' ')
+  };
+  return result;
+}
 
 function getObject(fields, allDataTypes, file) {
   let variable = {};

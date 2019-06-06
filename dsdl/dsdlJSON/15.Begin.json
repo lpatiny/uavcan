@@ -10,7 +10,21 @@
         "unsigned": true,
         "bits": 16,
         "name": "timeoutSec",
-        "description": "[Seconds]"
+        "description": "[Seconds]",
+        "constants": [
+          {
+            "kind": "uint16",
+            "label": "TIMEOUT_CANCEL",
+            "value": 0,
+            "comment": "Stop enumeration immediately"
+          },
+          {
+            "kind": "uint16",
+            "label": "TIMEOUT_INFINITE",
+            "value": 65535,
+            "comment": "Do not stop until explicitly requested"
+          }
+        ]
       },
       {
         "length": 92,
@@ -26,10 +40,7 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint16 TIMEOUT_CANCEL   = 0     # Stop enumeration immediately",
-      "uint16 TIMEOUT_INFINITE = 65535 # Do not stop until explicitly requested"
-    ]
+    "constants": []
   },
   "response": {
     "variables": [
@@ -39,16 +50,42 @@
         "unsigned": true,
         "bits": 8,
         "name": "error",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "ERROR_OK",
+            "value": 0,
+            "comment": "Success"
+          },
+          {
+            "kind": "uint8",
+            "label": "ERROR_INVALID_MODE",
+            "value": 1,
+            "comment": "The node cannot perform enumeration in its current operating mode"
+          },
+          {
+            "kind": "uint8",
+            "label": "ERROR_INVALID_PARAMETER",
+            "value": 2,
+            "comment": "The node cannot enumerate on the requested parameter, or it doesn't exist"
+          },
+          {
+            "kind": "uint8",
+            "label": "ERROR_UNSUPPORTED",
+            "value": 3,
+            "comment": "The node cannot perform enumeration in its current configuration"
+          },
+          {
+            "kind": "uint8",
+            "label": "ERROR_UNKNOWN",
+            "value": 255,
+            "comment": "Generic error"
+          }
+        ]
       }
     ],
-    "statics": [
-      "uint8 ERROR_OK                  = 0     # Success",
-      "uint8 ERROR_INVALID_MODE        = 1     # The node cannot perform enumeration in its current operating mode",
-      "uint8 ERROR_INVALID_PARAMETER   = 2     # The node cannot enumerate on the requested parameter, or it doesn't exist",
-      "uint8 ERROR_UNSUPPORTED         = 3     # The node cannot perform enumeration in its current configuration",
-      "uint8 ERROR_UNKNOWN             = 255   # Generic error"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 15,

@@ -48,7 +48,7 @@
         "description": "Length prefix is exactly one byte long, which ensures proper alignment of payload"
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "hash": [

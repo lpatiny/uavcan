@@ -49,7 +49,7 @@
           "description": "Length prefix is exactly one byte long, which ensures proper alignment of payload"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "hash": [
@@ -73,9 +73,7 @@
     "type": "object",
     "message": {
       "variables": [],
-      "statics": [
-        "uint56 UNKNOWN = 0"
-      ]
+      "constants": []
     },
     "info": {
       "hash": [
@@ -121,7 +119,21 @@
           "unsigned": true,
           "bits": 8,
           "name": "optionalFieldFlags",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "OPTIONAL_FIELD_FLAG_VCS_COMMIT",
+              "value": 1,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "OPTIONAL_FIELD_FLAG_IMAGE_CRC",
+              "value": 2,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "var",
@@ -140,10 +152,7 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint8 OPTIONAL_FIELD_FLAG_VCS_COMMIT = 1",
-        "uint8 OPTIONAL_FIELD_FLAG_IMAGE_CRC  = 2"
-      ]
+      "constants": []
     },
     "info": {
       "hash": [
@@ -173,20 +182,72 @@
           "unsigned": true,
           "bits": 8,
           "name": "lightId",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "LIGHT_ID_FORMATION",
+              "value": 255,
+              "comment": ""
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint8 LIGHT_ID_ANTI_COLLISION = 246",
-        "uint8 LIGHT_ID_RIGHT_OF_WAY   = 247",
-        "uint8 LIGHT_ID_STROBE         = 248",
-        "uint8 LIGHT_ID_WING           = 249",
-        "uint8 LIGHT_ID_LOGO           = 250",
-        "uint8 LIGHT_ID_TAXI           = 251",
-        "uint8 LIGHT_ID_TURN_OFF       = 252",
-        "uint8 LIGHT_ID_TAKE_OFF       = 253",
-        "uint8 LIGHT_ID_LANDING        = 254",
-        "uint8 LIGHT_ID_FORMATION      = 255"
+      "constants": [
+        {
+          "kind": "uint8",
+          "label": "LIGHT_ID_ANTI_COLLISION",
+          "value": 246,
+          "comment": ""
+        },
+        {
+          "kind": "uint8",
+          "label": "LIGHT_ID_RIGHT_OF_WAY",
+          "value": 247,
+          "comment": ""
+        },
+        {
+          "kind": "uint8",
+          "label": "LIGHT_ID_STROBE",
+          "value": 248,
+          "comment": ""
+        },
+        {
+          "kind": "uint8",
+          "label": "LIGHT_ID_WING",
+          "value": 249,
+          "comment": ""
+        },
+        {
+          "kind": "uint8",
+          "label": "LIGHT_ID_LOGO",
+          "value": 250,
+          "comment": ""
+        },
+        {
+          "kind": "uint8",
+          "label": "LIGHT_ID_TAXI",
+          "value": 251,
+          "comment": ""
+        },
+        {
+          "kind": "uint8",
+          "label": "LIGHT_ID_TURN_OFF",
+          "value": 252,
+          "comment": ""
+        },
+        {
+          "kind": "uint8",
+          "label": "LIGHT_ID_TAKE_OFF",
+          "value": 253,
+          "comment": ""
+        },
+        {
+          "kind": "uint8",
+          "label": "LIGHT_ID_LANDING",
+          "value": 254,
+          "comment": ""
+        }
       ]
     },
     "info": {
@@ -236,7 +297,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "hash": [
@@ -266,12 +327,18 @@
           "unsigned": true,
           "bits": 8,
           "name": "protocol",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "MAVLINK",
+              "value": 0,
+              "comment": "MAVLink"
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint8 MAVLINK                   = 0     # MAVLink"
-      ]
+      "constants": []
     },
     "info": {
       "type": "object"
@@ -297,9 +364,7 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint8 SEPARATOR = '/'"
-      ]
+      "constants": []
     },
     "info": {
       "hash": [
@@ -346,7 +411,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "hash": [
@@ -376,15 +441,36 @@
           "unsigned": true,
           "bits": 8,
           "name": "commandMode",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "COMMAND_MODE_ANGULAR_VELOCITY",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "COMMAND_MODE_ORIENTATION_FIXED_FRAME",
+              "value": 1,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "COMMAND_MODE_ORIENTATION_BODY_FRAME",
+              "value": 2,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "COMMAND_MODE_GEO_POI",
+              "value": 3,
+              "comment": ""
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint8 COMMAND_MODE_ANGULAR_VELOCITY        = 0",
-        "uint8 COMMAND_MODE_ORIENTATION_FIXED_FRAME = 1",
-        "uint8 COMMAND_MODE_ORIENTATION_BODY_FRAME  = 2",
-        "uint8 COMMAND_MODE_GEO_POI                 = 3"
-      ]
+      "constants": []
     },
     "info": {
       "hash": [
@@ -414,15 +500,36 @@
           "unsigned": true,
           "bits": 3,
           "name": "value",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint3",
+              "label": "DEBUG",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "uint3",
+              "label": "INFO",
+              "value": 1,
+              "comment": ""
+            },
+            {
+              "kind": "uint3",
+              "label": "WARNING",
+              "value": 2,
+              "comment": ""
+            },
+            {
+              "kind": "uint3",
+              "label": "ERROR",
+              "value": 3,
+              "comment": ""
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint3 DEBUG    = 0",
-        "uint3 INFO     = 1",
-        "uint3 WARNING  = 2",
-        "uint3 ERROR    = 3"
-      ]
+      "constants": []
     },
     "info": {
       "hash": [
@@ -488,7 +595,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "hash": [
@@ -518,21 +625,72 @@
           "unsigned": false,
           "bits": 16,
           "name": "value",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "int16",
+              "label": "OK",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "int16",
+              "label": "UNKNOWN_ERROR",
+              "value": 32767,
+              "comment": ""
+            },
+            {
+              "kind": "int16",
+              "label": "NOT_FOUND",
+              "value": 2,
+              "comment": ""
+            },
+            {
+              "kind": "int16",
+              "label": "IO_ERROR",
+              "value": 5,
+              "comment": ""
+            },
+            {
+              "kind": "int16",
+              "label": "ACCESS_DENIED",
+              "value": 13,
+              "comment": ""
+            },
+            {
+              "kind": "int16",
+              "label": "IS_DIRECTORY",
+              "value": 21,
+              "comment": "I.e. attempt to read/write on a path that points to a directory"
+            },
+            {
+              "kind": "int16",
+              "label": "INVALID_VALUE",
+              "value": 22,
+              "comment": "E.g. file name is not valid for the target file system"
+            },
+            {
+              "kind": "int16",
+              "label": "FILE_TOO_LARGE",
+              "value": 27,
+              "comment": ""
+            },
+            {
+              "kind": "int16",
+              "label": "OUT_OF_SPACE",
+              "value": 28,
+              "comment": ""
+            },
+            {
+              "kind": "int16",
+              "label": "NOT_IMPLEMENTED",
+              "value": 38,
+              "comment": ""
+            }
+          ]
         }
       ],
-      "statics": [
-        "int16 OK                = 0",
-        "int16 UNKNOWN_ERROR     = 32767",
-        "int16 NOT_FOUND         = 2",
-        "int16 IO_ERROR          = 5",
-        "int16 ACCESS_DENIED     = 13",
-        "int16 IS_DIRECTORY      = 21 # I.e. attempt to read/write on a path that points to a directory",
-        "int16 INVALID_VALUE     = 22 # E.g. file name is not valid for the target file system",
-        "int16 FILE_TOO_LARGE    = 27",
-        "int16 OUT_OF_SPACE      = 28",
-        "int16 NOT_IMPLEMENTED   = 38"
-      ]
+      "constants": []
     },
     "info": {
       "hash": [
@@ -562,16 +720,42 @@
           "unsigned": true,
           "bits": 8,
           "name": "flags",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "FLAG_FILE",
+              "value": 1,
+              "comment": "Excludes FLAG_DIRECTORY"
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_DIRECTORY",
+              "value": 2,
+              "comment": "Excludes FLAG_FILE"
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_SYMLINK",
+              "value": 4,
+              "comment": "Link target is either FLAG_FILE or FLAG_DIRECTORY"
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_READABLE",
+              "value": 8,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_WRITEABLE",
+              "value": 16,
+              "comment": ""
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint8 FLAG_FILE      = 1        # Excludes FLAG_DIRECTORY",
-        "uint8 FLAG_DIRECTORY = 2        # Excludes FLAG_FILE",
-        "uint8 FLAG_SYMLINK   = 4        # Link target is either FLAG_FILE or FLAG_DIRECTORY",
-        "uint8 FLAG_READABLE  = 8",
-        "uint8 FLAG_WRITEABLE = 16"
-      ]
+      "constants": []
     },
     "info": {
       "hash": [
@@ -631,7 +815,7 @@
           "description": "Node ID of this allocation."
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "hash": [
@@ -655,7 +839,7 @@
     "type": "object",
     "message": {
       "variables": [],
-      "statics": []
+      "constants": []
     },
     "info": {
       "hash": [
@@ -725,7 +909,7 @@
           "description": "Position and velocity covariance in the ECEF frame. Units are m^2 for position,"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "hash": [
@@ -755,13 +939,24 @@
           "unsigned": true,
           "bits": 8,
           "name": "value",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "SERVICE",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "MESSAGE",
+              "value": 1,
+              "comment": ""
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint8 SERVICE = 0",
-        "uint8 MESSAGE = 1"
-      ]
+      "constants": []
     },
     "info": {
       "hash": [
@@ -826,7 +1021,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "hash": [
@@ -864,7 +1059,33 @@
           "unsigned": true,
           "bits": 8,
           "name": "commandType",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "COMMAND_TYPE_UNITLESS",
+              "value": 0,
+              "comment": "[-1, 1]"
+            },
+            {
+              "kind": "uint8",
+              "label": "COMMAND_TYPE_POSITION",
+              "value": 1,
+              "comment": "meter or radian"
+            },
+            {
+              "kind": "uint8",
+              "label": "COMMAND_TYPE_FORCE",
+              "value": 2,
+              "comment": "Newton or Newton metre"
+            },
+            {
+              "kind": "uint8",
+              "label": "COMMAND_TYPE_SPEED",
+              "value": 3,
+              "comment": "meter per second or radian per second"
+            }
+          ]
         },
         {
           "type": "var",
@@ -875,12 +1096,7 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint8 COMMAND_TYPE_UNITLESS     = 0     # [-1, 1]",
-        "uint8 COMMAND_TYPE_POSITION     = 1     # meter or radian",
-        "uint8 COMMAND_TYPE_FORCE        = 2     # Newton or Newton metre",
-        "uint8 COMMAND_TYPE_SPEED        = 3     # meter per second or radian per second"
-      ]
+      "constants": []
     },
     "info": {
       "hash": [
@@ -917,9 +1133,7 @@
           "description": ""
         }
       ],
-      "statics": [
-        "float32 ANGLE_MULTIPLIER = 4.7746482927568605"
-      ]
+      "constants": []
     },
     "info": {
       "hash": [
@@ -968,7 +1182,7 @@
           "description": "Number of errors in the CAN layer."
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "hash": [
@@ -1020,7 +1234,7 @@
           "description": "TAO rules apply"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "response": {
       "variables": [
@@ -1038,7 +1252,7 @@
           "description": "TAO rules apply"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "type": "object"
@@ -1056,7 +1270,33 @@
           "unsigned": true,
           "bits": 8,
           "name": "flags",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "FLAG_RESET_SHELL",
+              "value": 1,
+              "comment": "Restarts the shell instance anew; may or may not imply CLEAR_OUTPUT_BUFFERS"
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_CLEAR_OUTPUT_BUFFERS",
+              "value": 2,
+              "comment": "Makes stdout and stderr buffers empty"
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_READ_STDOUT",
+              "value": 64,
+              "comment": "Output will contain stdout"
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_READ_STDERR",
+              "value": 128,
+              "comment": "Output will be extended with stderr"
+            }
+          ]
         },
         {
           "length": 128,
@@ -1072,13 +1312,19 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint8 NEWLINE = '\\n'",
-        "uint8 MIN_OUTPUT_LIFETIME_SEC = 10",
-        "uint8 FLAG_RESET_SHELL          = 1     # Restarts the shell instance anew; may or may not imply CLEAR_OUTPUT_BUFFERS",
-        "uint8 FLAG_CLEAR_OUTPUT_BUFFERS = 2     # Makes stdout and stderr buffers empty",
-        "uint8 FLAG_READ_STDOUT          = 64    # Output will contain stdout",
-        "uint8 FLAG_READ_STDERR          = 128   # Output will be extended with stderr"
+      "constants": [
+        {
+          "kind": "uint8",
+          "label": "NEWLINE",
+          "value": "'\\n'",
+          "comment": ""
+        },
+        {
+          "kind": "uint8",
+          "label": "MIN_OUTPUT_LIFETIME_SEC",
+          "value": 10,
+          "comment": ""
+        }
       ]
     },
     "response": {
@@ -1097,7 +1343,33 @@
           "unsigned": true,
           "bits": 8,
           "name": "flags",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "FLAG_RUNNING",
+              "value": 1,
+              "comment": "The shell is currently running a process; stdin/out/err are piped to it"
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_SHELL_ERROR",
+              "value": 2,
+              "comment": "Exit status contains error code, output contains text (e.g. no such command)"
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_HAS_PENDING_STDOUT",
+              "value": 64,
+              "comment": "There is more stdout to read"
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_HAS_PENDING_STDERR",
+              "value": 128,
+              "comment": "There is more stderr to read"
+            }
+          ]
         },
         {
           "length": 256,
@@ -1113,12 +1385,7 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint8 FLAG_RUNNING              = 1     # The shell is currently running a process; stdin/out/err are piped to it",
-        "uint8 FLAG_SHELL_ERROR          = 2     # Exit status contains error code, output contains text (e.g. no such command)",
-        "uint8 FLAG_HAS_PENDING_STDOUT   = 64    # There is more stdout to read",
-        "uint8 FLAG_HAS_PENDING_STDERR   = 128   # There is more stderr to read"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 6,
@@ -1149,16 +1416,22 @@
           "unsigned": true,
           "bits": 40,
           "name": "magicNumber",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint40",
+              "label": "MAGIC_NUMBER",
+              "value": 742196058910,
+              "comment": ""
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint40 MAGIC_NUMBER = 0xACCE551B1E"
-      ]
+      "constants": []
     },
     "response": {
       "variables": [],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 5,
@@ -1197,9 +1470,19 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint8 MIN_MESSAGES = 3",
-        "uint16 MAX_INTERVAL_MS = 500"
+      "constants": [
+        {
+          "kind": "uint8",
+          "label": "MIN_MESSAGES",
+          "value": 3,
+          "comment": ""
+        },
+        {
+          "kind": "uint16",
+          "label": "MAX_INTERVAL_MS",
+          "value": 500,
+          "comment": ""
+        }
       ]
     },
     "info": {
@@ -1253,7 +1536,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "response": {
       "variables": [
@@ -1264,7 +1547,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 49,
@@ -1304,7 +1587,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "response": {
       "variables": [
@@ -1328,7 +1611,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 48,
@@ -1360,7 +1643,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "response": {
       "variables": [
@@ -1371,7 +1654,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 47,
@@ -1411,7 +1694,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "response": {
       "variables": [
@@ -1434,7 +1717,7 @@
           "description": "Ignored/Empty if such entry does not exist."
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 46,
@@ -1466,7 +1749,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "response": {
       "variables": [
@@ -1491,7 +1774,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 45,
@@ -1531,7 +1814,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "response": {
       "variables": [
@@ -1541,7 +1824,33 @@
           "unsigned": true,
           "bits": 8,
           "name": "error",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "ERROR_OK",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "ERROR_INVALID_MODE",
+              "value": 1,
+              "comment": "Cannot perform the update in the current operating mode or state."
+            },
+            {
+              "kind": "uint8",
+              "label": "ERROR_IN_PROGRESS",
+              "value": 2,
+              "comment": "Firmware update is already in progress, and the slave doesn't want to restart."
+            },
+            {
+              "kind": "uint8",
+              "label": "ERROR_UNKNOWN",
+              "value": 255,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "array",
@@ -1555,12 +1864,7 @@
           "description": "Detailed description of the error."
         }
       ],
-      "statics": [
-        "uint8 ERROR_OK               = 0",
-        "uint8 ERROR_INVALID_MODE     = 1    # Cannot perform the update in the current operating mode or state.",
-        "uint8 ERROR_IN_PROGRESS      = 2    # Firmware update is already in progress, and the slave doesn't want to restart.",
-        "uint8 ERROR_UNKNOWN          = 255"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 40,
@@ -1585,10 +1889,25 @@
     "type": "message",
     "message": {
       "variables": [],
-      "statics": [
-        "uint16 MAX_BROADCASTING_PERIOD_MS = 1100            # Milliseconds",
-        "uint16 MIN_BROADCASTING_PERIOD_MS = 40              # Milliseconds",
-        "uint16 RECOMMENDED_BROADCASTER_TIMEOUT_MS = 2200    # Milliseconds"
+      "constants": [
+        {
+          "kind": "uint16",
+          "label": "MAX_BROADCASTING_PERIOD_MS",
+          "value": 1100,
+          "comment": "Milliseconds"
+        },
+        {
+          "kind": "uint16",
+          "label": "MIN_BROADCASTING_PERIOD_MS",
+          "value": 40,
+          "comment": "Milliseconds"
+        },
+        {
+          "kind": "uint16",
+          "label": "RECOMMENDED_BROADCASTER_TIMEOUT_MS",
+          "value": 2200,
+          "comment": "Milliseconds"
+        }
       ]
     },
     "info": {
@@ -1614,7 +1933,7 @@
     "type": "service",
     "request": {
       "variables": [],
-      "statics": []
+      "constants": []
     },
     "response": {
       "variables": [
@@ -1679,7 +1998,7 @@
                     "description": "Number of errors in the CAN layer."
                   }
                 ],
-                "statics": []
+                "constants": []
               },
               "info": {
                 "hash": [
@@ -1703,7 +2022,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 4,
@@ -1750,8 +2069,13 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint16 BROADCASTING_PERIOD_MS = 1000"
+      "constants": [
+        {
+          "kind": "uint16",
+          "label": "BROADCASTING_PERIOD_MS",
+          "value": 1000,
+          "comment": ""
+        }
       ]
     },
     "info": {
@@ -1798,7 +2122,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 380,
@@ -1837,7 +2161,33 @@
           "unsigned": true,
           "bits": 2,
           "name": "health",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint2",
+              "label": "HEALTH_OK",
+              "value": 0,
+              "comment": "The node is functioning properly."
+            },
+            {
+              "kind": "uint2",
+              "label": "HEALTH_WARNING",
+              "value": 1,
+              "comment": "A critical parameter went out of range or the node encountered a minor failure."
+            },
+            {
+              "kind": "uint2",
+              "label": "HEALTH_ERROR",
+              "value": 2,
+              "comment": "The node encountered a major failure."
+            },
+            {
+              "kind": "uint2",
+              "label": "HEALTH_CRITICAL",
+              "value": 3,
+              "comment": "The node suffered a fatal malfunction."
+            }
+          ]
         },
         {
           "type": "var",
@@ -1845,7 +2195,39 @@
           "unsigned": true,
           "bits": 3,
           "name": "mode",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint3",
+              "label": "MODE_OPERATIONAL",
+              "value": 0,
+              "comment": "Normal operating mode."
+            },
+            {
+              "kind": "uint3",
+              "label": "MODE_INITIALIZATION",
+              "value": 1,
+              "comment": "Initialization is in progress; this mode is entered immediately after startup."
+            },
+            {
+              "kind": "uint3",
+              "label": "MODE_MAINTENANCE",
+              "value": 2,
+              "comment": "E.g. calibration, the bootloader is running, etc."
+            },
+            {
+              "kind": "uint3",
+              "label": "MODE_SOFTWARE_UPDATE",
+              "value": 3,
+              "comment": "New software/firmware is being loaded."
+            },
+            {
+              "kind": "uint3",
+              "label": "MODE_OFFLINE",
+              "value": 7,
+              "comment": "The node is no longer available."
+            }
+          ]
         },
         {
           "type": "var",
@@ -1864,19 +2246,25 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint16 MAX_BROADCASTING_PERIOD_MS = 1000",
-        "uint16 MIN_BROADCASTING_PERIOD_MS = 2",
-        "uint16 OFFLINE_TIMEOUT_MS = 3000",
-        "uint2 HEALTH_OK         = 0     # The node is functioning properly.",
-        "uint2 HEALTH_WARNING    = 1     # A critical parameter went out of range or the node encountered a minor failure.",
-        "uint2 HEALTH_ERROR      = 2     # The node encountered a major failure.",
-        "uint2 HEALTH_CRITICAL   = 3     # The node suffered a fatal malfunction.",
-        "uint3 MODE_OPERATIONAL      = 0         # Normal operating mode.",
-        "uint3 MODE_INITIALIZATION   = 1         # Initialization is in progress; this mode is entered immediately after startup.",
-        "uint3 MODE_MAINTENANCE      = 2         # E.g. calibration, the bootloader is running, etc.",
-        "uint3 MODE_SOFTWARE_UPDATE  = 3         # New software/firmware is being loaded.",
-        "uint3 MODE_OFFLINE          = 7         # The node is no longer available."
+      "constants": [
+        {
+          "kind": "uint16",
+          "label": "MAX_BROADCASTING_PERIOD_MS",
+          "value": 1000,
+          "comment": ""
+        },
+        {
+          "kind": "uint16",
+          "label": "MIN_BROADCASTING_PERIOD_MS",
+          "value": 2,
+          "comment": ""
+        },
+        {
+          "kind": "uint16",
+          "label": "OFFLINE_TIMEOUT_MS",
+          "value": 3000,
+          "comment": ""
+        }
       ]
     },
     "info": {
@@ -1927,7 +2315,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "response": {
       "variables": [
@@ -1940,7 +2328,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 31,
@@ -2045,7 +2433,7 @@
                     "description": "Node ID of this allocation."
                   }
                 ],
-                "statics": []
+                "constants": []
               },
               "info": {
                 "hash": [
@@ -2069,9 +2457,19 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint16 DEFAULT_MIN_ELECTION_TIMEOUT_MS = 2000",
-        "uint16 DEFAULT_MAX_ELECTION_TIMEOUT_MS = 4000"
+      "constants": [
+        {
+          "kind": "uint16",
+          "label": "DEFAULT_MIN_ELECTION_TIMEOUT_MS",
+          "value": 2000,
+          "comment": ""
+        },
+        {
+          "kind": "uint16",
+          "label": "DEFAULT_MAX_ELECTION_TIMEOUT_MS",
+          "value": 4000,
+          "comment": ""
+        }
       ]
     },
     "response": {
@@ -2085,7 +2483,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 30,
@@ -2138,7 +2536,7 @@
           "description": "TAO rules apply"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "type": "object"
@@ -2281,7 +2679,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 2000,
@@ -2334,7 +2732,7 @@
           "description": "Full data type name, e.g. \"uavcan.protocol.GetDataTypeInfo\""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "response": {
       "variables": [
@@ -2366,7 +2764,33 @@
           "unsigned": true,
           "bits": 8,
           "name": "flags",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "FLAG_KNOWN",
+              "value": 1,
+              "comment": "This data type is defined"
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_SUBSCRIBED",
+              "value": 2,
+              "comment": "Subscribed to messages of this type"
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_PUBLISHING",
+              "value": 4,
+              "comment": "Publishing messages of this type"
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_SERVING",
+              "value": 8,
+              "comment": "Providing service of this type"
+            }
+          ]
         },
         {
           "length": 80,
@@ -2382,12 +2806,7 @@
           "description": "Full data type name"
         }
       ],
-      "statics": [
-        "uint8 FLAG_KNOWN      = 1   # This data type is defined",
-        "uint8 FLAG_SUBSCRIBED = 2   # Subscribed to messages of this type",
-        "uint8 FLAG_PUBLISHING = 4   # Publishing messages of this type",
-        "uint8 FLAG_SERVING    = 8   # Providing service of this type"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 2,
@@ -2445,7 +2864,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 16383,
@@ -2492,7 +2911,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 16370,
@@ -2523,7 +2942,21 @@
           "unsigned": true,
           "bits": 16,
           "name": "timeoutSec",
-          "description": "[Seconds]"
+          "description": "[Seconds]",
+          "constants": [
+            {
+              "kind": "uint16",
+              "label": "TIMEOUT_CANCEL",
+              "value": 0,
+              "comment": "Stop enumeration immediately"
+            },
+            {
+              "kind": "uint16",
+              "label": "TIMEOUT_INFINITE",
+              "value": 65535,
+              "comment": "Do not stop until explicitly requested"
+            }
+          ]
         },
         {
           "length": 92,
@@ -2539,10 +2972,7 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint16 TIMEOUT_CANCEL   = 0     # Stop enumeration immediately",
-        "uint16 TIMEOUT_INFINITE = 65535 # Do not stop until explicitly requested"
-      ]
+      "constants": []
     },
     "response": {
       "variables": [
@@ -2552,16 +2982,42 @@
           "unsigned": true,
           "bits": 8,
           "name": "error",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "ERROR_OK",
+              "value": 0,
+              "comment": "Success"
+            },
+            {
+              "kind": "uint8",
+              "label": "ERROR_INVALID_MODE",
+              "value": 1,
+              "comment": "The node cannot perform enumeration in its current operating mode"
+            },
+            {
+              "kind": "uint8",
+              "label": "ERROR_INVALID_PARAMETER",
+              "value": 2,
+              "comment": "The node cannot enumerate on the requested parameter, or it doesn't exist"
+            },
+            {
+              "kind": "uint8",
+              "label": "ERROR_UNSUPPORTED",
+              "value": 3,
+              "comment": "The node cannot perform enumeration in its current configuration"
+            },
+            {
+              "kind": "uint8",
+              "label": "ERROR_UNKNOWN",
+              "value": 255,
+              "comment": "Generic error"
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint8 ERROR_OK                  = 0     # Success",
-        "uint8 ERROR_INVALID_MODE        = 1     # The node cannot perform enumeration in its current operating mode",
-        "uint8 ERROR_INVALID_PARAMETER   = 2     # The node cannot enumerate on the requested parameter, or it doesn't exist",
-        "uint8 ERROR_UNSUPPORTED         = 3     # The node cannot perform enumeration in its current configuration",
-        "uint8 ERROR_UNKNOWN             = 255   # Generic error"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 15,
@@ -2634,7 +3090,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1129,
@@ -2855,7 +3311,7 @@
                     "description": ""
                   }
                 ],
-                "statics": []
+                "constants": []
               },
               "info": {
                 "hash": [
@@ -2879,35 +3335,175 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint2 STATE_STOPPED = 0",
-        "uint2 STATE_STARTING = 1",
-        "uint2 STATE_RUNNING = 2",
-        "uint2 STATE_FAULT = 3",
-        "uint30 FLAG_GENERAL_ERROR                       = 1",
-        "uint30 FLAG_CRANKSHAFT_SENSOR_ERROR_SUPPORTED   = 2",
-        "uint30 FLAG_CRANKSHAFT_SENSOR_ERROR             = 4",
-        "uint30 FLAG_TEMPERATURE_SUPPORTED               = 8",
-        "uint30 FLAG_TEMPERATURE_BELOW_NOMINAL           = 16      # Under-temperature warning",
-        "uint30 FLAG_TEMPERATURE_ABOVE_NOMINAL           = 32      # Over-temperature warning",
-        "uint30 FLAG_TEMPERATURE_OVERHEATING             = 64      # Critical overheating",
-        "uint30 FLAG_TEMPERATURE_EGT_ABOVE_NOMINAL       = 128     # Exhaust gas over-temperature warning",
-        "uint30 FLAG_FUEL_PRESSURE_SUPPORTED             = 256",
-        "uint30 FLAG_FUEL_PRESSURE_BELOW_NOMINAL         = 512     # Under-pressure warning",
-        "uint30 FLAG_FUEL_PRESSURE_ABOVE_NOMINAL         = 1024    # Over-pressure warning",
-        "uint30 FLAG_DETONATION_SUPPORTED                = 2048",
-        "uint30 FLAG_DETONATION_OBSERVED                 = 4096    # Detonation condition observed warning",
-        "uint30 FLAG_MISFIRE_SUPPORTED                   = 8192",
-        "uint30 FLAG_MISFIRE_OBSERVED                    = 16384   # Misfire condition observed warning",
-        "uint30 FLAG_OIL_PRESSURE_SUPPORTED              = 32768",
-        "uint30 FLAG_OIL_PRESSURE_BELOW_NOMINAL          = 65536   # Under-pressure warning",
-        "uint30 FLAG_OIL_PRESSURE_ABOVE_NOMINAL          = 131072  # Over-pressure warning",
-        "uint30 FLAG_DEBRIS_SUPPORTED                    = 262144",
-        "uint30 FLAG_DEBRIS_DETECTED                     = 524288  # Detection of debris warning",
-        "uint3 SPARK_PLUG_SINGLE         = 0",
-        "uint3 SPARK_PLUG_FIRST_ACTIVE   = 1",
-        "uint3 SPARK_PLUG_SECOND_ACTIVE  = 2",
-        "uint3 SPARK_PLUG_BOTH_ACTIVE    = 3"
+      "constants": [
+        {
+          "kind": "uint2",
+          "label": "STATE_STOPPED",
+          "value": 0,
+          "comment": ""
+        },
+        {
+          "kind": "uint2",
+          "label": "STATE_STARTING",
+          "value": 1,
+          "comment": ""
+        },
+        {
+          "kind": "uint2",
+          "label": "STATE_RUNNING",
+          "value": 2,
+          "comment": ""
+        },
+        {
+          "kind": "uint2",
+          "label": "STATE_FAULT",
+          "value": 3,
+          "comment": ""
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_GENERAL_ERROR",
+          "value": 1,
+          "comment": ""
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_CRANKSHAFT_SENSOR_ERROR_SUPPORTED",
+          "value": 2,
+          "comment": ""
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_CRANKSHAFT_SENSOR_ERROR",
+          "value": 4,
+          "comment": ""
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_TEMPERATURE_SUPPORTED",
+          "value": 8,
+          "comment": ""
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_TEMPERATURE_BELOW_NOMINAL",
+          "value": 16,
+          "comment": "Under-temperature warning"
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_TEMPERATURE_ABOVE_NOMINAL",
+          "value": 32,
+          "comment": "Over-temperature warning"
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_TEMPERATURE_OVERHEATING",
+          "value": 64,
+          "comment": "Critical overheating"
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_TEMPERATURE_EGT_ABOVE_NOMINAL",
+          "value": 128,
+          "comment": "Exhaust gas over-temperature warning"
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_FUEL_PRESSURE_SUPPORTED",
+          "value": 256,
+          "comment": ""
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_FUEL_PRESSURE_BELOW_NOMINAL",
+          "value": 512,
+          "comment": "Under-pressure warning"
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_FUEL_PRESSURE_ABOVE_NOMINAL",
+          "value": 1024,
+          "comment": "Over-pressure warning"
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_DETONATION_SUPPORTED",
+          "value": 2048,
+          "comment": ""
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_DETONATION_OBSERVED",
+          "value": 4096,
+          "comment": "Detonation condition observed warning"
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_MISFIRE_SUPPORTED",
+          "value": 8192,
+          "comment": ""
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_MISFIRE_OBSERVED",
+          "value": 16384,
+          "comment": "Misfire condition observed warning"
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_OIL_PRESSURE_SUPPORTED",
+          "value": 32768,
+          "comment": ""
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_OIL_PRESSURE_BELOW_NOMINAL",
+          "value": 65536,
+          "comment": "Under-pressure warning"
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_OIL_PRESSURE_ABOVE_NOMINAL",
+          "value": 131072,
+          "comment": "Over-pressure warning"
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_DEBRIS_SUPPORTED",
+          "value": 262144,
+          "comment": ""
+        },
+        {
+          "kind": "uint30",
+          "label": "FLAG_DEBRIS_DETECTED",
+          "value": 524288,
+          "comment": "Detection of debris warning"
+        },
+        {
+          "kind": "uint3",
+          "label": "SPARK_PLUG_SINGLE",
+          "value": 0,
+          "comment": ""
+        },
+        {
+          "kind": "uint3",
+          "label": "SPARK_PLUG_FIRST_ACTIVE",
+          "value": 1,
+          "comment": ""
+        },
+        {
+          "kind": "uint3",
+          "label": "SPARK_PLUG_SECOND_ACTIVE",
+          "value": 2,
+          "comment": ""
+        },
+        {
+          "kind": "uint3",
+          "label": "SPARK_PLUG_BOTH_ACTIVE",
+          "value": 3,
+          "comment": ""
+        }
       ]
     },
     "info": {
@@ -2955,13 +3551,24 @@
           "unsigned": true,
           "bits": 8,
           "name": "errorFlags",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "ERROR_FLAG_OVERHEATING",
+              "value": 1,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "ERROR_FLAG_OVERCOOLING",
+              "value": 2,
+              "comment": ""
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint8 ERROR_FLAG_OVERHEATING = 1",
-        "uint8 ERROR_FLAG_OVERCOOLING = 2"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 1110,
@@ -2992,13 +3599,24 @@
           "unsigned": true,
           "bits": 8,
           "name": "status",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "STATUS_DISARMED",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "STATUS_FULLY_ARMED",
+              "value": 255,
+              "comment": ""
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint8 STATUS_DISARMED           = 0",
-        "uint8 STATUS_FULLY_ARMED        = 255"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 1100,
@@ -3051,7 +3669,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "response": {
       "variables": [
@@ -3121,7 +3739,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 11,
@@ -3208,7 +3826,75 @@
           "unsigned": true,
           "bits": 11,
           "name": "statusFlags",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint11",
+              "label": "STATUS_FLAG_IN_USE",
+              "value": 1,
+              "comment": "The battery is currently used as a power supply"
+            },
+            {
+              "kind": "uint11",
+              "label": "STATUS_FLAG_CHARGING",
+              "value": 2,
+              "comment": "Charger is active"
+            },
+            {
+              "kind": "uint11",
+              "label": "STATUS_FLAG_CHARGED",
+              "value": 4,
+              "comment": "Charging complete, but the charger is still active"
+            },
+            {
+              "kind": "uint11",
+              "label": "STATUS_FLAG_TEMP_HOT",
+              "value": 8,
+              "comment": "Battery temperature is above normal"
+            },
+            {
+              "kind": "uint11",
+              "label": "STATUS_FLAG_TEMP_COLD",
+              "value": 16,
+              "comment": "Battery temperature is below normal"
+            },
+            {
+              "kind": "uint11",
+              "label": "STATUS_FLAG_OVERLOAD",
+              "value": 32,
+              "comment": "Safe operating area violation"
+            },
+            {
+              "kind": "uint11",
+              "label": "STATUS_FLAG_BAD_BATTERY",
+              "value": 64,
+              "comment": "This battery should not be used anymore (e.g. low SOH)"
+            },
+            {
+              "kind": "uint11",
+              "label": "STATUS_FLAG_NEED_SERVICE",
+              "value": 128,
+              "comment": "This battery requires maintenance (e.g. balancing, full recharge)"
+            },
+            {
+              "kind": "uint11",
+              "label": "STATUS_FLAG_BMS_ERROR",
+              "value": 256,
+              "comment": "Battery management system/controller error, smart battery interface error"
+            },
+            {
+              "kind": "uint11",
+              "label": "STATUS_FLAG_RESERVED_A",
+              "value": 512,
+              "comment": "Keep zero"
+            },
+            {
+              "kind": "uint11",
+              "label": "STATUS_FLAG_RESERVED_B",
+              "value": 1024,
+              "comment": "Keep zero"
+            }
+          ]
         },
         {
           "type": "var",
@@ -3216,7 +3902,15 @@
           "unsigned": true,
           "bits": 7,
           "name": "stateOfHealthPct",
-          "description": "Health of the battery, in percent, optional"
+          "description": "Health of the battery, in percent, optional",
+          "constants": [
+            {
+              "kind": "uint7",
+              "label": "STATE_OF_HEALTH_UNKNOWN",
+              "value": 127,
+              "comment": "Use this constant if SOH cannot be estimated"
+            }
+          ]
         },
         {
           "type": "var",
@@ -3262,20 +3956,7 @@
           "description": "Battery model name"
         }
       ],
-      "statics": [
-        "uint11 STATUS_FLAG_IN_USE       = 1     # The battery is currently used as a power supply",
-        "uint11 STATUS_FLAG_CHARGING     = 2     # Charger is active",
-        "uint11 STATUS_FLAG_CHARGED      = 4     # Charging complete, but the charger is still active",
-        "uint11 STATUS_FLAG_TEMP_HOT     = 8     # Battery temperature is above normal",
-        "uint11 STATUS_FLAG_TEMP_COLD    = 16    # Battery temperature is below normal",
-        "uint11 STATUS_FLAG_OVERLOAD     = 32    # Safe operating area violation",
-        "uint11 STATUS_FLAG_BAD_BATTERY  = 64    # This battery should not be used anymore (e.g. low SOH)",
-        "uint11 STATUS_FLAG_NEED_SERVICE = 128   # This battery requires maintenance (e.g. balancing, full recharge)",
-        "uint11 STATUS_FLAG_BMS_ERROR    = 256   # Battery management system/controller error, smart battery interface error",
-        "uint11 STATUS_FLAG_RESERVED_A   = 512   # Keep zero",
-        "uint11 STATUS_FLAG_RESERVED_B   = 1024  # Keep zero",
-        "uint7 STATE_OF_HEALTH_UNKNOWN = 127     # Use this constant if SOH cannot be estimated"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 1092,
@@ -3330,15 +4011,36 @@
           "unsigned": true,
           "bits": 8,
           "name": "errorFlags",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "ERROR_FLAG_OVERVOLTAGE",
+              "value": 1,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "ERROR_FLAG_UNDERVOLTAGE",
+              "value": 2,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "ERROR_FLAG_OVERCURRENT",
+              "value": 4,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "ERROR_FLAG_UNDERCURRENT",
+              "value": 8,
+              "comment": ""
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint8 ERROR_FLAG_OVERVOLTAGE  = 1",
-        "uint8 ERROR_FLAG_UNDERVOLTAGE = 2",
-        "uint8 ERROR_FLAG_OVERCURRENT  = 4",
-        "uint8 ERROR_FLAG_UNDERCURRENT = 8"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 1091,
@@ -3396,7 +4098,7 @@
           "description": "[Percent] Error standard deviation. Use best guess if unknown."
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1090,
@@ -3439,20 +4141,72 @@
                     "unsigned": true,
                     "bits": 8,
                     "name": "lightId",
-                    "description": ""
+                    "description": "",
+                    "constants": [
+                      {
+                        "kind": "uint8",
+                        "label": "LIGHT_ID_FORMATION",
+                        "value": 255,
+                        "comment": ""
+                      }
+                    ]
                   }
                 ],
-                "statics": [
-                  "uint8 LIGHT_ID_ANTI_COLLISION = 246",
-                  "uint8 LIGHT_ID_RIGHT_OF_WAY   = 247",
-                  "uint8 LIGHT_ID_STROBE         = 248",
-                  "uint8 LIGHT_ID_WING           = 249",
-                  "uint8 LIGHT_ID_LOGO           = 250",
-                  "uint8 LIGHT_ID_TAXI           = 251",
-                  "uint8 LIGHT_ID_TURN_OFF       = 252",
-                  "uint8 LIGHT_ID_TAKE_OFF       = 253",
-                  "uint8 LIGHT_ID_LANDING        = 254",
-                  "uint8 LIGHT_ID_FORMATION      = 255"
+                "constants": [
+                  {
+                    "kind": "uint8",
+                    "label": "LIGHT_ID_ANTI_COLLISION",
+                    "value": 246,
+                    "comment": ""
+                  },
+                  {
+                    "kind": "uint8",
+                    "label": "LIGHT_ID_RIGHT_OF_WAY",
+                    "value": 247,
+                    "comment": ""
+                  },
+                  {
+                    "kind": "uint8",
+                    "label": "LIGHT_ID_STROBE",
+                    "value": 248,
+                    "comment": ""
+                  },
+                  {
+                    "kind": "uint8",
+                    "label": "LIGHT_ID_WING",
+                    "value": 249,
+                    "comment": ""
+                  },
+                  {
+                    "kind": "uint8",
+                    "label": "LIGHT_ID_LOGO",
+                    "value": 250,
+                    "comment": ""
+                  },
+                  {
+                    "kind": "uint8",
+                    "label": "LIGHT_ID_TAXI",
+                    "value": 251,
+                    "comment": ""
+                  },
+                  {
+                    "kind": "uint8",
+                    "label": "LIGHT_ID_TURN_OFF",
+                    "value": 252,
+                    "comment": ""
+                  },
+                  {
+                    "kind": "uint8",
+                    "label": "LIGHT_ID_TAKE_OFF",
+                    "value": 253,
+                    "comment": ""
+                  },
+                  {
+                    "kind": "uint8",
+                    "label": "LIGHT_ID_LANDING",
+                    "value": 254,
+                    "comment": ""
+                  }
                 ]
               },
               "info": {
@@ -3477,7 +4231,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1081,
@@ -3519,7 +4273,7 @@
           "description": "Sec"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1080,
@@ -3577,7 +4331,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1071,
@@ -3619,7 +4373,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1070,
@@ -3650,7 +4404,33 @@
           "unsigned": true,
           "bits": 3,
           "name": "gnssTimeStandard",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint3",
+              "label": "GNSS_TIME_STANDARD_NONE",
+              "value": 0,
+              "comment": "Time is unknown"
+            },
+            {
+              "kind": "uint3",
+              "label": "GNSS_TIME_STANDARD_TAI",
+              "value": 1,
+              "comment": ""
+            },
+            {
+              "kind": "uint3",
+              "label": "GNSS_TIME_STANDARD_UTC",
+              "value": 2,
+              "comment": ""
+            },
+            {
+              "kind": "uint3",
+              "label": "GNSS_TIME_STANDARD_GPS",
+              "value": 3,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "var",
@@ -3666,7 +4446,15 @@
           "unsigned": true,
           "bits": 8,
           "name": "numLeapSeconds",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "NUM_LEAP_SECONDS_UNKNOWN",
+              "value": 0,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "var",
@@ -3726,7 +4514,21 @@
           "unsigned": true,
           "bits": 2,
           "name": "status2DFix",
-          "description": "= 2"
+          "description": "= 2",
+          "constants": [
+            {
+              "kind": "uint2",
+              "label": "STATUS_NO_FIX",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "uint2",
+              "label": "STATUS_TIME_ONLY",
+              "value": 1,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "var",
@@ -3750,7 +4552,33 @@
           "unsigned": true,
           "bits": 4,
           "name": "mode",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint4",
+              "label": "MODE_SINGLE",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "uint4",
+              "label": "MODE_DGPS",
+              "value": 1,
+              "comment": ""
+            },
+            {
+              "kind": "uint4",
+              "label": "MODE_RTK",
+              "value": 2,
+              "comment": ""
+            },
+            {
+              "kind": "uint4",
+              "label": "MODE_PPP",
+              "value": 3,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "var",
@@ -3758,7 +4586,33 @@
           "unsigned": true,
           "bits": 6,
           "name": "subMode",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint6",
+              "label": "SUB_MODE_DGPS_OTHER",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "uint6",
+              "label": "SUB_MODE_DGPS_SBAS",
+              "value": 1,
+              "comment": ""
+            },
+            {
+              "kind": "uint6",
+              "label": "SUB_MODE_RTK_FLOAT",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "uint6",
+              "label": "SUB_MODE_RTK_FIXED",
+              "value": 1,
+              "comment": ""
+            }
+          ]
         },
         {
           "length": 36,
@@ -3839,7 +4693,7 @@
                     "description": "Position and velocity covariance in the ECEF frame. Units are m^2 for position,"
                   }
                 ],
-                "statics": []
+                "constants": []
               },
               "info": {
                 "hash": [
@@ -3863,23 +4717,7 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint3 GNSS_TIME_STANDARD_NONE = 0  # Time is unknown",
-        "uint3 GNSS_TIME_STANDARD_TAI  = 1",
-        "uint3 GNSS_TIME_STANDARD_UTC  = 2",
-        "uint3 GNSS_TIME_STANDARD_GPS  = 3",
-        "uint8 NUM_LEAP_SECONDS_UNKNOWN = 0",
-        "uint2 STATUS_NO_FIX    = 0",
-        "uint2 STATUS_TIME_ONLY = 1",
-        "uint4 MODE_SINGLE      = 0",
-        "uint4 MODE_DGPS        = 1",
-        "uint4 MODE_RTK         = 2",
-        "uint4 MODE_PPP         = 3",
-        "uint6 SUB_MODE_DGPS_OTHER    = 0",
-        "uint6 SUB_MODE_DGPS_SBAS     = 1",
-        "uint6 SUB_MODE_RTK_FLOAT     = 0",
-        "uint6 SUB_MODE_RTK_FIXED     = 1"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 1063,
@@ -3910,7 +4748,15 @@
           "unsigned": true,
           "bits": 8,
           "name": "protocolIdRtcm2",
-          "description": "= 2"
+          "description": "= 2",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "PROTOCOL_ID_UNKNOWN",
+              "value": 0,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "var",
@@ -3942,9 +4788,7 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint8 PROTOCOL_ID_UNKNOWN = 0"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 1062,
@@ -4042,7 +4886,7 @@
           "description": "All used sats of all available GNSS"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1061,
@@ -4073,7 +4917,33 @@
           "unsigned": true,
           "bits": 3,
           "name": "gnssTimeStandard",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint3",
+              "label": "GNSS_TIME_STANDARD_NONE",
+              "value": 0,
+              "comment": "Time is unknown"
+            },
+            {
+              "kind": "uint3",
+              "label": "GNSS_TIME_STANDARD_TAI",
+              "value": 1,
+              "comment": ""
+            },
+            {
+              "kind": "uint3",
+              "label": "GNSS_TIME_STANDARD_UTC",
+              "value": 2,
+              "comment": ""
+            },
+            {
+              "kind": "uint3",
+              "label": "GNSS_TIME_STANDARD_GPS",
+              "value": 3,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "var",
@@ -4089,7 +4959,15 @@
           "unsigned": true,
           "bits": 8,
           "name": "numLeapSeconds",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "NUM_LEAP_SECONDS_UNKNOWN",
+              "value": 0,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "var",
@@ -4149,7 +5027,21 @@
           "unsigned": true,
           "bits": 2,
           "name": "status2DFix",
-          "description": "= 2"
+          "description": "= 2",
+          "constants": [
+            {
+              "kind": "uint2",
+              "label": "STATUS_NO_FIX",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "uint2",
+              "label": "STATUS_TIME_ONLY",
+              "value": 1,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "var",
@@ -4209,15 +5101,7 @@
           "description": "(m/s)^2"
         }
       ],
-      "statics": [
-        "uint3 GNSS_TIME_STANDARD_NONE = 0  # Time is unknown",
-        "uint3 GNSS_TIME_STANDARD_TAI  = 1",
-        "uint3 GNSS_TIME_STANDARD_UTC  = 2",
-        "uint3 GNSS_TIME_STANDARD_GPS  = 3",
-        "uint8 NUM_LEAP_SECONDS_UNKNOWN = 0",
-        "uint2 STATUS_NO_FIX    = 0",
-        "uint2 STATUS_TIME_ONLY = 1"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 1060,
@@ -4264,7 +5148,33 @@
           "unsigned": true,
           "bits": 5,
           "name": "sensorType",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint5",
+              "label": "SENSOR_TYPE_UNDEFINED",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "uint5",
+              "label": "SENSOR_TYPE_SONAR",
+              "value": 1,
+              "comment": ""
+            },
+            {
+              "kind": "uint5",
+              "label": "SENSOR_TYPE_LIDAR",
+              "value": 2,
+              "comment": ""
+            },
+            {
+              "kind": "uint5",
+              "label": "SENSOR_TYPE_RADAR",
+              "value": 3,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "var",
@@ -4272,7 +5182,33 @@
           "unsigned": true,
           "bits": 3,
           "name": "readingType",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint3",
+              "label": "READING_TYPE_UNDEFINED",
+              "value": 0,
+              "comment": "Range is unknown"
+            },
+            {
+              "kind": "uint3",
+              "label": "READING_TYPE_VALID_RANGE",
+              "value": 1,
+              "comment": "Range field contains valid distance"
+            },
+            {
+              "kind": "uint3",
+              "label": "READING_TYPE_TOO_CLOSE",
+              "value": 2,
+              "comment": "Range field contains min range for the sensor"
+            },
+            {
+              "kind": "uint3",
+              "label": "READING_TYPE_TOO_FAR",
+              "value": 3,
+              "comment": "Range field contains max range for the sensor"
+            }
+          ]
         },
         {
           "type": "var",
@@ -4283,16 +5219,7 @@
           "description": "Meters"
         }
       ],
-      "statics": [
-        "uint5 SENSOR_TYPE_UNDEFINED = 0",
-        "uint5 SENSOR_TYPE_SONAR     = 1",
-        "uint5 SENSOR_TYPE_LIDAR     = 2",
-        "uint5 SENSOR_TYPE_RADAR     = 3",
-        "uint3 READING_TYPE_UNDEFINED   = 0   # Range is unknown",
-        "uint3 READING_TYPE_VALID_RANGE = 1   # Range field contains valid distance",
-        "uint3 READING_TYPE_TOO_CLOSE   = 2   # Range field contains min range for the sensor",
-        "uint3 READING_TYPE_TOO_FAR     = 3   # Range field contains max range for the sensor"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 1050,
@@ -4357,7 +5284,7 @@
           "description": "+inf for non-existent axes"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1044,
@@ -4426,13 +5353,24 @@
           "unsigned": true,
           "bits": 2,
           "name": "heightReference",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint2",
+              "label": "HEIGHT_REFERENCE_ELLIPSOID",
+              "value": 0,
+              "comment": ""
+            },
+            {
+              "kind": "uint2",
+              "label": "HEIGHT_REFERENCE_MEAN_SEA_LEVEL",
+              "value": 1,
+              "comment": ""
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint2 HEIGHT_REFERENCE_ELLIPSOID = 0",
-        "uint2 HEIGHT_REFERENCE_MEAN_SEA_LEVEL = 1"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 1041,
@@ -4484,7 +5422,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1040,
@@ -4566,7 +5504,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1034,
@@ -4605,7 +5543,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1031,
@@ -4644,7 +5582,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1030,
@@ -4686,7 +5624,7 @@
           "description": "Kelvin^2"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1029,
@@ -4728,7 +5666,7 @@
           "description": "Pascal^2"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1028,
@@ -4759,7 +5697,33 @@
           "unsigned": true,
           "bits": 8,
           "name": "flags",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "FLAG_HEATER_AVAILABLE",
+              "value": 1,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_HEATER_WORKING",
+              "value": 2,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_HEATER_OVERCURRENT",
+              "value": 4,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "FLAG_HEATER_OPENCIRCUIT",
+              "value": 8,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "var",
@@ -4823,12 +5787,7 @@
           "description": "order of diagonal elements : "
         }
       ],
-      "statics": [
-        "uint8 FLAG_HEATER_AVAILABLE      = 1",
-        "uint8 FLAG_HEATER_WORKING        = 2",
-        "uint8 FLAG_HEATER_OVERCURRENT    = 4",
-        "uint8 FLAG_HEATER_OPENCIRCUIT    = 8"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 1027,
@@ -4870,7 +5829,7 @@
           "description": "Radians^2"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1026,
@@ -4901,7 +5860,21 @@
           "unsigned": true,
           "bits": 8,
           "name": "sensorId",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "SENSOR_ID_LEFT",
+              "value": 254,
+              "comment": ""
+            },
+            {
+              "kind": "uint8",
+              "label": "SENSOR_ID_RIGHT",
+              "value": 255,
+              "comment": ""
+            }
+          ]
         },
         {
           "type": "var",
@@ -4920,10 +5893,7 @@
           "description": "Radians^2"
         }
       ],
-      "statics": [
-        "uint8 SENSOR_ID_LEFT = 254",
-        "uint8 SENSOR_ID_RIGHT = 255"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 1025,
@@ -4965,7 +5935,7 @@
           "description": "(m/s)^2"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1021,
@@ -5007,7 +5977,7 @@
           "description": "(m/s)^2"
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1020,
@@ -5077,12 +6047,18 @@
           "unsigned": true,
           "bits": 7,
           "name": "powerRatingPct",
-          "description": "0 - unloaded, 100 - full load"
+          "description": "0 - unloaded, 100 - full load",
+          "constants": [
+            {
+              "kind": "uint7",
+              "label": "POWER_RATING_PCT_UNKNOWN",
+              "value": 127,
+              "comment": ""
+            }
+          ]
         }
       ],
-      "statics": [
-        "uint7 POWER_RATING_PCT_UNKNOWN = 127"
-      ]
+      "constants": []
     },
     "info": {
       "dataTypeID": 1011,
@@ -5133,7 +6109,33 @@
                     "unsigned": true,
                     "bits": 8,
                     "name": "commandType",
-                    "description": ""
+                    "description": "",
+                    "constants": [
+                      {
+                        "kind": "uint8",
+                        "label": "COMMAND_TYPE_UNITLESS",
+                        "value": 0,
+                        "comment": "[-1, 1]"
+                      },
+                      {
+                        "kind": "uint8",
+                        "label": "COMMAND_TYPE_POSITION",
+                        "value": 1,
+                        "comment": "meter or radian"
+                      },
+                      {
+                        "kind": "uint8",
+                        "label": "COMMAND_TYPE_FORCE",
+                        "value": 2,
+                        "comment": "Newton or Newton metre"
+                      },
+                      {
+                        "kind": "uint8",
+                        "label": "COMMAND_TYPE_SPEED",
+                        "value": 3,
+                        "comment": "meter per second or radian per second"
+                      }
+                    ]
                   },
                   {
                     "type": "var",
@@ -5144,12 +6146,7 @@
                     "description": ""
                   }
                 ],
-                "statics": [
-                  "uint8 COMMAND_TYPE_UNITLESS     = 0     # [-1, 1]",
-                  "uint8 COMMAND_TYPE_POSITION     = 1     # meter or radian",
-                  "uint8 COMMAND_TYPE_FORCE        = 2     # Newton or Newton metre",
-                  "uint8 COMMAND_TYPE_SPEED        = 3     # meter per second or radian per second"
-                ]
+                "constants": []
               },
               "info": {
                 "hash": [
@@ -5173,7 +6170,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1010,
@@ -5268,7 +6265,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1003,
@@ -5327,7 +6324,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1002,
@@ -5378,7 +6375,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1001,
@@ -5493,7 +6490,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1000,
@@ -5524,7 +6521,21 @@
           "unsigned": true,
           "bits": 8,
           "name": "opcode",
-          "description": ""
+          "description": "",
+          "constants": [
+            {
+              "kind": "uint8",
+              "label": "OPCODE_SAVE",
+              "value": 0,
+              "comment": "Save all parameters to non-volatile storage."
+            },
+            {
+              "kind": "uint8",
+              "label": "OPCODE_ERASE",
+              "value": 1,
+              "comment": "Clear the non-volatile storage; some changes may take effect only after reboot."
+            }
+          ]
         },
         {
           "type": "var",
@@ -5535,10 +6546,7 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint8 OPCODE_SAVE  = 0  # Save all parameters to non-volatile storage.",
-        "uint8 OPCODE_ERASE = 1  # Clear the non-volatile storage; some changes may take effect only after reboot."
-      ]
+      "constants": []
     },
     "response": {
       "variables": [
@@ -5551,7 +6559,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 10,
@@ -5576,7 +6584,7 @@
     "type": "service",
     "request": {
       "variables": [],
-      "statics": []
+      "constants": []
     },
     "response": {
       "variables": [
@@ -5612,7 +6620,7 @@
           "description": ""
         }
       ],
-      "statics": []
+      "constants": []
     },
     "info": {
       "dataTypeID": 1,
@@ -5659,14 +6667,49 @@
           "description": ""
         }
       ],
-      "statics": [
-        "uint16 MAX_REQUEST_PERIOD_MS = 1000     # It is OK to exceed this value",
-        "uint16 MIN_REQUEST_PERIOD_MS = 600      # It is OK to exceed this value",
-        "uint16 MAX_FOLLOWUP_DELAY_MS = 400",
-        "uint16 MIN_FOLLOWUP_DELAY_MS = 0        # Defined only for regularity; will always be zero.",
-        "uint16 FOLLOWUP_TIMEOUT_MS = 500",
-        "uint8 MAX_LENGTH_OF_UNIQUE_ID_IN_REQUEST = 6",
-        "uint7 ANY_NODE_ID = 0"
+      "constants": [
+        {
+          "kind": "uint16",
+          "label": "MAX_REQUEST_PERIOD_MS",
+          "value": 1000,
+          "comment": "It is OK to exceed this value"
+        },
+        {
+          "kind": "uint16",
+          "label": "MIN_REQUEST_PERIOD_MS",
+          "value": 600,
+          "comment": "It is OK to exceed this value"
+        },
+        {
+          "kind": "uint16",
+          "label": "MAX_FOLLOWUP_DELAY_MS",
+          "value": 400,
+          "comment": ""
+        },
+        {
+          "kind": "uint16",
+          "label": "MIN_FOLLOWUP_DELAY_MS",
+          "value": 0,
+          "comment": "Defined only for regularity; will always be zero."
+        },
+        {
+          "kind": "uint16",
+          "label": "FOLLOWUP_TIMEOUT_MS",
+          "value": 500,
+          "comment": ""
+        },
+        {
+          "kind": "uint8",
+          "label": "MAX_LENGTH_OF_UNIQUE_ID_IN_REQUEST",
+          "value": 6,
+          "comment": ""
+        },
+        {
+          "kind": "uint7",
+          "label": "ANY_NODE_ID",
+          "value": 0,
+          "comment": ""
+        }
       ]
     },
     "info": {

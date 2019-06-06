@@ -10,16 +10,22 @@
         "unsigned": true,
         "bits": 40,
         "name": "magicNumber",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint40",
+            "label": "MAGIC_NUMBER",
+            "value": 742196058910,
+            "comment": ""
+          }
+        ]
       }
     ],
-    "statics": [
-      "uint40 MAGIC_NUMBER = 0xACCE551B1E"
-    ]
+    "constants": []
   },
   "response": {
     "variables": [],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 5,

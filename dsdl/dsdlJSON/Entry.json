@@ -40,7 +40,7 @@
         "description": "Node ID of this allocation."
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "hash": [

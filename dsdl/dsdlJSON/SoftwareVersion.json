@@ -26,7 +26,21 @@
         "unsigned": true,
         "bits": 8,
         "name": "optionalFieldFlags",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "OPTIONAL_FIELD_FLAG_VCS_COMMIT",
+            "value": 1,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "OPTIONAL_FIELD_FLAG_IMAGE_CRC",
+            "value": 2,
+            "comment": ""
+          }
+        ]
       },
       {
         "type": "var",
@@ -45,10 +59,7 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint8 OPTIONAL_FIELD_FLAG_VCS_COMMIT = 1",
-      "uint8 OPTIONAL_FIELD_FLAG_IMAGE_CRC  = 2"
-    ]
+    "constants": []
   },
   "info": {
     "hash": [

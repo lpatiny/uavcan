@@ -32,7 +32,7 @@
         "description": "TAO rules apply"
       }
     ],
-    "statics": []
+    "constants": []
   },
   "response": {
     "variables": [
@@ -50,7 +50,7 @@
         "description": "TAO rules apply"
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "type": "object"

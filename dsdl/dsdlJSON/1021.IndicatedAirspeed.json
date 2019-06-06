@@ -21,7 +21,7 @@
         "description": "(m/s)^2"
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 1021,

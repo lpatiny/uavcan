@@ -29,7 +29,7 @@
         "description": "Number of errors in the CAN layer."
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "hash": [

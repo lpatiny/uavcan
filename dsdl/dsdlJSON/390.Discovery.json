@@ -26,8 +26,13 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint16 BROADCASTING_PERIOD_MS = 1000"
+    "constants": [
+      {
+        "kind": "uint16",
+        "label": "BROADCASTING_PERIOD_MS",
+        "value": 1000,
+        "comment": ""
+      }
     ]
   },
   "info": {

@@ -32,7 +32,7 @@
         "description": "TAO rules apply"
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "type": "object"

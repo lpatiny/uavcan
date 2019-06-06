@@ -4,9 +4,7 @@
   "type": "object",
   "message": {
     "variables": [],
-    "statics": [
-      "uint56 UNKNOWN = 0"
-    ]
+    "constants": []
   },
   "info": {
     "hash": [

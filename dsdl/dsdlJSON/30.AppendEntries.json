@@ -84,7 +84,7 @@
                   "description": "Node ID of this allocation."
                 }
               ],
-              "statics": []
+              "constants": []
             },
             "info": {
               "hash": [
@@ -108,9 +108,19 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint16 DEFAULT_MIN_ELECTION_TIMEOUT_MS = 2000",
-      "uint16 DEFAULT_MAX_ELECTION_TIMEOUT_MS = 4000"
+    "constants": [
+      {
+        "kind": "uint16",
+        "label": "DEFAULT_MIN_ELECTION_TIMEOUT_MS",
+        "value": 2000,
+        "comment": ""
+      },
+      {
+        "kind": "uint16",
+        "label": "DEFAULT_MAX_ELECTION_TIMEOUT_MS",
+        "value": 4000,
+        "comment": ""
+      }
     ]
   },
   "response": {
@@ -124,7 +134,7 @@
         "description": ""
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 30,

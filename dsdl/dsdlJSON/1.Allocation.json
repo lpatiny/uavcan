@@ -26,14 +26,49 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint16 MAX_REQUEST_PERIOD_MS = 1000     # It is OK to exceed this value",
-      "uint16 MIN_REQUEST_PERIOD_MS = 600      # It is OK to exceed this value",
-      "uint16 MAX_FOLLOWUP_DELAY_MS = 400",
-      "uint16 MIN_FOLLOWUP_DELAY_MS = 0        # Defined only for regularity; will always be zero.",
-      "uint16 FOLLOWUP_TIMEOUT_MS = 500",
-      "uint8 MAX_LENGTH_OF_UNIQUE_ID_IN_REQUEST = 6",
-      "uint7 ANY_NODE_ID = 0"
+    "constants": [
+      {
+        "kind": "uint16",
+        "label": "MAX_REQUEST_PERIOD_MS",
+        "value": 1000,
+        "comment": "It is OK to exceed this value"
+      },
+      {
+        "kind": "uint16",
+        "label": "MIN_REQUEST_PERIOD_MS",
+        "value": 600,
+        "comment": "It is OK to exceed this value"
+      },
+      {
+        "kind": "uint16",
+        "label": "MAX_FOLLOWUP_DELAY_MS",
+        "value": 400,
+        "comment": ""
+      },
+      {
+        "kind": "uint16",
+        "label": "MIN_FOLLOWUP_DELAY_MS",
+        "value": 0,
+        "comment": "Defined only for regularity; will always be zero."
+      },
+      {
+        "kind": "uint16",
+        "label": "FOLLOWUP_TIMEOUT_MS",
+        "value": 500,
+        "comment": ""
+      },
+      {
+        "kind": "uint8",
+        "label": "MAX_LENGTH_OF_UNIQUE_ID_IN_REQUEST",
+        "value": 6,
+        "comment": ""
+      },
+      {
+        "kind": "uint7",
+        "label": "ANY_NODE_ID",
+        "value": 0,
+        "comment": ""
+      }
     ]
   },
   "info": {

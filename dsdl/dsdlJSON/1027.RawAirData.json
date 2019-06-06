@@ -10,7 +10,33 @@
         "unsigned": true,
         "bits": 8,
         "name": "flags",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "FLAG_HEATER_AVAILABLE",
+            "value": 1,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_HEATER_WORKING",
+            "value": 2,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_HEATER_OVERCURRENT",
+            "value": 4,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_HEATER_OPENCIRCUIT",
+            "value": 8,
+            "comment": ""
+          }
+        ]
       },
       {
         "type": "var",
@@ -74,12 +100,7 @@
         "description": "order of diagonal elements : "
       }
     ],
-    "statics": [
-      "uint8 FLAG_HEATER_AVAILABLE      = 1",
-      "uint8 FLAG_HEATER_WORKING        = 2",
-      "uint8 FLAG_HEATER_OVERCURRENT    = 4",
-      "uint8 FLAG_HEATER_OPENCIRCUIT    = 8"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 1027,

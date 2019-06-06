@@ -77,7 +77,7 @@
         "description": "All used sats of all available GNSS"
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 1061,

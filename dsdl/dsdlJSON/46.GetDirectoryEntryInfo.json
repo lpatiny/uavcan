@@ -19,7 +19,7 @@
         "description": ""
       }
     ],
-    "statics": []
+    "constants": []
   },
   "response": {
     "variables": [
@@ -42,7 +42,7 @@
         "description": "Ignored/Empty if such entry does not exist."
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 46,

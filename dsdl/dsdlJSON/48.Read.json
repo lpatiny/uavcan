@@ -19,7 +19,7 @@
         "description": ""
       }
     ],
-    "statics": []
+    "constants": []
   },
   "response": {
     "variables": [
@@ -43,7 +43,7 @@
         "description": ""
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 48,

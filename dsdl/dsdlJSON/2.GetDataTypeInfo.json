@@ -32,7 +32,7 @@
         "description": "Full data type name, e.g. \"uavcan.protocol.GetDataTypeInfo\""
       }
     ],
-    "statics": []
+    "constants": []
   },
   "response": {
     "variables": [
@@ -64,7 +64,33 @@
         "unsigned": true,
         "bits": 8,
         "name": "flags",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "FLAG_KNOWN",
+            "value": 1,
+            "comment": "This data type is defined"
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_SUBSCRIBED",
+            "value": 2,
+            "comment": "Subscribed to messages of this type"
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_PUBLISHING",
+            "value": 4,
+            "comment": "Publishing messages of this type"
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_SERVING",
+            "value": 8,
+            "comment": "Providing service of this type"
+          }
+        ]
       },
       {
         "length": 80,
@@ -80,12 +106,7 @@
         "description": "Full data type name"
       }
     ],
-    "statics": [
-      "uint8 FLAG_KNOWN      = 1   # This data type is defined",
-      "uint8 FLAG_SUBSCRIBED = 2   # Subscribed to messages of this type",
-      "uint8 FLAG_PUBLISHING = 4   # Publishing messages of this type",
-      "uint8 FLAG_SERVING    = 8   # Providing service of this type"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 2,

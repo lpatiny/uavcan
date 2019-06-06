@@ -18,9 +18,7 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint8 SEPARATOR = '/'"
-    ]
+    "constants": []
   },
   "info": {
     "hash": [

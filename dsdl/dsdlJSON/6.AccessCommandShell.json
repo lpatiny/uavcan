@@ -10,7 +10,33 @@
         "unsigned": true,
         "bits": 8,
         "name": "flags",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "FLAG_RESET_SHELL",
+            "value": 1,
+            "comment": "Restarts the shell instance anew; may or may not imply CLEAR_OUTPUT_BUFFERS"
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_CLEAR_OUTPUT_BUFFERS",
+            "value": 2,
+            "comment": "Makes stdout and stderr buffers empty"
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_READ_STDOUT",
+            "value": 64,
+            "comment": "Output will contain stdout"
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_READ_STDERR",
+            "value": 128,
+            "comment": "Output will be extended with stderr"
+          }
+        ]
       },
       {
         "length": 128,
@@ -26,13 +52,19 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint8 NEWLINE = '\\n'",
-      "uint8 MIN_OUTPUT_LIFETIME_SEC = 10",
-      "uint8 FLAG_RESET_SHELL          = 1     # Restarts the shell instance anew; may or may not imply CLEAR_OUTPUT_BUFFERS",
-      "uint8 FLAG_CLEAR_OUTPUT_BUFFERS = 2     # Makes stdout and stderr buffers empty",
-      "uint8 FLAG_READ_STDOUT          = 64    # Output will contain stdout",
-      "uint8 FLAG_READ_STDERR          = 128   # Output will be extended with stderr"
+    "constants": [
+      {
+        "kind": "uint8",
+        "label": "NEWLINE",
+        "value": "'\\n'",
+        "comment": ""
+      },
+      {
+        "kind": "uint8",
+        "label": "MIN_OUTPUT_LIFETIME_SEC",
+        "value": 10,
+        "comment": ""
+      }
     ]
   },
   "response": {
@@ -51,7 +83,33 @@
         "unsigned": true,
         "bits": 8,
         "name": "flags",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "FLAG_RUNNING",
+            "value": 1,
+            "comment": "The shell is currently running a process; stdin/out/err are piped to it"
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_SHELL_ERROR",
+            "value": 2,
+            "comment": "Exit status contains error code, output contains text (e.g. no such command)"
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_HAS_PENDING_STDOUT",
+            "value": 64,
+            "comment": "There is more stdout to read"
+          },
+          {
+            "kind": "uint8",
+            "label": "FLAG_HAS_PENDING_STDERR",
+            "value": 128,
+            "comment": "There is more stderr to read"
+          }
+        ]
       },
       {
         "length": 256,
@@ -67,12 +125,7 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint8 FLAG_RUNNING              = 1     # The shell is currently running a process; stdin/out/err are piped to it",
-      "uint8 FLAG_SHELL_ERROR          = 2     # Exit status contains error code, output contains text (e.g. no such command)",
-      "uint8 FLAG_HAS_PENDING_STDOUT   = 64    # There is more stdout to read",
-      "uint8 FLAG_HAS_PENDING_STDERR   = 128   # There is more stderr to read"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 6,

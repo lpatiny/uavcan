@@ -10,20 +10,72 @@
         "unsigned": true,
         "bits": 8,
         "name": "lightId",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "LIGHT_ID_FORMATION",
+            "value": 255,
+            "comment": ""
+          }
+        ]
       }
     ],
-    "statics": [
-      "uint8 LIGHT_ID_ANTI_COLLISION = 246",
-      "uint8 LIGHT_ID_RIGHT_OF_WAY   = 247",
-      "uint8 LIGHT_ID_STROBE         = 248",
-      "uint8 LIGHT_ID_WING           = 249",
-      "uint8 LIGHT_ID_LOGO           = 250",
-      "uint8 LIGHT_ID_TAXI           = 251",
-      "uint8 LIGHT_ID_TURN_OFF       = 252",
-      "uint8 LIGHT_ID_TAKE_OFF       = 253",
-      "uint8 LIGHT_ID_LANDING        = 254",
-      "uint8 LIGHT_ID_FORMATION      = 255"
+    "constants": [
+      {
+        "kind": "uint8",
+        "label": "LIGHT_ID_ANTI_COLLISION",
+        "value": 246,
+        "comment": ""
+      },
+      {
+        "kind": "uint8",
+        "label": "LIGHT_ID_RIGHT_OF_WAY",
+        "value": 247,
+        "comment": ""
+      },
+      {
+        "kind": "uint8",
+        "label": "LIGHT_ID_STROBE",
+        "value": 248,
+        "comment": ""
+      },
+      {
+        "kind": "uint8",
+        "label": "LIGHT_ID_WING",
+        "value": 249,
+        "comment": ""
+      },
+      {
+        "kind": "uint8",
+        "label": "LIGHT_ID_LOGO",
+        "value": 250,
+        "comment": ""
+      },
+      {
+        "kind": "uint8",
+        "label": "LIGHT_ID_TAXI",
+        "value": 251,
+        "comment": ""
+      },
+      {
+        "kind": "uint8",
+        "label": "LIGHT_ID_TURN_OFF",
+        "value": 252,
+        "comment": ""
+      },
+      {
+        "kind": "uint8",
+        "label": "LIGHT_ID_TAKE_OFF",
+        "value": 253,
+        "comment": ""
+      },
+      {
+        "kind": "uint8",
+        "label": "LIGHT_ID_LANDING",
+        "value": 254,
+        "comment": ""
+      }
     ]
   },
   "info": {

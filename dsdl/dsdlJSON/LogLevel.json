@@ -10,15 +10,36 @@
         "unsigned": true,
         "bits": 3,
         "name": "value",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint3",
+            "label": "DEBUG",
+            "value": 0,
+            "comment": ""
+          },
+          {
+            "kind": "uint3",
+            "label": "INFO",
+            "value": 1,
+            "comment": ""
+          },
+          {
+            "kind": "uint3",
+            "label": "WARNING",
+            "value": 2,
+            "comment": ""
+          },
+          {
+            "kind": "uint3",
+            "label": "ERROR",
+            "value": 3,
+            "comment": ""
+          }
+        ]
       }
     ],
-    "statics": [
-      "uint3 DEBUG    = 0",
-      "uint3 INFO     = 1",
-      "uint3 WARNING  = 2",
-      "uint3 ERROR    = 3"
-    ]
+    "constants": []
   },
   "info": {
     "hash": [

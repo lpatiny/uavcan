@@ -66,7 +66,75 @@
         "unsigned": true,
         "bits": 11,
         "name": "statusFlags",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint11",
+            "label": "STATUS_FLAG_IN_USE",
+            "value": 1,
+            "comment": "The battery is currently used as a power supply"
+          },
+          {
+            "kind": "uint11",
+            "label": "STATUS_FLAG_CHARGING",
+            "value": 2,
+            "comment": "Charger is active"
+          },
+          {
+            "kind": "uint11",
+            "label": "STATUS_FLAG_CHARGED",
+            "value": 4,
+            "comment": "Charging complete, but the charger is still active"
+          },
+          {
+            "kind": "uint11",
+            "label": "STATUS_FLAG_TEMP_HOT",
+            "value": 8,
+            "comment": "Battery temperature is above normal"
+          },
+          {
+            "kind": "uint11",
+            "label": "STATUS_FLAG_TEMP_COLD",
+            "value": 16,
+            "comment": "Battery temperature is below normal"
+          },
+          {
+            "kind": "uint11",
+            "label": "STATUS_FLAG_OVERLOAD",
+            "value": 32,
+            "comment": "Safe operating area violation"
+          },
+          {
+            "kind": "uint11",
+            "label": "STATUS_FLAG_BAD_BATTERY",
+            "value": 64,
+            "comment": "This battery should not be used anymore (e.g. low SOH)"
+          },
+          {
+            "kind": "uint11",
+            "label": "STATUS_FLAG_NEED_SERVICE",
+            "value": 128,
+            "comment": "This battery requires maintenance (e.g. balancing, full recharge)"
+          },
+          {
+            "kind": "uint11",
+            "label": "STATUS_FLAG_BMS_ERROR",
+            "value": 256,
+            "comment": "Battery management system/controller error, smart battery interface error"
+          },
+          {
+            "kind": "uint11",
+            "label": "STATUS_FLAG_RESERVED_A",
+            "value": 512,
+            "comment": "Keep zero"
+          },
+          {
+            "kind": "uint11",
+            "label": "STATUS_FLAG_RESERVED_B",
+            "value": 1024,
+            "comment": "Keep zero"
+          }
+        ]
       },
       {
         "type": "var",
@@ -74,7 +142,15 @@
         "unsigned": true,
         "bits": 7,
         "name": "stateOfHealthPct",
-        "description": "Health of the battery, in percent, optional"
+        "description": "Health of the battery, in percent, optional",
+        "constants": [
+          {
+            "kind": "uint7",
+            "label": "STATE_OF_HEALTH_UNKNOWN",
+            "value": 127,
+            "comment": "Use this constant if SOH cannot be estimated"
+          }
+        ]
       },
       {
         "type": "var",
@@ -120,20 +196,7 @@
         "description": "Battery model name"
       }
     ],
-    "statics": [
-      "uint11 STATUS_FLAG_IN_USE       = 1     # The battery is currently used as a power supply",
-      "uint11 STATUS_FLAG_CHARGING     = 2     # Charger is active",
-      "uint11 STATUS_FLAG_CHARGED      = 4     # Charging complete, but the charger is still active",
-      "uint11 STATUS_FLAG_TEMP_HOT     = 8     # Battery temperature is above normal",
-      "uint11 STATUS_FLAG_TEMP_COLD    = 16    # Battery temperature is below normal",
-      "uint11 STATUS_FLAG_OVERLOAD     = 32    # Safe operating area violation",
-      "uint11 STATUS_FLAG_BAD_BATTERY  = 64    # This battery should not be used anymore (e.g. low SOH)",
-      "uint11 STATUS_FLAG_NEED_SERVICE = 128   # This battery requires maintenance (e.g. balancing, full recharge)",
-      "uint11 STATUS_FLAG_BMS_ERROR    = 256   # Battery management system/controller error, smart battery interface error",
-      "uint11 STATUS_FLAG_RESERVED_A   = 512   # Keep zero",
-      "uint11 STATUS_FLAG_RESERVED_B   = 1024  # Keep zero",
-      "uint7 STATE_OF_HEALTH_UNKNOWN = 127     # Use this constant if SOH cannot be estimated"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 1092,

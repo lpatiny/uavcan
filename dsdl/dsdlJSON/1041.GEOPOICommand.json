@@ -48,13 +48,24 @@
         "unsigned": true,
         "bits": 2,
         "name": "heightReference",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint2",
+            "label": "HEIGHT_REFERENCE_ELLIPSOID",
+            "value": 0,
+            "comment": ""
+          },
+          {
+            "kind": "uint2",
+            "label": "HEIGHT_REFERENCE_MEAN_SEA_LEVEL",
+            "value": 1,
+            "comment": ""
+          }
+        ]
       }
     ],
-    "statics": [
-      "uint2 HEIGHT_REFERENCE_ELLIPSOID = 0",
-      "uint2 HEIGHT_REFERENCE_MEAN_SEA_LEVEL = 1"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 1041,

@@ -17,9 +17,7 @@
         "description": ""
       }
     ],
-    "statics": [
-      "float32 ANGLE_MULTIPLIER = 4.7746482927568605"
-    ]
+    "constants": []
   },
   "info": {
     "hash": [

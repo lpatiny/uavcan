@@ -10,7 +10,33 @@
         "unsigned": true,
         "bits": 3,
         "name": "gnssTimeStandard",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint3",
+            "label": "GNSS_TIME_STANDARD_NONE",
+            "value": 0,
+            "comment": "Time is unknown"
+          },
+          {
+            "kind": "uint3",
+            "label": "GNSS_TIME_STANDARD_TAI",
+            "value": 1,
+            "comment": ""
+          },
+          {
+            "kind": "uint3",
+            "label": "GNSS_TIME_STANDARD_UTC",
+            "value": 2,
+            "comment": ""
+          },
+          {
+            "kind": "uint3",
+            "label": "GNSS_TIME_STANDARD_GPS",
+            "value": 3,
+            "comment": ""
+          }
+        ]
       },
       {
         "type": "var",
@@ -26,7 +52,15 @@
         "unsigned": true,
         "bits": 8,
         "name": "numLeapSeconds",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "NUM_LEAP_SECONDS_UNKNOWN",
+            "value": 0,
+            "comment": ""
+          }
+        ]
       },
       {
         "type": "var",
@@ -86,7 +120,21 @@
         "unsigned": true,
         "bits": 2,
         "name": "status2DFix",
-        "description": "= 2"
+        "description": "= 2",
+        "constants": [
+          {
+            "kind": "uint2",
+            "label": "STATUS_NO_FIX",
+            "value": 0,
+            "comment": ""
+          },
+          {
+            "kind": "uint2",
+            "label": "STATUS_TIME_ONLY",
+            "value": 1,
+            "comment": ""
+          }
+        ]
       },
       {
         "type": "var",
@@ -110,7 +158,33 @@
         "unsigned": true,
         "bits": 4,
         "name": "mode",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint4",
+            "label": "MODE_SINGLE",
+            "value": 0,
+            "comment": ""
+          },
+          {
+            "kind": "uint4",
+            "label": "MODE_DGPS",
+            "value": 1,
+            "comment": ""
+          },
+          {
+            "kind": "uint4",
+            "label": "MODE_RTK",
+            "value": 2,
+            "comment": ""
+          },
+          {
+            "kind": "uint4",
+            "label": "MODE_PPP",
+            "value": 3,
+            "comment": ""
+          }
+        ]
       },
       {
         "type": "var",
@@ -118,7 +192,33 @@
         "unsigned": true,
         "bits": 6,
         "name": "subMode",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint6",
+            "label": "SUB_MODE_DGPS_OTHER",
+            "value": 0,
+            "comment": ""
+          },
+          {
+            "kind": "uint6",
+            "label": "SUB_MODE_DGPS_SBAS",
+            "value": 1,
+            "comment": ""
+          },
+          {
+            "kind": "uint6",
+            "label": "SUB_MODE_RTK_FLOAT",
+            "value": 0,
+            "comment": ""
+          },
+          {
+            "kind": "uint6",
+            "label": "SUB_MODE_RTK_FIXED",
+            "value": 1,
+            "comment": ""
+          }
+        ]
       },
       {
         "length": 36,
@@ -199,7 +299,7 @@
                   "description": "Position and velocity covariance in the ECEF frame. Units are m^2 for position,"
                 }
               ],
-              "statics": []
+              "constants": []
             },
             "info": {
               "hash": [
@@ -223,23 +323,7 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint3 GNSS_TIME_STANDARD_NONE = 0  # Time is unknown",
-      "uint3 GNSS_TIME_STANDARD_TAI  = 1",
-      "uint3 GNSS_TIME_STANDARD_UTC  = 2",
-      "uint3 GNSS_TIME_STANDARD_GPS  = 3",
-      "uint8 NUM_LEAP_SECONDS_UNKNOWN = 0",
-      "uint2 STATUS_NO_FIX    = 0",
-      "uint2 STATUS_TIME_ONLY = 1",
-      "uint4 MODE_SINGLE      = 0",
-      "uint4 MODE_DGPS        = 1",
-      "uint4 MODE_RTK         = 2",
-      "uint4 MODE_PPP         = 3",
-      "uint6 SUB_MODE_DGPS_OTHER    = 0",
-      "uint6 SUB_MODE_DGPS_SBAS     = 1",
-      "uint6 SUB_MODE_RTK_FLOAT     = 0",
-      "uint6 SUB_MODE_RTK_FIXED     = 1"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 1063,

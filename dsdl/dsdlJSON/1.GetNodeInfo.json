@@ -4,7 +4,7 @@
   "type": "service",
   "request": {
     "variables": [],
-    "statics": []
+    "constants": []
   },
   "response": {
     "variables": [
@@ -40,7 +40,7 @@
         "description": ""
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 1,

@@ -18,7 +18,33 @@
         "unsigned": true,
         "bits": 2,
         "name": "health",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint2",
+            "label": "HEALTH_OK",
+            "value": 0,
+            "comment": "The node is functioning properly."
+          },
+          {
+            "kind": "uint2",
+            "label": "HEALTH_WARNING",
+            "value": 1,
+            "comment": "A critical parameter went out of range or the node encountered a minor failure."
+          },
+          {
+            "kind": "uint2",
+            "label": "HEALTH_ERROR",
+            "value": 2,
+            "comment": "The node encountered a major failure."
+          },
+          {
+            "kind": "uint2",
+            "label": "HEALTH_CRITICAL",
+            "value": 3,
+            "comment": "The node suffered a fatal malfunction."
+          }
+        ]
       },
       {
         "type": "var",
@@ -26,7 +52,39 @@
         "unsigned": true,
         "bits": 3,
         "name": "mode",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint3",
+            "label": "MODE_OPERATIONAL",
+            "value": 0,
+            "comment": "Normal operating mode."
+          },
+          {
+            "kind": "uint3",
+            "label": "MODE_INITIALIZATION",
+            "value": 1,
+            "comment": "Initialization is in progress; this mode is entered immediately after startup."
+          },
+          {
+            "kind": "uint3",
+            "label": "MODE_MAINTENANCE",
+            "value": 2,
+            "comment": "E.g. calibration, the bootloader is running, etc."
+          },
+          {
+            "kind": "uint3",
+            "label": "MODE_SOFTWARE_UPDATE",
+            "value": 3,
+            "comment": "New software/firmware is being loaded."
+          },
+          {
+            "kind": "uint3",
+            "label": "MODE_OFFLINE",
+            "value": 7,
+            "comment": "The node is no longer available."
+          }
+        ]
       },
       {
         "type": "var",
@@ -45,19 +103,25 @@
         "description": ""
       }
     ],
-    "statics": [
-      "uint16 MAX_BROADCASTING_PERIOD_MS = 1000",
-      "uint16 MIN_BROADCASTING_PERIOD_MS = 2",
-      "uint16 OFFLINE_TIMEOUT_MS = 3000",
-      "uint2 HEALTH_OK         = 0     # The node is functioning properly.",
-      "uint2 HEALTH_WARNING    = 1     # A critical parameter went out of range or the node encountered a minor failure.",
-      "uint2 HEALTH_ERROR      = 2     # The node encountered a major failure.",
-      "uint2 HEALTH_CRITICAL   = 3     # The node suffered a fatal malfunction.",
-      "uint3 MODE_OPERATIONAL      = 0         # Normal operating mode.",
-      "uint3 MODE_INITIALIZATION   = 1         # Initialization is in progress; this mode is entered immediately after startup.",
-      "uint3 MODE_MAINTENANCE      = 2         # E.g. calibration, the bootloader is running, etc.",
-      "uint3 MODE_SOFTWARE_UPDATE  = 3         # New software/firmware is being loaded.",
-      "uint3 MODE_OFFLINE          = 7         # The node is no longer available."
+    "constants": [
+      {
+        "kind": "uint16",
+        "label": "MAX_BROADCASTING_PERIOD_MS",
+        "value": 1000,
+        "comment": ""
+      },
+      {
+        "kind": "uint16",
+        "label": "MIN_BROADCASTING_PERIOD_MS",
+        "value": 2,
+        "comment": ""
+      },
+      {
+        "kind": "uint16",
+        "label": "OFFLINE_TIMEOUT_MS",
+        "value": 3000,
+        "comment": ""
+      }
     ]
   },
   "info": {

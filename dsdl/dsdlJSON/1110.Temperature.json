@@ -26,13 +26,24 @@
         "unsigned": true,
         "bits": 8,
         "name": "errorFlags",
-        "description": ""
+        "description": "",
+        "constants": [
+          {
+            "kind": "uint8",
+            "label": "ERROR_FLAG_OVERHEATING",
+            "value": 1,
+            "comment": ""
+          },
+          {
+            "kind": "uint8",
+            "label": "ERROR_FLAG_OVERCOOLING",
+            "value": 2,
+            "comment": ""
+          }
+        ]
       }
     ],
-    "statics": [
-      "uint8 ERROR_FLAG_OVERHEATING = 1",
-      "uint8 ERROR_FLAG_OVERCOOLING = 2"
-    ]
+    "constants": []
   },
   "info": {
     "dataTypeID": 1110,

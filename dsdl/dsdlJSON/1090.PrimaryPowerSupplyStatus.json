@@ -37,7 +37,7 @@
         "description": "[Percent] Error standard deviation. Use best guess if unknown."
       }
     ],
-    "statics": []
+    "constants": []
   },
   "info": {
     "dataTypeID": 1090,

@@ -4,10 +4,25 @@
   "type": "message",
   "message": {
     "variables": [],
-    "statics": [
-      "uint16 MAX_BROADCASTING_PERIOD_MS = 1100            # Milliseconds",
-      "uint16 MIN_BROADCASTING_PERIOD_MS = 40              # Milliseconds",
-      "uint16 RECOMMENDED_BROADCASTER_TIMEOUT_MS = 2200    # Milliseconds"
+    "constants": [
+      {
+        "kind": "uint16",
+        "label": "MAX_BROADCASTING_PERIOD_MS",
+        "value": 1100,
+        "comment": "Milliseconds"
+      },
+      {
+        "kind": "uint16",
+        "label": "MIN_BROADCASTING_PERIOD_MS",
+        "value": 40,
+        "comment": "Milliseconds"
+      },
+      {
+        "kind": "uint16",
+        "label": "RECOMMENDED_BROADCASTER_TIMEOUT_MS",
+        "value": 2200,
+        "comment": "Milliseconds"
+      }
     ]
   },
   "info": {
