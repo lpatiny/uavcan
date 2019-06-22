@@ -18,20 +18,16 @@ class DefaultAdapter extends EventEmitter {
   frameSent(frame, text) {
     this.emit('frame', {
       event: 'TX',
-      value: {
-        frame,
-        text
-      }
+      value: frame,
+      text
     });
   }
 
   frameReceived(frame, text) {
     this.emit('frame', {
       event: 'RX',
-      value: {
-        frame,
-        text
-      }
+      value: frame,
+      text
     });
     processFrame(frame, this);
   }

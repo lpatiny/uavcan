@@ -15,6 +15,11 @@ describe('parseFrame', () => {
       0xdf
     ]);
 
+    expect(result.epoch).not.toBeNaN();
+    expect(result.id).not.toBeNaN();
+    delete result.epoch;
+    delete result.id;
+
     expect(result).toStrictEqual({
       priority: 24,
       isService: false,

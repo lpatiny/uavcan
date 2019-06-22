@@ -1,5 +1,7 @@
 'use strict';
 
+const { performance } = require('perf_hooks');
+
 const CRC = require('./util/CRC');
 const serialize = require('./serializer/serialize');
 const parse = require('./parser/parse');
@@ -18,6 +20,8 @@ const { getDataType } = require('./DataTypesManager');
 class Data {
   constructor(data, dataTypeID, options = {}) {
     const { isService = false, isRequest = false, hasCRC = true } = options;
+    this.id = performance.now();
+    this.epoch = Date.now();
     if (Array.isArray(data) || Buffer.isBuffer(data)) {
       if (hasCRC) {
         this.bytes = getBytesFromCRCData(

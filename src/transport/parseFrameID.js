@@ -1,7 +1,11 @@
 'use strict';
 
+const { performance } = require('perf_hooks');
+
 function parseFrameID(frameID) {
   let toReturn = {
+    id: performance.now(),
+    epoch: Date.now(),
     priority: (frameID >> 24) & 31,
     isService: (frameID >> 7) & 1,
     sourceNodeID: frameID & 127
