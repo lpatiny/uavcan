@@ -1,7 +1,5 @@
 'use strict';
 
-const debug = require('debug')('uavcan.adapter.TestAdapter');
-
 const parseFrame = require('../transport/parseFrame');
 const bytesToHex = require('../util/bytesToHex');
 const hexToBytes = require('../util/hexToBytes');

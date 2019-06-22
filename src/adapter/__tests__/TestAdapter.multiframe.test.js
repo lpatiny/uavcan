@@ -1,7 +1,5 @@
 'use strict';
 
-const Node = require('../../Node');
-const Data = require('../../data/Data');
 const TestAdapter = require('../TestAdapter');
 
 const testAdapter = new TestAdapter();

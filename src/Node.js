@@ -1,7 +1,5 @@
 'use strict';
 
-const debug = require('debug')('slcan.device');
-
 const getFrames = require('./transport/getFrames');
 
 class Node {

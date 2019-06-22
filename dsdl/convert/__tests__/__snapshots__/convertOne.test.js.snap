@@ -6,7 +6,7 @@ Object {
 SI units are avoided because of float16 range limitations.",
   "id": "uavcan.equipment.ahrs.MagneticFieldStrength2",
   "message": Object {
-    "statics": Array [],
+    "constants": Array [],
     "variables": Array [
       Object {
         "bits": 8,
