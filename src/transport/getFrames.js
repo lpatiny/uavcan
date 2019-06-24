@@ -1,5 +1,7 @@
 'use strict';
 
+const { performance } = require('perf_hooks');
+
 /**
  *
  * @param {Data} data
@@ -36,6 +38,8 @@ function getFrames(data, sourceNode, options = {}) {
       sourceNode.transferID;
     let payload = frameBytes.slice(0).concat(tailByte);
     frames.push({
+      id: performance.now(),
+      epoch: Date.now(),
       sourceNodeID: options.sourceNodeID,
       destinationNodeID: options.destinationNodeID,
       dataTypeID: options.dataTypeID,
