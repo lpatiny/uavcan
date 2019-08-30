@@ -36,6 +36,11 @@ describe('getFrames', () => {
     let data = new Data([0xf1, 0x5f, 0x01, 0x00, 0x00, 0x00, 0x00], 1);
 
     let result = getFrames(data, sourceNode);
+    expect(result[0].epoch).not.toBeNaN();
+    expect(result[0].id).not.toBeNaN();
+    delete result[0].epoch;
+    delete result[0].id;
+
     expect(result).toStrictEqual(expected);
   });
 
@@ -90,6 +95,16 @@ describe('getFrames', () => {
     );
 
     let result = getFrames(data, sourceNode, { destinationNodeID: 12 });
+
+    expect(result[0].epoch).not.toBeNaN();
+    expect(result[0].id).not.toBeNaN();
+    delete result[0].epoch;
+    delete result[0].id;
+    expect(result[1].epoch).not.toBeNaN();
+    expect(result[1].id).not.toBeNaN();
+    delete result[1].epoch;
+    delete result[1].id;
+
     expect(result).toStrictEqual(expected);
   });
 });

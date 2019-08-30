@@ -12,7 +12,13 @@ describe('Adapter multiframe', () => {
     testAdapter.receiveFrame('180b8cff819c20501d2040085');
     testAdapter.receiveFrame('180b8cff6000000000065');
 
-    expect(callbackUAVCAN).toHaveBeenCalledWith({
+    let result = callbackUAVCAN.mock.calls[0][0];
+    expect(result.value.epoch).not.toBeNaN();
+    expect(result.value.id).not.toBeNaN();
+    delete result.value.epoch;
+    delete result.value.id;
+
+    expect(result).toStrictEqual({
       event: 'Service request',
       value: {
         dataTypeID: 11,
