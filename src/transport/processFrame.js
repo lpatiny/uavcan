@@ -95,10 +95,7 @@ function emitUAVCAN(frame, bytes, adapter) {
   }
   debug(toSend);
 
-  adapter.emit('uavcan', {
-    event: kind,
-    value: toSend
-  });
+  adapter.process(toSend); // uavcan receives frame
 }
 
 module.exports = processFrame;
